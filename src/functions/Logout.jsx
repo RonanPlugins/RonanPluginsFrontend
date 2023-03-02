@@ -10,22 +10,16 @@ const LogOut = () => {
     api.logout().then((logout) => {
         if (logout.status === 200) {
             toast.success("You have been logged out.",{toastId: "loggedout"})
-            navigate("/auth/login")
+            navigate("/login")
             setUser(null)
             return
         }
     })
     .catch(() => {
         toast.error("An error occurred.",{toastId: "errorocc"})
-        navigate("/auth/login")
+        navigate("/login")
         return
     })
-
-    return (
-        <p>
-        You are being logged out!
-        </p>
-    )
 }
 
 export default LogOut

@@ -10,11 +10,11 @@ export default {
 
     // Main User Api Methods.
     async login({ username, password }) {
-        const params = new URLSearchParams({ "email/username": username, password })
-        return client.post(`/auth/user/login`, params.toString())
+        const params = new URLSearchParams({ "usernameOrEmail": username, password })
+        return client.post(`/user/login`, params.toString())
     },
-    async signup({ username, email, password }) {
-        return client.post(`/auth/user/create`, { email, username, password })
+    async signup({ firstName, lastName, username, email, password }) {
+        return client.post(`/user/create`, { firstName, lastName, username, email, password })
     },
     async user() {
         return client.get(`/user`)
@@ -26,6 +26,6 @@ export default {
         return client.delete(`/user/delete`, { confirmPassword })
     },
     async logout() {
-        return client.post("/auth/user/logout")
+        return client.get("/user/logout")
     },
 };
