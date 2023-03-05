@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import React ,{ useContext } from 'react'
+import { useContext } from 'react'
 import { toast } from 'react-toastify'
 import api from '../api'
 import UserContext from '../context/UserContext'
@@ -9,14 +9,14 @@ const LogOut = () => {
     const { setUser } = useContext(UserContext)
     api.logout().then((logout) => {
         if (logout.status === 200) {
-            toast.success("You have been logged out.",{toastId: "loggedout"})
+            toast.success("You have been logged out.",{toastId: "logged_out"})
             navigate("/login")
             setUser(null)
             return
         }
     })
     .catch(() => {
-        toast.error("An error occurred.",{toastId: "errorocc"})
+        toast.error("An error occurred.",{toastId: "error_occurred"})
         navigate("/login")
         return
     })

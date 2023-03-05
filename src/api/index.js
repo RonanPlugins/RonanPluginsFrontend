@@ -28,4 +28,7 @@ export default {
     async logout() {
         return client.get("/user/logout")
     },
+    async connectDiscord() {
+        return client.get("/connections/discord")
+    },
 };

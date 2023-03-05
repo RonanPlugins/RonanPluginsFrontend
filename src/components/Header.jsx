@@ -8,9 +8,7 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
     MenuGroup,
-    MenuOptionGroup,
     MenuDivider,
     Button,
 } from '@chakra-ui/react';
@@ -72,23 +70,6 @@ const NavBtn = styled.nav`
  }
 `;
 
-const NavBtnLink = styled(MenuButton)`
- border-radius: 4px;
- background-color: #ed97c2;
- padding: 10px 22px;
- color: #ffff;
- border: none;
- outline: none;
- cursor: pointer;
- transition: all 0.2s ease-in-out;
- text-decoration: none;
-
- &:hover {
-  transition: all 0.2s ease-in-out;
-  background: #e917aa;
- }
-`;
-
 const HeaderLogo = styled.img`
  width: 50px;
  height: 50px;
@@ -110,9 +91,8 @@ const Header = () => {
                 <NavMenu>
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/plugins">Plugins</NavLink>
-                    <NavLink to="/support">Support</NavLink>
-                    <NavLink to="/discord">Discord</NavLink>
-                    <NavLink to="/github">Github</NavLink>
+                    <NavLink to="https://discord.com/invite/8Kt4wKm">Discord</NavLink>
+                    <NavLink to="https://github.com/SuperRonanCraft">Github</NavLink>
                 </NavMenu>
                 <NavBtn>
                     <Menu>

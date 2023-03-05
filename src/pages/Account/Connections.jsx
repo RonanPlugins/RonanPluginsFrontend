@@ -1,10 +1,14 @@
 import React from 'react'
 
 const Connections = () => {
+    async function connectDiscord(user) {
+        window.open("http://localhost:3001/connections/discord")
+    }
+
   return (
       <div>
           
-          <button>Connect to discord</button>
+          <button onClick={() => { connectDiscord() }}>Connect to discord</button>
     </div>
   )
 }
