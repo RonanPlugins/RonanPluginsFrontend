@@ -13,9 +13,9 @@ import {
   FormError,
   FormInput,
   Logo,
-} from "../../components/Theme";
-import { loginSchema } from "../../schemas/";
-import UserContext from "../../context/UserContext";
+} from "../Theme.jsx";
+import { loginSchema } from "../../common/Auth/AuthSchema.jsx";
+import UserContext from "../../setup/app-context-manager/UserContext.jsx";
 
 const Login = () => {
   const navigate = useNavigate();

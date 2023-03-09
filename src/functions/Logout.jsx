@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { toast } from 'react-toastify'
 import api from '../api'
-import UserContext from '../context/UserContext'
+import UserContext from '../setup/app-context-manager/UserContext.jsx'
 
 const LogOut = () => {
     const navigate = useNavigate()

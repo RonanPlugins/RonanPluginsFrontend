@@ -1,8 +1,8 @@
 import React from 'react'
 
 const Connections = () => {
-    async function connectDiscord(user) {
-        window.open("http://localhost:3001/connections/discord")
+  async function connectDiscord(user) {
+    location.href = process.env.API_URL+"/connections/discord?redirect="+encodeURI(window.location.pathname)
     }
 
   return (

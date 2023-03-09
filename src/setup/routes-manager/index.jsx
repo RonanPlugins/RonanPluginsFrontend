@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserContext from './context/UserContext';
-import LogOut from './functions/Logout';
-import Account from './pages/Account/Account';
-import Connections from './pages/Account/Connections';
-import Payments from './pages/Account/Payments';
-import Login from './pages/Auth/Login';
-import SignUp from './pages/Auth/SignUp';
-import Default from './pages/Default';
-import Home from './pages/Home';
-import Plugins from './pages/Plugins';
+import UserContext from '../app-context-manager/UserContext';
+import LogOut from '../../functions/Logout';
+import Account from '../../pages/account-manager/Account';
+import Connections from '../../pages/account-manager/Connections';
+import Payments from '../../pages/account-manager/Payments';
+import Login from '../../pages/sign-in';
+import SignUp from '../../pages/sign-up';
+import DashboardDefault from '../../pages/dashboard/DashboardDefault';
+import Default from '../../pages/main/Default';
+import Home from '../../pages/main/Home';
+import Plugins from '../../pages/main/Plugins';
 import PrivateRoutes from './PrivateRoutes';
 
 function App() {
@@ -28,9 +29,11 @@ function App() {
       <Route path="/logout" element={<LogOut />} />
       {/* Private Routes */}
       <Route element={<PrivateRoutes />}>
-       <Route path="/account" element={<Account />} />
-       <Route path="/account/payments" element={<Payments />} />
-       <Route path="/account/connections" element={<Connections />} />
+       <Route element={<DashboardDefault />}>
+        <Route path="/account" element={<Account />} />
+        <Route path="/account/payments" element={<Payments />} />
+        <Route path="/account/connections" element={<Connections />} />
+       </Route>
       </Route>
      </Route>
     </Routes>

@@ -13,8 +13,8 @@ import {
   FormError,
   FormInput,
   Logo,
-} from "../../components/Theme";
-import { signupSchema } from "../../schemas";
+} from "../Theme.jsx";
+import { signupSchema } from "../../common/Auth/AuthSchema.jsx";
 
 const SignUp = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars, FaSignOutAlt, FaSignInAlt,FaDiscord,FaMoneyCheckAlt,FaCogs } from 'react-icons/fa';
-import UserContext from '../context/UserContext';
+import UserContext from '../../../setup/app-context-manager/UserContext.jsx';
 import {
     Menu,
     MenuButton,
@@ -87,7 +87,7 @@ const Header = () => {
                         alt="Logo"
                     />
                 </NavLink>
-                <Bars />
+                <Bars onClick={()=>{toggleNav()}}/>
                 <NavMenu>
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/plugins">Plugins</NavLink>
