@@ -1,0 +1,15 @@
+[
+    {
+        "user_id": "14e4fe03-976d-4add-9d5f-d75a1dad2399",
+        "username": "Test User",
+        "email": "test@gmail.com",
+        "emailVerified": false,
+        "iv": "88ace45a6340c03cc6aa5079e205a5b5",
+        "password": "$2b$10$nmHdMJORi8Ux1QdTBPgC5.MPwiCv9xUBAxUU0T8PAN9xqVRP3gzi.",
+        "subscription_id": "",
+        "licence_id": "",
+        "discord_user_id": "",
+        "created_at": "2023-03-10 15:05:18",
+        "updated_at": "2023-03-10 15:05:18"
+    }
+]

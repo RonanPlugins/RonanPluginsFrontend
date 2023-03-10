@@ -1,0 +1,21 @@
+.container {
+ display: grid;
+ height: 100vh;
+ background-color: red;
+ grid-template-columns: 1fr;
+ grid-template-rows: 1fr 1fr 1fr;
+ gap: 0px 0px;
+ grid-template-areas:
+  'top'
+  'middle'
+  'bottom';
+}
+.top {
+ grid-area: top;
+}
+.middle {
+ grid-area: middle;
+}
+.bottom {
+ grid-area: bottom;
+}
