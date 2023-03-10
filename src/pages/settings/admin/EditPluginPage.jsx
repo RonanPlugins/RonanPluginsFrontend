@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Textarea } from '@chakra-ui/react';
+import { Button, Textarea } from '@chakra-ui/react';
 import Plugin from '../../Plugins/Plugin';
-import { Button } from 'johnny-five';
 
 const Container = styled.div`
  display: flex;
