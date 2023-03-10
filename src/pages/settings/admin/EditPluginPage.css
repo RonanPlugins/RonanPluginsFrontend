@@ -1,0 +1,32 @@
+.container {
+ display: flex;
+ flex-direction: row;
+ gap: 30px;
+ margin: 10px;
+}
+@media only screen and (max-width: 800px) {
+ .container {
+  flex-direction: column;
+ }
+}
+
+.textSide {
+ flex: 1 1 0;
+ height: 100vh;
+}
+.previewSide {
+ flex: 1 1 0;
+ border: 3px solid #2d2d2d;
+ height: 100vh;
+}
+.topContainer {
+ display: flex;
+ align-items: center;
+}
+.topBar {
+ width: 50;
+ margin: 10px;
+ padding: 10px;
+ background-color: gray;
+ border-radius: 10px;
+}

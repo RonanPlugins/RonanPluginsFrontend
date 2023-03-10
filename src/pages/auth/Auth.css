@@ -1,0 +1,87 @@
+.AuthPage {
+ height: 100vh;
+ width: 100vw;
+ color: black;
+ background-color: #4d4459;
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ justify-content: center;
+}
+.AuthContainer {
+ max-width: 503px;
+ margin-left: 30px;
+ margin-right: 30px;
+ background-color: #ffffff;
+ text-align: center;
+ padding-top: 30px;
+ padding-bottom: 30px;
+ border-radius: 7px;
+ border: solid 1px;
+ border-color: #b2b0b0;
+}
+.AuthContent {
+ font-size: 20px;
+ font-family: 'DM Sans', sans-serif;
+ margin-bottom: 30px;
+}
+.Logo {
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ margin-bottom: 20px;
+ width: 105px;
+ height: 105px;
+ border-radius: 50%;
+}
+.AuthButton {
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ margin-bottom: 20px;
+ margin-top: 50px;
+ width: 281px;
+ height: 48px;
+ background-color: #3e86f1;
+ border-radius: 6px;
+ color: #ffffff;
+}
+.AuthButton :hover {
+ background-color: #1056bf;
+}
+.FormInput {
+ width: 388px;
+ height: 60px;
+ padding-left: 15px;
+ margin-left: 10px;
+ border-radius: 9px;
+ border: solid 1px;
+ border-color: #b2b0b0;
+ margin-bottom: 20px;
+}
+.FormError .input-error {
+ border: solid #ee6a6a;
+}
+.AdditionalButtons {
+ text-align: center;
+ margin: 0;
+ font-family: 'Inter', sans-serif;
+ font-weight: 900;
+ color: #868686;
+ width: 503px;
+}
+.BlueText {
+ display: inline;
+ cursor: pointer;
+ font-size: 18px;
+ color: #3e86f1;
+}
+.BlueText :hover {
+ color: #8a3aaf;
+}
+.FormError {
+ font-weight: 700;
+ padding-left: 65px;
+ color: #ee6a6a;
+ text-align: left;
+}

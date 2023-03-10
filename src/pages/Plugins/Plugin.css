@@ -1,0 +1,29 @@
+.PluginContainer {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ align-content: center;
+ text-align: center;
+}
+.ReactMarkdownStyles {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ align-content: center;
+ text-align: center;
+}
+
+.ReactMarkdownStyles img {
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ width: 50%;
+}
+.ReactMarkdownStyles iframe {
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ width: 50%;
+ aspect-ratio: 16/9;
+ height: auto;
+}

@@ -3,17 +3,7 @@ import { useFormik } from "formik";
 import api from "../../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import {
-  AdditionalButtons,
-  AuthButton,
-  AuthContainer,
-  AuthContent,
-  AuthPage,
-  BlueText,
-  FormError,
-  FormInput,
-  Logo,
-} from "../Theme.jsx";
+import "./Auth.css"
 import { loginSchema } from "../../common/Auth/AuthSchema.jsx";
 import UserContext from "../../setup/app-context-manager/UserContext.jsx";
 
@@ -60,53 +50,53 @@ const Login = () => {
   });
 
   return (
-    <AuthPage>
+    <div className="AuthPage">
       {/* <ToastContainer /> */}
-      <AuthContainer>
-        <Logo src="https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Meme_Man_on_transparent_background.webp/316px-Meme_Man_on_transparent_background.webp.png" alt="Logo" />
-        <AuthContent>Hey, welcome back!</AuthContent>
+      <div className="AuthContainer">
+        <img className="Logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Meme_Man_on_transparent_background.webp/316px-Meme_Man_on_transparent_background.webp.png" alt="Logo" />
+        <p className="AuthContent">Hey, welcome back!</p>
 
         <form onSubmit={handleSubmit}>
           {errors.username && touched.username && (
-            <FormError>{errors.username}</FormError>
+            <p className="FormError">{errors.username}</p>
           )}
-          <FormInput
+          <input
             value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
             id="username"
             type="name"
             placeholder="Username/Email"
-            className={errors.username && touched.username ? "input-error" : ""}
+            className={errors.username && touched.username ? "input-error" : "FormInput"}
           />
             {errors.password && touched.password && (
-              <FormError>{errors.password}</FormError>
+              <p className="FormError">{errors.password}</p>
             )}
-          <FormInput
+          <input
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
             id="password"
             type="password"
             placeholder="Password"
-            className={errors.password && touched.password ? "input-error" : ""}
+            className={errors.password && touched.password ? "input-error" : "FormInput"}
           />
-          <AuthButton disabled={isSubmitting} type="submit">Sign in</AuthButton>
+          <button className="AuthButton" disabled={isSubmitting} type="submit">Sign in</button>
         </form>
-      </AuthContainer>
-      <AdditionalButtons>
+      </div>
+      <div className="AdditionalButtons">
         <div>
           Don not have an account?{" "}
-          <BlueText
+          <p className="BlueText"
             onClick={() => {
               navigate("/signup");
             }}
           >
             Sign Up
-          </BlueText>
+          </p>
         </div>
-      </AdditionalButtons>
-    </AuthPage>
+      </div>
+    </div>
   );
 };
 

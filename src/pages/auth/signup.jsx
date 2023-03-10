@@ -2,18 +2,8 @@ import React from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
+import "./Auth.css"
 import { toast } from "react-toastify";
-import {
-  AdditionalButtons,
-  AuthButton,
-  AuthContainer,
-  AuthContent,
-  AuthPage,
-  BlueText,
-  FormError,
-  FormInput,
-  Logo,
-} from "../Theme.jsx";
 import { signupSchema } from "../../common/Auth/AuthSchema.jsx";
 
 const SignUp = () => {
@@ -63,81 +53,81 @@ const onSubmit = async (values, actions) => {
   });
 
   return (
-    <AuthPage>
+    <div className="AuthPage">
       {/* <ToastContainer /> */}
-      <AuthContainer>
-        <Logo src="https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Meme_Man_on_transparent_background.webp/316px-Meme_Man_on_transparent_background.webp.png" alt="Logo" />
-        <AuthContent>Hey, you are new here!</AuthContent>
+      <div className="AuthContainer">
+        <img className="Logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Meme_Man_on_transparent_background.webp/316px-Meme_Man_on_transparent_background.webp.png" alt="Logo" />
+        <p className="AuthContent">Hey, you are new here!</p>
 
         <form onSubmit={handleSubmit}>
 
           {errors.firstName && touched.firstName && (
-            <FormError>{errors.firstName}</FormError>
+            <p className="FormError">{errors.firstName}</p>
           )}
-          <FormInput
+          <input
             value={values.firstName}
             onChange={handleChange}
             onBlur={handleBlur}
             id="firstName"
             type="name"
             placeholder="First Name"
-            className={errors.firstName && touched.firstName ? "input-error" : ""}
+            className={errors.firstName && touched.firstName ? "input-error" : "FormInput"}
           />
           {errors.lastName && touched.lastName && (
-            <FormError>{errors.lastName}</FormError>
+            <p className="FormError">{errors.lastName}</p>
           )}
-          <FormInput
+          <input
             value={values.lastName}
             onChange={handleChange}
             onBlur={handleBlur}
             id="lastName"
             type="name"
             placeholder="Last Name"
-            className={errors.lastName && touched.lastName ? "input-error" : ""}
+            className={errors.lastName && touched.lastName ? "input-error" : "FormInput"}
           />
 
           {errors.username && touched.username && (
-            <FormError>{errors.username}</FormError>
+            <p className="FormError">{errors.username}</p>
           )}
-          <FormInput
+          <input
             value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
             id="username"
             type="name"
             placeholder="Username"
-            className={errors.username && touched.username ? "input-error" : ""}
+            className={errors.username && touched.username ? "input-error" : "FormInput"}
           />
           {errors.email && touched.email && (
-            <FormError>{errors.email}</FormError>
+            <p className="FormError">{errors.email}</p>
           )}
-          <FormInput
+          <input
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
             id="email"
             type="email"
             placeholder="Email"
-            className={errors.email && touched.email ? "input-error" : ""}
+            className={errors.email && touched.email ? "input-error" : "FormInput"}
           />
 
           {errors.password && touched.password && (
-            <FormError>{errors.password}</FormError>
+            <p className="FormError">{errors.password}</p>
           )}
-          <FormInput
+          <input
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
             id="password"
             type="password"
             placeholder="Password"
-            className={errors.password && touched.password ? "input-error" : ""}
+            className={errors.password && touched.password ? "input-error" : "FormInput"}
           />
 
           {errors.confirm_password && touched.confirm_password && (
-            <FormError>{errors.confirm_password}</FormError>
+            <p className="FormError">{errors.confirm_password}</p>
           )}
-          <FormInput
+          <input
             value={values.confirm_password}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -147,28 +137,28 @@ const onSubmit = async (values, actions) => {
             className={
               errors.confirm_password && touched.confirm_password
                 ? "input-error"
-                : ""
+                : "FormInput"
             }
           />
 
-          <AuthButton disabled={isSubmitting} type="submit">
+          <button className="AuthButton" disabled={isSubmitting} type="submit">
             Sign up
-          </AuthButton>
+          </button>
         </form>
-      </AuthContainer>
-      <AdditionalButtons>
+      </div>
+      <div className="AdditionalButtons">
         <div>
           Already have an account?{" "}
-          <BlueText
+          <p className="BlueText"
             onClick={() => {
               navigate("/login");
             }}
           >
             Login
-          </BlueText>
+          </p>
         </div>
-      </AdditionalButtons>
-    </AuthPage>
+      </div>
+    </div>
   );
 };
 

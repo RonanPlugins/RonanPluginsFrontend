@@ -1,41 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { Button, Textarea } from '@chakra-ui/react';
+import React, { useRef} from 'react';
+import { Button, ButtonGroup, Textarea,  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+  useDisclosure,
+} from '@chakra-ui/react';
 import Plugin from '../../Plugins/Plugin';
-
-const Container = styled.div`
- display: flex;
- flex-direction: row;
- gap: 30px;
- margin: 10px;
- @media (max-width: 800px) {
-  flex-direction: column;
- }
-`;
-const TextSide = styled.div`
- flex: 1 1 0;
- height: 100vh;
-`;
-const PreviewSide = styled.div`
- flex: 1 1 0;
- border: 3px solid #2d2d2d;
- height: 100vh;
-`;
+import './EditPluginPage.css'
 const EditPluginPage = ({ pluginData }) => {
- let [value, setValue] = React.useState(pluginData.ProductMarkdown);
-
- // useEffect(() => {
- //   setValue(pluginData.ProductMarkdown)
- // })
+  let [value, setValue] = React.useState(pluginData.ProductMarkdown);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = useRef()
 
  let handleInputChange = (e) => {
   let inputValue = e.target.value;
   setValue(inputValue);
  };
  return (
-   <Container>
-     <Button>Save</Button>
-   <TextSide>
+   <>
+     <AlertDialog
+        motionPreset='slideInBottom'
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
+        <AlertDialogOverlay />
+
+        <AlertDialogContent>
+          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+          <AlertDialogCloseButton />
+          <AlertDialogBody>
+            Are you sure you want to discard your changes?
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              No
+            </Button>
+            <Button colorScheme='red' ml={3}>
+              Yes
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+     <div className='topContainer topBar '>
+       <ButtonGroup>
+         
+     <Button colorScheme='red' onClick={onOpen}>Discard Changes</Button>
+       <Button colorScheme='green' >Save</Button>
+       </ButtonGroup>
+       
+     </div>
+   <div className='container'>
+   <div className='textSide'>
     <Textarea
      onChange={handleInputChange}
      height={'100vh'}
@@ -43,12 +63,13 @@ const EditPluginPage = ({ pluginData }) => {
      backgroundColor={'white'}
      color={'black'}
      value={value}
-    />
-   </TextSide>
-   <PreviewSide>
+     />
+   </div>
+   <div className='previewSide'>
     <Plugin pluginData={pluginData} content={value} />
-   </PreviewSide>
-  </Container>
+   </div>
+  </div>
+     </>
  );
 };
 
