@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars, FaSignOutAlt, FaSignInAlt,FaDiscord,FaMoneyCheckAlt,FaCogs } from 'react-icons/fa';
@@ -11,7 +11,18 @@ import {
     MenuGroup,
     MenuDivider,
     Button,
+      Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+    useDisclosure,
+  Input,
+  ButtonGroup,
 } from '@chakra-ui/react';
+
 
 const Nav = styled.nav`
  background-color: #595472;
@@ -69,7 +80,10 @@ const NavBtn = styled.nav`
   display: none;
  }
 `;
-
+const MobileNavButton = styled(Button)`
+margin-top: 10px;
+width: 80%;
+`;
 const HeaderLogo = styled.img`
  width: 50px;
  height: 50px;
@@ -77,9 +91,49 @@ const HeaderLogo = styled.img`
 
 const Header = () => {
     const { user } = useContext(UserContext);
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
     return (
         <>
+            <>
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+                    finalFocusRef={btnRef}
+                    
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Navigation</DrawerHeader>
+                        <DrawerBody>
+
+            <MobileNavButton href='/account' colorScheme='pink'>Home</MobileNavButton>
+            <MobileNavButton  colorScheme='pink'>Plugins</MobileNavButton>
+            <MobileNavButton  colorScheme='pink'>Discord</MobileNavButton>
+            <MobileNavButton  colorScheme='pink'>Github</MobileNavButton>
+                        </DrawerBody>
+                        <DrawerFooter>
+                            <Menu>
+                        <MenuButton as={MobileNavButton} colorScheme='pink'>
+                            Profile
+                        </MenuButton>
+                        <MenuList>
+                            
+                            <MenuGroup title='Profile'>
+                                {user ?(<><MenuItem icon={<FaCogs />} as='a' href='/account'>My Account</MenuItem><MenuItem icon={<FaMoneyCheckAlt />} as='a' href='/account/payments'>Payments </MenuItem><MenuItem icon={<FaSignOutAlt />} as='a' href='/logout'>LogOut </MenuItem></>):(<MenuItem icon={<FaSignInAlt />} as='a' href='/login'>Login</MenuItem>)}
+                            </MenuGroup>
+                            <MenuDivider />
+                            <MenuGroup title='Help'>
+                                <MenuItem icon={<FaDiscord />}>Discord</MenuItem>
+                            </MenuGroup>
+                        </MenuList>
+                    </Menu>
+                        </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
             <Nav>
                 <NavLink to="/">
                     <HeaderLogo
@@ -87,7 +141,7 @@ const Header = () => {
                         alt="Logo"
                     />
                 </NavLink>
-                <Bars onClick={()=>{toggleNav()}}/>
+                <Bars onClick={onOpen}/>
                 <NavMenu>
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/plugins">Plugins</NavLink>

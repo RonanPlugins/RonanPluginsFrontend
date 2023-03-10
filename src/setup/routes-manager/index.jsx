@@ -12,6 +12,9 @@ import Default from '../../pages/main/Default';
 import Home from '../../pages/main/Home';
 import Plugins from '../../pages/main/Plugins';
 import PrivateRoutes from './PrivateRoutes';
+import Plugin from '../../pages/Plugins/Plugin';
+import EditPluginPage from '../../pages/settings/admin/EditPluginPage';
+const data = require('../../pages/main/exampleDatabase.json');
 
 function App() {
  const [user, setUser] = useState(null);
@@ -23,10 +26,13 @@ function App() {
       {/* Default Routes */}
       <Route path="/" exact element={<Home />} />
       <Route path="/plugins" element={<Plugins />} />
+
       {/* Authentication Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/logout" element={<LogOut />} />
+      {/* END Authentication Routes */}
+
       {/* Private Routes */}
       <Route element={<PrivateRoutes />}>
        <Route element={<DashboardDefault />}>
@@ -35,6 +41,30 @@ function App() {
         <Route path="/account/connections" element={<Connections />} />
        </Route>
       </Route>
+      {/* END Private Routes */}
+
+      {/* Plugin Routes */}
+      <Route>
+       {data.map((d) => {
+           return (
+            <>
+         <Route
+          path={'/plugin/' + d.ProductName}
+          element={<Plugin pluginData={d} content={d.ProductMarkdown} />}
+          key={d.id}
+          />
+            <Route
+          path={'/plugin/' + d.ProductName+"/edit"}
+          element={<EditPluginPage pluginData={d} />}
+          key={d.id+".edit"}
+          />
+          </>
+        );
+       })}
+      </Route>
+
+      <Route path="*" element={<>Page not found</>} />
+      {/* END 1Default Routes */}
      </Route>
     </Routes>
    </Router>

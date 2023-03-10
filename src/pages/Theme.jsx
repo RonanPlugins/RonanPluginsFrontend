@@ -1,27 +1,11 @@
 
 import styled from 'styled-components';
 
-export const Container = styled.div`
-    overflow: hidden;
-    max-height: 100vh;
-    display: grid;
-    min-height: 100vh;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "Header Header"
-        "SideBar Main-Content";
-    @media (max-width: 992px) {
-            grid-template-areas:
-        "Header Header"
-        "Main-Content Main-Content";
-    }
-`
 
 export const AuthPage = styled.div`
     height:100vh;
     width:100vw;
+    color: black;
     background-color: #4D4459;
     display: flex;
     align-items: center;
@@ -30,7 +14,9 @@ export const AuthPage = styled.div`
     `;
 
 export const AuthContainer = styled.div`
-    width:503px;
+    max-width:503px;
+    margin-left:30px;
+    margin-right:30px;
     background-color: #FFFFFF;
     text-align:center;
     padding-top:30px;
@@ -84,6 +70,7 @@ export const FormInput = styled.input`
 `
 
 export const AdditionalButtons = styled.div`
+text-align: center;
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-weight: 900;
