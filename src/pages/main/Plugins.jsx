@@ -1,13 +1,13 @@
 import React from 'react';
 const PluginsData = require('../../mockupData/Plugins.json');
-import './Plugins.css';
+import './AllPlugins.css';
 
 const Plugins = () => {
  return (
-  <div className="container">
-   <div key="1" className='top' >1</div>
-   <div key="2" className='middle'>2</div>
-   <div key="3"className='bottom'>3</div>
+  <div className="AllPluginscontainer">
+   <div key="1" className='top' >Image</div>
+   <div key="2" className='middle'>Selection</div>
+   <div key="3"className='bottom'>Discord and reddit</div>
   </div>
  );
 };

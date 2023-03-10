@@ -54,7 +54,7 @@ const EditPluginPage = ({ pluginData }) => {
        </ButtonGroup>
        
      </div>
-   <div className='container'>
+   <div className='EditPluginPagecontainer'>
    <div className='textSide'>
     <Textarea
      onChange={handleInputChange}
