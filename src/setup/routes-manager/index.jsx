@@ -14,6 +14,11 @@ import Plugins from '../../pages/main/Plugins';
 import PrivateRoutes from './PrivateRoutes';
 import Plugin from '../../pages/Plugins/Plugin';
 import EditPluginPage from '../../pages/settings/admin/EditPluginPage';
+import Admin from '../../pages/admin/Admin';
+import Users from '../../pages/admin/users/Users';
+import AdminPlugins from '../../pages/admin/plugins/AdminPlugins';
+import Settings from '../../pages/admin/settings/Settings';
+import AdminDefault from '../../pages/admin/AdminDefault';
 const data = require('../../pages/main/exampleDatabase.json');
 
 function App() {
@@ -42,23 +47,31 @@ function App() {
        </Route>
       </Route>
       {/* END Private Routes */}
+      {/* Private Routes */}
+      <Route element={<AdminDefault/>}>
+        <Route path="/admin" element={<Admin/>} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/plugins" element={<AdminPlugins />} />
+        <Route path="/admin/settings" element={<Settings />} />
+      </Route>
+      {/* END Private Routes */}
 
       {/* Plugin Routes */}
       <Route>
        {data.map((d) => {
-           return (
-            <>
-         <Route
-          path={'/plugin/' + d.ProductName}
-          element={<Plugin pluginData={d} content={d.ProductMarkdown} />}
-          key={d.id}
+        return (
+         <>
+          <Route
+           path={'/plugin/' + d.ProductName}
+           element={<Plugin pluginData={d} content={d.ProductMarkdown} />}
+           key={d.id}
           />
-            <Route
-          path={'/plugin/' + d.ProductName+"/edit"}
-          element={<EditPluginPage pluginData={d} />}
-          key={d.id+".edit"}
+          <Route
+           path={'/plugin/' + d.ProductName + '/edit'}
+           element={<EditPluginPage pluginData={d} />}
+           key={d.id + '.edit'}
           />
-          </>
+         </>
         );
        })}
       </Route>
