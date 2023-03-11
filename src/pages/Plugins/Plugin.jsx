@@ -6,15 +6,15 @@ import remarkBreaks from 'remark-breaks';
 import rehypeRaw from 'rehype-raw';
 
 
-const Plugin = ({ pluginData,content }) => {
+const Plugin = ({ pluginData, content }) => {
  return (
   <div className='PluginContainer'>
          <ReactMarkdown
              className='ReactMarkdownStyles'
     remarkPlugins={[remarkGfm, remarkBreaks]}
     rehypePlugins={[rehypeRaw]}
-    children={content}
-   />
+             
+         >{content}</ReactMarkdown>
   </div>
  );
 };

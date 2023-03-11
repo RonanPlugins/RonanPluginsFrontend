@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { Button, ButtonGroup, Textarea,  AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
@@ -10,15 +10,35 @@ import { Button, ButtonGroup, Textarea,  AlertDialog,
 } from '@chakra-ui/react';
 import Plugin from '../../Plugins/Plugin';
 import './EditPluginPage.css'
+import { toast } from 'react-toastify';
 const EditPluginPage = ({ pluginData }) => {
-  let [value, setValue] = React.useState(pluginData.ProductMarkdown);
+  let [value, setValue] = useState(pluginData.ProductMarkdown);
+  const [changed, setChanged] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
-
- let handleInputChange = (e) => {
+  let handleInputChange = (e) => {
+  //  console.log(e.target.value)
   let inputValue = e.target.value;
-  setValue(inputValue);
- };
+    setValue(inputValue);
+    setChanged(true)
+  };
+  
+  const onSave = (e) => {
+    toast.success("Saved your changes!")
+    console.log("Saving text here.")
+    console.log(value)
+  }
+  const resetChanges = (e) => {
+    setValue(pluginData.ProductMarkdown)
+    onClose
+  }
+
+  window.onbeforeunload = function(e) {
+  if( !changed ) {
+    return;
+  }
+  return dialogText;
+};
  return (
    <>
      <AlertDialog
@@ -40,7 +60,7 @@ const EditPluginPage = ({ pluginData }) => {
             <Button ref={cancelRef} onClick={onClose}>
               No
             </Button>
-            <Button colorScheme='red' ml={3}>
+           <Button colorScheme='red' ml={3} onClick={resetChanges}>
               Yes
             </Button>
           </AlertDialogFooter>
@@ -49,14 +69,14 @@ const EditPluginPage = ({ pluginData }) => {
      <div className='topContainer topBar '>
        <ButtonGroup>
          
-     <Button colorScheme='red' onClick={onOpen}>Discard Changes</Button>
-       <Button colorScheme='green' >Save</Button>
+     <Button colorScheme='red'  onClick={onOpen}>Discard Changes</Button>
+       <Button colorScheme='green' onClick={onSave} >Save</Button>
        </ButtonGroup>
        
      </div>
    <div className='EditPluginPagecontainer'>
    <div className='textSide'>
-    <Textarea
+         <Textarea
      onChange={handleInputChange}
      height={'100vh'}
      resize="none"

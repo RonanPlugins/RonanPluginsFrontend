@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+.wave {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ overflow: hidden;
+ line-height: 0;
+}
+
+.wave svg {
+ position: relative;
+ display: block;
+ width: calc(100% + 1.3px);
+ height: 103px;
+ transform: rotateY(180deg);
+}
+
+.wave,
+.wave-bottom .shape-fill {
+ fill: #595472;
+}
+.wave-bottom {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ overflow: hidden;
+ line-height: 0;
+ transform: rotate(180deg);
+}
+
+.wave-bottom svg {
+ position: relative;
+ display: block;
+ width: calc(126% + 1.3px);
+ height: 115px;
+ transform: rotateY(180deg);
+}
+
+.wave-bottom .shape-fill {
+ fill: #4d4459;
+}
+.Hero img {
+ width: 100vw;
+ z-index: 0;
+ height: auto;
+}
+.custom-shape-divider-top-1678562461 {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ overflow: hidden;
+ line-height: 0;
+}
+
+.custom-shape-divider-top-1678562461 svg {
+ position: relative;
+ display: block;
+ width: calc(100% + 1.3px);
+ height: 150px;
+ transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1678562461 .shape-fill {
+ fill: #ffffff;
+}
+.MainContent {
+ background-color: #595472;
+ height: 100%;
+ display: grid;
+ grid-auto-rows: 1fr;
+ grid-template-columns: 1fr;
+ grid-template-rows: 0.7fr 1.3fr;
+ gap: 0px 0px;
+ grid-template-areas:
+  'text'
+  '.';
+}
+.Features {
+ margin-top: 40px;
+ height: auto;
+ display: flex;
+ flex-wrap: wrap;
+ gap: 30px;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+}
+.Feature {
+ width: 400px;
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-rows: 1fr 0.4fr 1.6fr;
+ gap: 0px 0px;
+ grid-auto-flow: row;
+ grid-template-areas:
+  'Icon'
+  'Text'
+  'Description';
+}
+
+.Icon {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ grid-area: Icon;
+}
+
+.Text {
+ font-family: 'Russo One', sans-serif;
+ font-size: 25px;
+ grid-area: Text;
+}
+
+.Description {
+ font-size: 15px;
+ grid-area: Description;
+}
+
+.Wave2 {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ overflow: hidden;
+ line-height: 0;
+ transform: rotate(180deg);
+}
+
+.Wave2 svg {
+ position: relative;
+ display: block;
+ width: calc(100% + 1.3px);
+ height: 201px;
+ transform: rotateY(180deg);
+}
+
+.Wave2 .shape-fill {
+ fill: #7e42ce;
+}
+.S3 {
+ height: 1000px;
+ background-color: #4d4459;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ grid-template-rows: 1fr 1fr;
+ gap: 0px 0px;
+ grid-auto-flow: row;
+ grid-template-areas:
+  'plugins .'
+  '. discord';
+}
+
+.discord {
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-rows: 0.8fr 1.4fr 0.8fr;
+ gap: 0px 0px;
+ grid-auto-flow: row;
+ grid-template-areas:
+  '.'
+  '.'
+  '.';
+ grid-area: discord;
+}
+
+.plugins {
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-rows: 0.8fr 1.4fr 0.8fr;
+ gap: 0px 0px;
+ grid-auto-flow: row;
+ grid-template-areas:
+  '.'
+  '.'
+  '.';
+ grid-area: plugins;
+}
