@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Home.css"
-import {BsCodeSlash,BsFillLightningFill,BsFillPersonFill} from "react-icons/bs"
+import { BsCodeSlash, BsFillLightningFill, BsFillPersonFill } from "react-icons/bs"
 const Home = () => {
   return (
     <div>
@@ -14,7 +14,7 @@ const Home = () => {
       </div>
       {/* SVG */}
 
-      
+
 
 
 
@@ -27,27 +27,27 @@ const Home = () => {
 
       <div className='MainContent'>
 
-        <div className='Features'>
+          <div className='Features'>
 
-          <div className='Feature'>
-            <div className='Icon'><BsFillLightningFill size={50} /></div>
-            <div className='Text'>Well optimized</div>
-            <div className='Description'>We created all of our plugins to be as optimized as possible in order to give you the fastest performance. We carefully crafted the plugins to be more efficient and tight for your server.  We’ve developed a number of different plugins that exist to help you with your server. </div>
-          </div>
+            <div className='Feature'>
+              <div className='Icon'><BsFillLightningFill size={50} /></div>
+              <div className='Text'>Well optimized</div>
+              <div className='Description'>We created all of our plugins to be as optimized as possible in order to give you the fastest performance. We carefully crafted the plugins to be more efficient and tight for your server.  We’ve developed a number of different plugins that exist to help you with your server. </div>
+            </div>
 
-          <div className='Feature'>
-            <div className='Icon'><BsCodeSlash size={50} /></div>
-            <div className='Text'>Customizable</div>
-            <div className='Description'>All of our plugins are customizable; you can customize them to suit your particular Minecraft server. With a huge range of configuration options for each plugin, there should be one to meet your needs.</div>
-          </div>
-          
-          <div className='Feature'>
-            <div className='Icon'><BsFillPersonFill size={50} /></div>
-            <div className='Text'>Fast support</div>
-            <div className='Description'>We have a very fast support team on our Discord along with nearly 1,000 members to help you customize your plugin.  If you are not sure what plugin is right for you, contact us and we will help you!</div>
-          </div>
+            <div className='Feature'>
+              <div className='Icon'><BsCodeSlash size={50} /></div>
+              <div className='Text'>Customizable</div>
+              <div className='Description'>All of our plugins are customizable; you can customize them to suit your particular Minecraft server. With a huge range of configuration options for each plugin, there should be one to meet your needs.</div>
+            </div>
 
-        </div>
+            <div className='Feature'>
+              <div className='Icon'><BsFillPersonFill size={50} /></div>
+              <div className='Text'>Fast support</div>
+              <div className='Description'>We have a very fast support team on our Discord along with nearly 1,000 members to help you customize your plugin.  If you are not sure what plugin is right for you, contact us and we will help you!</div>
+            </div>
+
+          </div>
       </div>
       {/* <div className='S3'>
         <div className='discord'>
