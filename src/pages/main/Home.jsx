@@ -21,8 +21,7 @@ const Home = () => {
       <div className='Hero'>
         <img src='https://imgur.com/OOPWnB8.png' />
         <div className='centered'>
-          <h1 className=''>Welcome to</h1>
-          <h1 className='minecraftFont' style={{color:"#"}}>RonanPlugins</h1>
+          <h1 className='herotext'>RonanPlugins</h1>
         </div>
       </div>
 

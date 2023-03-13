@@ -44,14 +44,12 @@
  fill: #4d4459;
 }
 .Hero {
- font-size: 10vw;
  position: relative;
  text-align: center;
- color: rgb(58, 21, 223);
 }
 .centered {
  position: absolute;
- top: 50%;
+ top: 20%;
  left: 50%;
  transform: translate(-50%, -50%);
 }
@@ -195,4 +193,8 @@
 }
 .minecraftFont {
  font-family: 'Minecraft', sans-serif;
+}
+.herotext {
+ font-size: 3vw;
+ font-family: 'Russo One', sans-serif;
 }
