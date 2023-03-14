@@ -19,6 +19,7 @@ import Users from '../../pages/admin/users/Users';
 import AdminPlugins from '../../pages/admin/plugins/AdminPlugins';
 import Settings from '../../pages/admin/settings/Settings';
 import AdminDefault from '../../pages/admin/AdminDefault';
+import PageNotFound from '../../pages/errors/PageNotFound';
 const data = require('../../pages/main/exampleDatabase.json');
 
 function App() {
@@ -76,7 +77,7 @@ function App() {
        })}
       </Route>
 
-      <Route path="*" element={<>Page not found</>} />
+      <Route path="*" element={<PageNotFound/>} />
       {/* END 1Default Routes */}
      </Route>
     </Routes>
