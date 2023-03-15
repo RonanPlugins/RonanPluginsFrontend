@@ -2,7 +2,7 @@
     {
         "id": "1",
         "ProductName": "BetterRTP",
-        "ProductMarkdown": "![bettertp](https://proxy.spigotmc.org/fc585cc7dc1e600bf74dd6edc258a3a17e95c840?url=https%3A%2F%2Fi.imgur.com%2FFlkGoXA.png) ![img](https://i.imgur.com/COuBLTH.png) <iframe width=\"auto\" height=\"auto\" src=\"https://www.youtube.com/embed/j-I-QDWXDv4\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen/>",
+        "ProductMarkdown": "![bettertp](https:\/\/i.imgur.com\/FlkGoXA.png) ![img](https:\/\/i.imgur.com\/COuBLTH.png) <iframe width=\"auto\" height=\"auto\" src=\"https:\/\/www.youtube.com\/embed\/j-I-QDWXDv4\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen\/>",
         "ProductTitle": "BetterRTP Plugin"
     },
     {

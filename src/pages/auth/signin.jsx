@@ -53,7 +53,7 @@ const Login = () => {
     <div className="AuthPage">
       {/* <ToastContainer /> */}
       <div className="AuthContainer">
-        <img className="Logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Meme_Man_on_transparent_background.webp/316px-Meme_Man_on_transparent_background.webp.png" alt="Logo" />
+        <img className="Logo" src="/assets/logo.webp" alt="Logo" />
         <p className="AuthContent">Hey, welcome back!</p>
 
         <form onSubmit={handleSubmit}>

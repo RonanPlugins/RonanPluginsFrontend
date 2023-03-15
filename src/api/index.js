@@ -1,10 +1,20 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const client = axios.create({
     baseURL: process.env.API_URL,
     responseType: "json",
     withCredentials: true,
 });
+
+client.interceptors.response.use(function (response) {
+}, function (error) {
+    // If the user is not logged in on any request.
+    if (error.request.status) {
+        toast.error("Request error: " + error.request.status)
+    }
+    return Promise.reject(error);
+})
 
 export default {
 

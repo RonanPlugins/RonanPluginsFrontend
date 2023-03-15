@@ -68,7 +68,7 @@ const Header = () => {
             <div className='Nav'>
                 <Link className='NavLink' to="/">
                     <img className='HeaderLogo'
-                        src="https://imgur.com/gWagMWE.png"
+                        src="/assets/logo.webp"
                         alt="Logo"
                     />
                 </Link>

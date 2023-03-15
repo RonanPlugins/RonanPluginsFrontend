@@ -6,8 +6,8 @@ const DiscordAndReddit = () => {
   return (
     <div className='bottombit'><div className='center'>Don’t know what plugin is best for you?</div>
              <div className='center'>
-                 <Button leftIcon={<FaDiscord/>} colorScheme="blue" variant='solid'>Discord</Button>
-                 <Button leftIcon={<FaReddit/>}  colorScheme="orange" variant='solid'>Reddit</Button>
+                 <Button leftIcon={<FaDiscord/>} className="button" colorScheme="blue"  as={"a"} href="https://discord.com/invite/8Kt4wKm" target="_blank" rel="noopener noreferrer">Discord</Button>
+                 <Button leftIcon={<FaReddit/>}  className="button" colorScheme="orange" as={"a"} href="https://www.reddit.com/r/RonanNetwork/" target="_blank" rel="noopener noreferrer">Reddit</Button>
     </div></div>
   )
 }

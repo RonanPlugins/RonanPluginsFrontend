@@ -44,6 +44,7 @@
  fill: #4d4459;
 }
 .Hero {
+  
  position: relative;
  text-align: center;
 }
@@ -112,6 +113,12 @@
   'Icon'
   'Text'
   'Description';
+}
+
+@media screen and (max-width: 768px) {
+ .Feature {
+   width: 300px;
+ }
 }
 
 .Feature:hover .Icon {
@@ -197,7 +204,8 @@
 .minecraftFont {
  font-family: 'Minecraft', sans-serif;
 }
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 .herotext {
+  font-family: 'Oleo Script', cursive;
  font-size: 3vw;
- font-family: 'Russo One', sans-serif;
 }

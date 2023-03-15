@@ -6,7 +6,7 @@ const PageNotFound = () => {
         <div className='pagenotfound'>
           <div className='smallercontainer'>
 
-  <div class="Code"><img src='/assets/404.png'/></div>
+  <div class="Code"><img src='/assets/404.webp'/></div>
   <div class="PNF">Page Not Found</div>
                 <div class="Description">
                     <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>

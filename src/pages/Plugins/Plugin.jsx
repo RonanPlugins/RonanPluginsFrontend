@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import "./Plugin.css"
 import remarkGfm from 'remark-gfm';
+import rehypeFormat from 'rehype-format'
 import remarkBreaks from 'remark-breaks';
 import rehypeRaw from 'rehype-raw';
 
@@ -12,7 +13,7 @@ const Plugin = ({ pluginData, content }) => {
          <ReactMarkdown
              className='ReactMarkdownStyles'
     remarkPlugins={[remarkGfm, remarkBreaks]}
-    rehypePlugins={[rehypeRaw]}
+    rehypePlugins={[rehypeRaw,rehypeFormat]}
              
          >{content}</ReactMarkdown>
   </div>

@@ -56,12 +56,12 @@ const onSubmit = async (values, actions) => {
     <div className="AuthPage">
       {/* <ToastContainer /> */}
       <div className="AuthContainer">
-        <img className="Logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Meme_Man_on_transparent_background.webp/316px-Meme_Man_on_transparent_background.webp.png" alt="Logo" />
+        <img className="Logo" src="/assets/logo.webp" alt="Logo" />
         <p className="AuthContent">Hey, you are new here!</p>
 
         <form onSubmit={handleSubmit}>
 
-          {errors.firstName && touched.firstName && (
+          {/* {errors.firstName && touched.firstName && (
             <p className="FormError">{errors.firstName}</p>
           )}
           <input
@@ -84,7 +84,7 @@ const onSubmit = async (values, actions) => {
             type="name"
             placeholder="Last Name"
             className={errors.lastName && touched.lastName ? "input-error" : "FormInput"}
-          />
+          /> */}
 
           {errors.username && touched.username && (
             <p className="FormError">{errors.username}</p>

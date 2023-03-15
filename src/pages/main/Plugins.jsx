@@ -10,7 +10,7 @@ const Plugins = () => {
  return (
   <div className="AllPluginscontainer">
    <div key="1" className="top">
-    <img src='https://imgur.com/v2qrbEo.png'/>
+    <img src='/assets/plugins.webp'/>
    </div>
    <div key="2" className="plugins">
     {PluginsData.map((plugin) => {

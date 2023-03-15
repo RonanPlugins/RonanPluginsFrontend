@@ -19,7 +19,7 @@ const Home = () => {
 
 
       <div className='Hero'>
-        <img src='https://imgur.com/OOPWnB8.png' />
+        <img src='/assets/homebackground.webp' />
         <div className='centered'>
           <h1 className='herotext'>RonanPlugins</h1>
         </div>

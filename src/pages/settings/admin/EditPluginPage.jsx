@@ -8,6 +8,7 @@ import { Button, ButtonGroup, Textarea,  AlertDialog,
   AlertDialogCloseButton,
   useDisclosure,
 } from '@chakra-ui/react';
+const data = require("../../main/exampleDatabase.json")
 import Plugin from '../../Plugins/Plugin';
 import './EditPluginPage.css'
 import { toast } from 'react-toastify';
@@ -17,7 +18,6 @@ const EditPluginPage = ({ pluginData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
   let handleInputChange = (e) => {
-  //  console.log(e.target.value)
   let inputValue = e.target.value;
     setValue(inputValue);
     setChanged(true)
@@ -26,11 +26,11 @@ const EditPluginPage = ({ pluginData }) => {
   const onSave = (e) => {
     toast.success("Saved your changes!")
     console.log("Saving text here.")
-    console.log(value)
+    // TODO: Make API call here
   }
   const resetChanges = (e) => {
     setValue(pluginData.ProductMarkdown)
-    onClose
+    onClose()
   }
 
   window.onbeforeunload = function(e) {

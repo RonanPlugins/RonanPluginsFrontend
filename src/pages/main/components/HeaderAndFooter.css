@@ -1,8 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 .Nav {
  background-color: #595472;
- font-family: 'Russo One', sans-serif;
+font-family: 'Montserrat', sans-serif;
+
+ font-weight: 800;
  height: 80px;
  display: flex;
+ align-items: center;
  justify-content: space-between;
  padding: 0.5rem calc((100vw - 1000px) / 20);
  z-index: 10;
@@ -30,10 +35,7 @@
 @media screen and (max-width: 768px) {
  .Bars {
   display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(-100%, 75%);
+  margin-right: 30px;
   font-size: 1.8rem;
   cursor: pointer;
  }
