@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import BetaPopup from './BetaPopup.jsx';
-import Footer from './components/Footer.jsx';
-import Header from './components/Header.jsx';
-import SmallHeader from './components/SmallHeader.jsx';
+import BetaPopup from '../PopUp/BetaPopup';
+import Footer from '../components/HeaderAndFooter/Footer';
+import Header from '../components/HeaderAndFooter/Header';
+import SmallHeader from '../components/InfoBanner/SmallHeader';
 import "./Default.css"
 
 const Default = () => {

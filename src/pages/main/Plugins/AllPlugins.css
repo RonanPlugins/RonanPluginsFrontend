@@ -1,0 +1,102 @@
+.AllPluginscontainer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.top {
+	height: 200px;
+	margin-bottom: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.top img {
+	width: 60%;
+	max-width: 800px;
+}
+.plugins {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.plugin {
+	text-align: left;
+	margin: 20px;
+	height: 300px;
+	width: 250px;
+	background-color: #595472;
+	border-color: #9ecaed;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #ffffff;
+	display: grid;
+	grid-auto-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 0px 0px;
+	grid-template-areas:'Image''Image''Content';
+}
+.plugin:hover {
+	cursor: pointer;
+	box-shadow: 5px 5px 30px #b920a0;
+}
+.plugin img {
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+	grid-area: Image;
+}
+.Content {
+	background-color: #4d4459;
+	padding: 10px;
+	border-radius: 0 0 10px 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 0px 0px;
+	grid-template-areas:'Stars Reviews''Name Name''Mini-Description Mini-Description';
+	grid-area: Content;
+}
+.Name {
+	grid-area: Name;
+}
+.Stars {
+	grid-area: Stars;
+}
+.Reviews {
+	color: rgb(158, 153, 153);
+	grid-area: Reviews;
+}
+.Mini-Description {
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: rgb(158, 153, 153);
+	grid-area: Mini-Description;
+}
+.bottom {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	height: 150px;
+	grid-area: bottom;
+	display: grid;
+	grid-auto-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas:'.''.';
+}
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bottom button {
+	margin: 15px;
+	width: 200px;
+	height: 40px;
+}

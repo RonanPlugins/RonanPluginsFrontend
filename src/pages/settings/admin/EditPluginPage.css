@@ -1,34 +1,36 @@
 .EditPluginPagecontainer {
- display: flex;
- flex-direction: row;
- gap: 30px;
- margin: 10px;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	height: 100%;
+	flex-direction: row;
+	gap: 30px;
+	margin: 10px;
 }
-@media only screen and (max-width: 800px) {
- .EditPluginPagecontainer {
-  flex-direction: column;
- }
+.EditPluginPagecontainer img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 }
-
-.textSide {
- flex: 1 1 0;
- height: 100vh;
-}
-.previewSide {
- flex: 1 1 0;
- border: 3px solid #2d2d2d;
- border-radius: 10px;
- overflow-y: scroll;
- height: 100vh;
+.EditPluginPagecontainer iframe {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	aspect-ratio: 16/9;
+	height: auto;
 }
 .topContainer {
- display: flex;
- align-items: center;
+	display: flex;
+	align-items: center;
 }
 .topBar {
- width: 50;
- margin: 10px;
- padding: 10px;
- background-color: gray;
- border-radius: 10px;
+	width: 50;
+	margin: 10px;
+	padding: 10px;
+	background-color: gray;
+	border-radius: 10px;
 }

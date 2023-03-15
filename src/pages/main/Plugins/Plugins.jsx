@@ -1,10 +1,8 @@
 import React from 'react';
-const PluginsData = require('../../mockupData/Plugins.json');
+const PluginsData = require('../../../mockupData/Plugins.json');
 import './AllPlugins.css';
 import { Rating } from 'react-simple-star-rating';
-import { Button } from '@chakra-ui/react';
-import { FaDiscord, FaReddit } from 'react-icons/fa';
-import DiscordAndReddit from './components/DiscordAndReddit';
+import DiscordAndReddit from '../components/DiscordAndReddit/DiscordAndReddit';
 
 const Plugins = () => {
  return (

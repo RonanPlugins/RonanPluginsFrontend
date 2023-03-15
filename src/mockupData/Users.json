@@ -1,15 +1,67 @@
 [
     {
-        "user_id": "14e4fe03-976d-4add-9d5f-d75a1dad2399",
-        "username": "Test User",
-        "email": "test@gmail.com",
-        "emailVerified": false,
-        "iv": "88ace45a6340c03cc6aa5079e205a5b5",
-        "password": "$2b$10$nmHdMJORi8Ux1QdTBPgC5.MPwiCv9xUBAxUU0T8PAN9xqVRP3gzi.",
-        "subscription_id": "",
-        "licence_id": "",
-        "discord_user_id": "",
-        "created_at": "2023-03-10 15:05:18",
-        "updated_at": "2023-03-10 15:05:18"
+        "user": {
+            "user_id": "00000000-0000-0000-0000-000000000000",
+            "email": "3b8e47b1ae90684602b80af0fb9907e16645ad05f206ad1f36cb48b7198a9e8c",
+            "created_at": "2023-03-11T17:55:59.000Z",
+            "updated_at": "2023-03-15T16:36:14.000Z",
+            "license_id": "00000000-0000-0000-0000-000000000000",
+            "subscription_id": "00000000-0000-0000-0000-000000000000",
+            "license": {
+                "license_id": "00000000-0000-0000-0000-000000000000",
+                "end_date": null,
+                "created_at": null,
+                "updated_at": "2023-03-11T17:53:41.000Z",
+                "plan_id": "00000000-0000-0000-0000-000000000000",
+                "subscription_id": "00000000-0000-0000-0000-000000000000",
+                "plan": {
+                    "plan_id": "00000000-0000-0000-0000-000000000000",
+                    "name": "Testing_Plan",
+                    "description": "This plan is for testing only",
+                    "max_servers": -1,
+                    "price": 0,
+                    "access_to_all_plugins": 1,
+                    "access_to_beta_program": 1
+                },
+                "subscription": {
+                    "subscription_id": "00000000-0000-0000-0000-000000000000",
+                    "user_id": "00000000-0000-0000-0000-000000000000",
+                    "plan_id": "00000000-0000-0000-0000-000000000000",
+                    "license_id": "00000000-0000-0000-0000-000000000000",
+                    "start_date": "2023-03-11T06:00:00.000Z",
+                    "end_date": "2027-03-20T05:00:00.000Z"
+                }
+            },
+            "subscription": {
+                "subscription_id": "00000000-0000-0000-0000-000000000000",
+                "user_id": "00000000-0000-0000-0000-000000000000",
+                "plan_id": "00000000-0000-0000-0000-000000000000",
+                "license_id": "00000000-0000-0000-0000-000000000000",
+                "start_date": "2023-03-11T06:00:00.000Z",
+                "end_date": "2027-03-20T05:00:00.000Z",
+                "user": {
+                    "email": "3b8e47b1ae90684602b80af0fb9907e16645ad05f206ad1f36cb48b7198a9e8c",
+                    "created_at": "2023-03-11T17:55:59.000Z",
+                    "updated_at": "2023-03-15T16:36:14.000Z"
+                },
+                "license": {
+                    "license_id": "00000000-0000-0000-0000-000000000000",
+                    "end_date": null,
+                    "created_at": null,
+                    "updated_at": "2023-03-11T17:53:41.000Z",
+                    "plan_id": "00000000-0000-0000-0000-000000000000",
+                    "subscription_id": "00000000-0000-0000-0000-000000000000"
+                },
+                "plan": {
+                    "plan_id": "00000000-0000-0000-0000-000000000000",
+                    "name": "Testing_Plan",
+                    "description": "This plan is for testing only",
+                    "max_servers": -1,
+                    "price": 0,
+                    "access_to_all_plugins": 1,
+                    "access_to_beta_program": 1
+                }
+            }
+        }
     }
 ]

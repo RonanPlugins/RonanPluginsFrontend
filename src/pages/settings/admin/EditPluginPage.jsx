@@ -8,7 +8,9 @@ import { Button, ButtonGroup, Textarea,  AlertDialog,
   AlertDialogCloseButton,
   useDisclosure,
 } from '@chakra-ui/react';
-const data = require("../../main/exampleDatabase.json")
+import MDEditor from '@uiw/react-md-editor';
+
+const data = require("../../../mockupData/exampleDatabase.json")
 import Plugin from '../../Plugins/Plugin';
 import './EditPluginPage.css'
 import { toast } from 'react-toastify';
@@ -18,14 +20,14 @@ const EditPluginPage = ({ pluginData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
   let handleInputChange = (e) => {
-  let inputValue = e.target.value;
-    setValue(inputValue);
+    setValue(e);
     setChanged(true)
   };
   
   const onSave = (e) => {
     toast.success("Saved your changes!")
     console.log("Saving text here.")
+    console.log(JSON.stringify(value))
     // TODO: Make API call here
   }
   const resetChanges = (e) => {
@@ -75,19 +77,11 @@ const EditPluginPage = ({ pluginData }) => {
        
      </div>
    <div className='EditPluginPagecontainer'>
-   <div className='textSide'>
-         <Textarea
-     onChange={handleInputChange}
-     height={'100vh'}
-     resize="none"
-     backgroundColor={'white'}
-     color={'black'}
-     value={value}
-     />
-   </div>
-   <div className='previewSide'>
-    <Plugin pluginData={pluginData} content={value} />
-   </div>
+       <MDEditor
+         height={"100vh"}
+        value={value}
+        onChange={handleInputChange}
+      />
   </div>
      </>
  );

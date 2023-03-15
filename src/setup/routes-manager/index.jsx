@@ -8,9 +8,9 @@ import Payments from '../../pages/account-manager/Payments';
 import Login from '../../pages/auth/signin';
 import SignUp from '../../pages/auth/signup';
 import DashboardDefault from '../../pages/dashboard/DashboardDefault';
-import Default from '../../pages/main/Default';
-import Home from '../../pages/main/Home';
-import Plugins from '../../pages/main/Plugins';
+import Default from '../../pages/main/Default/Default';
+import Home from '../../pages/main/Home/Home';
+import Plugins from '../../pages/main/Plugins/Plugins';
 import PrivateRoutes from './PrivateRoutes';
 import Plugin from '../../pages/Plugins/Plugin';
 import EditPluginPage from '../../pages/settings/admin/EditPluginPage';
@@ -18,9 +18,10 @@ import Admin from '../../pages/admin/Admin';
 import Users from '../../pages/admin/users/Users';
 import AdminPlugins from '../../pages/admin/plugins/AdminPlugins';
 import Settings from '../../pages/admin/settings/Settings';
-import AdminDefault from '../../pages/admin/AdminDefault';
+import AdminDefault from '../../pages/admin/Default/AdminDefault';
 import PageNotFound from '../../pages/errors/PageNotFound';
-const data = require('../../pages/main/exampleDatabase.json');
+import AboutUs from '../../pages/main/AboutUs/AboutUs';
+const data = require('../../mockupData/exampleDatabase.json');
 
 function App() {
  const [user, setUser] = useState(null);
@@ -32,6 +33,7 @@ function App() {
       {/* Default Routes */}
       <Route path="/" exact element={<Home />} />
       <Route path="/plugins" element={<Plugins />} />
+      <Route path="/about-us" element={<AboutUs />} />
 
       {/* Authentication Routes */}
       <Route path="/login" element={<Login />} />

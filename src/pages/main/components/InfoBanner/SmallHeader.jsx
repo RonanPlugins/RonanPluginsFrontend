@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getWithExpiry, setWithExpiry } from '../../../util/PopUpUtil'
+import { getWithExpiry, setWithExpiry } from '../../../../util/PopUpUtil'
 import "./SmallHeader.css"
 // const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen: false})
-const SmallHeader = ({ id,text, url,minutesopen }) => {
-    const [open, setOpen] = useState(true)
+const SmallHeader = ({ id, text, url, minutesopen }) => {
+    // TODO: should popup open
+    const [open, setOpen] = useState(false)
     useEffect(() => {
         const pup = getWithExpiry("popup-"+id)
         if (pup != null) {
