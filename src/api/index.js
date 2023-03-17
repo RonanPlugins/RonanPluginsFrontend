@@ -20,7 +20,8 @@ export default {
 
     // ---------------- User ----------------
     async login({ username, password }) {
-        return client.post(`/user/login`, { username, password })
+        const params = new URLSearchParams({ "usernameOrEmail": username, password })
+        return client.post(`/user/login`, params.toString())
     },
     async signup({ firstName, lastName, username, email, password }) {
         return client.post(`/user/create`, { firstName, lastName, username, email, password })
