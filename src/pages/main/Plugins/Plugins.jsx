@@ -37,7 +37,7 @@ const Plugins = () => {
     })}
    </div>
    <div key="3" className="bottom">
-    <DiscordAndReddit/>
+    <DiscordAndReddit text={"Don’t know what plugin is best for you?"} />
    </div>
   </div>
  );

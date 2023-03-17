@@ -26,8 +26,13 @@ const Home = () => {
       </div>
 
       <div className='MainContent'>
+        <div className='HomeTextContainer'>
+          Get the most out of your server
+          <p>Don't know what your next step in your minecraft server should be? We have plugins for that - explore our minecraft plugins and find the one that works for your server</p>
+          <hr className='PinkPageBreak'></hr>
+        </div>
 
-          <div className='Features'>
+        <div className='Features'>
 
             <div className='Feature'>
               <div className='Icon'><BsFillLightningFill size={50} /></div>

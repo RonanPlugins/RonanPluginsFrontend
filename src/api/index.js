@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const client = axios.create({
-    baseURL: process.env.API_URL,
+    baseURL: "http://localhost:3001",
     responseType: "json",
     withCredentials: true,
 });
@@ -10,9 +10,9 @@ const client = axios.create({
 client.interceptors.response.use(function (response) {
 }, function (error) {
     // If the user is not logged in on any request.
-    if (error.request.status) {
-        toast.error("Request error: " + error.request.status)
-    }
+    // if (error.request.status) {
+    //     toast.error("Request error: " + error.request.status)
+    // }
     return Promise.reject(error);
 })
 
@@ -20,8 +20,7 @@ export default {
 
     // ---------------- User ----------------
     async login({ username, password }) {
-        const params = new URLSearchParams({ "usernameOrEmail": username, password })
-        return client.post(`/user/login`, params.toString())
+        return client.post(`/user/login`, { username, password })
     },
     async signup({ firstName, lastName, username, email, password }) {
         return client.post(`/user/create`, { firstName, lastName, username, email, password })

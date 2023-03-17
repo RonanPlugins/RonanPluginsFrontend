@@ -82,6 +82,7 @@
 }
 .Features {
 	margin-top: 40px;
+	margin-bottom: 40px;
 	height: auto;
 	display: flex;
 	flex-wrap: wrap;
@@ -176,4 +177,20 @@
 .herotext {
 	font-family: 'Oleo Script', cursive;
 	font-size: 3vw;
+}
+
+.HomeTextContainer{
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 2rem;
+	font-family: 'Russo One', sans-serif;
+}
+.HomeTextContainer p{
+	font-family: 'Roboto', sans-serif;
+	max-width: 800px;
+	font-size: 1rem;
 }

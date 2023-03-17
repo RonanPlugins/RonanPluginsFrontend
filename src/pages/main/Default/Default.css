@@ -1,8 +1,15 @@
 .MainPageContainer {
  background-color: #4d4459;
  position: relative;
- overflow: hidden;
+ overflow: scroll;
  width: 100%;
- color: #fff;
  min-height: 100vh;
+ color: #fff;
+}
+.PinkPageBreak{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100px;
+	border-top: 3px solid #ED97C2;
+	border-radius: 10px;
 }

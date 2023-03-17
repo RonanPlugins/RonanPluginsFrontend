@@ -4,7 +4,12 @@ import "./HeaderAndFooter.css"
 const Footer = () => {
  return (
   <div className='MainFooter'>
-   RonanCraft
+         <div className='largefootertext'>
+             RonanCraft
+         </div>
+         <div className='footerlinks'>
+             Discord
+         </div>
   </div>
  );
 };

@@ -22,7 +22,7 @@ import {
     FormLabel,
 } from '@chakra-ui/react';
 
-import { BsFillHouseFill, BsFillPlugFill, BsDiscord, BsGithub, BsFillPersonFill, BsFillDoorOpenFill, BsGrid1X2,BsInfoCircleFill } from "react-icons/bs"
+import { BsFillHouseFill, BsFillPlugFill, BsDiscord, BsGithub, BsFillPersonFill, BsFillDoorOpenFill, BsGrid1X2,BsInfoCircleFill,BsCartFill } from "react-icons/bs"
 
 const Header = () => {
     const { user } = useContext(UserContext);
@@ -45,7 +45,8 @@ const Header = () => {
                         <FormLabel className='formlabel'>Pages</FormLabel>
                         <Button className='MobileNavButton' leftIcon={<BsFillHouseFill />} as={"a"} href='/account'>Home</Button>
                         <Button className='MobileNavButton' leftIcon={<BsFillPlugFill />} as={"a"} href='/plugins'>Plugins</Button>
-                        <Button className='MobileNavButton' leftIcon={<BsInfoCircleFill />} as={"a"} href='/about-us'>About Us</Button>
+                        <Button className='MobileNavButton' leftIcon={<BsInfoCircleFill />} as={"a"} href='/about'>About</Button>
+                        <Button className='MobileNavButton' leftIcon={<BsCartFill />} as={"a"} href='/tiers'>Tiers</Button>
                         <FormLabel className='formlabel'>Profile</FormLabel>
                         {user ? (
                             <>
@@ -74,9 +75,8 @@ const Header = () => {
                 <div className='NavMenu'>
                     <Link className='NavLink' to="/">Home</Link>
                     <Link className='NavLink' to="/plugins">Plugins</Link>
-                    <Link className='NavLink' to="/about-us">AboutUs</Link>
-                    <Link className='NavLink' to="https://discord.com/invite/8Kt4wKm">Discord</Link>
-                    <Link className='NavLink' to="https://github.com/SuperRonanCraft">Github</Link>
+                    <Link className='NavLink' to="/about">About</Link>
+                    <Link className='NavLink' to="/tiers">Tiers</Link>
                 </div>
                 <nav className='NavBtn'>
                     <Menu>

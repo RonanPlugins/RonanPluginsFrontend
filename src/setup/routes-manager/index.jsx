@@ -20,7 +20,8 @@ import AdminPlugins from '../../pages/admin/plugins/AdminPlugins';
 import Settings from '../../pages/admin/settings/Settings';
 import AdminDefault from '../../pages/admin/Default/AdminDefault';
 import PageNotFound from '../../pages/errors/PageNotFound';
-import AboutUs from '../../pages/main/AboutUs/AboutUs';
+import About from '../../pages/main/About/About';
+import Tiers from '../../pages/main/Tiers/Tiers';
 const data = require('../../mockupData/exampleDatabase.json');
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
       {/* Default Routes */}
       <Route path="/" exact element={<Home />} />
       <Route path="/plugins" element={<Plugins />} />
-      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/about" element={<About />} />
 
       {/* Authentication Routes */}
       <Route path="/login" element={<Login />} />
@@ -44,6 +45,7 @@ function App() {
       {/* Private Routes */}
       <Route element={<PrivateRoutes />}>
        <Route element={<DashboardDefault />}>
+      <Route path='/tiers' element={<Tiers/>}/>
         <Route path="/account" element={<Account />} />
         <Route path="/account/payments" element={<Payments />} />
         <Route path="/account/connections" element={<Connections />} />
