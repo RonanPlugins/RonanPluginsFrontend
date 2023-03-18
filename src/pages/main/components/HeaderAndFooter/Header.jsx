@@ -73,7 +73,7 @@ const Header = () => {
                         alt="Logo"
                     />
                 </Link>
-                <button onClick={onOpen}>
+                <button onClick={onOpen} className="Bars">
                     <Icons.GetIconFromString nameIcon={Icons.Bars} propsIcon={{ className: 'Bars' }} />
                 </button>
                 <div className='NavMenu'>
