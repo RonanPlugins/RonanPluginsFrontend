@@ -3,6 +3,7 @@ const PluginsData = require('../../../mockupData/Plugins.json');
 import './AllPlugins.css';
 import { Rating } from 'react-simple-star-rating';
 import DiscordAndReddit from '../components/DiscordAndReddit/DiscordAndReddit';
+import Messages from '../../../libs/Messages';
 
 const Plugins = () => {
  return (
@@ -37,7 +38,7 @@ const Plugins = () => {
     })}
    </div>
    <div key="3" className="bottom">
-    <DiscordAndReddit text={"Don’t know what plugin is best for you?"} />
+    <DiscordAndReddit text={Messages.SupportHeadingPlugins} />
    </div>
   </div>
  );

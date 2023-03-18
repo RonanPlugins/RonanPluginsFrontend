@@ -1,8 +1,7 @@
 .MainPageContainer {
  background-color: #4d4459;
  position: relative;
- overflow: scroll;
- width: 100%;
+ overflow: hidden;
  min-height: 100vh;
  color: #fff;
 }

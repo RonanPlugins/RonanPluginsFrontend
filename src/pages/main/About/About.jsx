@@ -1,4 +1,5 @@
 import React from 'react'
+import Messages from '../../../libs/Messages'
 import DiscordAndReddit from '../components/DiscordAndReddit/DiscordAndReddit'
 import "./About.css"
 
@@ -9,7 +10,7 @@ const AboutUs = () => {
       <hr className='PinkPageBreak' />
       RonanCraft
       <hr className='PinkPageBreak'/>
-      <DiscordAndReddit text={"Contact Us"}/>
+      <DiscordAndReddit text={Messages.SupportHeadingAbout}/>
     </div>
   )
 }

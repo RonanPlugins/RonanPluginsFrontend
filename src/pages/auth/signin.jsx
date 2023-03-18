@@ -17,6 +17,7 @@ const Login = () => {
       username: values.username,
       password: values.password,
     });
+    console.log(login)
     if (login.status === 200) {
       setUser(login.data)
       const params = new URLSearchParams(window.location.search);
@@ -25,7 +26,7 @@ const Login = () => {
       toast.success("You're now logged in!",{toastId: "logged_in"})
     }
   } catch (err) {
-    
+    console.log("SignIn Error: "+err)
     actions.resetForm();
     toast.error("Incorrect username or password!",{toastId: "password_wrong"});
   }

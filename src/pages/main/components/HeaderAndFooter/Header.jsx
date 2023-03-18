@@ -22,7 +22,9 @@ import {
     FormLabel,
 } from '@chakra-ui/react';
 
-import { BsFillHouseFill, BsFillPlugFill, BsDiscord, BsGithub, BsFillPersonFill, BsFillDoorOpenFill, BsGrid1X2,BsInfoCircleFill,BsCartFill } from "react-icons/bs"
+import Messages from '../../../../libs/Messages';
+import Links from '../../../../libs/Links';
+import Icons from '../../../../libs/Icons';
 
 const Header = () => {
     const { user } = useContext(UserContext);
@@ -40,25 +42,25 @@ const Header = () => {
                 <DrawerOverlay />
                 <DrawerContent >
                     <DrawerCloseButton />
-                    <DrawerHeader>Navigation</DrawerHeader>
+                    <DrawerHeader>{Messages.Navigation}</DrawerHeader>
                     <DrawerBody>
-                        <FormLabel className='formlabel'>Pages</FormLabel>
-                        <Button className='MobileNavButton' leftIcon={<BsFillHouseFill />} as={"a"} href='/account'>Home</Button>
-                        <Button className='MobileNavButton' leftIcon={<BsFillPlugFill />} as={"a"} href='/plugins'>Plugins</Button>
-                        <Button className='MobileNavButton' leftIcon={<BsInfoCircleFill />} as={"a"} href='/about'>About</Button>
-                        <Button className='MobileNavButton' leftIcon={<BsCartFill />} as={"a"} href='/tiers'>Tiers</Button>
-                        <FormLabel className='formlabel'>Profile</FormLabel>
+                        <FormLabel className='formlabel'>{Messages.Pages}</FormLabel>
+                        <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Home} />} as={"a"} href={Links.Home}>{Messages.Home}</Button>
+                        <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Plugins} />} as={"a"} href={Links.Plugins}>{Messages.Plugins}</Button>
+                        <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.About} />} as={"a"} href={Links.About}>{Messages.About}</Button>
+                        <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Tiers} />} as={"a"} href={Links.Tiers}>{Messages.Tiers}</Button>
+                        <FormLabel className='formlabel'>{Messages.Profile}</FormLabel>
                         {user ? (
                             <>
-                                <Button className='MobileNavButton' leftIcon={<BsGrid1X2 />} as={"a"} href='/account'>Account</Button>
-                                <Button className='MobileNavButton' leftIcon={<BsFillDoorOpenFill />} as={"a"} href='/logout'>Logout</Button>
+                                <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Account} />} as={"a"} href={Links.Account}>{Messages.Account}</Button>
+                                <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Logout} />} as={"a"} href={Links.Logout}>{Messages.Logout}</Button>
                             </>
                         ) : (
-                            <Button className='MobileNavButton' leftIcon={<BsFillPersonFill />} as={"a"} href='/login'>Login</Button>
+                            <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Login} />} as={"a"} href={Links.Login}>{Messages.Login}</Button>
                             )}
-                            <FormLabel className='formlabel'>Links</FormLabel>
-                            <Button className='MobileNavButton' leftIcon={<BsDiscord />} as={"a"} href='https://discord.com/invite/8Kt4wKm'>Discord</Button>
-                            <Button className='MobileNavButton' leftIcon={<BsGithub />} as={"a"} href='https://github.com/SuperRonanCraft'>Github</Button>
+                            <FormLabel className='formlabel'>{Messages.Links}</FormLabel>
+                        <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Discord} />} as={"a"} href={Links.Discord}>{Messages.Discord}</Button>
+                            <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Github} />} as={"a"} href={Links.Github}>{Messages.Github}</Button>
                     </DrawerBody>
                     <DrawerFooter>
                     </DrawerFooter>
@@ -71,26 +73,29 @@ const Header = () => {
                         alt="Logo"
                     />
                 </Link>
-                <FaBars className='Bars' onClick={onOpen} />
+                <button onClick={onOpen}>
+                    <Icons.GetIconFromString nameIcon={Icons.Bars} propsIcon={{ className: 'Bars' }} />
+                </button>
                 <div className='NavMenu'>
-                    <Link className='NavLink' to="/">Home</Link>
-                    <Link className='NavLink' to="/plugins">Plugins</Link>
-                    <Link className='NavLink' to="/about">About</Link>
-                    <Link className='NavLink' to="/tiers">Tiers</Link>
+                    {Messages.HeaderLinks.map((link) => {
+                        return (
+                            <Link className='NavLink' to={link.URL}>{link.Text}</Link>
+                        )
+                    })}
                 </div>
                 <nav className='NavBtn'>
                     <Menu>
                         <MenuButton as={Button} className="ProfileButton" colorScheme='pink'>
-                            Profile
+                            {Messages.Profile}
                         </MenuButton>
                         <MenuList>
 
                             <MenuGroup title='Profile'>
-                                {user ? (<><MenuItem icon={<FaCogs />} as='a' href='/account'>My Account</MenuItem><MenuItem icon={<FaMoneyCheckAlt />} as='a' href='/account/payments'>Payments </MenuItem><MenuItem icon={<FaSignOutAlt />} as='a' href='/logout'>LogOut </MenuItem></>) : (<MenuItem icon={<FaSignInAlt />} as='a' href='/login'>Login</MenuItem>)}
+                                {user ? (<><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Bars} />} as='a' href={Links.Account}>{ Messages.MyAccount}</MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Payments} />} as='a' href='/account/payments'>Payments </MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Logout} />} as='a' href='/logout'>LogOut </MenuItem></>) : (<MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Login} />} as='a' href='/login'>Login</MenuItem>)}
                             </MenuGroup>
                             <MenuDivider />
                             <MenuGroup title='Help'>
-                                <MenuItem icon={<FaDiscord />}>Discord</MenuItem>
+                                <MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Discord} />} as={"a"}  href={Links.Discord} >{Messages.Discord}</MenuItem>
                             </MenuGroup>
                         </MenuList>
                     </Menu>

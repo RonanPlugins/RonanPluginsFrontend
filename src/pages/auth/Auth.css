@@ -1,8 +1,5 @@
-/* TODO: fix the form error format */
 .AuthPage {
 	margin-top: 40px;
-	height: 100%;
-	width: 100vw;
 	color: black;
 	background-color: #4d4459;
 	display: flex;
@@ -45,7 +42,7 @@
 	margin-right: auto;
 	margin-bottom: 20px;
 	margin-top: 50px;
-	width: 281px;
+	width: 90%;
 	height: 48px;
 	background-color: #3e86f1;
 	border-radius: 6px;
@@ -54,7 +51,7 @@
 .AuthButton :hover {
 	background-color: #1056bf;
 }
-.FormInput {
+.FormInput,.input-error {
 	width: 90%;
 	height: 60px;
 	padding-left: 15px;
@@ -62,6 +59,10 @@
 	border: solid 1px;
 	border-color: #b2b0b0;
 	margin-bottom: 20px;
+}
+.input-error{
+	border-color: #e61111;
+	
 }
 .FormError .input-error {
 	border: solid #ee6a6a;
@@ -85,7 +86,7 @@
 }
 .FormError {
 	font-weight: 700;
-	padding-left: 65px;
+	padding-left: 30px;
 	color: #ee6a6a;
 	text-align: left;
 }
