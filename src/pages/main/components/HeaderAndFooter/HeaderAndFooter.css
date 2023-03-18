@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 .Nav {
-	background-color: #595472;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 800;
 	display: flex;
@@ -9,14 +8,21 @@
 	z-index: 10;
 }
 .NavLink {
-	font-size: 150%;
-	color: #fff;
-	/* display: flex; */
-	/* align-items: center; */
-	/* text-decoration: none; */
-	padding: 0 1rem;
-	/* height: 100%; */
+
+	color: rgba(52, 73, 85, 0.5);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
 	cursor: pointer;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.NavLink h1{
+	font-size: 25px;
+	color: #f9aa33;
+
 }
 
 .NavLink:hover {
@@ -49,7 +55,6 @@
 .NavBtn {
 	display: flex;
 	align-items: center;
-	margin-right: 24px;
 }
 @media screen and (max-width: 963px) {
 	.NavBtn {
@@ -75,7 +80,6 @@
 .MainFooter {
 	min-height: 130px;
 	height: fit-content;
-	background-color: #4d4459;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -87,6 +91,7 @@
 }
 
 .largefootertext h1{
+	color: #344955;
 	font-size: clamp(2rem, 20vw, 3vw); 
 }
 

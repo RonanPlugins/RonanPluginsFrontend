@@ -19,23 +19,24 @@ export default class Messages {
     static Reddit = "Reddit";
     static Github = "Github";
     static Links = "Links"
+    static LearnMore = "LEARN MORE";
     static SupportHeadingPlugins = "Don’t know what plugin is best for you?";
     static SupportHeadingAbout = "Contact Us";
     static Features = [
         {
             Icon: "BsFillLightningFill",
             Title: "Well optimized",
-            Description: "We created all of our plugins to be as optimized as possible in order to give you the fastest performance. We carefully crafted the plugins to be more efficient and tight for your server. We’ve developed a number of different plugins that exist to help you with your server."
+            Description: "All our plugins are designed with optimization in mind."
         },
         {
             Icon: "BsCodeSlash",
             Title: "Customizable",
-            Description: "All of our plugins are customizable; you can customize them to suit your particular Minecraft server. With a huge range of configuration options for each plugin, there should be one to meet your needs."
+            Description: "All plugins comes with it’s own config.yml to make it suit your needs"
         },
         {
             Icon: "BsFillPersonFill",
             Title: "Fast support",
-            Description: "We have a very fast support team on our Discord along with nearly 1,000 members to help you customize your plugin. If you are not sure what plugin is right for you, contact us and we will help you!"
+            Description: "We have a discord with over 1.000 members ready to help you whenever you need!"
         }
     ];
     static FeaturesTitle = "Get the most out of your server";

@@ -29,7 +29,7 @@
 	margin: 20px;
 	height: 300px;
 	width: 250px;
-	background-color: #595472;
+	background-color: #e9e4e4;
 	border-color: #9ecaed;
 	border-radius: 10px;
 	box-shadow: 0 0 10px #ffffff;
@@ -51,7 +51,7 @@
 	grid-area: Image;
 }
 .Content {
-	background-color: #4d4459;
+	background-color: #f1f1f1;
 	padding: 10px;
 	border-radius: 0 0 10px 10px;
 	display: grid;

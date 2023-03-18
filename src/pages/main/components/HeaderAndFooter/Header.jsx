@@ -72,6 +72,9 @@ const Header = () => {
                         src="/assets/logo.webp"
                         alt="Logo"
                     />
+                    <h1>
+                        RonanPlugins
+                    </h1>
                 </Link>
                 <button onClick={onOpen} className="Bars">
                     <Icons.GetIconFromString nameIcon={Icons.Bars} propsIcon={{ className: 'Bars' }} />
@@ -85,7 +88,7 @@ const Header = () => {
                 </div>
                 <nav className='NavBtn'>
                     <Menu>
-                        <MenuButton as={Button} className="ProfileButton" colorScheme='pink'>
+                        <MenuButton as={Button} className="ProfileButton" backgroundColor={"#4ecdc4"}>
                             {Messages.Profile}
                         </MenuButton>
                         <MenuList>

@@ -1,98 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
-@import url('https://fonts.cdnfonts.com/css/minecraft-4');
-.wave {
-	position: absolute;
-	top: 0;
-	left: 0;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+.Left{
 	width: 100%;
-	overflow: hidden;
-	line-height: 0;
 }
-.wave svg {
-	position: relative;
-	display: block;
-	width: calc(100% + 1.3px);
-	height: 103px;
-	transform: rotateY(180deg);
-}
-.wave,.wave-bottom .shape-fill {
-	fill: #595472;
-}
-.wave-bottom {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	overflow: hidden;
-	line-height: 0;
-	transform: rotate(180deg);
-}
-.wave-bottom svg {
-	position: relative;
-	display: block;
-	width: calc(126% + 1.3px);
-	height: 115px;
-	transform: rotateY(180deg);
-}
-.wave-bottom .shape-fill {
-	fill: #4d4459;
+.Left span{
+	color: #4ecdc4;
+	font-weight: 800;
 }
 .Hero {
-	position: relative;
-	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	
+	padding-top: 40px;
+	padding-left: 40px;
 }
-.centered {
-	position: absolute;
-	top: 20%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+
+.Hero img{
+	width:50% ;
 }
-.Hero img {
-	width: 100vw;
-	z-index: 0;
-	height: auto;
+
+@media screen and (max-width: 768px) {
+	.Hero{
+		padding-bottom: 40px;
+		padding-left: 0px;
+	}
+	.Hero img{
+		display:none;
+	}	
+	.Hero h1,h2,button{
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+	}
+	.Left{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
 }
-.custom-shape-divider-top-1678562461 {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	overflow: hidden;
-	line-height: 0;
+
+.Hero button{
+	margin-top:15px;
+	padding: 5px;
+	background-color: #4ecdc4;
 }
-.custom-shape-divider-top-1678562461 svg {
-	position: relative;
-	display: block;
-	width: calc(100% + 1.3px);
-	height: 150px;
-	transform: rotateY(180deg);
+.Left h1{
+		font-size: 50px;
 }
-.custom-shape-divider-top-1678562461 .shape-fill {
-	fill: #ffffff;
+.Left h2{
+		font-size: 40px;
 }
-.MainContent {
-	background-color: #595472;
-	height: 100%;
-	display: grid;
-	grid-auto-rows: 1fr;
-	grid-template-columns: 1fr;
-	grid-template-rows: 0.7fr 1.3fr;
-	gap: 0px 0px;
-	grid-template-areas:'text''.';
-}
+
+/* ---------------- */
+/*     Features     */
+/* ---------------- */
 .Features {
-	margin-top: 40px;
-	margin-bottom: 40px;
-	height: auto;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 30px;
-	justify-content: center;
 	align-items: center;
 	text-align: center;
+	padding-left: 30px;
+	margin-bottom: 50px;
+}
+@media screen and (min-width: 768px) {
+	.Features {
+		justify-content: space-around;
+	}
+}
+@media screen and (max-width: 768px) {
+	.Left h1{
+		font-size: 40px;
+}
+.Left h2{
+		font-size: 20px;
+}
+	.Features {
+		justify-content: center;
+		padding-left: 0px;
+	}
 }
 .Feature {
-	width: 400px;
+	width: 200px;
+	color: rgba(35, 47, 62, 0.5);
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 0.4fr 1.6fr;
@@ -105,10 +100,8 @@
 		width: 300px;
 	}
 }
-.Feature:hover .Icon {
-	color: #d1e708;
-}
 .Icon {
+	color: #4ecdc4;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -122,75 +115,4 @@
 .Description {
 	font-size: 15px;
 	grid-area: Description;
-}
-.Wave2 {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	overflow: hidden;
-	line-height: 0;
-	transform: rotate(180deg);
-}
-.Wave2 svg {
-	position: relative;
-	display: block;
-	width: calc(100% + 1.3px);
-	height: 201px;
-	transform: rotateY(180deg);
-}
-.Wave2 .shape-fill {
-	fill: #7e42ce;
-}
-.S3 {
-	height: 1000px;
-	background-color: #4d4459;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	grid-template-areas:'plugins .''. discord';
-}
-.discord {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 0.8fr 1.4fr 0.8fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	grid-template-areas:'.''.''.';
-	grid-area: discord;
-}
-.plugins {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 0.8fr 1.4fr 0.8fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	grid-template-areas:'.''.''.';
-	grid-area: plugins;
-}
-.minecraftFont {
-	font-family: 'Minecraft', sans-serif;
-}
-@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
-.herotext {
-	font-family: 'Oleo Script', cursive;
-	font-size: 3vw;
-}
-
-.HomeTextContainer{
-	margin-top: 40px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-size: 2rem;
-	font-family: 'Russo One', sans-serif;
-}
-.HomeTextContainer p{
-	font-family: 'Roboto', sans-serif;
-	max-width: 800px;
-	font-size: 1rem;
 }

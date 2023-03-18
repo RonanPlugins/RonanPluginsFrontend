@@ -87,7 +87,7 @@ const Login = () => {
       </div>
       <div className="AdditionalButtons">
         <div>
-          Don not have an account?{" "}
+          Do not have an account?{" "}
           <p className="BlueText"
             onClick={() => {
               navigate("/signup");
