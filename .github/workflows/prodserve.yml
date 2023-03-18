@@ -20,9 +20,8 @@ jobs:
         username: ${{secrets.VPS_USERNAME}}
         password: ${{secrets.VPS_PASSWORD}}
         script: |
-          systemctl stop RonanPluginsReact.service
           cd /var/www/RonanPluginsReact
           git pull
           npm install
           npm run build
-          systemctl start RonanPluginsReact.service
+          systemctl restart RonanPluginsReact.service
