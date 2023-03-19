@@ -45,6 +45,8 @@ const Header = () => {
                     <DrawerHeader>{Messages.Navigation}</DrawerHeader>
                     <DrawerBody>
                         <FormLabel className='formlabel'>{Messages.Pages}</FormLabel>
+                        {/*TODO update this to use PLUGINS, PLANS, MY ACCOUNT on navbar.
+                         TODO remove profile button and use MY ACCOUNT instead*/}
                         <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Home} />} as={"a"} href={Links.Home}>{Messages.Home}</Button>
                         <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.Plugins} />} as={"a"} href={Links.Plugins}>{Messages.Plugins}</Button>
                         <Button className='MobileNavButton' leftIcon={<Icons.GetIconFromString nameIcon={Icons.About} />} as={"a"} href={Links.About}>{Messages.About}</Button>

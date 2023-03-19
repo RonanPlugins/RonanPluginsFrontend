@@ -9,13 +9,13 @@ const Home = () => {
       <div className='Hero'>
         <div className='Left'>
           <h1>{Messages.BrandName}</h1>
-          <h2>Where creativity meets <span>functionality</span></h2>
+          <h2>Where creativity meets <span className={"new line"}>functionality</span></h2>
           <a href={Links.About}>
           <button>{Messages.LearnMore}</button>
           </a>
           
         </div>
-        <img src='https://imgur.com/HppoLfc.png' />
+        <img src='https://imgur.com/HppoLfc.png'  alt={"Image"}/>
       </div>
         <div className='Features'>
 

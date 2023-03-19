@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "react-scripts start",
-    "dev": "react-scripts start",
+    "dev": "react-scripts start dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
