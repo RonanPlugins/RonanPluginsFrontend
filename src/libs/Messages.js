@@ -10,7 +10,7 @@ export default class Messages {
     static Home = "Home";
     static Plugins = "Plugins";
     static About = "About";
-    static Tiers = "Tiers";
+    static Plans = "Plans";
     static Profile = "Profile";
     static Login = "Login";
     static Account = "Account";
@@ -43,20 +43,16 @@ export default class Messages {
     static FeaturesDescription = "Don't know what your next step in your minecraft server should be? We have plugins for that - explore our minecraft plugins and find the one that works for your server";
     static HeaderLinks = [
         {
-            Text: this.Home,
-            URL: Links.Home
-        },
-        {
-            Text: this.Plugins,
+            Text: this.Plugins.toUpperCase(),
             URL: Links.Plugins
         },
         {
-            Text: this.About,
-            URL: Links.About
+            Text: this.Plans.toUpperCase(),
+            URL: Links.Plans
         },
         {
-            Text: this.Tiers,
-            URL: Links.Tiers
+            Text: this.MyAccount.toUpperCase(),
+            URL: Links.Account
         }
     ];
     static FooterLinks = [

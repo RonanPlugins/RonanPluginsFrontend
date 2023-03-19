@@ -69,7 +69,7 @@ const Header = () => {
                 </DrawerContent>
             </Drawer>
             <div className='Nav'>
-                <Link className='NavLink' to="/">
+                <Link className='NavLogo' to="/">
                     <img className='HeaderLogo'
                         src="/assets/logo.webp"
                         alt="Logo"

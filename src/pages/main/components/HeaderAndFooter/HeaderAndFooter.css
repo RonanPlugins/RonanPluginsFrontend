@@ -2,15 +2,14 @@
 .Nav {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 800;
+	width: 100%;
 	display: flex;
-	justify-content: left;
+	  justify-content: center;
+  justify-content: flex-start;
 	padding: 0.5rem calc((100vw - 1000px) / 20);
-	z-index: 10;
-	margin: 30px auto auto;
+	z-index: 999999999;
 }
-.NavLink {
-
-	color: rgba(52, 73, 85, 0.5);
+.NavLogo{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -18,22 +17,28 @@
 	cursor: pointer;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin: auto 20px auto 0;
+}
+.NavLink {
+	color: rgba(52, 73, 85, 0.5);
+	cursor: pointer;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
-.NavLink h1{
+.NavLogo h1{
 	font-size: 25px;
-	color: #f9aa33;
+	color: var(--formal-secondary-color);
 
 }
 
 .NavLink:hover {
-	color: #ed97c2;
+	color: var(--formal-accent-color);
 }
 
 .Bars {
+	  margin-left: auto;
 	display: none;
-	color: #ed97c2;
+	color: var(--formal-accent-color);
 }
 @media screen and (max-width: 963px) {
 	.Bars {
@@ -48,8 +53,6 @@
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
-	text-transform: uppercase;
-	margin: auto 50px;
 }
 @media screen and (max-width: 963px) {
 	.NavMenu {
@@ -57,6 +60,7 @@
 	}
 }
 .NavBtn {
+	  margin-left: auto;
 	display: flex;
 	align-items: center;
 }
@@ -95,7 +99,7 @@
 }
 
 .largefootertext h1{
-	color: #344955;
+	color: var(--formal-primary-color);
 	font-size: clamp(2rem, 20vw, 3vw); 
 }
 
@@ -115,5 +119,5 @@
 	padding-right: 20px;
 }
 .footerlink:hover{
-	color:#ed97c2
+	color:var(--formal-accent-color)
 }

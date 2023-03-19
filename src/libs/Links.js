@@ -3,7 +3,7 @@ export default class Links {
     static Home = "/";
     static Plugins = "/plugins";
     static About = "/about";
-    static Tiers = "/tiers";
+    static Plans = "/plans"
     static Login = "/login";
     static Logout = "/logout";
     static SignUp = "/signup";

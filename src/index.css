@@ -1,1 +1,14 @@
+:root {
+	/*Variables*/
+	/*Colors*/
+	--formal-text-color: #232F3E;
+	--formal-primary-color: #344955;
+	--formal-secondary-color: #F9AA33;
+	--formal-accent-color: #4ECDC4;
+	--formal-background-color: #F5F5F5;
+
+	/*Fonts*/
+	--formal-primary-font: 'Montserrat', sans-serif;
+}
+
 * { margin:0; padding: 0; box-sizing: border-box; }
