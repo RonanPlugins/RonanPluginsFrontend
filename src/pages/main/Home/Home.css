@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+:root {
+	/*Variables*/
+	/*Colors*/
+	--formal-text-color: #232F3E;
+	--formal-primary-color: #344955;
+	--formal-secondary-color: #F9AA33;
+	--formal-accent-color: #4ECDC4;
+	--formal-background-color: #F5F5F5;
+
+	/*Fonts*/
+	--formal-primary-font: 'Montserrat', sans-serif;
+}
+
 .Left{
 	width: 100%;
+	margin: 10vh auto auto 5vw;
+	text-shadow: 0 4px 4px rgba(0,0,0,0.25);
 }
 .Left span{
-	color: #4ecdc4;
+	color: var(--formal-accent-color);
 	font-weight: 800;
+
+}
+.Left span::before {
+	content: "";
+	display: block;
+	margin-top: -10px;
 }
 .Hero {
 	font-family: 'Montserrat', sans-serif;
@@ -14,23 +35,23 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	
+
 	padding-top: 40px;
 	padding-left: 40px;
 }
 
 .Hero img{
-	width:50% ;
+	width:80%;
 }
 
 @media screen and (max-width: 768px) {
 	.Hero{
 		padding-bottom: 40px;
-		padding-left: 0px;
+		padding-left: 0;
 	}
 	.Hero img{
 		display:none;
-	}	
+	}
 	.Hero h1,h2,button{
 		text-align: center;
 		justify-content: center;
@@ -45,15 +66,18 @@
 }
 
 .Hero button{
-	margin-top:15px;
-	padding: 5px;
-	background-color: #4ecdc4;
+	margin-top: 15px;
+	margin-left: 15px;
+	padding: 5px 25px;
+	border-radius: 5px;
+	background-color: var(--formal-accent-color);
 }
 .Left h1{
-		font-size: 50px;
+	font-size: 35px;
+	margin-bottom: -10px;
 }
 .Left h2{
-		font-size: 40px;
+	font-size: 50px;
 }
 
 /* ---------------- */
@@ -62,36 +86,38 @@
 .Features {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 30px;
+	gap: 50px;
 	align-items: center;
 	text-align: center;
-	padding-left: 30px;
-	margin-bottom: 50px;
+	margin-top: -250px;
 }
 @media screen and (min-width: 768px) {
 	.Features {
-		justify-content: space-around;
+		margin-left: 150px;
+		justify-content: left;
 	}
 }
 @media screen and (max-width: 768px) {
 	.Left h1{
 		font-size: 40px;
-}
-.Left h2{
+		margin: 20px;
+	}
+	.Left h2{
 		font-size: 20px;
-}
+	}
 	.Features {
 		justify-content: center;
-		padding-left: 0px;
+		padding-left: 0;
+		margin-top: 200px;
 	}
 }
 .Feature {
-	width: 200px;
+	width: 10vw;
 	color: rgba(35, 47, 62, 0.5);
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 0.4fr 1.6fr;
-	gap: 0px 0px;
+	gap: 0 0;
 	grid-auto-flow: row;
 	grid-template-areas:'Icon''Text''Description';
 }
