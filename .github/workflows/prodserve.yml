@@ -25,5 +25,5 @@ jobs:
           npm install
           npm run build
           rm -rf ./build
-          cp ./dist ./build
+          cp -r ./dist ./build
           systemctl restart RonanPluginsReact.service
