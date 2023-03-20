@@ -95,7 +95,7 @@ const Header = () => {
                         <MenuList>
                             <MenuGroup title='Profile'>
                                 {console.log(user)}
-                                {user ? (<><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Bars} />} as='a' href={Links.Account}>{ Messages.MyAccount}</MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Payments} />} as='a' href='/account/payments'>Payments </MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Logout} />} as='a' href='/logout'>LogOut </MenuItem></>) : (<MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Login} />} as='a' href='/login'>Login</MenuItem>)}
+                                {user ? (<><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Bars} />} as='a' href={Links.Account}>{ Messages.MyAccount}</MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Payments} />} as='a' href='/user/payments'>Payments </MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Logout} />} as='a' href='/logout'>LogOut </MenuItem></>) : (<MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Login} />} as='a' href='/login'>Login</MenuItem>)}
                             </MenuGroup>
                             <MenuDivider />
                             <MenuGroup title='Help'>

@@ -7,7 +7,7 @@ export default class Links {
     static Login = "/login";
     static Logout = "/logout";
     static SignUp = "/signup";
-    static Account = "/account";
+    static Account = "/user";
     static PrivacyPolicy = "/privacy-policy";
     static TermsAndConditions = "/terms-and-conditions";
 

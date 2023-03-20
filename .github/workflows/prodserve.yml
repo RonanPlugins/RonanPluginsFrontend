@@ -23,6 +23,7 @@ jobs:
           cd /var/www/RonanPluginsReact
           git pull
           npm install
-          systemctl stop RonanPluginsReact.service
           npm run build
-          systemctl start RonanPluginsReact.service
+          rm -rf ./build
+          cp ./dist ./build
+          systemctl restart RonanPluginsReact.service
