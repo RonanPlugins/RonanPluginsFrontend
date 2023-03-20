@@ -1,6 +1,7 @@
 import Links from "./Links.js";
 
 export default class Messages {
+    static Logout = "Logout"
     static Support = "Support";
     static PrivacyPolicy = "Privacy Policy";
     static TermsAndConditions = "Terms And Conditions";
@@ -49,11 +50,8 @@ export default class Messages {
         {
             Text: this.Plans.toUpperCase(),
             URL: Links.Plans
-        },
-        {
-            Text: this.MyAccount.toUpperCase(),
-            URL: Links.Account
         }
+        // Always has my account
     ];
     static FooterLinks = [
         {
@@ -69,7 +67,5 @@ export default class Messages {
             URL: Links.TermsAndConditions
         }
     ];
-    // static SUPPORT = "Support";
-    // static SUPPORT = "Support";
 }
 

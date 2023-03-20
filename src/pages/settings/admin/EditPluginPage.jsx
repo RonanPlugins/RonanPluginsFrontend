@@ -26,8 +26,6 @@ const EditPluginPage = ({ pluginData }) => {
   
   const onSave = (e) => {
     toast.success("Saved your changes!")
-    console.log("Saving text here.")
-    console.log(JSON.stringify(value))
     // TODO: Make API call here
   }
   const resetChanges = (e) => {

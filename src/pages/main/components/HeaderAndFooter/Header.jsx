@@ -87,15 +87,14 @@ const Header = () => {
                             <Link className='NavLink' to={link.URL}>{link.Text}</Link>
                         )
                     })}
-                </div>
-                <nav className='NavBtn'>
                     <Menu>
-                        <MenuButton as={Button} className="ProfileButton" backgroundColor={"#4ecdc4"}>
-                            {Messages.Profile}
+                        <MenuButton className='NavLink'>
+                            {Messages.MyAccount.toUpperCase()}
                         </MenuButton>
-                        <MenuList>
 
+                        <MenuList>
                             <MenuGroup title='Profile'>
+                                {console.log(user)}
                                 {user ? (<><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Bars} />} as='a' href={Links.Account}>{ Messages.MyAccount}</MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Payments} />} as='a' href='/account/payments'>Payments </MenuItem><MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Logout} />} as='a' href='/logout'>LogOut </MenuItem></>) : (<MenuItem icon={<Icons.GetIconFromString nameIcon={Icons.Login} />} as='a' href='/login'>Login</MenuItem>)}
                             </MenuGroup>
                             <MenuDivider />
@@ -104,7 +103,7 @@ const Header = () => {
                             </MenuGroup>
                         </MenuList>
                     </Menu>
-                </nav>
+                </div>
             </div>
         </div>
     );

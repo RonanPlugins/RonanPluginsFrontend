@@ -19,6 +19,8 @@
 	padding-right: 10px;
 }
 .NavLink {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 800;
 	color: rgba(52, 73, 85, 0.5);
 	cursor: pointer;
 	padding-left: 25px;

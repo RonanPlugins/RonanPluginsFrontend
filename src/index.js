@@ -5,10 +5,14 @@ import "./index.css"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ChakraProvider } from '@chakra-ui/react'
+import { ProSidebarProvider } from 'react-pro-sidebar';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ChakraProvider>
-    <ToastContainer />
-    <App />
+    <ProSidebarProvider>
+      <ToastContainer />
+      <App />
+    </ProSidebarProvider>
   </ChakraProvider>
 )

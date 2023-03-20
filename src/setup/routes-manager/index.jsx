@@ -14,80 +14,105 @@ import Plugins from '../../pages/main/Plugins/Plugins';
 import PrivateRoutes from './PrivateRoutes';
 import Plugin from '../../pages/Plugins/Plugin';
 import EditPluginPage from '../../pages/settings/admin/EditPluginPage';
-import Admin from '../../pages/admin/Admin';
-import Users from '../../pages/admin/users/Users';
-import AdminPlugins from '../../pages/admin/plugins/AdminPlugins';
-import Settings from '../../pages/admin/settings/Settings';
-import AdminDefault from '../../pages/admin/Default/AdminDefault';
 import PageNotFound from '../../pages/errors/PageNotFound';
 import About from '../../pages/main/About/About';
 import Tiers from '../../pages/main/Tiers/Tiers';
+import AdminRoutes, { TestingAdminRoute } from './AdminRoutes';
+import UserProfileDefault from '../../pages/UserDashboard/UserProfileDefault';
+import AdminDashboardDefault from '../../pages/AdminDashboard/AdminDashboardDefault';
+import AdminUsers from '../../pages/AdminDashboard/pages/AdminUsers';
+import AdminSettings from '../../pages/AdminDashboard/pages/AdminSettings';
+import AdminHome from '../../pages/AdminDashboard/pages/AdminHome';
+import UserHome from '../../pages/UserDashboard/pages/UserHome';
+import UserDownloads from '../../pages/UserDashboard/pages/UserDownloads';
+import UserLicense from '../../pages/UserDashboard/pages/UserLicense';
+import UserSubscription from '../../pages/UserDashboard/pages/UserSubscription';
+import UserSettings from '../../pages/UserDashboard/pages/UserSettings';
+import AdminPlugins from '../../pages/AdminDashboard/pages/AdminPlugins';
 const data = require('../../mockupData/exampleDatabase.json');
 
 function App() {
- const [user, setUser] = useState(null);
- return (
-  <UserContext.Provider value={{ user, setUser }}>
-   <Router>
-    <Routes>
-     <Route element={<Default />}>
-      {/* Default Routes */}
-      <Route path="/" exact element={<Home />} />
-      <Route path="/plugins" element={<Plugins />} />
-      <Route path="/about" element={<About />} />
+  const [user, setUser] = useState(null);
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <Routes>
+          <Route element={<Default />}>
+            {/* Default Routes */}
+            <Route path="/" exact element={<Home />} />
+            <Route path="/plugins" element={<Plugins />} />
+            <Route path="/about" element={<About />} />
 
-      {/* Authentication Routes */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/logout" element={<LogOut />} />
-      {/* END Authentication Routes */}
+            {/* Authentication Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/logout" element={<LogOut />} />
+            {/* END Authentication Routes */}
 
-      {/* Private Routes */}
-      <Route element={<PrivateRoutes />}>
-       <Route element={<DashboardDefault />}>
-      <Route path='/tiers' element={<Tiers/>}/>
-        <Route path="/account" element={<Account />} />
-        <Route path="/account/payments" element={<Payments />} />
-        <Route path="/account/connections" element={<Connections />} />
-       </Route>
-      </Route>
-      {/* END Private Routes */}
-      {/* Private Routes */}
-      <Route element={<AdminDefault/>}>
-        <Route path="/admin" element={<Admin/>} />
-        <Route path="/admin/users" element={<Users />} />
-        <Route path="/admin/plugins" element={<AdminPlugins />} />
-        <Route path="/admin/settings" element={<Settings />} />
-      </Route>
-      {/* END Private Routes */}
+            {/* Private Routes */}
+            <Route element={<PrivateRoutes />}>
+              <Route element={<DashboardDefault />}>
+                <Route path='/plans' element={<Tiers />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/account/payments" element={<Payments />} />
+                <Route path="/account/connections" element={<Connections />} />
+              </Route>
+              <Route element={<AdminRoutes neededPermissions={"8"} />}>
+                {data.map((d) => {
+                  return (
+                    <>
+                      <Route
+                        path={'/plugin/' + d.ProductName + '/edit'}
+                        element={<EditPluginPage pluginData={d} />}
+                        key={d.id}
+                      />
+                    </>
+                  );
+                })}
+              </Route>
+            </Route>
 
-      {/* Plugin Routes */}
-      <Route>
-       {data.map((d) => {
-        return (
-         <>
-          <Route
-           path={'/plugin/' + d.ProductName}
-           element={<Plugin pluginData={d} content={d.ProductMarkdown} />}
-           key={d.id}
-          />
-          <Route
-           path={'/plugin/' + d.ProductName + '/edit'}
-           element={<EditPluginPage pluginData={d} />}
-           key={d.id + '.edit'}
-          />
-         </>
-        );
-       })}
-      </Route>
+            {/* END Private Routes */}
+            {/* Plugin Routes */}
+            <Route>
+              {data.map((d) => {
+                return (
+                  <>
+                    <Route
+                      path={'/plugin/' + d.ProductName}
+                      element={<Plugin pluginData={d} content={d.ProductMarkdown} />}
+                      key={d.id}
+                    />
+                  </>
+                );
+              })}
+            </Route>
 
-      <Route path="*" element={<PageNotFound/>} />
-      {/* END 1Default Routes */}
-     </Route>
-    </Routes>
-   </Router>
-  </UserContext.Provider>
- );
+            <Route path="*" element={<PageNotFound />} />
+            {/* END Default Routes */}
+          </Route>
+          <Route element={<PrivateRoutes />}>
+            
+          <Route element={<UserProfileDefault />}>
+              <Route path="/user" element={<UserHome/>} />
+              <Route path="/user/downloads" element={<UserDownloads/>} />
+              <Route path="/user/license" element={<UserLicense/>} />
+              <Route path="/user/subscription" element={<UserSubscription/>} />
+              <Route path="/user/settings" element={<UserSettings/>} />
+          </Route>
+
+          <Route element={<AdminDashboardDefault />}>
+              <Route path="/admin" element={<AdminHome/>} />
+              <Route path="/admin/plugins" element={<AdminPlugins/>} />
+              <Route path="/admin/users" element={<AdminUsers/>} />
+              <Route path="/admin/settings" element={<AdminSettings/>} />
+          </Route>
+        
+        </Route>
+        </Routes>
+      </Router>
+    </UserContext.Provider>
+  );
 }
 
 export default App;

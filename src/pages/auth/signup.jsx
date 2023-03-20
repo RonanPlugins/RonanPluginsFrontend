@@ -151,7 +151,8 @@ const onSubmit = async (values, actions) => {
           Already have an account?{" "}
           <p className="BlueText"
             onClick={() => {
-              navigate("/login");
+              const paramValue = new URLSearchParams(window.location.search).get("redirect");
+              navigate(paramValue?"/login?redirect="+paramValue:"/login");
             }}
           >
             Login

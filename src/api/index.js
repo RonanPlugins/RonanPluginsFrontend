@@ -9,20 +9,12 @@ const client = axios.create({
     withCredentials: true,
 });
 
-client.interceptors.response.use(function (response) {
-}, function (error) {
-    // If the user is not logged in on any request.
-    // if (error.request.status) {
-    //     toast.error("Request error: " + error.request.status)
-    // }
-    return Promise.reject(error);
-})
-
 export default {
 
     // ---------------- User ----------------
     async login({ username, password }) {
         const params = new URLSearchParams({ "usernameOrEmail": username, password })
+
         return client.post(`/user/login`, params.toString())
     },
     async signup({ firstName, lastName, username, email, password }) {
@@ -60,4 +52,10 @@ export default {
     async createReview({ user, userId, product, productId, rating, description, version }) {
         return client.post("/review/create", { user, userId, product, productId, rating, description, version })
     },
+
+
+    async getAdminPermissions({ admin_id }) {
+        return client.get(encodeURI("/admin/getPermissions?admin_id=" + admin_id))
+    },
+
 };

@@ -17,7 +17,7 @@ const Login = () => {
       username: values.username,
       password: values.password,
     });
-    console.log(login)
+
     if (login.status === 200) {
       setUser(login.data)
       const params = new URLSearchParams(window.location.search);
@@ -26,7 +26,6 @@ const Login = () => {
       toast.success("You're now logged in!",{toastId: "logged_in"})
     }
   } catch (err) {
-    console.log("SignIn Error: "+err)
     actions.resetForm();
     toast.error("Incorrect username or password!",{toastId: "password_wrong"});
   }
@@ -90,7 +89,8 @@ const Login = () => {
           Do not have an account?{" "}
           <p className="BlueText"
             onClick={() => {
-              navigate("/signup");
+              const paramValue = new URLSearchParams(window.location.search).get("redirect");
+              navigate(paramValue?"/signup?redirect="+paramValue:"/signup");
             }}
           >
             Sign Up
