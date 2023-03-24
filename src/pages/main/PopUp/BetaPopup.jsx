@@ -14,7 +14,7 @@ import React from 'react'
 const BetaPopup = () => {
 
   // TODO: Remove before prod
-  const OPEN_ON_REFRESH = true
+  const OPEN_ON_REFRESH = false
 
   const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen: OPEN_ON_REFRESH})
 

@@ -9,7 +9,7 @@ const Home = () => {
       <div className='Hero'>
         <div className='Left'>
           <h1>{Messages.BrandName}</h1>
-          <h2>Where creativity meets <span>functionality</span></h2>
+          <h2>Where creativity meets <br></br><span>functionality</span></h2>
           <a href={Links.About}>
           <button>{Messages.LearnMore}</button>
           </a>
