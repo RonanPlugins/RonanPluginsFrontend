@@ -13,7 +13,7 @@ export default {
 
     // ---------------- User ----------------
     async login({ username, password }) {
-        const params = new URLSearchParams({ "usernameOrEmail": username, password })
+        const params = new URLSearchParams({ username, password })
 
         return client.post(`/user/login`, params.toString())
     },
