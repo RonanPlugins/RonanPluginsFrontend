@@ -61,12 +61,6 @@ function App() {
             )
           })}
 
-          <Route path="/discord" element={<ExternalRedirect url={Links.Discord} />}/>
-          <Route path="/reddit" element={<ExternalRedirect url={Links.Reddit} />}/>
-          <Route path="/spigot" element={<ExternalRedirect url={Links.Spigot} />}/>
-          <Route path="/github" element={<ExternalRedirect url={Links.Github} />} />
-          
-
           <Route element={<Default />}>
             {/* Default Routes */}
             <Route path="/" exact element={<Home />} />
