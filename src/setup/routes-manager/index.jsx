@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserContext from '../app-context-manager/UserContext';
 import LogOut from '../../functions/Logout';
@@ -29,7 +29,18 @@ import UserLicense from '../../pages/UserDashboard/pages/UserLicense';
 import UserSubscription from '../../pages/UserDashboard/pages/UserSubscription';
 import UserSettings from '../../pages/UserDashboard/pages/UserSettings';
 import AdminPlugins from '../../pages/AdminDashboard/pages/AdminPlugins';
+import AdminPages from '../../pages/AdminDashboard/pages/AdminPages';
 const data = require('../../mockupData/exampleDatabase.json');
+
+function ExternalRedirect({ url }) {
+  useEffect(() => {
+    window.location.href = url;
+  }, [url]);
+
+  // Return null to prevent rendering any content
+  return null;
+}
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,6 +48,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <Routes>
+          <Route path="/discord" element={<ExternalRedirect url="https://discord.com/invite/8Kt4wKm" />}/>
           <Route element={<Default />}>
             {/* Default Routes */}
             <Route path="/" exact element={<Home />} />
@@ -105,6 +117,7 @@ function App() {
               <Route path="/admin" element={<AdminHome/>} />
               <Route path="/admin/plugins" element={<AdminPlugins/>} />
               <Route path="/admin/users" element={<AdminUsers/>} />
+              <Route path="/admin/pages" element={<AdminPages/>} />
               <Route path="/admin/settings" element={<AdminSettings/>} />
           </Route>
         

@@ -32,6 +32,7 @@ import UserContext from "../../setup/app-context-manager/UserContext"
 const LinkItems = [
   { name: "Return to home", icon: FiHome, url: "/" },
   { name: "Users", icon: FiUsers, url: "/admin/users" },
+  { name: "Pages", icon: FiUsers, url: "/admin/pages" },
   { name: "Plugins", icon: FiDownloadCloud, url: "/admin/plugins" },
 ]
 
