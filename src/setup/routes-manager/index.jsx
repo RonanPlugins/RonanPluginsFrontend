@@ -30,6 +30,7 @@ import UserSubscription from '../../pages/UserDashboard/pages/UserSubscription';
 import UserSettings from '../../pages/UserDashboard/pages/UserSettings';
 import AdminPlugins from '../../pages/AdminDashboard/pages/AdminPlugins';
 import AdminPages from '../../pages/AdminDashboard/pages/AdminPages';
+import Links from '../../libs/Links';
 const data = require('../../mockupData/exampleDatabase.json');
 
 function ExternalRedirect({ url }) {
@@ -44,11 +45,28 @@ function ExternalRedirect({ url }) {
 
 function App() {
   const [user, setUser] = useState(null);
+  const [pages, setPages] = useState(null);
+
+  // useEffect(() => {
+  //   api.
+  // },[])
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser,pages, setPages }}>
       <Router>
         <Routes>
-          <Route path="/discord" element={<ExternalRedirect url="https://discord.com/invite/8Kt4wKm" />}/>
+          {Links.Redirects.map((redirect) => {
+            return (
+              <Route path={"/" +redirect.slug} element={<ExternalRedirect url={redirect.url} />}/>
+            )
+          })}
+
+          <Route path="/discord" element={<ExternalRedirect url={Links.Discord} />}/>
+          <Route path="/reddit" element={<ExternalRedirect url={Links.Reddit} />}/>
+          <Route path="/spigot" element={<ExternalRedirect url={Links.Spigot} />}/>
+          <Route path="/github" element={<ExternalRedirect url={Links.Github} />} />
+          
+
           <Route element={<Default />}>
             {/* Default Routes */}
             <Route path="/" exact element={<Home />} />
