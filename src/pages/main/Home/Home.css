@@ -9,6 +9,9 @@
 	color: var(--formal-accent-color);
 	font-weight: 800;
 }
+.left h1, left h2 {
+	text-shadow: 2px 2px #000000;
+}
 .Hero {
 	font-family: 'Montserrat', sans-serif;
 
