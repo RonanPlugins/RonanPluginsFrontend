@@ -20,7 +20,7 @@ jobs:
         username: ${{secrets.VPS_USERNAME}}
         password: ${{secrets.VPS_PASSWORD}}
         script: |
-          cd /var/www/RonanPluginsReact
+          cd /var/www/RonanPlugins/frontend
           git pull
           npm install
           npm run build
