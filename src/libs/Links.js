@@ -8,7 +8,7 @@ export default class Links {
     static Logout = "/logout";
     static SignUp = "/signup";
     static Account = "/user";
-    static PrivacyPolicy = "/privacy-policy";
+    static PrivacyPolicy = "/privacy";
     static TermsAndConditions = "/terms-and-conditions";
 
     static Spigot = "https://www.spigotmc.org/resources/authors/ronancraft.13025/";

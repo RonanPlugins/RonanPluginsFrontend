@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
-
 const client = axios.create({
     // https://api.ronanplugins.com
     // http://localhost:3001
@@ -58,4 +56,16 @@ export default {
         return client.get(encodeURI("/admin/getPermissions?admin_id=" + admin_id))
     },
 
+    async getPages() {
+        return client.get("/page")
+    },
+    async getPage({ identifier }) {
+        return client.get("/page/" + identifier)
+    },
+    async createPage({ route, name, markdown }) {
+        return client.post("/page/create", { route, name, markdown })
+    },
+    async editPage({ name, markdown }) {
+        return client.put("/page/" + name + "/edit", { markdown })
+    },
 };

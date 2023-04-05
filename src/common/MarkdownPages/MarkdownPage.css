@@ -1,0 +1,8 @@
+.MarkdownContainer {
+	margin-top: 40px;
+    flex-direction: column;
+}
+.reactMarkdown{
+    max-width: 80%;
+
+}

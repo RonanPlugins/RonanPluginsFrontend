@@ -9,10 +9,10 @@ import { Button, ButtonGroup, Textarea,  AlertDialog,
   useDisclosure,
 } from '@chakra-ui/react';
 import MDEditor from '@uiw/react-md-editor';
-import './EditPluginPage.css'
+import './EditPage.css'
 import { toast } from 'react-toastify';
-const EditPage = ({ pluginData }) => {
-  let [value, setValue] = useState(pluginData.ProductMarkdown);
+const EditPage = ({ content,onSaveMain }) => {
+  let [value, setValue] = useState(content);
   const [changed, setChanged] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
@@ -22,11 +22,12 @@ const EditPage = ({ pluginData }) => {
   };
   
   const onSave = (e) => {
+    onSaveMain(value)
     toast.success("Saved your changes!")
     // TODO: Make API call here
   }
   const resetChanges = (e) => {
-    setValue(pluginData.ProductMarkdown)
+    setValue(content)
     onClose()
   }
 
@@ -63,6 +64,14 @@ const EditPage = ({ pluginData }) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+   <div className='EditPageContainer'>
+       <MDEditor
+         className='MDEditor'
+         height={"80vh"}
+        value={value}
+        onChange={handleInputChange}
+      />
+  </div>
      <div className='topContainer topBar '>
        <ButtonGroup>
          
@@ -71,13 +80,6 @@ const EditPage = ({ pluginData }) => {
        </ButtonGroup>
        
      </div>
-   <div className='EditPluginPagecontainer'>
-       <MDEditor
-         height={"100vh"}
-        value={value}
-        onChange={handleInputChange}
-      />
-  </div>
      </>
  );
 };

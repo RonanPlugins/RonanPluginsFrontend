@@ -1,0 +1,16 @@
+.Field{
+    margin: 10px;
+    /* margin-bottom: 10px; */
+}
+.EditPageContainer {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+    /* width: 100vw; */
+	/* height: 100%; */
+	flex-direction: row;
+	gap: 30px;
+	margin: 10px;
+}

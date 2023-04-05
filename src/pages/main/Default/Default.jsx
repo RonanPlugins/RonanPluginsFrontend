@@ -5,8 +5,9 @@ import Footer from '../components/HeaderAndFooter/Footer';
 import Header from '../components/HeaderAndFooter/Header';
 import SmallHeader from '../components/InfoBanner/SmallHeader';
 import "./Default.css"
+import Loading from '../../../util/Loading';
 
-const Default = () => {
+const Default = ({loading}) => {
 
  return (
        <>
@@ -14,7 +15,7 @@ const Default = () => {
          <SmallHeader id="emailverify" minutesopen={30} url={"test.com"} text="Please verify your email address."/>
          <Header />
    <div className='MainPageContainer'>
-    <Outlet />
+                   { loading?<Loading/>:<Outlet />}
    </div>
    <Footer />
   </>
