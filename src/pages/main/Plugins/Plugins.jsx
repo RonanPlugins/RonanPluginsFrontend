@@ -11,7 +11,7 @@ const Plugins = () => {
 const [plugins, setPlugins] = useState([]);
   useEffect(() => {
       const fetchData = async () => {
-        const response = await axios.get("https://api.spiget.org/v2/authors/13025/resources?sort=-downloads").catch((err) => {
+        const response = await axios.get("https://api.spiget.org/v2/authors/13025/resources?size=1000&sort=-downloads").catch((err) => {
       setLoading(false)
         });
           if (response.status === 200) {
