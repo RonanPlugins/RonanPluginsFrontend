@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import UserContext from "../../../setup/app-context-manager/UserContext";
 import "./Tiers.css"
 const Teirs = () => {
-      const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <div className="TiersContainer">
@@ -14,11 +14,8 @@ const Teirs = () => {
         </svg>
       </div>
       <div className="Stripe-Plans">
-        <stripe-pricing-table
-          pricing-table-id="prctbl_1MmHqJJp2M82sHvMOcEqWkm9"
-          publishable-key="pk_test_51Mi2D2Jp2M82sHvMBHLCCZqU1QcAVyQkuvLpcNi6SXG41COWCM8LgxRuB5cRn6HZz2MmRVEZ7zN5FVX3dQ22vCW100TzztgNnF"
-          client-reference-id={user?.id}
-        >
+        <stripe-pricing-table pricing-table-id="prctbl_1MrqwoJp2M82sHvMaE4jiVHO"
+          publishable-key="pk_test_51Mi2D2Jp2M82sHvMBHLCCZqU1QcAVyQkuvLpcNi6SXG41COWCM8LgxRuB5cRn6HZz2MmRVEZ7zN5FVX3dQ22vCW100TzztgNnF">
         </stripe-pricing-table>
       </div>
     </div>
