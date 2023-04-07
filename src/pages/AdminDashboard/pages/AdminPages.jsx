@@ -57,16 +57,16 @@ function EditPageModal({ isOpen, onOpen, onClose, page }) {
   const onSubmit = async (values, actions) => {    
     api.editPage({ name: page.name, markdown: values.markdown }).then((res) => {
       if (res.status === 201) {
+        onClose()
+        setNewContent(null)
         actions.setSubmitting(false);
         toast.success("Page has been successfully changed", { toastId: "page_edited" })
-        setNewContent(null)
-        onClose()
       } else if (res.status === 403) {
-        toast.error("You're lacking permissions to edit this page.",{toastId: "page_edited_noperm"})
-        
-      } else {
-        toast.error("An error occurred while saving the page.",{toastId: "page_edited_error"})
         onClose()
+        toast.error("You're lacking permissions to edit this page.",{toastId: "page_edited_noperm"})
+      } else {
+        onClose()
+        toast.error("An error occurred while saving the page.",{toastId: "page_edited_error"})
       }
     })
 

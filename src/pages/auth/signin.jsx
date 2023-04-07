@@ -1,36 +1,58 @@
+
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  Divider,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  HStack,
+  Image,
+  Input,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
+import Links from '../../libs/Links';
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 import api from "../../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import "./Auth.css"
 import { loginSchema } from "../../common/Auth/AuthSchema.jsx";
 import UserContext from "../../setup/app-context-manager/UserContext.jsx";
 
+
 const Login = () => {
+
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext)
 
   const onSubmit = async (values, actions) => {
-  try {
-    const login = await api.login({
-      username: values.username,
-      password: values.password,
-    });
+    try {
+      const login = await api.login({
+        username: values.username,
+        password: values.password,
+      });
 
-    if (login.status === 200) {
-      setUser(login.data)
-      const params = new URLSearchParams(window.location.search);
-      const paramValue = params.get("redirect");
-      navigate(paramValue?paramValue:"/");
-      toast.success("You're now logged in!",{toastId: "logged_in"})
+      if (login.status === 200) {
+        setUser(login.data)
+        const params = new URLSearchParams(window.location.search);
+        const paramValue = params.get("redirect");
+        navigate(paramValue ? paramValue : "/");
+        toast.success("You're now logged in!", { toastId: "logged_in" })
+      }
+    } catch (err) {
+      actions.resetForm();
+      toast.error("Incorrect username or password!", { toastId: "password_wrong" });
     }
-  } catch (err) {
-    actions.resetForm();
-    toast.error("Incorrect username or password!",{toastId: "password_wrong"});
-  }
-  actions.setSubmitting(false);
-};
+    actions.setSubmitting(false);
+  };
 
   const {
     values,
@@ -49,56 +71,59 @@ const Login = () => {
     onSubmit,
   });
 
-  return (
-    <div className="AuthPage">
-      {/* <ToastContainer /> */}
-      <div className="AuthContainer">
-        <img className="Logo" src="/assets/logo.webp" alt="Logo" />
-        <p className="AuthContent">Hey, welcome back!</p>
 
-        <form onSubmit={handleSubmit}>
-          {errors.username && touched.username && (
-            <p className="FormError">{errors.username}</p>
-          )}
-          <input
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            id="username"
-            type="name"
-            placeholder="Username/Email"
-            className={errors.username && touched.username ? "input-error" : "FormInput"}
-          />
-            {errors.password && touched.password && (
-              <p className="FormError">{errors.password}</p>
-            )}
-          <input
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            id="password"
-            type="password"
-            placeholder="Password"
-            className={errors.password && touched.password ? "input-error" : "FormInput"}
-          />
-          <button className="AuthButton" disabled={isSubmitting} type="submit">Sign in</button>
-        </form>
-      </div>
-      <div className="AdditionalButtons">
-        <div>
-          Do not have an account?{" "}
-          <p className="BlueText"
-            onClick={() => {
-              const paramValue = new URLSearchParams(window.location.search).get("redirect");
-              navigate(paramValue?"/signup?redirect="+paramValue:"/signup");
-            }}
-          >
-            Sign Up
-          </p>
-        </div>
-      </div>
-    </div>
+  return (
+    <form onSubmit={handleSubmit}>
+
+      <Flex
+        align={'center'}
+        justify={'center'}>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} w={"500px"}>
+          <Stack align={'center'}>
+            <Image src='/assets/logo.webp' width={"100px"} />
+            <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+            <Text color="blue.500" as={"a"} href={Links.SignUp}>Create an account</Text>
+          </Stack>
+          <Box
+            rounded={'lg'}
+            bg={useColorModeValue('white', 'gray.700')}
+            boxShadow={'lg'}
+            p={8}>
+            <Stack spacing={4}>
+              <FormControl id="email" isInvalid={errors.username && touched.username}>
+                <FormLabel>Username</FormLabel>
+                <Input id="username" type="username" onChange={handleChange} value={values.username} onBlur={handleBlur} />
+                <FormErrorMessage>{errors.username}</FormErrorMessage>
+              </FormControl>
+              <FormControl id="password" isInvalid={errors.password && touched.password}>
+                <FormLabel>Password</FormLabel>
+                <Input id="password" type="password" onChange={handleChange} value={values.password} onBlur={handleBlur} />
+                <FormErrorMessage>{errors.password}</FormErrorMessage>
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: 'column', sm: 'row' }}
+                  align={'start'}
+                  justify={'space-between'}>
+                </Stack>
+                <Button
+                  bg={'blue.400'}
+                  disabled={isSubmitting}
+                  type="submit"
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }}>
+                  Sign in
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
+    </form>
+
   );
-};
+}
 
 export default Login;

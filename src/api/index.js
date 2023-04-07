@@ -2,7 +2,7 @@ import axios from 'axios';
 const client = axios.create({
     // https://api.ronanplugins.com
     // http://localhost:3001
-    baseURL: "https://api.ronanplugins.com",
+    baseURL: "http://localhost:3001",
     responseType: "json",
     withCredentials: true,
 });
@@ -53,7 +53,7 @@ export default {
 
 
     async getAdminPermissions({ admin_id }) {
-        return client.get(encodeURI("/admin/getPermissions?admin_id=" + admin_id))
+        return client.get(encodeURI("/permissions/getPermissions"))
     },
 
     async getPages() {

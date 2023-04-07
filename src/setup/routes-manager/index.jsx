@@ -53,7 +53,9 @@ function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await api.getPages();
+      const response = await api.getPages().catch((err) => {
+      setLoading(false)
+      });
       setPages(response.data);
       setLoading(false)
     };
@@ -77,7 +79,7 @@ function App() {
             <Route element={<Default loading={ loading} />}>
 
               {/* Markdown Pages */}
-              {pages.map((page) => (
+              {pages?.map((page) => (
                 <Route key={page.page_id} path={page.route} exact element={<MarkdownPage content={page.markdown} />} />
               ))}
 
@@ -145,14 +147,25 @@ function App() {
                 <Route path="/user/license" element={<UserLicense />} />
                 <Route path="/user/subscription" element={<UserSubscription />} />
                 <Route path="/user/settings" element={<UserSettings />} />
-              </Route>
-
-              <Route element={<AdminDashboardDefault />}>
-                <Route path="/admin" element={<AdminHome />} />
-                <Route path="/admin/plugins" element={<AdminPlugins />} />
-                <Route path="/admin/users" element={<AdminUsers />} />
-                <Route path="/admin/pages" element={<AdminPages />} />
-                <Route path="/admin/settings" element={<AdminSettings />} />
+            </Route>
+            {/* TODO: Actually use correct permissions */}
+              <Route element={<AdminDashboardDefault  />}>
+                <Route element={<AdminRoutes neededPermissions={8388608} />}>
+                  <Route path="/admin" element={<AdminHome />} />
+                </Route>
+                <Route element={<AdminRoutes neededPermissions={8388608} />}>
+                  <Route path="/admin/plugins" element={<AdminPlugins />} />
+                </Route>
+                <Route element={<AdminRoutes neededPermissions={8388608} />}>
+                  <Route path="/admin/users" element={<AdminUsers />} />
+                </Route>
+                <Route element={<AdminRoutes neededPermissions={8388608} />}>
+                  <Route path="/admin/pages" element={<AdminPages />} />
+                </Route>
+                <Route element={<AdminRoutes neededPermissions={8388608} />}>
+                  <Route path="/admin/settings" element={<AdminSettings />} />
+                </Route>
+               
               </Route>
 
             </Route>

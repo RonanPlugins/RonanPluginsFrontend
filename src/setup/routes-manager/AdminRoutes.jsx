@@ -15,7 +15,7 @@ const useAuth = ({ neededPermissions }, setLoading) => {
 
       try {
         const response = await api.getAdminPermissions({ admin_id: user.user_id });
-        setIsAllowed(response.data.permissions.includes(Number(neededPermissions)));
+        setIsAllowed(response.data.permissions_integer >= neededPermissions);
       } catch (error) {
         setIsAllowed(false);
       } finally {

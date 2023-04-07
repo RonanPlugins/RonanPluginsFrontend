@@ -65,28 +65,21 @@
 /* ---------------- */
 /*     Features     */
 /* ---------------- */
-.Features {
+.Features{
+
 	display: flex;
+	flex-direction: row;
 	flex-wrap: wrap;
-	gap: 50px;
-	align-items: center;
+	/* overflow-x: auto; */
+	gap: 90px;
 	text-align: center;
-	padding-left: 30px;
-	padding-top: 30px;
-	margin-bottom: 50px;
-}
-@media screen and (min-width: 768px) {
-	/* .Features {
-		gap: 50px;
-	} */
+	margin-top: 30px;
+	justify-content: center;
+	align-items: center;
+	min-height: 300px;
+	height: auto;
 }
 @media screen and (max-width: 768px) {
-	.Left h1{
-		font-size: 40px;
-}
-.Left h2{
-		font-size: 20px;
-}
 	.Features {
 		justify-content: center;
 		padding-left: 0px;

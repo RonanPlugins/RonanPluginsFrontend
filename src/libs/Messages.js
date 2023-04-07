@@ -42,6 +42,7 @@ export default class Messages {
     ];
     static FeaturesTitle = "Get the most out of your server";
     static FeaturesDescription = "Don't know what your next step in your minecraft server should be? We have plugins for that - explore our minecraft plugins and find the one that works for your server";
+    static HomeSubText = ""
     static HeaderLinks = [
         {
             Text: this.Plugins.toUpperCase(),
