@@ -60,12 +60,12 @@ export default function Hero() {
         </Stack>
       </Flex>
       <Flex flex={1}>
-              <Image
+        <Image
+          width={"700px"}
                   className='heroImage'
           alt={'Hero Image'}
-          objectFit={'contain'}
           src={
-            'https://imgur.com/HppoLfc.png'
+            '/assets/homethingy.png'
           }
         />
       </Flex>
