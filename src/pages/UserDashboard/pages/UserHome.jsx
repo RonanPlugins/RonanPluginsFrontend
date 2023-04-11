@@ -42,9 +42,9 @@ const UserHome = () => {
         <FormControl id="userName">
           <FormLabel>User Icon</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
-            <Center>
+            {/* <Center>
               <Avatar size="xl" src="https://imgur.com/IGYWsdz.png"/>
-            </Center>
+            </Center> */}
             <Center w="full">
               <Button w={"90%"}>Change Icon</Button>
             </Center> 

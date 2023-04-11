@@ -73,7 +73,7 @@ const Login = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id='login'>
 
       <Flex
         align={'center'}
@@ -92,12 +92,12 @@ const Login = () => {
             <Stack spacing={4}>
               <FormControl id="email" isInvalid={errors.username && touched.username}>
                 <FormLabel>Username</FormLabel>
-                <Input id="username" type="username" onChange={handleChange} value={values.username} onBlur={handleBlur} />
+                <Input id="username" type="username" onChange={handleChange} value={values.username} onBlur={handleBlur} autoComplete='username'/>
                 <FormErrorMessage>{errors.username}</FormErrorMessage>
               </FormControl>
               <FormControl id="password" isInvalid={errors.password && touched.password}>
                 <FormLabel>Password</FormLabel>
-                <Input id="password" type="password" onChange={handleChange} value={values.password} onBlur={handleBlur} />
+                <Input id="password" type="password" onChange={handleChange} value={values.password} onBlur={handleBlur} autoComplete='current-password'/>
                 <FormErrorMessage>{errors.password}</FormErrorMessage>
               </FormControl>
               <Stack spacing={10}>

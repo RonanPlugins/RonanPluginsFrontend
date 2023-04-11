@@ -40,8 +40,7 @@ const SignUp = () => {
     const onSubmit = async (values, actions) => {
         try {
             const signup = await api.signup({
-                firstName: values.firstName,
-                lastName: values.lastName,
+                name: values.name,
                 username: values.username,
                 email: values.email,
                 password: values.password,
@@ -71,6 +70,7 @@ const SignUp = () => {
         isSubmitting,
     } = useFormik({
         initialValues: {
+            name: "",
             username: "",
             email: "",
             password: "",
@@ -81,7 +81,7 @@ const SignUp = () => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="login">
 
             <Flex
                 align={'center'}
@@ -99,22 +99,28 @@ const SignUp = () => {
                         p={8}>
                         <Stack spacing={4}>
 
+                            <FormControl id="name" isInvalid={errors.name && touched.name}>
+                                <FormLabel>Name</FormLabel>
+                                <Input id="name" type="name" onChange={handleChange} value={values.name} onBlur={handleBlur} autoComplete='name' />
+                                <FormErrorMessage>{errors.name}</FormErrorMessage>
+                            </FormControl>
+
                             <FormControl id="username" isInvalid={errors.username && touched.username}>
                                 <FormLabel>Username</FormLabel>
-                                <Input id="username" type="username" onChange={handleChange} value={values.username} onBlur={handleBlur} />
+                                <Input id="username" type="username" onChange={handleChange} value={values.username} onBlur={handleBlur} autoComplete='username' />
                                 <FormErrorMessage>{errors.username}</FormErrorMessage>
                             </FormControl>
 
                             <FormControl id="email" isInvalid={errors.email && touched.email}>
                                 <FormLabel>Email</FormLabel>
-                                <Input id="email" type="email" onChange={handleChange} value={values.email} onBlur={handleBlur} />
+                                <Input id="email" type="email" onChange={handleChange} value={values.email} onBlur={handleBlur} autoComplete='email' />
                                 <FormErrorMessage>{errors.email}</FormErrorMessage>
                             </FormControl>
 
                             <FormControl id="password" isInvalid={errors.password && touched.password}>
                                 <FormLabel>Password</FormLabel>
                                 <InputGroup>
-                                    <Input id='password' onChange={handleChange} value={values.password} onBlur={handleBlur} type={showPassword ? 'text' : 'password'} />
+                                    <Input  id='password' onChange={handleChange} value={values.password} onBlur={handleBlur} type={showPassword ? 'text' : 'password'} autoComplete='new-password' />
                                     <InputRightElement h={'full'}>
                                         <Button
                                             variant={'ghost'}
@@ -142,7 +148,7 @@ const SignUp = () => {
                                     _hover={{
                                         bg: 'blue.500',
                                     }}>
-                                    Sign in
+                                    Sign up
                                 </Button>
                             </Stack>
                         </Stack>

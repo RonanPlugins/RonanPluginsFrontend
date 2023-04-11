@@ -2,7 +2,7 @@ import axios from 'axios';
 const client = axios.create({
     // https://api.ronanplugins.com
     // http://localhost:3001
-    baseURL: "https://api.ronanplugins.com",
+    baseURL: "http://localhost:3001",
     responseType: "json",
     withCredentials: true,
 });
@@ -15,8 +15,8 @@ export default {
 
         return client.post(`/user/login`, params.toString())
     },
-    async signup({ firstName, lastName, username, email, password }) {
-        return client.post(`/user/create`, { firstName, lastName, username, email, password })
+    async signup({ name, username, email, password }) {
+        return client.post(`/user/create`, { name, username, email, password })
     },
     async user() {
         return client.get(`/user`)
