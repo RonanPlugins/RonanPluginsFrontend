@@ -19,7 +19,7 @@ export default function Plugin({ plugin }) {
     <Card className="text-center">
       <CardTitle className="truncate mx-2 my-2">
         {plugin.name}
-        <p className="text-sm font-normal text-primary">
+        <p className="text-sm font-normal">
           {new Date(plugin.updateDate * 1000).toLocaleString()}
         </p>
       </CardTitle>
@@ -35,8 +35,8 @@ export default function Plugin({ plugin }) {
           </div>
           <div className="grow"></div>
         </div>{" "}
-        <p className="text-sm text-primary/80">{plugin.rating.count} ratings</p>
-        <p className="text-primary">{plugin.downloads} downloads</p>
+        <p className="text-sm text-gray-500">{plugin.rating.count} ratings</p>
+        <p className="">{plugin.downloads} downloads</p>
       </CardContent>
       <CardFooter className="pr-2 pb-2 flex justify-between">
         {plugin.premium && (
@@ -52,7 +52,7 @@ export default function Plugin({ plugin }) {
         <a
           href={"https://www.spigotmc.org/resources/" + plugin.id}
           target="_blank"
-          className="text-right ml-auto text-muted text-sm hover:underline"
+          className="text-right ml-auto text-sm hover:underline"
         >
           View on Spigot...
         </a>

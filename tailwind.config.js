@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from "tailwindcss/plugin";
 module.exports = {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -68,5 +69,14 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        h1: { fontSize: theme("fontSize.3xl") },
+        h2: { fontSize: theme("fontSize.xl") },
+        h3: { fontSize: theme("fontSize.lg") },
+      });
+    }),
+  ],
 };

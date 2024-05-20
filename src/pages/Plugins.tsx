@@ -1,8 +1,6 @@
 import Plugin from "@/components/plugins/Plugin";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// const PluginsData = require("../../../mockupData/Plugins.json");
-// import { Rating } from "react-simple-star-rating";
 
 const Plugins = () => {
   const [plugins, setPlugins] = useState([]);
@@ -29,11 +27,29 @@ const Plugins = () => {
 
   if (loading) return <>Loading...</>;
 
+  const pluginsPremium = plugins.filter((plugin) => (plugin as any).premium);
+  const pluginsFree = plugins.filter((plugin) => !(plugin as any).premium);
+
   return (
-    <div className="my-10 grid grid-cols-3 gap-3 mx-10">
-      {plugins.map((plugin) => (
-        <Plugin key={plugin.id} plugin={plugin} />
-      ))}
+    <div className="mx-4 my-4">
+      <h1 className="text-center font-bold text-secondary px-4 bg-primary rounded-full">
+        Premium Plugins
+      </h1>
+      <div className="my-10 grid grid-cols-3 gap-3 mx-10">
+        {/* Premium Plugins */}
+        {pluginsPremium.map((plugin) => (
+          <Plugin key={(plugin as any).id} plugin={plugin} />
+        ))}
+      </div>
+      {/* Free Plugins */}
+      <h1 className="text-center font-bold text-secondary px-4 bg-primary rounded-full">
+        Free Plugins
+      </h1>
+      <div className="my-10 grid grid-cols-4 gap-3 mx-10">
+        {pluginsFree.map((plugin) => (
+          <Plugin key={(plugin as any).id} plugin={plugin} />
+        ))}
+      </div>
     </div>
   );
 };
