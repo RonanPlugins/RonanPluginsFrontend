@@ -1,3 +1,4 @@
+import Loading from "@/components/common/Loading";
 import Plugin from "@/components/plugins/Plugin";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import { useEffect, useState } from "react";
 const Plugins = () => {
   const [plugins, setPlugins] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       axios
@@ -25,7 +27,7 @@ const Plugins = () => {
     fetchData();
   }, []);
 
-  if (loading) return <>Loading...</>;
+  if (loading) return <Loading />;
 
   const pluginsPremium = plugins.filter((plugin) => (plugin as any).premium);
   const pluginsFree = plugins.filter((plugin) => !(plugin as any).premium);

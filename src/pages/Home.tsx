@@ -5,9 +5,7 @@ export default function Home() {
   return (
     <>
       <div className="columns-1 md:columns-2 min-h-[50vh]">
-        {/* Flex */}
         <div className="flex p-4 my-10">
-          {/* Stack */}
           <div className="w-full space-y-6">
             <header className="font-bold text-3xl md:text-4xl lg:text-6xl text-center md:text-left">
               <h1 className="font-light">RonanPlugins</h1>
@@ -39,10 +37,10 @@ export default function Home() {
           src="./assets/homethingy.png"
         ></img>
       </div>
-      <div className="pt-20 bg-gray-100 w-full flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
+      <div className="pt-20 bg-gray-100 dark:bg-secondary w-full flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
         {Features.map((feature) => {
           return (
-            <div className="w-[200px] text-[#232f3e80] ">
+            <div className="w-[200px] text-[#232f3e80] dark:text-primary">
               <div className="text-[#4ECDC4] flex align-middle justify-center">
                 {feature.Icon}
               </div>

@@ -4,6 +4,7 @@ import "./index.css";
 import { Outlet } from "react-router-dom";
 import Nav from "./components/home/NavBar";
 import { ThemeProvider } from "./context/ThemeContext";
+import Footer from "./components/home/Footer";
 
 // const client = new ApolloClient({
 //   uri: "/graphql",
@@ -16,6 +17,7 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Nav />
       <Outlet />
+      <Footer />
     </ThemeProvider>
   );
 }

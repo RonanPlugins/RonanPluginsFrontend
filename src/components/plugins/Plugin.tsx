@@ -4,7 +4,6 @@
 import { Star } from "lucide-react";
 import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
 import { Ratings } from "../ui/rating";
-import { useLocation } from "react-router-dom";
 import {
   Tooltip,
   TooltipContent,
@@ -12,10 +11,9 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
-export default function Plugin({ plugin }) {
+export default function Plugin({ plugin }: { plugin: any }) {
   console.log(plugin);
   return (
-    // <a href={"https://www.spigotmc.org/resources/" + plugin.id}>
     <Card className="text-center">
       <CardTitle className="truncate mx-2 my-2">
         {plugin.name}
@@ -25,10 +23,10 @@ export default function Plugin({ plugin }) {
       </CardTitle>
       <CardContent>
         <img
-          className="mx-auto my-2 h-20"
+          className=" mx-auto my-2 h-20 hover: border rounded-xl bg-white bg-gradient-to-r from-cyan-500 to-blue-500"
           src={"https://www.spigotmc.org/" + plugin.icon.url}
         />
-        <div className="flex">
+        <div className=" flex">
           <div className="grow"></div>
           <div className="grow-0">
             <Ratings rating={plugin.rating.average} />
