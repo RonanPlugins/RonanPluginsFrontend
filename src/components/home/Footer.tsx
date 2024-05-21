@@ -24,8 +24,8 @@ export default function Footer() {
           })}
         </div>
       </div>
-      <div className="bg-red-200 mx-2"></div>
-      <div className="bg-red-200 mx-2"></div>
+      {/* <div className="mx-2"></div> */}
+      {/* <div className="mx-2"></div> */}
     </div>
   );
 }
