@@ -26,13 +26,10 @@ export default function Plugin({ plugin }: { plugin: any }) {
           className=" mx-auto my-2 h-20 hover: border rounded-xl bg-white bg-gradient-to-r from-cyan-500 to-blue-500"
           src={"https://www.spigotmc.org/" + plugin.icon.url}
         />
-        <div className=" flex">
-          <div className="grow"></div>
-          <div className="grow-0">
-            <Ratings rating={plugin.rating.average} />
-          </div>
-          <div className="grow"></div>
-        </div>{" "}
+        <div className="flex">
+          <Ratings rating={plugin.rating.average} />
+        </div>
+
         <p className="text-sm text-gray-500">{plugin.rating.count} ratings</p>
         <p className="">{plugin.downloads} downloads</p>
       </CardContent>

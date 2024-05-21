@@ -49,7 +49,7 @@ const Ratings = ({ ...props }: RatingsProps) => {
     ) : null;
 
   return (
-    <div className={cn("flex items-center gap-2")} {...props}>
+    <div className="flex mx-auto">
       {[...Array(fullStars)].map((_, i) =>
         React.cloneElement(Icon, {
           key: i,
