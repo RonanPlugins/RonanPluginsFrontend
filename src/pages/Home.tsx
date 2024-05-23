@@ -40,7 +40,10 @@ export default function Home() {
       <div className="pt-20 bg-gray-100 dark:bg-secondary w-full flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
         {Features.map((feature) => {
           return (
-            <div className="w-[200px] text-[#232f3e80] dark:text-primary">
+            <div
+              key={feature.Title}
+              className="w-[200px] text-[#232f3e80] dark:text-primary"
+            >
               <div className="text-[#4ECDC4] flex align-middle justify-center">
                 {feature.Icon}
               </div>

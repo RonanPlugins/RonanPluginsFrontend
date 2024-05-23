@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavItem from "./NavItem";
+import LoginDialog from "../dialogs/LoginDialog";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -67,10 +68,7 @@ export default function Nav() {
                   <Button onClick={auth.logout}>Logout</Button>
                 </>
               ) : (
-                <>
-                  <NavItem link={"/signup"} title={"Sign Up"} />
-                  <NavItem link={"/login"} title={"Login"} />
-                </>
+                <LoginDialog />
               )}
               <ModeToggle />
             </div>
