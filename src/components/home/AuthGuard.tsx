@@ -1,8 +1,13 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import auth from '../../utils/auth';
+import { Navigate, Outlet } from "react-router-dom";
+import { useUserContext } from "@/context/UserContext";
+import Loading from "../common/Loading";
 
 export default function AuthGuard() {
-  const loggedIn = auth.loggedIn();
-  if (!loggedIn) return <Navigate to="/login" replace />;
+  const { isLoggedIn, user } = useUserContext();
+
+  if (!isLoggedIn) return <Navigate to="/login" replace />;
+
+  if (!user) return <Loading />;
+
   return <Outlet />;
 }

@@ -1,10 +1,4 @@
-import axios from "axios";
-
-const client = axios.create({
-  // https://api.ronanplugins.com
-  baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
-});
+import { client } from "./axiosClient";
 
 export default {
   async loginDiscord() {
@@ -23,7 +17,7 @@ export default {
         throw new Error("authentication failed!");
       })
       .then((response) => {
-        console.log("DATA", response);
+        // console.log("DATA", response);
         return response.data.user;
       })
       .catch((err) => {

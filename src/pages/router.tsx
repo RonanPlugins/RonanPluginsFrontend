@@ -4,6 +4,9 @@ import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Plugins from "./Plugins.tsx";
+import Profile from "./Profile.tsx";
+import AuthGuard from "@/components/home/AuthGuard.tsx";
+import PostCreate from "./post/PostCreate.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -27,15 +30,19 @@ export const router = createBrowserRouter([
         path: "/plugins",
         element: <Plugins />,
       },
-      // {
-      //   element: <AuthGuard />,
-      //   children: [
-      //     // {
-      //     //   path: "/profile",
-      //     //   element: <Profile />,
-      //     // },
-      //   ],
-      // },
+      {
+        element: <AuthGuard />,
+        children: [
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/post/create",
+            element: <PostCreate />,
+          },
+        ],
+      },
     ],
   },
 ]);
