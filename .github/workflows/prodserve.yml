@@ -26,4 +26,4 @@ jobs:
           npm run build
           rm -rf ./build
           cp -r ./dist ./build
-          systemctl restart RonanPluginsReact.service
+          systemctl restart RonanPlugins-FRONTEND.service
