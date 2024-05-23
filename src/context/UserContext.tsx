@@ -22,7 +22,7 @@ export default function UserProvider({ children }: { children: any }) {
   useEffect(() => {
     console.log("Welcome to RonanServices! Want to contribute?");
     const getUser = () => {
-      fetch("http://localhost:3001/api/auth/login/success", {
+      fetch(`${import.meta.env.VITE_API_URL}/auth/login/success`, {
         method: "GET",
         credentials: "include",
         headers: {
