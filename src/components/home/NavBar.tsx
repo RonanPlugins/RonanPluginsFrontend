@@ -1,15 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ModeToggle } from "../ModeToggle";
-import auth from "../../utils/auth";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavItem from "./NavItem";
 import LoginDialog from "../dialogs/LoginDialog";
+import { useUserContext } from "@/context/UserContext";
+import api from "@/api";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const { isLoggedIn, logout } = useUserContext();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    logout();
+    await api.logout();
+    navigate("/home");
+  };
 
   const location = useLocation();
   useEffect(() => {
@@ -62,10 +71,10 @@ export default function Nav() {
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex gap-4 items-center font-medium">
-              {auth.loggedIn() ? (
+              {isLoggedIn() ? (
                 <>
                   <NavItem link={"/profile"} title={"Profile"} />
-                  <Button onClick={auth.logout}>Logout</Button>
+                  <Button onClick={logoutHandler}>Logout</Button>
                 </>
               ) : (
                 <LoginDialog />

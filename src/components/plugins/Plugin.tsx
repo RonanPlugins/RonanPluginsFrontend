@@ -12,7 +12,7 @@ import {
 } from "../ui/tooltip";
 
 export default function Plugin({ plugin }: { plugin: any }) {
-  console.log(plugin);
+  // console.log(plugin);
   return (
     <Card className="text-center">
       <CardTitle className="truncate mx-2 my-2">
