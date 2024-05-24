@@ -8,6 +8,7 @@ import Profile from "./Profile.tsx";
 import AuthGuard from "@/components/home/AuthGuard.tsx";
 import PostCreate from "./post/PostCreate.tsx";
 import PostView from "./post/PostView.tsx";
+import Posts from "./post/Posts.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -32,6 +33,14 @@ export const router = createBrowserRouter([
         element: <Plugins />,
       },
       {
+        path: "/post/:id",
+        element: <PostView />,
+      },
+      {
+        path: "/posts",
+        element: <Posts />,
+      },
+      {
         element: <AuthGuard />,
         children: [
           {
@@ -41,10 +50,6 @@ export const router = createBrowserRouter([
           {
             path: "/post/create",
             element: <PostCreate />,
-          },
-          {
-            path: "/post/:id",
-            element: <PostView />,
           },
         ],
       },

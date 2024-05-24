@@ -76,7 +76,7 @@ export default function PostCreate() {
     getBase64(selectedImage, (image64: any) => {
       console.log("Valid post!", formData, description, selectedImage, image64);
       post
-        .createPost({
+        .create({
           title: formData.title,
           tagLine: formData.summary,
           linkSource: formData.link_source,

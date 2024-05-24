@@ -9,7 +9,7 @@ export default function PostView() {
   const [pluginInfo, setPluginInfo] = useState(null);
 
   async function getPlugin() {
-    const pInfo = await post.get(id);
+    const pInfo = await post.getOne(id);
     setPluginInfo(pInfo);
     setLoading(false);
   }
