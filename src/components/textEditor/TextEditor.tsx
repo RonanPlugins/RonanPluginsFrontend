@@ -1,35 +1,42 @@
-import { useState } from "react";
-import { Tiptap } from "./Tiptap";
+import { Color } from "@tiptap/extension-color";
+import ListItem from "@tiptap/extension-list-item";
+import TextStyle from "@tiptap/extension-text-style";
+import { EditorContent, useEditor } from "@tiptap/react";
+import Placeholder from "@tiptap/extension-placeholder";
+import StarterKit from "@tiptap/starter-kit";
+import ToolBar from "./Toolbar";
+import("./style.css");
 
-export default function TextEditorHeader() {
-  const [content, setContent] = useState<string>("");
-  const handleContentChange = (reason: any) => {
-    setContent(reason);
-  };
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("Post Data...", JSON.stringify(content));
-    // const data = {
-    //   content: content,
-    // };
-    // console.log(data);
-    // const existingDataString = localStorage.getItem("myData");
-    // const existingData = existingDataString
-    //   ? JSON.parse(existingDataString)
-    //   : [];
-    // const updatedData = [...existingData, data];
-    // localStorage.setItem("myData", JSON.stringify(updatedData));
-    setContent("");
-  };
+const extensions = [
+  Placeholder.configure({
+    placeholder: "Your plugins description...",
+    showOnlyWhenEditable: false,
+  }),
+  Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  TextStyle.configure({ types: [ListItem.name] }),
+  StarterKit.configure({
+    bulletList: {
+      keepMarks: true,
+      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+    },
+    orderedList: {
+      keepMarks: true,
+      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+    },
+  }),
+];
+
+const content = "";
+export default function TextEditor({ onChange }: { onChange: any }) {
+  const editor = useEditor({
+    extensions,
+    content,
+    onUpdate: () => onChange(editor?.getHTML()),
+  });
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-5xl w-full grid place-items-center mx-auto my-2"
-    >
-      <Tiptap
-        content={content}
-        onChange={(newContent: string) => handleContentChange(newContent)}
-      />
-    </form>
+    <>
+      <ToolBar editor={editor} />
+      <EditorContent editor={editor}></EditorContent>
+    </>
   );
 }

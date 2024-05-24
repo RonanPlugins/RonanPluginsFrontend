@@ -16,6 +16,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tiptap/extension-color": "^2.4.0",
+    "@tiptap/extension-placeholder": "^2.4.0",
     "@tiptap/extension-text-style": "^2.4.0",
     "@tiptap/extension-underline": "^2.4.0",
     "@tiptap/react": "^2.4.0",
@@ -31,7 +32,8 @@
     "react-hook-form": "^7.51.4",
     "react-router-dom": "^6.23.1",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.1",

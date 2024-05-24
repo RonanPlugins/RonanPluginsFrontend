@@ -1,4 +1,3 @@
-import { type Editor } from "@tiptap/react";
 import {
   Bold,
   Strikethrough,
@@ -13,22 +12,18 @@ import {
   Code,
 } from "lucide-react";
 
-type Props = {
-  editor: Editor | null;
-  content: string;
-};
-
-const inactive = "p-1 rounded-lg";
-const active = "p-1 bg-primary text-white rounded-lg";
-
-const Toolbar = ({ editor, content }: Props) => {
+export default function ToolBar({ editor }: { editor: any }) {
   if (!editor) {
     return null;
   }
+
+  const inactive = "p-1 rounded-lg";
+  const active = "p-1 bg-primary text-white rounded-lg";
+
   return (
     <div
       className="px-1 py-2 rounded-tl-md rounded-tr-md flex justify-between items-start
-    gap-5 w-full flex-wrap border border-gray-700"
+    gap-5 w-full flex-wrap border-gray-700 border-2"
     >
       <div className="flex justify-start items-center gap-1 w-full flex-wrap">
         <button
@@ -109,9 +104,9 @@ const Toolbar = ({ editor, content }: Props) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            editor.chain().focus().setCode().run();
+            editor.chain().focus().toggleCodeBlock().run();
           }}
-          className={editor.isActive("code") ? active : inactive}
+          className={editor.isActive("codeBlock") ? active : inactive}
         >
           <Code className="w-5 h-5" />
         </button>
@@ -142,16 +137,6 @@ const Toolbar = ({ editor, content }: Props) => {
           <Redo className="w-5 h-5" />
         </button>
       </div>
-      {content && (
-        <button
-          type="submit"
-          className="px-4 bg-sky-700 text-white py-2 rounded-md"
-        >
-          Add
-        </button>
-      )}
     </div>
   );
-};
-
-export default Toolbar;
+}
