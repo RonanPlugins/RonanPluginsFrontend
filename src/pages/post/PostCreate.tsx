@@ -14,23 +14,84 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { resizeFile } from "@/utils/imageResizer";
+import post from "@/api/post";
+import { useNavigate } from "react-router-dom";
+
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 
 const formSchema = z.object({
   title: z.string().min(3, {
     message: "Title must be at least 3 characters.",
   }),
-  password: z.string(),
+  summary: z.string(),
+  link_support: z.string(),
+  link_source: z.string(),
 });
 
 export default function PostCreate() {
+  //Are we posting this to the backend?
+  const [posting, setPosting] = useState<boolean>(false);
+  //Description state (read-only)
   const [description, setDescription] = useState(null);
+  //Resource Image
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  //Errors
+  const [descriptionError, setDescriptionError] = useState<string | null>(null);
+  const [selectedImageError, setSelectedImageError] = useState<string | null>(
+    null
+  );
+  const navigate = useNavigate();
+  //Form defaults
   const form = useForm({
     resolver: zodResolver(formSchema),
+    values: {
+      title: "",
+      summary: "",
+      link_support: "",
+      link_source: "",
+    },
   });
 
-  const handleCreatePost = (formData: any) => {
-    console.log(formData, description);
-    // post.createPost({ test: true });
+  //Posting a resource to backend + error checks
+  const handleCreatePost = async (formData: any) => {
+    const imageError = validateImage(selectedImage);
+    if (imageError) {
+      return setSelectedImageError(imageError);
+    } else {
+      setSelectedImageError(null);
+    }
+    if (!description) {
+      return setDescriptionError("Please provide a description!");
+    } else {
+      setDescriptionError(null);
+    }
+    setPosting(true);
+    getBase64(selectedImage, (image64: any) => {
+      console.log("Valid post!", formData, description, selectedImage, image64);
+      post
+        .createPost({
+          title: formData.title,
+          tagLine: formData.summary,
+          linkSource: formData.link_source,
+          linkSupport: formData.link_support,
+          description,
+          image64,
+        })
+        .then((data: any) => {
+          if (data) {
+            navigate(`/post/${data._id}`);
+          } else {
+            setDescriptionError("An error has occured!");
+          }
+        });
+    });
   };
 
   return (
@@ -83,6 +144,9 @@ export default function PostCreate() {
             <FormLabel>Description</FormLabel>
             <div className="my-2"></div>
             <TextEditor onChange={setDescription} />
+            {descriptionError !== null && (
+              <FormMessage>{descriptionError}</FormMessage>
+            )}
           </div>
 
           {/* Support Link */}
@@ -119,8 +183,30 @@ export default function PostCreate() {
             )}
           />
 
+          <div className="w-[200px] h-[200px] border-2 bg-slate-200">
+            {selectedImage && (
+              <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
+            )}
+          </div>
+
+          <FormItem>
+            <FormLabel>Resource Image</FormLabel>
+            <FormControl>
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  setSelectedImage(e.target.files?.[0] || null);
+                }}
+              />
+            </FormControl>
+            {selectedImageError !== null && (
+              <FormMessage>{selectedImageError}</FormMessage>
+            )}
+          </FormItem>
+
           <div className="flex justify-center">
-            <Button className="w-[200px] " type="submit">
+            <Button className="w-[200px] " type="submit" disabled={posting}>
               Post Resource
             </Button>
           </div>
@@ -130,40 +216,23 @@ export default function PostCreate() {
   );
 }
 
-/**
- * <div className="mx-auto flex flex-col w-full text-center gap-2 p-5 max-w-5xl place-content-center">
-        <h1 className="font-bold">Post a new Resource</h1>
-        <div className="my-2">
-          <h2 className="text-left">Title</h2>
-          <Input
-            type="title"
-            placeholder="Name by which your resource will be displayed"
-          />
-        </div>
-        <div className="my-2">
-          <h2 className="text-left">Summary</h2>
-          <Input
-            type="title"
-            placeholder="Brief one-line description of your resource"
-          />
-        </div>
-        <div className="my-2">
-          <h2 className="text-left">Description</h2>
-          <TextEditor onChange={setDescription} />
-        </div>
-        <div className="my-2">
-          <h2 className="text-left">Support Link</h2>
-          <Input type="title" placeholder="Discord/Website/Email for support" />
-        </div>
-        <div className="my-2">
-          <h2 className="text-left">Source Code</h2>
-          <Input
-            type="title"
-            placeholder="Link to the source code for this resource."
-          />
-        </div>
-        <Button className="mt-10" onClick={handleCreatePost}>
-          Post Resource
-        </Button>
-      </div>
- */
+function validateImage(image: File | null): string | null {
+  if (!image) {
+    return "Please select a resource image!";
+  } else {
+    if (!(image.size <= MAX_FILE_SIZE)) {
+      return `Max file size exceeded (${(image.size / 1000000).toFixed(
+        2
+      )}MB / 5MB)`;
+    } else {
+      if (!ACCEPTED_IMAGE_TYPES.includes(image.type)) {
+        return "Only .jpg, .jpeg, .png and .webp formats are supported";
+      }
+    }
+  }
+  return null;
+}
+
+async function getBase64(file: any, callback: any) {
+  resizeFile(file).then((newFile) => callback(newFile));
+}
