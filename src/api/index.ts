@@ -9,19 +9,23 @@ export default {
   async logout() {
     client.post("/auth/logout");
   },
-  async autoLogin() {
+  async autoLogin(): Promise<any | null> {
     return client
       .get(`${import.meta.env.VITE_API_URL}/auth/login/success`)
       .then((response) => {
         if (response.status === 200) return response;
-        throw new Error("authentication failed!");
+        return null;
+        //throw new Error("authentication failed!");
       })
-      .then((response) => {
+      .then((response: any | null) => {
         // console.log("DATA", response);
-        return response.data.user;
+        if (response) return response.data.user;
+        return null;
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: any) => {
+        // console.log("Cant login auto login!", err);
+        return null;
+        // throw new Error("authentication failed!");
       });
   },
 };

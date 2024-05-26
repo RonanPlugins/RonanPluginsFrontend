@@ -1,7 +1,12 @@
 import api from "@/api";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const initialState = { user: null, isLoggedIn: () => false, logout: () => {} };
+const initialState = {
+  user: null,
+  isLoggedIn: () => false,
+  logout: () => {},
+  userLoaded: false,
+};
 
 const UserContext = createContext(initialState);
 
@@ -11,6 +16,7 @@ export const useUserContext = () => {
 
 export default function UserProvider({ children }: { children: any }) {
   const [user, setUser] = useState(null);
+  const [userLoaded, setUserLoaded] = useState(false);
 
   const isLoggedIn = () => {
     return user !== null;
@@ -25,12 +31,13 @@ export default function UserProvider({ children }: { children: any }) {
     const getUser = async () => {
       const data = await api.autoLogin();
       if (data) setUser(data);
+      setUserLoaded(true);
     };
     getUser();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isLoggedIn, logout }}>
+    <UserContext.Provider value={{ user, isLoggedIn, logout, userLoaded }}>
       {children}
     </UserContext.Provider>
   );

@@ -8,6 +8,7 @@ export default function Posts() {
 
   async function getPlugins() {
     const posts = await post.getAll();
+    console.log("response", posts);
     setPlugins(posts);
     setLoading(false);
   }
@@ -22,11 +23,7 @@ export default function Posts() {
   console.log(plugins);
 
   return (
-    <>
-      {plugins?.map((post) => (
-        <Post key={post._id} post={post} />
-      ))}
-    </>
+    <>{plugins && plugins.map((post) => <Post key={post._id} post={post} />)}</>
   );
 }
 

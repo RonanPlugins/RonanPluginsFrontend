@@ -5,7 +5,7 @@ import Home from "./Home.jsx";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Plugins from "./Plugins.tsx";
 import Profile from "./Profile.tsx";
-import AuthGuard from "@/components/home/AuthGuard.tsx";
+import AuthGuard from "@/components/common/AuthGuard.tsx";
 import PostCreate from "./post/PostCreate.tsx";
 import PostView from "./post/PostView.tsx";
 import Posts from "./post/Posts.tsx";
