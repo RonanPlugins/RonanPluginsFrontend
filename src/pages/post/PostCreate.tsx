@@ -117,22 +117,24 @@ export default function PostCreate() {
     //   });
     // };
 
-    post
-      .create({
-        title: formData.title,
-        tagLine: formData.summary,
-        linkSource: formData.link_source,
-        linkSupport: formData.link_support,
-        description,
-        image: selectedImage,
-      })
-      .then((data: any) => {
-        if (data) {
-          navigate(`/post/${data._id}`);
-        } else {
-          setDescriptionError("An error has occured!");
-        }
-      });
+    downsizeImage(selectedImage, (imageFile: any) => {
+      post
+        .create({
+          title: formData.title,
+          tagLine: formData.summary,
+          linkSource: formData.link_source,
+          linkSupport: formData.link_support,
+          description,
+          image: imageFile,
+        })
+        .then((data: any) => {
+          if (data) {
+            navigate(`/post/${data._id}`);
+          } else {
+            setDescriptionError("An error has occured!");
+          }
+        });
+    });
   };
 
   useEffect(() => {
@@ -277,6 +279,6 @@ function validateImage(image: File | null): string | null {
   return null;
 }
 
-async function getBase64(file: any, callback: any) {
+async function downsizeImage(file: any, callback: any) {
   resizeFile(file).then((newFile) => callback(newFile));
 }

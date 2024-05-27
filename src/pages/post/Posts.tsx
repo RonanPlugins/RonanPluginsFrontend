@@ -22,9 +22,9 @@ export default function Posts() {
   if (loading) return <Loading />;
 
   return (
-    <>
+    <div className="w-full">
       {plugins &&
         plugins.map((post) => <PostPreview key={post._id} post={post} />)}
-    </>
+    </div>
   );
 }

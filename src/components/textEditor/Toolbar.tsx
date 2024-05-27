@@ -10,6 +10,7 @@ import {
   Undo,
   Redo,
   Code,
+  AlignCenter,
 } from "lucide-react";
 
 export default function ToolBar({ editor }: { editor: any }) {
@@ -73,7 +74,19 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Heading2 className="w-5 h-5" />
         </button>
-
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (!editor.isActive({ textAlign: "center" }))
+              editor.chain().focus().setTextAlign("center").run();
+            else editor.chain().focus().setTextAlign("left").run();
+          }}
+          className={
+            editor.isActive({ textAlign: "center" }) ? active : inactive
+          }
+        >
+          <AlignCenter className="w-5 h-5" />
+        </button>
         <button
           onClick={(e) => {
             e.preventDefault();

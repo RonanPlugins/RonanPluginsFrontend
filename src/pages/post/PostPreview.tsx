@@ -1,23 +1,21 @@
+import PluginImage from "@/components/plugins/PluginImage";
 import { Link } from "react-router-dom";
+
 export default function PostPreview({ post }: { post: any }) {
-  // const [image, setImage] = useState<any>(null);
-  // useEffect(() => {
-  //   const getImage = async () => {
-  //     try {
-  //       const _image = await postAPI.getImage(post.image);
-  //       setImage(URL.createObjectURL(_image));
-  //     } catch (err) {}
-  //   };
-  //   getImage();
-  // }, []);
-  console.log(`http://localhost:3001/pluginImages/${post.image}`);
+  console.log(post);
   return (
-    <>
-      <img src={`http://localhost:3001/pluginImages/${post.image}`} />
+    <div className="m-auto flex flex-row max-w-3xl my-3">
+      <PluginImage className="max-h-[80px] max-w-[80px]" image={post.image} />
 
       <Link to={`../post/${post._id}`}>
-        <h2 className="underline">{post.title}</h2>
+        <div className="flex flex-col ml-2">
+          <h2 className="">{post.title}</h2>
+          <p className="">{post.tagLine}</p>
+          <p className="mt-2 h-full text-sm text-transparent/50 align-text-bottom">
+            {post.authorID?.displayName}
+          </p>
+        </div>
       </Link>
-    </>
+    </div>
   );
 }
