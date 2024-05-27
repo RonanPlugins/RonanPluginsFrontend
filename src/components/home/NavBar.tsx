@@ -31,6 +31,7 @@ export default function Nav() {
   const navItems: { title: string; link: string }[] = [
     { title: "Home", link: "/home" },
     { title: "Plugins", link: "/plugins" },
+    { title: "Posts", link: "/posts" },
   ];
   return (
     <div className="left-0 right-0 top-0 z-10">

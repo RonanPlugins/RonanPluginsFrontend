@@ -1,7 +1,7 @@
 import TextEditor from "@/components/textEditor/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -42,6 +42,7 @@ export default function PostCreate() {
   const [description, setDescription] = useState(null);
   //Resource Image
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   //Errors
   const [descriptionError, setDescriptionError] = useState<string | null>(null);
   const [selectedImageError, setSelectedImageError] = useState<string | null>(
@@ -73,26 +74,70 @@ export default function PostCreate() {
       setDescriptionError(null);
     }
     setPosting(true);
-    getBase64(selectedImage, (image64: any) => {
-      console.log("Valid post!", formData, description, selectedImage, image64);
-      post
-        .create({
-          title: formData.title,
-          tagLine: formData.summary,
-          linkSource: formData.link_source,
-          linkSupport: formData.link_support,
-          description,
-          image64,
-        })
-        .then((data: any) => {
-          if (data) {
-            navigate(`/post/${data._id}`);
-          } else {
-            setDescriptionError("An error has occured!");
-          }
-        });
-    });
+    // console.log(selectedImage);
+    // getBase64(selectedImage, (image: any) => {
+    //   console.log("Valid post!", formData, selectedImage.type, image);
+    //   post
+    //     .create({
+    //       title: formData.title,
+    //       tagLine: formData.summary,
+    //       linkSource: formData.link_source,
+    //       linkSupport: formData.link_support,
+    //       description,
+    //       imageData: image,
+    //       imageType: previewImage.type,
+    //     })
+    //     .then((data: any) => {
+    //       if (data) {
+    //         navigate(`/post/${data._id}`);
+    //       } else {
+    //         setDescriptionError("An error has occured!");
+    //       }
+    //     });
+    // });
+
+    // const reader = new FileReader();
+    // reader.readAsArrayBuffer(selectedImage);
+    // reader.onload = () => {
+    //   const blob = new Blob([reader.result], { type: selectedImage.type });
+    //   const form = new FormData();
+    //   form.append("image", blob);
+    //   form.append("title", formData.title);
+
+    //   form.append("tagLine", formData.summary);
+    //   form.append("linkSource", formData.link_source);
+    //   form.append("linkSupport", formData.link_support);
+    //   form.append("description", description);
+    //   post.create(form).then((data: any) => {
+    //     if (data) {
+    //       navigate(`/post/${data._id}`);
+    //     } else {
+    //       setDescriptionError("An error has occured!");
+    //     }
+    //   });
+    // };
+
+    post
+      .create({
+        title: formData.title,
+        tagLine: formData.summary,
+        linkSource: formData.link_source,
+        linkSupport: formData.link_support,
+        description,
+        image: selectedImage,
+      })
+      .then((data: any) => {
+        if (data) {
+          navigate(`/post/${data._id}`);
+        } else {
+          setDescriptionError("An error has occured!");
+        }
+      });
   };
+
+  useEffect(() => {
+    if (selectedImage) setPreviewImage(URL.createObjectURL(selectedImage));
+  }, [selectedImage]);
 
   return (
     <div className="mx-auto flex flex-col w-full text-left gap-2 p-5 max-w-5xl place-content-center">
@@ -184,9 +229,7 @@ export default function PostCreate() {
           />
 
           <div className="w-[200px] h-[200px] border-2 bg-slate-200">
-            {selectedImage && (
-              <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
-            )}
+            {previewImage && <img src={previewImage} alt="Selected" />}
           </div>
 
           <FormItem>
@@ -206,7 +249,8 @@ export default function PostCreate() {
           </FormItem>
 
           <div className="flex justify-center">
-            <Button className="w-[200px] " type="submit" disabled={posting}>
+            <Button className="w-[200px] " type="submit">
+              {/* disabled={posting} */}
               Post Resource
             </Button>
           </div>
