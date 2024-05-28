@@ -8,7 +8,7 @@ export default function PluginImage({
   return (
     <img
       className={`rounded-md ` + className}
-      src={`http://localhost:3001/images/${
+      src={`${import.meta.env.VITE_IMAGES_URL}${
         image ? `plugins/${image}` : `notavailable.png`
       }`}
     />
