@@ -190,7 +190,7 @@ export default function PostCreate() {
           <div>
             <FormLabel>Description</FormLabel>
             <div className="my-2"></div>
-            <TextEditor onChange={setDescription} />
+            <TextEditor onChange={setDescription} canEdit={true} />
             {descriptionError !== null && (
               <FormMessage>{descriptionError}</FormMessage>
             )}

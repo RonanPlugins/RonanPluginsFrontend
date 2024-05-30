@@ -2,6 +2,7 @@ import postAPI from "@/api/post";
 import Loading from "@/components/common/Loading";
 import PluginEditTools from "@/components/plugins/PluginEditTools";
 import PluginImage from "@/components/plugins/PluginImage";
+import TextEditor from "@/components/textEditor/TextEditor";
 import { Card, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -45,7 +46,7 @@ export default function PostView() {
           </CardTitle>
           {/* Body of plugin data */}
           <section className="mx-2 pb-2">
-            <div dangerouslySetInnerHTML={{ __html: post.description }} />
+            <TextEditor content={post.description} canEdit={true} />
           </section>
         </Card>
         <div className="w-96 max-w-4xl">

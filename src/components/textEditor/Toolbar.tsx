@@ -11,6 +11,8 @@ import {
   Redo,
   Code,
   AlignCenter,
+  Palette,
+  Heading1,
 } from "lucide-react";
 
 export default function ToolBar({ editor }: { editor: any }) {
@@ -27,6 +29,7 @@ export default function ToolBar({ editor }: { editor: any }) {
     gap-5 w-full flex-wrap border-gray-700 border-2"
     >
       <div className="flex justify-start items-center gap-1 w-full flex-wrap">
+        {/* BOLD */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -36,6 +39,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Bold className="w-5 h-5" />
         </button>
+        {/* ITALIC */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -45,6 +49,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Italic className="w-5 h-5" />
         </button>
+        {/* UNDERLINE */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -54,6 +59,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Underline className="w-5 h-5" />
         </button>
+        {/* STRIKETHROUGH */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -63,6 +69,19 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Strikethrough className="w-5 h-5" />
         </button>
+        {/* HEADING 1 */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            editor.chain().focus().toggleHeading({ level: 1 }).run();
+          }}
+          className={
+            editor.isActive("heading", { level: 1 }) ? active : inactive
+          }
+        >
+          <Heading1 className="w-5 h-5" />
+        </button>
+        {/* HEADING 2 */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -74,6 +93,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Heading2 className="w-5 h-5" />
         </button>
+        {/* ALIGN CENTER */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -87,6 +107,17 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <AlignCenter className="w-5 h-5" />
         </button>
+        {/* COLOR */}
+        {/* <button
+          onClick={(e) => {
+            editor.commands.setColor("#ff0000");
+          }}
+          className={editor.isActive({ color: "#ff0000" }) ? active : inactive}
+        >
+          <Palette className="w-5 h-5" />
+        </button> */}
+        <div></div>
+        {/* LIST */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -96,6 +127,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <List className="w-5 h-5" />
         </button>
+        {/* ORDER LIST */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -105,6 +137,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <ListOrdered className="w-5 h-5" />
         </button>
+        {/* QUOTE */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -114,6 +147,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Quote className="w-5 h-5" />
         </button>
+        {/* CODE */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -123,6 +157,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Code className="w-5 h-5" />
         </button>
+        {/* UNDER */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -136,6 +171,7 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Undo className="w-5 h-5" />
         </button>
+        {/* REDO */}
         <button
           onClick={(e) => {
             e.preventDefault();
