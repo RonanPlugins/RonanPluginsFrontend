@@ -11,11 +11,12 @@ import {
   Redo,
   Code,
   AlignCenter,
-  Palette,
   Heading1,
 } from "lucide-react";
+import ColorPicker from "./ColorPicker";
+import { Editor } from "@tiptap/react";
 
-export default function ToolBar({ editor }: { editor: any }) {
+export default function ToolBar({ editor }: { editor: Editor }) {
   if (!editor) {
     return null;
   }
@@ -116,7 +117,10 @@ export default function ToolBar({ editor }: { editor: any }) {
         >
           <Palette className="w-5 h-5" />
         </button> */}
-        <div></div>
+
+        <div>
+          <ColorPicker editor={editor} />
+        </div>
         {/* LIST */}
         <button
           onClick={(e) => {

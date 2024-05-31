@@ -1,5 +1,5 @@
 .tiptap {
-  @apply border-gray-700 border-t-0 rounded-bl-md rounded-br-md border-2 text-left p-2 min-h-64;
+  @apply p-2 min-h-64 focus:outline-primary;
 
   ul {
     @apply ml-6 list-disc;
@@ -46,12 +46,12 @@
 
   blockquote {
     padding-left: 1rem;
-    border-left: 2px solid rgba(#0d0d0d, 0.1);
+    border-left: 2px solid #4d4d4d;
   }
 
   hr {
     border: none;
-    border-top: 2px solid rgba(#0d0d0d, 0.1);
+    border-top: 2px solid #4d4d4d;
     margin: 2rem 0;
   }
 

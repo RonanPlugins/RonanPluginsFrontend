@@ -12,11 +12,11 @@ import Placeholder from "@tiptap/extension-placeholder";
 import StarterKit from "@tiptap/starter-kit";
 import ToolBar from "./Toolbar";
 import TextAlign from "@tiptap/extension-text-align";
-import Dropcursor from "@tiptap/extension-dropcursor";
+import Underline from "@tiptap/extension-underline";
 import("./style.css");
 
 const extensions = [
-  Dropcursor,
+  Underline,
   Image,
   Placeholder.configure({
     placeholder: "Your plugins description...",
@@ -33,6 +33,9 @@ const extensions = [
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
     },
+    dropcursor: {
+      width: 2,
+    },
   }),
   TextAlign.configure({
     types: ["heading", "paragraph"],
@@ -43,10 +46,12 @@ export default function TextEditor({
   onChange = null,
   canEdit = false,
   content = "",
+  className = "",
 }: {
   onChange?: any;
   canEdit?: boolean;
   content?: string;
+  className?: string;
 }) {
   const editor = useEditor({
     extensions,
@@ -56,19 +61,21 @@ export default function TextEditor({
   });
   return (
     <>
-      {editor && (
+      {canEdit && editor && (
         <BubbleMenu
           className="bubble-menu"
           tippyOptions={{ duration: 100 }}
           editor={editor}
         >
           <button
+            type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={editor.isActive("bold") ? "is-active" : ""}
           >
             Bold
           </button>
           <button
+            type="button"
             onClick={() => editor.chain().focus().toggleItalic().run()}
             className={editor.isActive("italic") ? "is-active" : ""}
           >
@@ -77,13 +84,14 @@ export default function TextEditor({
         </BubbleMenu>
       )}
 
-      {editor && (
+      {canEdit && editor && (
         <FloatingMenu
           className="floating-menu"
           tippyOptions={{ duration: 100 }}
           editor={editor}
         >
           <button
+            type="button"
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 1 }).run()
             }
@@ -94,6 +102,7 @@ export default function TextEditor({
             H1
           </button>
           <button
+            type="button"
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 2 }).run()
             }
@@ -104,6 +113,7 @@ export default function TextEditor({
             H2
           </button>
           <button
+            type="button"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={editor.isActive("bulletList") ? "is-active" : ""}
           >
@@ -112,8 +122,8 @@ export default function TextEditor({
         </FloatingMenu>
       )}
 
-      <ToolBar editor={editor} />
-      <EditorContent editor={editor} />
+      {canEdit && editor && <ToolBar editor={editor} />}
+      <EditorContent className={className} editor={editor} />
     </>
   );
   // return (

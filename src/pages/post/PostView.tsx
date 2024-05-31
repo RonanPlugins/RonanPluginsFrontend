@@ -46,7 +46,11 @@ export default function PostView() {
           </CardTitle>
           {/* Body of plugin data */}
           <section className="mx-2 pb-2">
-            <TextEditor content={post.description} canEdit={true} />
+            <TextEditor
+              className="p-2"
+              content={post.description}
+              canEdit={false}
+            />
           </section>
         </Card>
         <div className="w-96 max-w-4xl">
