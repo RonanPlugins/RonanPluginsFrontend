@@ -1,10 +1,10 @@
 import { client } from "./axiosClient";
 
 export default {
-  create(postInfo: any): Promise<any> {
-    console.log("New Create Resource Request", postInfo);
+  create(resourceInfo: any): Promise<any> {
+    console.log("New Create Resource Request", resourceInfo);
     return client
-      .post(`/post/create`, postInfo)
+      .post(`/resource/create`, resourceInfo)
       .then(({ data }) => {
         //console.log("POST", data);
         return data;
@@ -14,9 +14,9 @@ export default {
         return null;
       });
   },
-  getOne(postId: string | undefined): Promise<any> {
+  getOne(resourceId: string | undefined): Promise<any> {
     return client
-      .get(`/post/get/${postId}`)
+      .get(`/resource/get/${resourceId}`)
       .then(({ data }) => {
         //console.log("POST", data);
         return data;
@@ -28,7 +28,7 @@ export default {
   },
   getAll(): Promise<any> {
     return client
-      .get(`/post/get`, { responseType: "json" })
+      .get(`/resource/get`, { responseType: "json" })
       .then(({ data }) => {
         return data;
       })

@@ -8,7 +8,7 @@ export default function PluginEditTools({ resource }: { resource: any }) {
         <h2>Resource Tools</h2>
       </CardTitle>
       <CardContent className="p-3">
-        <Link to={"/edit"}>
+        <Link to={"./edit"}>
           <p>Edit Resource</p>
         </Link>
         <p>Edit Icon</p>
