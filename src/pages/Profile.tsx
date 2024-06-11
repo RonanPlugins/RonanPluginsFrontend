@@ -8,9 +8,10 @@ export default function Profile() {
 
   return (
     <div className="w-full text-center my-4">
-      <h1>Welcome Back {user.displayName}</h1>
+      <h1>Welcome Back</h1>
+      <h1>{user.name}</h1>
 
-      <Button onClick={() => naviage("/post/create")}>Create a Post</Button>
+      <Button onClick={() => naviage("/resource/create")}>New Resource</Button>
     </div>
   );
 }

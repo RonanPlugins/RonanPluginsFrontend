@@ -15,7 +15,7 @@ export default function ResourcePreview({ resource }: { resource: any }) {
           <h2 className="">{resource.title}</h2>
           <p className="">{resource.tagLine}</p>
           <p className="mt-2 h-full text-sm text-transparent/50 align-text-bottom">
-            {resource.authorID?.displayName}
+            {resource.authorID?.name}
           </p>
         </div>
       </div>
