@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { resizeFile } from "@/utils/imageResizer";
-import post from "@/api/post";
+import resourceAPI from "@/api/resource";
 import { useNavigate } from "react-router-dom";
 
 const MAX_FILE_SIZE = 5000000;
@@ -74,51 +74,9 @@ export default function PostCreate() {
       setDescriptionError(null);
     }
     setPosting(true);
-    // console.log(selectedImage);
-    // getBase64(selectedImage, (image: any) => {
-    //   console.log("Valid post!", formData, selectedImage.type, image);
-    //   post
-    //     .create({
-    //       title: formData.title,
-    //       tagLine: formData.summary,
-    //       linkSource: formData.link_source,
-    //       linkSupport: formData.link_support,
-    //       description,
-    //       imageData: image,
-    //       imageType: previewImage.type,
-    //     })
-    //     .then((data: any) => {
-    //       if (data) {
-    //         navigate(`/post/${data._id}`);
-    //       } else {
-    //         setDescriptionError("An error has occured!");
-    //       }
-    //     });
-    // });
-
-    // const reader = new FileReader();
-    // reader.readAsArrayBuffer(selectedImage);
-    // reader.onload = () => {
-    //   const blob = new Blob([reader.result], { type: selectedImage.type });
-    //   const form = new FormData();
-    //   form.append("image", blob);
-    //   form.append("title", formData.title);
-
-    //   form.append("tagLine", formData.summary);
-    //   form.append("linkSource", formData.link_source);
-    //   form.append("linkSupport", formData.link_support);
-    //   form.append("description", description);
-    //   post.create(form).then((data: any) => {
-    //     if (data) {
-    //       navigate(`/post/${data._id}`);
-    //     } else {
-    //       setDescriptionError("An error has occured!");
-    //     }
-    //   });
-    // };
 
     downsizeImage(selectedImage, (imageFile: any) => {
-      post
+      resourceAPI
         .create({
           title: formData.title,
           tagLine: formData.summary,

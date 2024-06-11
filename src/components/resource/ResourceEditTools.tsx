@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "../ui/card";
 
-export default function PluginEditTools({ post }: { post: any }) {
+export default function PluginEditTools({ resource }: { resource: any }) {
   return (
     <Card>
       <CardTitle className="truncate bg-primary p-2 rounded-t-md text-secondary">

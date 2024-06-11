@@ -1,5 +1,5 @@
 import Loading from "@/components/common/Loading";
-import Plugin from "@/components/plugins/Plugin";
+import Plugin from "@/components/resource/Plugin";
 import axios from "axios";
 import { useEffect, useState } from "react";
 

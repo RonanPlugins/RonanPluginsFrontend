@@ -1,14 +1,11 @@
 import App from "../App.tsx";
-
-import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import Plugins from "./Plugins.tsx";
 import Profile from "./Profile.tsx";
 import AuthGuard from "@/components/common/AuthGuard.tsx";
-import PostCreate from "./post/PostCreate.tsx";
-import PostView from "./post/PostView.tsx";
-import Posts from "./post/Posts.tsx";
+import PostCreate from "./resouces/ResourceCreate.tsx";
+import ResourceView from "./resouces/ResourceView.tsx";
+import Resources from "./resouces/Resources.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -29,16 +26,12 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/plugins",
-        element: <Plugins />,
+        path: "/resources",
+        element: <Resources />,
       },
       {
-        path: "/post/:id",
-        element: <PostView />,
-      },
-      {
-        path: "/posts",
-        element: <Posts />,
+        path: "/resources/:id",
+        element: <ResourceView />,
       },
       {
         element: <AuthGuard />,
