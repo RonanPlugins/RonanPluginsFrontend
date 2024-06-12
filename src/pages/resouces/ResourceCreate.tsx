@@ -28,11 +28,16 @@ const ACCEPTED_IMAGE_TYPES = [
 
 const formSchema = z.object({
   title: z.string().min(3, {
-    message: "Title must be at least 3 characters.",
+    message: "Title must be at least 3 characters",
   }),
-  summary: z.string(),
+  summary: z.string().min(1, {
+    message: "Please provide a summary",
+  }),
   link_support: z.string(),
   link_source: z.string(),
+  version: z.string().min(1, {
+    message: "Please provide a version id",
+  }),
 });
 
 export default function PostCreate() {
@@ -57,6 +62,7 @@ export default function PostCreate() {
       summary: "",
       link_support: "",
       link_source: "",
+      version: "",
     },
   });
 
@@ -69,7 +75,7 @@ export default function PostCreate() {
       setSelectedImageError(null);
     }
     if (!description) {
-      return setDescriptionError("Please provide a description!");
+      return setDescriptionError("Please provide a description");
     } else {
       setDescriptionError(null);
     }
@@ -84,10 +90,11 @@ export default function PostCreate() {
           linkSupport: formData.link_support,
           description,
           image: imageFile,
+          version: formData.version,
         })
         .then((data: any) => {
           if (data) {
-            navigate(`/post/${data._id}`);
+            navigate(`/resource/${data._id}`);
           } else {
             setDescriptionError("An error has occured!");
           }
@@ -130,6 +137,24 @@ export default function PostCreate() {
 
           <FormField
             control={form.control}
+            name="version"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Version</FormLabel>
+                <FormControl>
+                  <Input placeholder="Resource release version" {...field} />
+                </FormControl>
+                {form.formState.errors.version && (
+                  <FormMessage>
+                    {form.formState.errors.version.message}
+                  </FormMessage>
+                )}
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="summary"
             render={({ field }) => (
               <FormItem>
@@ -140,6 +165,11 @@ export default function PostCreate() {
                 <FormDescription>
                   Brief one-line description of your resource
                 </FormDescription>
+                {form.formState.errors.summary && (
+                  <FormMessage>
+                    {form.formState.errors.summary.message}
+                  </FormMessage>
+                )}
               </FormItem>
             )}
           />

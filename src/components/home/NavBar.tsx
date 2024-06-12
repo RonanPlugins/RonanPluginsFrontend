@@ -12,7 +12,7 @@ import Links from "@/lib/Links";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
-  const { isLoggedIn, logout } = useUserContext();
+  const { isLoggedIn, logout, user } = useUserContext();
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
@@ -75,6 +75,8 @@ export default function Nav() {
             <div className="flex gap-4 items-center font-medium">
               {isLoggedIn() ? (
                 <>
+                  <img src={user.avatarURL} className="rounded h-10" />
+
                   <NavItem link={Links.Profile} title={"Profile"} />
                   <Button onClick={logoutHandler}>Logout</Button>
                 </>

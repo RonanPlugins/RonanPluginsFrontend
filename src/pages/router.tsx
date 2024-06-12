@@ -7,6 +7,8 @@ import ResourceCreate from "./resouces/ResourceCreate.tsx";
 import ResourceView from "./resouces/ResourceView.tsx";
 import Resources from "./resouces/Resources.tsx";
 import Admin from "./Admin.tsx";
+import { PERMISSION } from "@/utils/PERMISSION.ts";
+import ProfileOther from "./ProfileOther.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -30,6 +32,17 @@ export const router = createBrowserRouter([
         path: "/resource/:id",
         element: <ResourceView />,
       },
+      // Creator
+      {
+        element: <AuthGuard role={PERMISSION.CREATOR} />,
+        children: [
+          {
+            path: "/resource/create",
+            element: <ResourceCreate />,
+          },
+        ],
+      },
+      //Profile
       {
         element: <AuthGuard />,
         children: [
@@ -37,22 +50,19 @@ export const router = createBrowserRouter([
             path: "/profile",
             element: <Profile />,
           },
+        ],
+      },
+      {
+        element: <ProfileOther />,
+        path: "/user/:userID",
+      },
+      //Admin
+      {
+        element: <AuthGuard role={PERMISSION.ADMIN} />,
+        children: [
           {
-            path: "/resource/create",
-            element: <ResourceCreate />,
-          },
-          {
-            element: <AuthGuard role="admin" />,
-            children: [
-              {
-                path: "/admin",
-                element: <Admin />,
-              },
-              {
-                path: "/resource/create",
-                element: <ResourceCreate />,
-              },
-            ],
+            path: "/admin",
+            element: <Admin />,
           },
         ],
       },

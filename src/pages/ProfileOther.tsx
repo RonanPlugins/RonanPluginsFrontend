@@ -1,59 +1,50 @@
 import Loading from "@/components/common/Loading";
 import ResourcePreview from "@/components/resource/ResourcePreview";
-import { Button } from "@/components/ui/button";
-import { useUserContext } from "@/context/UserContext";
-import { PERMISSION } from "@/utils/PERMISSION";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import resourceAPI from "@/api/resource";
-import Links from "@/lib/Links";
+import memberAPI from "@/api/member";
+import { useUserContext } from "@/context/UserContext";
 
-export default function Profile() {
-  const { user }: { user: any } = useUserContext();
-  const naviage = useNavigate();
-
+export default function ProfileOther() {
+  const { user } = useUserContext();
+  const [userProfile, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
+  const { userID } = useParams();
+  const navigate = useNavigate();
+
+  if (userID === user?._id) navigate("../profile");
 
   async function getResources() {
-    const posts = await resourceAPI.getUser(user?._id);
-    console.log("response", posts);
+    const posts = await resourceAPI.getUser(`${userID}`);
+    // console.log("response", posts);
     setResources(posts);
-    setLoading(false);
+  }
+
+  async function getUser() {
+    const user = await memberAPI.get(`${userID}`);
+    setUser(user);
   }
 
   useEffect(() => {
     getResources();
+    getUser();
+    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <Loading />;
 
   return (
-    <div className="w-full my-2">
+    <div className="w-full text-center my-2">
       <h1 className="scroll-m-20 text-5xl font-extrabold tracking-tight text-center my-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
-        Welcome Back {user.name}
+        {`${userProfile?.name}'s Profile`}
       </h1>
-
-      <div className="text-center">
-        {user.role >= PERMISSION.CREATOR && (
-          <Button
-            className="mb-2 mx-1"
-            onClick={() => naviage(Links.ResourceNew)}
-          >
-            New Resource
-          </Button>
-        )}
-        {user.role >= PERMISSION.ADMIN && (
-          <Button className="mb-2 mx-1" onClick={() => naviage("../admin")}>
-            Admin Portal
-          </Button>
-        )}
-      </div>
 
       <div className="resourceContainer">
         <h2 className="text-secondary-foreground text-3xl text-left">
-          Resources from {user.name}
+          Resources from {userProfile?.name}
         </h2>
         <div className="resources">
           {resources &&

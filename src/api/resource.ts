@@ -26,9 +26,9 @@ export default {
         return null;
       });
   },
-  getAll(filter?: string): Promise<any> {
+  getAll(filter?: FilterParams): Promise<any> {
     return client
-      .get(`/resource/get`, { responseType: "json", params: { filter } })
+      .get(`/resource/get`, { responseType: "json", params: { ...filter } })
       .then(({ data }) => {
         return data;
       })
@@ -37,15 +37,34 @@ export default {
         return null;
       });
   },
-  // getImage(imageID: string): Promise<any> {
-  //   return client
-  //     .get(`/post/get/image/${imageID}`)
-  //     .then(({ data }) => {
-  //       return data;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return null;
-  //     });
-  // },
+  getUser(userID: string): Promise<any> {
+    return client
+      .get(`/resource/user/${userID}`, { responseType: "json" })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
+  getCount(): Promise<any> {
+    return client
+      .get(`/resource/count`, {
+        responseType: "json",
+      })
+      .then(({ data }) => {
+        return data.count;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
 };
+
+interface FilterParams {
+  sort: string; //FILTERBY enum
+  page: number; //Page currently on
+  count: number; //How many per page
+}

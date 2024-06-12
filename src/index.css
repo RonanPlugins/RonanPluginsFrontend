@@ -57,7 +57,7 @@
     @apply bg-background text-foreground;
   }
   .resourceContainer {
-    @apply max-w-3xl mx-auto bg-gray-100 rounded p-2;
+    @apply max-w-3xl mx-auto bg-gray-200 dark:bg-gray-800 rounded p-2;
   }
   .resources {
     @apply grid divide-y-2 divide-gray-400;

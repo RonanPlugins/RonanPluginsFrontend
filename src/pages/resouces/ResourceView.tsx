@@ -5,12 +5,14 @@ import ResourceImage from "@/components/resource/ResourceImage";
 import TextEditor from "@/components/textEditor/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
+import { useUserContext } from "@/context/UserContext";
 import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ResourceView() {
   const { id } = useParams();
+  const { user } = useUserContext();
   const [loading, setLoading] = useState(true);
   const [resource, setResourceInfo] = useState<any | null>(null);
 
@@ -32,7 +34,7 @@ export default function ResourceView() {
   return (
     <div className="w-full my-2">
       <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
-        <Card className="grow mr-2 w-full">
+        <Card className="max-w-4xl grow mr-2 w-full">
           {/* Plugin Header */}
           <CardTitle className="py-2 mx-2">
             <div className="flex flex-row">
@@ -63,9 +65,11 @@ export default function ResourceView() {
             />
           </section>
         </Card>
-        <div className="w-full md:w-96">
-          <ResourceEditTools resource={resource} />
-        </div>
+        {user?._id === resource.authorID._id && (
+          <div className="w-full md:w-96">
+            <ResourceEditTools resource={resource} />
+          </div>
+        )}
       </div>
     </div>
   );

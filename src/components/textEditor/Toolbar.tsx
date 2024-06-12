@@ -12,6 +12,7 @@ import {
   Code,
   AlignCenter,
   Heading1,
+  Link,
 } from "lucide-react";
 import ColorPicker from "./ColorPicker";
 import { Editor } from "@tiptap/react";
@@ -160,6 +161,21 @@ export default function ToolBar({ editor }: { editor: Editor }) {
           className={editor.isActive("codeBlock") ? active : inactive}
         >
           <Code className="w-5 h-5" />
+        </button>
+        {/* LINK */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (editor.isActive("link")) {
+              editor.chain().focus().extendMarkRange("link").unsetLink().run();
+            }
+          }}
+          className={
+            editor.isActive("link") ? active : `${inactive} text-gray-400`
+          }
+          disabled={!editor.isActive("link")}
+        >
+          <Link className="w-5 h-5" />
         </button>
         {/* UNDER */}
         <button

@@ -8,34 +8,41 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { Button } from "../ui/button";
 
 export default function ResourcePreview({ resource }: { resource: any }) {
-  console.log(resource);
+  // console.log(resource);
   return (
-    <div className="p-2 flex flex-row max-w-3xl">
+    <div className="p-2 flex flex-row">
       <Link to={`./${resource._id}`}>
-        <ResourceImage
-          className="max-h-[80px] max-w-[80px]"
-          image={resource.image}
-        />
+        <ResourceImage image={resource.image} />
       </Link>
-      <div className="ml-2 grid text-left">
+      <div className="ml-2 grid">
         <div className="flex">
-          <h3 className="text-primary font-bold text-center hover:text-secondary-foreground hover:underline">
+          <h3 className="text-primary font-bold hover:text-secondary-foreground hover:underline">
             <Link to={`../resource/${resource._id}`}>{resource.title}</Link>
           </h3>
 
           <p className="mx-2 text-secondary-foreground/80 text-sm my-auto hover:underline">
-            <Link to={`../member/${resource.authorID._id}`}>
+            <Link to={`../user/${resource.authorID?._id}`}>
               by {resource.authorID?.name}
             </Link>
           </p>
         </div>
         <p className="">{resource.tagLine}</p>
-        <p className="text-sm mt-auto">
-          <p className="text-secondary-foreground/50">{resource.version}</p>
-        </p>
+        <div className="mt-auto">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <p className="text-sm text-secondary-foreground/50">
+                  {resource.version}
+                </p>
+              </TooltipTrigger>
+              <TooltipContent align="start">
+                <p>Version</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </div>
       <div className="self-end ml-auto text-xs">
         <dl className="flex flex-row">

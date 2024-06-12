@@ -5,6 +5,10 @@
     @apply ml-6 list-disc;
   }
 
+  a {
+    @apply text-primary hover:underline;
+  }
+
   ol {
     @apply ml-6 list-decimal;
   }

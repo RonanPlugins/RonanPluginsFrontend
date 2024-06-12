@@ -13,9 +13,14 @@ import StarterKit from "@tiptap/starter-kit";
 import ToolBar from "./Toolbar";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
 import("./style.css");
 
 const extensions = [
+  Link.configure({
+    validate: (href) => /^https?:\/\//.test(href),
+    openOnClick: false,
+  }),
   Underline,
   Image,
   Placeholder.configure({
