@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
+import { useUserContext } from "@/context/UserContext";
+import Links from "@/lib/Links";
 import { Code, User, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
+  const { isLoggedIn } = useUserContext();
   return (
     <>
       <div className="columns-1 md:columns-2 min-h-[50vh]">
@@ -13,18 +17,22 @@ export default function Home() {
               <p className="text-blue-400">functionality</p>
             </header>
             <div className="py-4 text-center md:text-left flex md:inline-block flex-wrap space-y-2">
-              <a className="grow w-full md:w-0" href="./plans">
-                <Button className="rounded-full md:ml-0 w-full max-w-xl md:w-fit md:mr-2">
-                  View Plans
-                </Button>
-              </a>
+              {!isLoggedIn() && (
+                <a className="grow w-full md:w-0" href="./login">
+                  <Button className="rounded-full md:ml-0 w-full max-w-xl md:w-fit md:mr-2">
+                    Login
+                  </Button>
+                </a>
+              )}
               <a className="grow w-full md:w-0" href="./login">
-                <Button
-                  className="rounded-full w-full max-w-xl md:w-fit"
-                  variant="secondary"
-                >
-                  Login
-                </Button>
+                <Link to={Links.Discord}>
+                  <Button
+                    className="rounded-full w-full max-w-xl md:w-fit"
+                    variant="secondary"
+                  >
+                    Join Our Discord
+                  </Button>
+                </Link>
               </a>
             </div>
           </div>

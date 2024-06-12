@@ -1,13 +1,11 @@
 export default class Links {
   // Local Pages
   static Home = "/";
-  static Plugins = "/plugins";
+  static Resources = "/resources";
+  static ResourceNew = "/resource/create";
   static About = "/about";
-  static Plans = "/plans";
   static Login = "/login";
-  static Logout = "/logout";
-  static SignUp = "/signup";
-  static Account = "/user";
+  static Profile = "/profile";
   static PrivacyPolicy = "/privacy";
   static TermsAndConditions = "/terms-and-conditions";
 

@@ -8,6 +8,7 @@ import NavItem from "./NavItem";
 import LoginDialog from "../dialogs/LoginDialog";
 import { useUserContext } from "@/context/UserContext";
 import api from "@/api";
+import Links from "@/lib/Links";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -29,9 +30,9 @@ export default function Nav() {
 
   // console.log(loc);
   const navItems: { title: string; link: string }[] = [
-    { title: "Home", link: "/home" },
-    { title: "Resources", link: "/resources" },
-    { title: "Creators", link: "/creators" },
+    { title: "Home", link: Links.Home },
+    { title: "Resources", link: Links.Resources },
+    // { title: "Creators", link: "/creators" },
   ];
   return (
     <div className="left-0 right-0 top-0 z-10">
@@ -74,7 +75,7 @@ export default function Nav() {
             <div className="flex gap-4 items-center font-medium">
               {isLoggedIn() ? (
                 <>
-                  <NavItem link={"/profile"} title={"Profile"} />
+                  <NavItem link={Links.Profile} title={"Profile"} />
                   <Button onClick={logoutHandler}>Logout</Button>
                 </>
               ) : (

@@ -6,6 +6,7 @@ import AuthGuard from "@/components/common/AuthGuard.tsx";
 import ResourceCreate from "./resouces/ResourceCreate.tsx";
 import ResourceView from "./resouces/ResourceView.tsx";
 import Resources from "./resouces/Resources.tsx";
+import Admin from "./Admin.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -15,14 +16,10 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "*",
-        element: <Navigate to="/home" replace />,
+        element: <Navigate to="/" replace />,
       },
       {
         path: "/",
-        element: <Navigate to="/home" replace />,
-      },
-      {
-        path: "/home",
         element: <Home />,
       },
       {
@@ -30,7 +27,7 @@ export const router = createBrowserRouter([
         element: <Resources />,
       },
       {
-        path: "/resources/:id",
+        path: "/resource/:id",
         element: <ResourceView />,
       },
       {
@@ -43,6 +40,19 @@ export const router = createBrowserRouter([
           {
             path: "/resource/create",
             element: <ResourceCreate />,
+          },
+          {
+            element: <AuthGuard role="admin" />,
+            children: [
+              {
+                path: "/admin",
+                element: <Admin />,
+              },
+              {
+                path: "/resource/create",
+                element: <ResourceCreate />,
+              },
+            ],
           },
         ],
       },

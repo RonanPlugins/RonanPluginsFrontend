@@ -3,7 +3,9 @@ import Loading from "@/components/common/Loading";
 import ResourceEditTools from "@/components/resource/ResourceEditTools";
 import ResourceImage from "@/components/resource/ResourceImage";
 import TextEditor from "@/components/textEditor/TextEditor";
+import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
+import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -38,9 +40,17 @@ export default function ResourceView() {
                 className="max-h-[120px] max-w-[120px] mr-2"
                 image={resource.image}
               />
-              <div className="flex flex-col">
-                <h2>{resource.title}</h2>
-                <p className="text-base font-normal">{resource.tagLine}</p>
+              <div className="flex flex-row w-full">
+                <div className="flex flex-col">
+                  <h3 className="text-primary font-bold text-3xl">
+                    {resource.title}
+                  </h3>
+                  <p className="text-base font-normal">{resource.tagLine}</p>
+                </div>
+                <Button className="ml-auto my-auto">
+                  <Download className="mr-2" size={20} />
+                  Download {resource.version}
+                </Button>
               </div>
             </div>
           </CardTitle>

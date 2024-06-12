@@ -1,27 +1,10 @@
 import { Instagram, Twitter, Youtube } from "lucide-react";
 
 export default class Footer {
-  static CopyrightText = "© 2023 RonanPlugins. All rights reserved";
+  static CopyrightText = "© 2024 RonanPlugins. All rights reserved";
   static LogoPath = "/assets/logo.webp";
 
   static Links = [
-    {
-      Header: "Company",
-      Links: [
-        {
-          name: "About Us",
-          href: "/about",
-        },
-        // {
-        //     name: "Game Panel",
-        //     href: "https://panel.ronanhost.com"
-        // },
-        {
-          name: "Plans",
-          href: "/plans",
-        },
-      ],
-    },
     {
       Header: "Support",
       Links: [

@@ -56,7 +56,10 @@
   body {
     @apply bg-background text-foreground;
   }
-  h2 {
-    @apply font-bold;
+  .resourceContainer {
+    @apply max-w-3xl mx-auto bg-gray-100 rounded p-2;
+  }
+  .resources {
+    @apply grid divide-y-2 divide-gray-400;
   }
 }

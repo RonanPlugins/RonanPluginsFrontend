@@ -26,9 +26,9 @@ export default {
         return null;
       });
   },
-  getAll(): Promise<any> {
+  getAll(filter?: string): Promise<any> {
     return client
-      .get(`/resource/get`, { responseType: "json" })
+      .get(`/resource/get`, { responseType: "json", params: { filter } })
       .then(({ data }) => {
         return data;
       })
