@@ -1,9 +1,9 @@
 import Loading from "@/components/common/Loading";
-import Plugin from "@/components/resource/Plugin";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import SPIGET from "./__Plugin";
 
-const Plugins = () => {
+const SPIGETS = () => {
   const [plugins, setPlugins] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -40,7 +40,7 @@ const Plugins = () => {
       {/* Premium Plugins */}
       <div className="my-10 grid grid-cols-2 sm:grid-cols-3 gap-3 mx-5">
         {pluginsPremium.map((plugin) => (
-          <Plugin key={(plugin as any).id} plugin={plugin} />
+          <SPIGET key={(plugin as any).id} pluginData={plugin} />
         ))}
       </div>
       {/* Free Plugins */}
@@ -49,11 +49,11 @@ const Plugins = () => {
       </h1>
       <div className="my-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mx-5">
         {pluginsFree.map((plugin) => (
-          <Plugin key={(plugin as any).id} plugin={plugin} />
+          <SPIGET key={(plugin as any).id} pluginData={plugin} />
         ))}
       </div>
     </div>
   );
 };
 
-export default Plugins;
+export default SPIGETS;

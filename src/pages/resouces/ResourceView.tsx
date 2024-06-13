@@ -10,6 +10,8 @@ import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { Buffer } from "buffer";
+
 export default function ResourceView() {
   const { id } = useParams();
   const { user } = useUserContext();
@@ -18,6 +20,11 @@ export default function ResourceView() {
 
   async function getPlugin() {
     const pInfo = await resourceAPI.getOne(id);
+    if (pInfo.description) {
+      pInfo.description = Buffer.from(pInfo.description, "base64").toString(
+        "utf-8"
+      );
+    }
     setResourceInfo(pInfo);
     setLoading(false);
   }
@@ -29,7 +36,7 @@ export default function ResourceView() {
 
   if (loading) return <Loading />;
   if (resource === null) return <>Error!</>;
-  // console.log(pluginInfo);
+  // console.log(user?._id, resource.authorID._id);
 
   return (
     <div className="w-full my-2">

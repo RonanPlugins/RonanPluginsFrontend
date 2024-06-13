@@ -28,6 +28,7 @@
     "@tiptap/starter-kit": "^2.4.0",
     "@types/react-color": "^3.0.12",
     "axios": "^1.6.8",
+    "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",

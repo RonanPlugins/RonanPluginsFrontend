@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import resourceAPI from "@/api/resource";
 import Links from "@/lib/Links";
+import { EditSpigot } from "@/components/profile/EditSpigot";
 
 export default function Profile() {
   const { user }: { user: any } = useUserContext();
@@ -17,7 +18,7 @@ export default function Profile() {
 
   async function getResources() {
     const posts = await resourceAPI.getUser(user?._id);
-    console.log("response", posts);
+    // console.log(posts);
     setResources(posts);
     setLoading(false);
   }
@@ -36,6 +37,9 @@ export default function Profile() {
       </h1>
 
       <div className="text-center">
+        {/* <Button className="mb-2 mx-1" onClick={() => naviage("./settings")}>
+          Settings
+        </Button> */}
         {user.role >= PERMISSION.CREATOR && (
           <Button
             className="mb-2 mx-1"
@@ -51,15 +55,20 @@ export default function Profile() {
         )}
       </div>
 
-      <div className="resourceContainer">
-        <h2 className="text-secondary-foreground text-3xl text-left">
-          Resources from {user.name}
-        </h2>
-        <div className="resources">
-          {resources &&
-            resources.map((resource) => (
-              <ResourcePreview key={resource._id} resource={resource} />
-            ))}
+      <div className="w-full">
+        <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
+          <div className="resourceContainer max-w-4xl grow mr-2 w-full">
+            <h2 className="text-secondary-foreground text-3xl text-left">
+              Resources from {user.name}
+            </h2>
+            <div className="resources">
+              {resources &&
+                resources.map((resource) => (
+                  <ResourcePreview key={resource._id} resource={resource} />
+                ))}
+            </div>
+          </div>
+          <EditSpigot />
         </div>
       </div>
     </div>

@@ -13,19 +13,20 @@ export default function ResourcePreview({ resource }: { resource: any }) {
   // console.log(resource);
   return (
     <div className="p-2 flex flex-row">
-      <Link to={`./${resource._id}`}>
+      <Link to={`../resource/${resource._id}`}>
         <ResourceImage image={resource.image} />
       </Link>
       <div className="ml-2 grid">
         <div className="flex">
-          <h3 className="text-primary font-bold hover:text-secondary-foreground hover:underline">
-            <Link to={`../resource/${resource._id}`}>{resource.title}</Link>
-          </h3>
-
-          <p className="mx-2 text-secondary-foreground/80 text-sm my-auto hover:underline">
-            <Link to={`../user/${resource.authorID?._id}`}>
-              by {resource.authorID?.name}
-            </Link>
+          <p>
+            <span className="text-primary text-lg font-bold hover:text-secondary-foreground hover:underline">
+              <Link to={`../resource/${resource._id}`}>{resource.title}</Link>
+            </span>
+            <span className="mx-2 text-secondary-foreground/80 text-sm my-auto font-normal no-underline hover:underline">
+              <Link to={`../user/${resource.authorID?._id}`}>
+                by {resource.authorID?.name}
+              </Link>
+            </span>
           </p>
         </div>
         <p className="">{resource.tagLine}</p>
