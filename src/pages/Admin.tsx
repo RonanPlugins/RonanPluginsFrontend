@@ -1,6 +1,5 @@
 import memberAPI from "@/api/member";
 import Loading from "@/components/common/Loading";
-import ResourceImage from "@/components/resource/ResourceImage";
 import {
   TooltipProvider,
   Tooltip,
@@ -11,6 +10,7 @@ import { Clock8 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import date from "../utils/date";
+import Image from "@/components/common/Image";
 
 export default function Admin() {
   const [users, setUsers] = useState<any[] | null>(null);
@@ -32,7 +32,7 @@ export default function Admin() {
         {users?.map((user) => {
           return (
             <div className="p-2 flex flex-row">
-              <ResourceImage url={user.avatarURL} />
+              <Image url={user.avatarURL} />
               <div className="ml-2 grid">
                 <h3 className="text-primary font-bold hover:text-secondary-foreground hover:underline">
                   <Link to={`../user/${user._id}`}>{user.name}</Link>

@@ -19,8 +19,8 @@ export default function getDate(str: string) {
   if (diffMinutes >= 2) {
     return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
   }
-  const diffSeconds = Math.floor((diffTime / 1000) % 60);
-  return `${diffSeconds} seconds ago`;
+  // const diffSeconds = Math.floor((diffTime / 1000) % 60);
+  return `few moments ago`;
   // console.log(diffDays + " days");
   // console.log(diffHours + " hours");
   // console.log(diffMinutes + " minutes");

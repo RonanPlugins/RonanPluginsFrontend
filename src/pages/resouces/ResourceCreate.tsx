@@ -26,6 +26,9 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
+const MAX_JAR_SIZE = 50000000;
+const ACCEPTED_JAR_TYPES = [".jar", ".zip"];
+
 const formSchema = z.object({
   title: z.string().min(3, {
     message: "Title must be at least 3 characters",
@@ -48,11 +51,14 @@ export default function PostCreate() {
   //Resource Image
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  //Resource Jar
+  const [selectedJar, setSelectedJar] = useState<File | null>(null);
   //Errors
   const [descriptionError, setDescriptionError] = useState<string | null>(null);
   const [selectedImageError, setSelectedImageError] = useState<string | null>(
     null
   );
+  const [selectedJarError, setSelectedJarError] = useState<string | null>(null);
   const navigate = useNavigate();
   //Form defaults
   const form = useForm({
@@ -74,6 +80,12 @@ export default function PostCreate() {
     } else {
       setSelectedImageError(null);
     }
+    const jarError = validateJar(selectedJar);
+    if (jarError) {
+      return setSelectedJarError(jarError);
+    } else {
+      setSelectedJarError(null);
+    }
     if (!description) {
       return setDescriptionError("Please provide a description");
     } else {
@@ -90,6 +102,7 @@ export default function PostCreate() {
           linkSupport: formData.link_support,
           description,
           image: imageFile,
+          jar: selectedJar,
           version: formData.version,
         })
         .then((data: any) => {
@@ -222,10 +235,11 @@ export default function PostCreate() {
             )}
           />
 
-          <div className="w-[200px] h-[200px] border-2 bg-slate-200">
+          <div className="w-[200px] h-[200px] border-2 object-contain bg-slate-200">
             {previewImage && <img src={previewImage} alt="Selected" />}
           </div>
 
+          {/* Resource Image */}
           <FormItem>
             <FormLabel>Resource Image</FormLabel>
             <FormControl>
@@ -239,6 +253,23 @@ export default function PostCreate() {
             </FormControl>
             {selectedImageError !== null && (
               <FormMessage>{selectedImageError}</FormMessage>
+            )}
+          </FormItem>
+
+          {/* Resource File */}
+          <FormItem>
+            <FormLabel>Upload Your Resource</FormLabel>
+            <FormControl>
+              <Input
+                type="file"
+                accept=".zip,.jar"
+                onChange={(e) => {
+                  setSelectedJar(e.target.files?.[0] || null);
+                }}
+              />
+            </FormControl>
+            {selectedJarError !== null && (
+              <FormMessage>{selectedJarError}</FormMessage>
             )}
           </FormItem>
 
@@ -269,6 +300,23 @@ function validateImage(image: File | null): string | null {
     }
   }
   return null;
+}
+
+function validateJar(jar: File | null): string | null {
+  if (!jar) {
+    return "Please select a file";
+  } else {
+    if (!(jar.size <= MAX_JAR_SIZE)) {
+      return `Max file size exceeded (${(jar.size / 1000000).toFixed(
+        2
+      )}MB / 50MB)`;
+    } else {
+      for (const type of ACCEPTED_JAR_TYPES) {
+        if (jar.name.endsWith(type)) return null;
+      }
+      return "Only .zip, .jar formats are supported";
+    }
+  }
 }
 
 async function downsizeImage(file: any, callback: any) {

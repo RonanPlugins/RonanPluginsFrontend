@@ -7,7 +7,7 @@ import memberAPI from "@/api/member";
 import { useUserContext } from "@/context/UserContext";
 
 export default function ProfileOther() {
-  const { user } = useUserContext();
+  const { user }: { user: any } = useUserContext();
   const [userProfile, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);

@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/UserContext";
 import Links from "@/lib/Links";
-import { Code, User, Zap } from "lucide-react";
+import {
+  BadgeJapaneseYenIcon,
+  CircleDollarSign,
+  Component,
+  Download,
+  JoystickIcon,
+  Server,
+  StarsIcon,
+  UserCheck2,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -13,18 +22,19 @@ export default function Home() {
           <div className="w-full space-y-6">
             <header className="font-bold text-3xl md:text-4xl lg:text-6xl text-center md:text-left">
               <h1 className="font-light">RonanPlugins</h1>
-              <p>Where creativity meets</p>
-              <p className="text-blue-400">functionality</p>
+              <p>Where creators meet</p>
+              <p className="text-blue-400">developers</p>
             </header>
             <div className="py-4 text-center md:text-left flex md:inline-block flex-wrap space-y-2">
-              {!isLoggedIn() && (
-                <a className="grow w-full md:w-0" href="./login">
+              <div className="grow w-full md:w-0">
+                <Link to={Links.Resources}>
                   <Button className="rounded-full md:ml-0 w-full max-w-xl md:w-fit md:mr-2">
-                    Login
+                    Browse Marketplace
                   </Button>
-                </a>
-              )}
-              <a className="grow w-full md:w-0" href="./login">
+                </Link>
+              </div>
+
+              <div className="grow w-full md:w-0">
                 <Link to={Links.Discord}>
                   <Button
                     className="rounded-full w-full max-w-xl md:w-fit"
@@ -33,7 +43,7 @@ export default function Home() {
                     Join Our Discord
                   </Button>
                 </Link>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -45,12 +55,12 @@ export default function Home() {
           src="./assets/homethingy.png"
         ></img>
       </div>
-      <div className="pt-20 bg-gray-100 dark:bg-secondary w-full flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
+      <div className="pt-20 bg-gray-100 dark:bg-secondary w-full p-2 flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
         {Features.map((feature) => {
           return (
             <div
               key={feature.Title}
-              className="w-[200px] text-[#232f3e80] dark:text-primary"
+              className="w-[220px] text-[#232f3e80] dark:text-primary"
             >
               <div className="text-[#4ECDC4] flex align-middle justify-center">
                 {feature.Icon}
@@ -67,20 +77,37 @@ export default function Home() {
 
 const Features = [
   {
-    Icon: <Zap size="50" />,
-    Title: "Well optimized",
-    Description: "All our plugins are designed with optimization in mind.",
+    Icon: <UserCheck2 size="50" />,
+    Title: "Cherry Picked",
+    Description: (
+      <p>
+        Our hand selected list of developers guarantee our resources/plugins are
+        the best in the market!
+      </p>
+    ),
   },
   {
-    Icon: <Code size="50" />,
-    Title: "Customizable",
-    Description:
-      "All plugins comes with it’s own config.yml to make it suit your needs",
+    Icon: <StarsIcon size="50" />,
+    Title: "Support Your Favorites",
+    Description: (
+      <p>Able to support your developer repeatedly with flexible plans.</p>
+    ),
   },
   {
-    Icon: <User size="50" />,
-    Title: "Fast support",
-    Description:
-      "We have a discord with over 1.000 members ready to help you whenever you need!",
+    Icon: <CircleDollarSign size="50" />,
+    Title: "Flexible Plans",
+    Description: <p>Purchase one resource, or a creators full library!</p>,
+  },
+  {
+    Icon: <Download size="50" />,
+    Title: "Guaranteed Updates",
+    Description: (
+      <p>Resource updates always available until your subscription ends!</p>
+    ),
+  },
+  {
+    Icon: <Component size="50" />,
+    Title: "Are You a Creator?",
+    Description: <p>Join our team and start publishing resources!</p>,
   },
 ];

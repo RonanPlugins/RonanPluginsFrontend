@@ -1,22 +1,28 @@
+import { useEffect, useState } from "react";
+
+import resourceAPI from "@/api/resource";
+import Loading from "../common/Loading";
+import Image from "../common/Image";
+
 export default function ResourceImage({
-  image,
+  id,
   className,
-  url,
 }: {
-  image?: any;
+  id: string;
   className?: string;
-  url?: string;
 }) {
-  return (
-    <img
-      className={`rounded-md max-h-[80px] max-w-[80px]` + className}
-      src={
-        !url
-          ? `${import.meta.env.VITE_IMAGES_URL}${
-              image ? `plugins/${image}` : `notavailable.png`
-            }`
-          : url
-      }
-    />
-  );
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    resourceAPI.getIcon(id).then((data) => {
+      setImage(data);
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) return <Loading />;
+
+  return <Image className={className} url={image} />;
 }

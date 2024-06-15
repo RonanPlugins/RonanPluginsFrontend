@@ -8,7 +8,7 @@ const initialState = {
   logout: () => {},
   userLoaded: false,
   isAdmin: false,
-  isCreator: false,
+  isDeveloper: false,
 };
 
 const UserContext = createContext(initialState);
@@ -21,7 +21,7 @@ export default function UserProvider({ children }: { children: any }) {
   const [user, setUser] = useState(null);
   const [userLoaded, setUserLoaded] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
-  const [isCreator, setCreator] = useState(false);
+  const [isDeveloper, setDeveloper] = useState(false);
 
   const isLoggedIn = () => {
     return user !== null;
@@ -38,7 +38,7 @@ export default function UserProvider({ children }: { children: any }) {
       if (data) {
         setUser(data);
         setAdmin(data.role === PERMISSION.ADMIN);
-        setCreator(data.role >= PERMISSION.CREATOR);
+        setDeveloper(data.role >= PERMISSION.CREATOR);
       }
       setUserLoaded(true);
     };
@@ -47,7 +47,7 @@ export default function UserProvider({ children }: { children: any }) {
 
   return (
     <UserContext.Provider
-      value={{ user, isLoggedIn, logout, userLoaded, isAdmin, isCreator }}
+      value={{ user, isLoggedIn, logout, userLoaded, isAdmin, isDeveloper }}
     >
       {children}
     </UserContext.Provider>

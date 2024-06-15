@@ -14,7 +14,7 @@ export default function ResourcePreview({ resource }: { resource: any }) {
   return (
     <div className="p-2 flex flex-row">
       <Link to={`../resource/${resource._id}`}>
-        <ResourceImage image={resource.image} />
+        <ResourceImage id={resource.image} />
       </Link>
       <div className="ml-2 grid">
         <div className="flex">

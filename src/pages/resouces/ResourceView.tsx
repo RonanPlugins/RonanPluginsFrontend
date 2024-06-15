@@ -3,18 +3,17 @@ import Loading from "@/components/common/Loading";
 import ResourceEditTools from "@/components/resource/ResourceEditTools";
 import ResourceImage from "@/components/resource/ResourceImage";
 import TextEditor from "@/components/textEditor/TextEditor";
-import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { useUserContext } from "@/context/UserContext";
-import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Buffer } from "buffer";
+import ResourceDownload from "@/components/resource/ResourceDownload";
 
 export default function ResourceView() {
   const { id } = useParams();
-  const { user } = useUserContext();
+  const { user }: { user: any } = useUserContext();
   const [loading, setLoading] = useState(true);
   const [resource, setResourceInfo] = useState<any | null>(null);
 
@@ -47,7 +46,7 @@ export default function ResourceView() {
             <div className="flex flex-row">
               <ResourceImage
                 className="max-h-[120px] max-w-[120px] mr-2"
-                image={resource.image}
+                id={resource.image}
               />
               <div className="flex flex-row w-full">
                 <div className="flex flex-col">
@@ -56,10 +55,11 @@ export default function ResourceView() {
                   </h3>
                   <p className="text-base font-normal">{resource.tagLine}</p>
                 </div>
-                <Button className="ml-auto my-auto">
-                  <Download className="mr-2" size={20} />
-                  Download {resource.version}
-                </Button>
+                <ResourceDownload
+                  name={resource.title}
+                  version={resource.version}
+                  id={resource.jar}
+                />
               </div>
             </div>
           </CardTitle>

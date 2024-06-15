@@ -61,6 +61,32 @@ export default {
         return null;
       });
   },
+  getIcon(id: string): Promise<any> {
+    return client
+      .get(`/resource/file/${id}`, {
+        responseType: "blob",
+      })
+      .then(({ data }) => {
+        return URL.createObjectURL(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
+  getJar(id: string): Promise<any> {
+    return client
+      .get(`/resource/file/${id}`, {
+        responseType: "blob",
+      })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
 };
 
 interface FilterParams {

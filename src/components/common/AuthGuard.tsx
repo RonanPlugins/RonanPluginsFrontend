@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import { PERMISSION } from "@/utils/PERMISSION";
 
 export default function AuthGuard({ role }: { role?: any }) {
-  const { isLoggedIn, userLoaded, isAdmin, isCreator } = useUserContext();
+  const { isLoggedIn, userLoaded, isAdmin, isDeveloper } = useUserContext();
 
   //Loading
   if (!userLoaded) return <Loading />;
@@ -13,7 +13,7 @@ export default function AuthGuard({ role }: { role?: any }) {
   //Permission
   if (role === PERMISSION.ADMIN && !isAdmin)
     return <Navigate to="/home" replace />;
-  if (role === PERMISSION.CREATOR && !isCreator)
+  if (role === PERMISSION.CREATOR && !isDeveloper)
     return <Navigate to="/home" replace />;
   //Passed all...
   return <Outlet />;
