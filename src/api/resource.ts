@@ -4,7 +4,7 @@ export default {
   create(resourceInfo: any): Promise<any> {
     console.log("New Create Resource Request", resourceInfo);
     return client
-      .post(`/resource/create`, resourceInfo)
+      .post(`/resource`, resourceInfo)
       .then(({ data }) => {
         //console.log("POST", data);
         return data;
@@ -17,7 +17,20 @@ export default {
   edit(id: number, info: any): Promise<any> {
     console.log("Edit Resource Request", id, info);
     return client
-      .post(`/resource/edit/${id}`, info)
+      .put(`/resource/${id}`, info)
+      .then(({ data }) => {
+        //console.log("POST", data);
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
+  delete(id: number): Promise<any> {
+    console.log("Delete Resource Request", id);
+    return client
+      .delete(`/resource/${id}`)
       .then(({ data }) => {
         //console.log("POST", data);
         return data;
@@ -29,7 +42,7 @@ export default {
   },
   getOne(resourceId: string | undefined): Promise<any> {
     return client
-      .get(`/resource/get/${resourceId}`)
+      .get(`/resource/${resourceId}`)
       .then(({ data }) => {
         //console.log("POST", data);
         return data;
@@ -41,7 +54,7 @@ export default {
   },
   getAll(filter?: FilterParams): Promise<any> {
     return client
-      .get(`/resource/get`, { responseType: "json", params: { ...filter } })
+      .get(`/resource`, { responseType: "json", params: { ...filter } })
       .then(({ data }) => {
         return data;
       })

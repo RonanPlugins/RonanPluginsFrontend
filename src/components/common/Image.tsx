@@ -1,12 +1,14 @@
 export default function Image({
   image,
   url,
+  classname,
 }: {
   image?: any;
   url?: string | null;
+  classname?: string;
 }) {
   return (
-    <div className={`h-[80px] w-[80px] object-contain my-auto`}>
+    <div className={`h-[80px] w-[80px] object-contain my-auto ${classname}`}>
       <img
         src={
           !url

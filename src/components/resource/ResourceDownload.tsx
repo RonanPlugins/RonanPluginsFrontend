@@ -8,10 +8,12 @@ export default function ResourceDownload({
   version,
   id,
   name,
+  classname,
 }: {
   version: string;
   id: string;
   name: string;
+  classname?: string;
 }) {
   const [downloading, setDownloading] = useState(false);
 
@@ -32,7 +34,7 @@ export default function ResourceDownload({
 
   return (
     <Button
-      className="ml-auto my-auto"
+      className={classname}
       disabled={downloading}
       onClick={handleDownload}
     >

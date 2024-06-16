@@ -10,10 +10,11 @@ import { useParams } from "react-router-dom";
 
 import { Buffer } from "buffer";
 import ResourceDownload from "@/components/resource/ResourceDownload";
+import ResourceDelete from "@/components/resource/ResourceDelete";
 
 export default function ResourceView() {
   const { id } = useParams();
-  const { user }: { user: any } = useUserContext();
+  const { user, isAdmin }: { user: any; isAdmin: boolean } = useUserContext();
   const [loading, setLoading] = useState(true);
   const [resource, setResourceInfo] = useState<any | null>(null);
 
@@ -46,7 +47,7 @@ export default function ResourceView() {
           <CardTitle className="py-2 mx-2">
             <div className="flex flex-col-reverse lg:flex-row">
               <div className="flex flex-row">
-                <ResourceImage id={resource.image} />
+                <ResourceImage classname="mr-2" id={resource.image} />
                 <div className="flex flex-row w-full">
                   <div className="flex flex-col">
                     <h3 className="text-primary font-bold text-2xl md:text-3xl">
@@ -56,11 +57,15 @@ export default function ResourceView() {
                   </div>
                 </div>
               </div>
-              <ResourceDownload
-                name={resource.title}
-                version={resource.version}
-                id={resource.jar}
-              />
+              <div className="flex flex-row lg:flex-col ml-auto my-auto space-x-2 lg:space-y-2 lg:space-x-0">
+                <ResourceDownload
+                  classname="mx-auto my-auto"
+                  name={resource.title}
+                  version={resource.version}
+                  id={resource.jar}
+                />
+                {isAdmin && <ResourceDelete resource={resource} />}
+              </div>
             </div>
           </CardTitle>
           {/* Body of plugin data */}
@@ -73,7 +78,7 @@ export default function ResourceView() {
           </section>
         </Card>
         {user?._id === resource.authorID._id && (
-          <div className="w-full md:w-96">
+          <div className="w-full lg:w-96">
             <ResourceEditTools resource={resource} />
           </div>
         )}

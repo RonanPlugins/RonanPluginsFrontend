@@ -4,7 +4,13 @@ import resourceAPI from "@/api/resource";
 import Loading from "../common/Loading";
 import Image from "../common/Image";
 
-export default function ResourceImage({ id }: { id: string }) {
+export default function ResourceImage({
+  id,
+  classname,
+}: {
+  id: string;
+  classname?: string;
+}) {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,5 +24,5 @@ export default function ResourceImage({ id }: { id: string }) {
 
   if (loading) return <Loading />;
 
-  return <Image url={image} />;
+  return <Image classname={classname} url={image} />;
 }
