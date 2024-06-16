@@ -1,7 +1,7 @@
 import resourceAPI from "@/api/resource";
 import Loading from "@/components/common/Loading";
 import { useEffect, useState } from "react";
-import ResourcePreview from "@/components/resource/ResourcePreview";
+import { ResourcePreview } from "@/components/resource/Preview";
 import { FILTERBY, getTitle } from "@/utils/FILTERBY";
 import {
   Select,
@@ -12,15 +12,16 @@ import {
 } from "@/components/ui/select";
 import Pagination from "@/components/common/Pagination";
 import { useSearchParams } from "react-router-dom";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-export default function Resources() {
+export function Resources() {
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
   //Filters
   const [sort, setSort] = useState<string>(FILTERBY.LAST_UPDATE);
-  const perPage = 20;
+  const perPage = 10;
   const [page, setPage] = useState<number>(
     Number(searchParams.get("page")) || 0
   );
@@ -51,43 +52,57 @@ export default function Resources() {
   if (loading) return <Loading />;
 
   return (
-    <div className="resourceContainer my-2">
-      {/* Title/Filter */}
-      <div className="flex flex-row">
-        <h1 className="">Resources</h1>
-        <div className="flex flex-row ml-auto mb-2">
-          <p className="my-auto mr-2">Sort By:</p>
-          <Select onValueChange={setSort} value={sort}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {Object.values(FILTERBY).map((filter) => (
-                <SelectItem key={filter} value={filter}>
-                  {getTitle(filter)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+    <div className="max-w-6xl mx-auto flex lg:flex-row flex-col space-x-2 mt-2">
+      <div className="w-full lg:w-96">
+        {/* Title/Filter */}
+        <Card>
+          <CardHeader>
+            <h2 className="font-bold">Sort By</h2>
+          </CardHeader>
+          <CardContent>
+            <Select onValueChange={setSort} value={sort}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(FILTERBY).map((filter) => (
+                  <SelectItem key={filter} value={filter}>
+                    {getTitle(filter)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </CardContent>
+          <CardHeader>
+            <h2 className="font-bold">Categories</h2>
+          </CardHeader>
+          <CardContent>
+            <p>Chat</p>
+          </CardContent>
+        </Card>
       </div>
+
       {/* Resources */}
-      <div className="resources">
-        {resources &&
-          resources.map((resource) => (
-            <ResourcePreview key={resource._id} resource={resource} />
-          ))}
+      <div className="max-w-4xl lg:max-w-6xl grid space-y-2">
+        <div className="resources">
+          {resources &&
+            resources.map((resource) => (
+              <div className="resource">
+                <ResourcePreview key={resource._id} resource={resource} />
+              </div>
+            ))}
+        </div>
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <Pagination
+            startPage={page + 1}
+            totalPages={totalPages}
+            onPageChange={(page) => {
+              setPage(page - 1);
+            }}
+          />
+        )}
       </div>
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <Pagination
-          startPage={page + 1}
-          totalPages={totalPages}
-          onPageChange={(page) => {
-            setPage(page - 1);
-          }}
-        />
-      )}
     </div>
   );
 }

@@ -5,23 +5,23 @@ import { Button } from "../ui/button";
 import Links from "@/lib/Links";
 import { PERMISSION } from "@/utils/PERMISSION";
 
-export default function SideBar_Developer({ classname }: { classname: any }) {
+export default function SideBar_Developer() {
   const { user }: { user: any } = useUserContext();
   const naviage = useNavigate();
   return (
-    <div className={`${classname}`}>
-      <div className="my-2 md:mt-0 text-center flex flex-row justify-center">
+    <>
+      <div className="text-center grid grid-cols-2 place-items-stretch space-x-2">
         {/* <Button className="mb-2 mx-1" onClick={() => naviage("./settings")}>
           Settings
         </Button> */}
         {user.role >= PERMISSION.CREATOR && (
-          <Button className="mx-1" onClick={() => naviage(Links.ResourceNew)}>
+          <Button className="" onClick={() => naviage(Links.ResourceNew)}>
             New Resource
           </Button>
         )}
         {user.role >= PERMISSION.ADMIN && (
           <Button
-            className="mx-1"
+            className=""
             variant="destructive"
             onClick={() => naviage("../admin")}
           >
@@ -30,6 +30,6 @@ export default function SideBar_Developer({ classname }: { classname: any }) {
         )}
       </div>
       <EditSpigot />
-    </div>
+    </>
   );
 }

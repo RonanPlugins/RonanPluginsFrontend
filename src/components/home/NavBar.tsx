@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ModeToggle } from "../ModeToggle";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
@@ -7,19 +7,11 @@ import { useEffect, useState } from "react";
 import NavItem from "./NavItem";
 import LoginDialog from "../common/LoginDialog";
 import { useUserContext } from "@/context/UserContext";
-import api from "@/api";
 import Links from "@/lib/Links";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
-  const { isLoggedIn, logout, user } = useUserContext();
-  const navigate = useNavigate();
-
-  const logoutHandler = async () => {
-    logout();
-    await api.logout();
-    navigate("/home");
-  };
+  const { isLoggedIn, user } = useUserContext();
 
   const location = useLocation();
   useEffect(() => {
@@ -75,10 +67,13 @@ export default function Nav() {
             <div className="flex gap-4 items-center font-medium">
               {isLoggedIn() ? (
                 <>
-                  <img src={user?.avatarURL} className="rounded h-10" />
-
+                  <Link to={Links.Profile}>
+                    <img
+                      src={user?.avatarURL}
+                      className="rounded h-10 hover:ring-4"
+                    />
+                  </Link>
                   <NavItem link={Links.Profile} title={"Profile"} />
-                  <Button onClick={logoutHandler}>Logout</Button>
                 </>
               ) : (
                 <LoginDialog />

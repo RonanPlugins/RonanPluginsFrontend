@@ -4,7 +4,8 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import fileDownload from "js-file-download";
 import { extension } from "mime-types";
-export default function ResourceDownload({
+
+export function ResourceDownload({
   version,
   id,
   name,

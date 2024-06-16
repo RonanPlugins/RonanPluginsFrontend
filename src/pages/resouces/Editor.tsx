@@ -30,7 +30,7 @@ const formSchema = z.object({
   link_source: z.string().optional(),
 });
 
-export default function ResourceEdit() {
+export function ResourceEdit() {
   const { id } = useParams();
   const [posting, setPosting] = useState<boolean>(false);
   const [description, setDescription] = useState<string>();

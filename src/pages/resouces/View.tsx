@@ -1,18 +1,19 @@
 import resourceAPI from "@/api/resource";
 import Loading from "@/components/common/Loading";
-import ResourceEditTools from "@/components/resource/ResourceEditTools";
-import ResourceImage from "@/components/resource/ResourceImage";
+import { ResourceSidebar } from "@/components/resource/Sidebar";
+import { ResourceImage } from "@/components/resource/Image";
 import TextEditor from "@/components/textEditor/TextEditor";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Buffer } from "buffer";
-import ResourceDownload from "@/components/resource/ResourceDownload";
-import ResourceDelete from "@/components/resource/ResourceDelete";
+import { ResourceDownload } from "@/components/resource/Download";
+import { ResourceDelete } from "@/components/resource/Delete";
+import { ResourceMenuBar } from "@/components/resource/Menubar";
 
-export default function ResourceView() {
+export function ResourceView() {
   const { id } = useParams();
   const { user, isAdmin }: { user: any; isAdmin: boolean } = useUserContext();
   const [loading, setLoading] = useState(true);
@@ -40,11 +41,15 @@ export default function ResourceView() {
   // console.log(user?._id, resource.authorID._id);
 
   return (
-    <div className="w-full my-2">
-      <div className="max-w-4xl lg:max-w-6xl mx-auto flex lg:flex-row flex-col">
-        <Card className="max-w-4xl grow mr-2 w-full">
+    <div className="max-w-6xl my-2 mx-auto flex lg:flex-row flex-col space-x-2">
+      <div className="w-full lg:w-96">
+        <ResourceSidebar resource={resource} />
+      </div>
+      <div className="w-full lg:max-w-4xl">
+        <Card className=" grow">
           {/* Plugin Header */}
-          <CardTitle className="py-2 mx-2">
+          <CardHeader>
+            {/* <ResourceMenuBar resource={resource} /> */}
             <div className="flex flex-col-reverse lg:flex-row">
               <div className="flex flex-row">
                 <ResourceImage classname="mr-2" id={resource.image} />
@@ -67,21 +72,14 @@ export default function ResourceView() {
                 {isAdmin && <ResourceDelete resource={resource} />}
               </div>
             </div>
-          </CardTitle>
-          {/* Body of plugin data */}
-          <section className="mx-2 pb-2">
-            <TextEditor
-              className="p-2"
-              content={resource.description}
-              canEdit={false}
-            />
-          </section>
+          </CardHeader>
+          <CardContent className="py-2 mx-2">
+            {/* Body of plugin data */}
+            <body className="border-t-4">
+              <TextEditor content={resource.description} canEdit={false} />
+            </body>
+          </CardContent>
         </Card>
-        {user?._id === resource.authorID._id && (
-          <div className="w-full lg:w-96">
-            <ResourceEditTools resource={resource} />
-          </div>
-        )}
       </div>
       {/* <div dangerouslySetInnerHTML={{ __html: resource.description }} /> */}
     </div>

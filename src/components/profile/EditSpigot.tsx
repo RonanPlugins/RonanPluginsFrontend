@@ -44,7 +44,7 @@ export function EditSpigot() {
   }
 
   return (
-    <Card className="">
+    <Card>
       <CardHeader>
         <CardTitle>Spigot</CardTitle>
         <CardDescription>

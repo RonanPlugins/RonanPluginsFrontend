@@ -1,5 +1,5 @@
 import Loading from "@/components/common/Loading";
-import ResourcePreview from "@/components/resource/ResourcePreview";
+import { ResourcePreview } from "@/components/resource/Preview";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import resourceAPI from "@/api/resource";
@@ -8,7 +8,7 @@ import { useUserContext } from "@/context/UserContext";
 
 export default function ProfileOther() {
   const { user }: { user: any } = useUserContext();
-  const [userProfile, setUser] = useState({});
+  const [userProfile, setUser] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
   const { userID } = useParams();

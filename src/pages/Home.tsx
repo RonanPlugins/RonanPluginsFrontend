@@ -1,24 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { useUserContext } from "@/context/UserContext";
 import Links from "@/lib/Links";
-import Messages from "@/lib/Messages";
 import {
-  BadgeJapaneseYenIcon,
-  CircleDollarSign,
   Component,
-  Download,
   Gift,
-  JoystickIcon,
-  Server,
   StarsIcon,
-  Timer,
   TimerReset,
   UserCheck2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const { isLoggedIn } = useUserContext();
   return (
     <>
       <div className="columns-1 md:columns-2 min-h-[50vh]">

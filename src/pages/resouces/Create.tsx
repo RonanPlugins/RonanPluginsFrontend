@@ -43,7 +43,7 @@ const formSchema = z.object({
   }),
 });
 
-export default function ResourceCreate() {
+export function ResourceCreate() {
   //Are we posting this to the backend?
   const [posting, setPosting] = useState<boolean>(false);
   //Description state (read-only)

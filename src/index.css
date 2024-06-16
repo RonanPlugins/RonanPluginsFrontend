@@ -56,10 +56,10 @@
   body {
     @apply bg-background text-foreground;
   }
-  .resourceContainer {
-    @apply max-w-3xl mx-auto bg-gray-200 dark:bg-gray-800 rounded p-2;
+  .resource {
+    @apply bg-gray-200 dark:bg-primary-foreground p-2 rounded;
   }
   .resources {
-    @apply grid divide-y-2 divide-gray-400;
+    @apply mx-auto space-y-2 max-w-4xl;
   }
 }

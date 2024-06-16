@@ -3,13 +3,13 @@ import Home from "./Home.jsx";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Profile from "./Profile.tsx";
 import AuthGuard from "@/components/common/AuthGuard.tsx";
-import ResourceCreate from "./resouces/ResourceCreate.tsx";
-import ResourceView from "./resouces/ResourceView.tsx";
-import Resources from "./resouces/Resources.tsx";
+import { ResourceCreate } from "./resouces/Create.tsx";
+import { ResourceView } from "./resouces/View.tsx";
+import { Resources } from "./resouces/Resources.tsx";
 import Admin from "./Admin.tsx";
 import { PERMISSION } from "@/utils/PERMISSION.ts";
 import ProfileOther from "./ProfileOther.tsx";
-import ResourceEdit from "./resouces/ResourceEditor.tsx";
+import { ResourceEdit } from "./resouces/Editor.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([

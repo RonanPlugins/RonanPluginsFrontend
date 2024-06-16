@@ -4,7 +4,7 @@ import resourceAPI from "@/api/resource";
 import Loading from "../common/Loading";
 import Image from "../common/Image";
 
-export default function ResourceImage({
+export function ResourceImage({
   id,
   classname,
 }: {

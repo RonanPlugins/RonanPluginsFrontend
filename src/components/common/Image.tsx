@@ -10,6 +10,7 @@ export default function Image({
   return (
     <div className={`h-[80px] w-[80px] object-contain my-auto ${classname}`}>
       <img
+        className="rounded"
         src={
           !url
             ? `${import.meta.env.VITE_IMAGES_URL}${

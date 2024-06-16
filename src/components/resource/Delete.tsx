@@ -13,7 +13,7 @@ import {
 import resourceAPI from "@/api/resource";
 import { useNavigate } from "react-router-dom";
 
-export default function ResourceDelete({ resource }: { resource: any }) {
+export function ResourceDelete({ resource }: { resource: any }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 

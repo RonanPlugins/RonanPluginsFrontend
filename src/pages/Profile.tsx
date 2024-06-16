@@ -1,15 +1,19 @@
 import Loading from "@/components/common/Loading";
-import ResourcePreview from "@/components/resource/ResourcePreview";
+import { ResourcePreview } from "@/components/resource/Preview";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import resourceAPI from "@/api/resource";
-import SideBar_Developer from "@/components/profile/SideBar_Developer";
+import SideBar_Developer from "@/components/profile/DeveloperProfileButtons";
+import { useNavigate } from "react-router-dom";
+import api from "@/api";
+import { Button } from "@/components/ui/button";
 
 export default function Profile() {
-  const { user }: { user: any } = useUserContext();
+  const { user, logout }: { user: any; logout: any } = useUserContext();
 
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
+  const navigate = useNavigate();
 
   async function getResources() {
     const posts = await resourceAPI.getUser(user?._id);
@@ -17,6 +21,12 @@ export default function Profile() {
     setResources(posts);
     setLoading(false);
   }
+
+  const logoutHandler = async () => {
+    logout();
+    await api.logout();
+    navigate("/home");
+  };
 
   useEffect(() => {
     getResources();
@@ -34,17 +44,19 @@ export default function Profile() {
       <div className="w-full">
         <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
           <div className="resourceContainer max-w-4xl grow mr-2 w-full">
-            <h2 className="text-secondary-foreground text-3xl text-left">
-              Resources from {user.name}
-            </h2>
             <div className="resources">
               {resources &&
                 resources.map((resource) => (
-                  <ResourcePreview key={resource._id} resource={resource} />
+                  <div className="resource">
+                    <ResourcePreview key={resource._id} resource={resource} />
+                  </div>
                 ))}
             </div>
           </div>
-          <SideBar_Developer classname="max-w-2xl" />
+          <div className="max-w-2xl flex flex-col space-y-2 mx-2">
+            <Button onClick={logoutHandler}>Logout</Button>
+            <SideBar_Developer />
+          </div>
         </div>
       </div>
     </div>
