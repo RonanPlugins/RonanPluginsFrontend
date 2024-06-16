@@ -24,7 +24,7 @@ import profile from "@/api/profile";
 
 export function EditSpigot() {
   const { user }: { user: any } = useUserContext();
-  const [spigotID, setSpigotID] = useState(user.spigot.spigotID || "");
+  const [spigotID, setSpigotID] = useState(user.spigot?.spigotID || "");
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -52,7 +52,7 @@ export function EditSpigot() {
         </CardDescription>
       </CardHeader>
       <CardContent className="text-center">
-        {user.spigot.spigotID ? (
+        {user.spigot?.spigotID ? (
           <div>
             <div className="w-full border-2 rounded">{spigotID}</div>
             <Button className="mt-2" onClick={handleRetry}>
