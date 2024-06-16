@@ -14,7 +14,10 @@ export default function ProfileOther() {
   const { userID } = useParams();
   const navigate = useNavigate();
 
-  if (userID === user?._id) navigate("../profile");
+  useEffect(() => {
+    if (userID === user?._id) navigate("../profile");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function getResources() {
     const posts = await resourceAPI.getUser(`${userID}`);

@@ -1,17 +1,12 @@
 import Loading from "@/components/common/Loading";
 import ResourcePreview from "@/components/resource/ResourcePreview";
-import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/UserContext";
-import { PERMISSION } from "@/utils/PERMISSION";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import resourceAPI from "@/api/resource";
-import Links from "@/lib/Links";
-import { EditSpigot } from "@/components/profile/EditSpigot";
+import SideBar_Developer from "@/components/profile/SideBar_Developer";
 
 export default function Profile() {
   const { user }: { user: any } = useUserContext();
-  const naviage = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
@@ -36,25 +31,6 @@ export default function Profile() {
         Welcome Back {user.name}
       </h1>
 
-      <div className="text-center">
-        {/* <Button className="mb-2 mx-1" onClick={() => naviage("./settings")}>
-          Settings
-        </Button> */}
-        {user.role >= PERMISSION.CREATOR && (
-          <Button
-            className="mb-2 mx-1"
-            onClick={() => naviage(Links.ResourceNew)}
-          >
-            New Resource
-          </Button>
-        )}
-        {user.role >= PERMISSION.ADMIN && (
-          <Button className="mb-2 mx-1" onClick={() => naviage("../admin")}>
-            Admin Portal
-          </Button>
-        )}
-      </div>
-
       <div className="w-full">
         <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
           <div className="resourceContainer max-w-4xl grow mr-2 w-full">
@@ -68,7 +44,7 @@ export default function Profile() {
                 ))}
             </div>
           </div>
-          <EditSpigot />
+          <SideBar_Developer classname="max-w-2xl" />
         </div>
       </div>
     </div>

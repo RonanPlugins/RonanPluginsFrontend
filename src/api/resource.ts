@@ -14,6 +14,19 @@ export default {
         return null;
       });
   },
+  edit(id: number, info: any): Promise<any> {
+    console.log("Edit Resource Request", id, info);
+    return client
+      .post(`/resource/edit/${id}`, info)
+      .then(({ data }) => {
+        //console.log("POST", data);
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
   getOne(resourceId: string | undefined): Promise<any> {
     return client
       .get(`/resource/get/${resourceId}`)
@@ -70,7 +83,7 @@ export default {
         return URL.createObjectURL(data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         return null;
       });
   },
@@ -83,7 +96,7 @@ export default {
         return data;
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         return null;
       });
   },

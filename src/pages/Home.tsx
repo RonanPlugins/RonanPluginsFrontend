@@ -1,14 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/UserContext";
 import Links from "@/lib/Links";
+import Messages from "@/lib/Messages";
 import {
   BadgeJapaneseYenIcon,
   CircleDollarSign,
   Component,
   Download,
+  Gift,
   JoystickIcon,
   Server,
   StarsIcon,
+  Timer,
+  TimerReset,
   UserCheck2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -90,24 +94,33 @@ const Features = [
     Icon: <StarsIcon size="50" />,
     Title: "Support Your Favorites",
     Description: (
-      <p>Able to support your developer repeatedly with flexible plans.</p>
+      <p>Able to support your Developer repeatedly, promoting longevity</p>
     ),
   },
   {
-    Icon: <CircleDollarSign size="50" />,
-    Title: "Flexible Plans",
-    Description: <p>Purchase one resource, or a creators full library!</p>,
+    Icon: <Gift size="50" />,
+    Title: "Package Deals",
+    Description: (
+      <p>
+        Purchase a Developers full library of resources at a compelling
+        discount!
+      </p>
+    ),
   },
   {
-    Icon: <Download size="50" />,
-    Title: "Guaranteed Updates",
+    Icon: <TimerReset size="50" />,
+    Title: "Promoting Longevity",
     Description: (
-      <p>Resource updates always available until your subscription ends!</p>
+      <p>
+        Developers won't abandon projects easily if it hurts their revenue.
+        Recurring support promotes long-term the plugins you love, at a very low
+        price!
+      </p>
     ),
   },
   {
     Icon: <Component size="50" />,
-    Title: "Are You a Creator?",
+    Title: "Are You a Developer?",
     Description: <p>Join our team and start publishing resources!</p>,
   },
 ];

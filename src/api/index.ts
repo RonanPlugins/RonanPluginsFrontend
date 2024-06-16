@@ -3,7 +3,7 @@ import { client } from "./axiosClient";
 export default {
   async loginDiscord() {
     // const params = new URLSearchParams({ username, password });
-    window.open(`${import.meta.env.VITE_API_URL}/auth/discord`);
+    location.replace(`${import.meta.env.VITE_API_URL}/auth/discord`);
     // return client.get(`/auth/discord`);
   },
   async logout() {

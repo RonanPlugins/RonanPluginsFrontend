@@ -36,14 +36,14 @@ const formSchema = z.object({
   summary: z.string().min(1, {
     message: "Please provide a summary",
   }),
-  link_support: z.string(),
-  link_source: z.string(),
+  link_support: z.string().optional(),
+  link_source: z.string().optional(),
   version: z.string().min(1, {
     message: "Please provide a version id",
   }),
 });
 
-export default function PostCreate() {
+export default function ResourceCreate() {
   //Are we posting this to the backend?
   const [posting, setPosting] = useState<boolean>(false);
   //Description state (read-only)
@@ -109,6 +109,7 @@ export default function PostCreate() {
           if (data) {
             navigate(`/resource/${data._id}`);
           } else {
+            setPosting(false);
             setDescriptionError("An error has occured!");
           }
         });
@@ -275,7 +276,7 @@ export default function PostCreate() {
 
           <div className="flex justify-center">
             <Button className="w-[200px] " type="submit">
-              {/* disabled={posting} */}
+              disabled={posting}
               Post Resource
             </Button>
           </div>

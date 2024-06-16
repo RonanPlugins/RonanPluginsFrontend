@@ -9,6 +9,7 @@ import Resources from "./resouces/Resources.tsx";
 import Admin from "./Admin.tsx";
 import { PERMISSION } from "@/utils/PERMISSION.ts";
 import ProfileOther from "./ProfileOther.tsx";
+import ResourceEdit from "./resouces/ResourceEditor.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
           {
             path: "/profile",
             element: <Profile />,
+          },
+          {
+            path: "/resource/:id/edit",
+            element: <ResourceEdit />,
           },
           // {
           //   path: "/profile/settings",

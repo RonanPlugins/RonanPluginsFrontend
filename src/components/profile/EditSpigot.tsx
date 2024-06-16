@@ -24,12 +24,27 @@ import profile from "@/api/profile";
 
 export function EditSpigot() {
   const { user }: { user: any } = useUserContext();
-  const [spigotID, setSpigotID] = useState("");
+  const [spigotID, setSpigotID] = useState(user.spigot.spigotID || "");
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
 
+  console.log(user);
+  async function handleSubmit() {
+    setOpenConfirm(false);
+    setOpen(false);
+    const response = await profile.setSpigot(spigotID);
+    if (!response) return;
+    // console.log(response);
+    location.reload();
+  }
+
+  //Temporary Function
+  async function handleRetry() {
+    await profile.setSpigot(spigotID);
+  }
+
   return (
-    <Card className="max-w-2xl h-full">
+    <Card className="">
       <CardHeader>
         <CardTitle>Spigot</CardTitle>
         <CardDescription>
@@ -37,8 +52,13 @@ export function EditSpigot() {
         </CardDescription>
       </CardHeader>
       <CardContent className="text-center">
-        {user.spigotID ? (
-          <div className="w-full border-2 rounded">{user.spigotID}</div>
+        {user.spigot.spigotID ? (
+          <div>
+            <div className="w-full border-2 rounded">{spigotID}</div>
+            <Button className="mt-2" onClick={handleRetry}>
+              Resync
+            </Button>
+          </div>
         ) : (
           <>
             <Dialog open={open} onOpenChange={setOpen}>
@@ -85,7 +105,7 @@ export function EditSpigot() {
               </DialogContent>
             </Dialog>
             <Confirm
-              userID={user._id}
+              handleSubmit={handleSubmit}
               openConfirm={openConfirm}
               setOpenConfirm={setOpenConfirm}
               spigotID={spigotID}
@@ -101,18 +121,13 @@ function Confirm({
   openConfirm,
   setOpenConfirm,
   spigotID,
-  userID,
+  handleSubmit,
 }: {
   openConfirm: any;
   setOpenConfirm: any;
   spigotID: any;
-  userID: string;
+  handleSubmit: any;
 }) {
-  async function handleSubmit() {
-    await profile.setSpigot(spigotID, userID);
-    setOpenConfirm(false);
-    location.reload();
-  }
   return (
     <Dialog open={openConfirm} onOpenChange={setOpenConfirm}>
       <DialogContent className="sm:max-w-[425px]">

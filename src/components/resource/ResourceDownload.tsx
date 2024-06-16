@@ -18,13 +18,15 @@ export default function ResourceDownload({
   async function handleDownload() {
     setDownloading(true);
     const jarFile = await resourceAPI.getJar(id);
-    console.log(
-      blobToFile(
-        jarFile,
-        `${name}-${version}.${extension(jarFile.type) || "zip"}`
-      )
-    );
-    fileDownload(jarFile, jarFile.name);
+    if (jarFile) {
+      console.log(
+        blobToFile(
+          jarFile,
+          `${name}-${version}.${extension(jarFile.type) || "zip"}`
+        )
+      );
+      fileDownload(jarFile, jarFile.name);
+    }
     setDownloading(false);
   }
 
@@ -34,7 +36,7 @@ export default function ResourceDownload({
       disabled={downloading}
       onClick={handleDownload}
     >
-      <Download className="mr-2" size={20} />
+      <Download className="mr-2" size="20" />
       Download {version}
     </Button>
   );

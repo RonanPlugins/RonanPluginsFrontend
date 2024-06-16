@@ -23,6 +23,7 @@ export default function ResourceView() {
       pInfo.description = Buffer.from(pInfo.description, "base64").toString(
         "utf-8"
       );
+      // console.log(pInfo.description);
     }
     setResourceInfo(pInfo);
     setLoading(false);
@@ -39,28 +40,27 @@ export default function ResourceView() {
 
   return (
     <div className="w-full my-2">
-      <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
+      <div className="max-w-4xl lg:max-w-6xl mx-auto flex lg:flex-row flex-col">
         <Card className="max-w-4xl grow mr-2 w-full">
           {/* Plugin Header */}
           <CardTitle className="py-2 mx-2">
-            <div className="flex flex-row">
-              <ResourceImage
-                className="max-h-[120px] max-w-[120px] mr-2"
-                id={resource.image}
-              />
-              <div className="flex flex-row w-full">
-                <div className="flex flex-col">
-                  <h3 className="text-primary font-bold text-3xl">
-                    {resource.title}
-                  </h3>
-                  <p className="text-base font-normal">{resource.tagLine}</p>
+            <div className="flex flex-col-reverse lg:flex-row">
+              <div className="flex flex-row">
+                <ResourceImage id={resource.image} />
+                <div className="flex flex-row w-full">
+                  <div className="flex flex-col">
+                    <h3 className="text-primary font-bold text-2xl md:text-3xl">
+                      {resource.title}
+                    </h3>
+                    <p className="text-base font-normal">{resource.tagLine}</p>
+                  </div>
                 </div>
-                <ResourceDownload
-                  name={resource.title}
-                  version={resource.version}
-                  id={resource.jar}
-                />
               </div>
+              <ResourceDownload
+                name={resource.title}
+                version={resource.version}
+                id={resource.jar}
+              />
             </div>
           </CardTitle>
           {/* Body of plugin data */}
@@ -78,6 +78,7 @@ export default function ResourceView() {
           </div>
         )}
       </div>
+      {/* <div dangerouslySetInnerHTML={{ __html: resource.description }} /> */}
     </div>
   );
 }

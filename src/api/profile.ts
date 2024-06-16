@@ -1,9 +1,9 @@
 import { client } from "./axiosClient";
 
 export default {
-  setSpigot(spigotID: string, userID: string): Promise<any> {
+  setSpigot(spigotID: string): Promise<any> {
     return client
-      .post(`/profile/setSpigot/${userID}`, null, { params: { spigotID } })
+      .post(`/profile/setSpigot`, null, { params: { spigotID } })
       .then(({ data }) => {
         return data;
       })

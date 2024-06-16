@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavItem from "./NavItem";
-import LoginDialog from "../dialogs/LoginDialog";
+import LoginDialog from "../common/LoginDialog";
 import { useUserContext } from "@/context/UserContext";
 import api from "@/api";
 import Links from "@/lib/Links";
@@ -75,7 +75,7 @@ export default function Nav() {
             <div className="flex gap-4 items-center font-medium">
               {isLoggedIn() ? (
                 <>
-                  <img src={user.avatarURL} className="rounded h-10" />
+                  <img src={user?.avatarURL} className="rounded h-10" />
 
                   <NavItem link={Links.Profile} title={"Profile"} />
                   <Button onClick={logoutHandler}>Logout</Button>

@@ -26,15 +26,16 @@ export default function Resources() {
   );
 
   async function getResources() {
+    setLoading(true);
     const posts = await resourceAPI.getAll({ sort, page, count: perPage });
     setResources(posts);
     setTotalPages(Math.ceil((await resourceAPI.getCount()) / perPage));
     setLoading(false);
-    if (resources) {
+    if (posts) {
       if (page === 0) setSearchParams({});
       else setSearchParams({ page: `${page}` }); //navigate(page === 0 ? `.` : `./?page=${page}`);
     } else if (page !== 0) setPage(0);
-    console.log(posts);
+    // console.log(posts);
   }
 
   // useEffect(() => {
