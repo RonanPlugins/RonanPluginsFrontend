@@ -89,26 +89,26 @@ export default {
   },
   getIcon(id: string): Promise<any> {
     return client
-      .get(`/resource/file/${id}`, {
+      .get(`/resource/${id}/image`, {
         responseType: "blob",
       })
       .then(({ data }) => {
         return URL.createObjectURL(data);
       })
       .catch((err) => {
-        //console.log(err);
+        console.log(err);
         return null;
       });
   },
   getJar(id: string): Promise<any> {
     return client
-      .get(`/resource/file/${id}`, {
+      .get(`/resource/${id}/file`, {
         responseType: "blob",
       })
       .then(({ data }) => {
         return data;
       })
-      .catch((err) => {
+      .catch(() => {
         // console.log(err);
         return null;
       });

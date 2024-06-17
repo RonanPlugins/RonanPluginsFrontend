@@ -8,7 +8,7 @@ export default function Image({
   classname?: string;
 }) {
   return (
-    <div className={`h-[80px] w-[80px] object-contain my-auto ${classname}`}>
+    <div className={`h-[80px] w-[80px] object-contain ${classname}`}>
       <img
         className="rounded"
         src={

@@ -28,7 +28,6 @@ export function EditSpigot() {
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
 
-  console.log(user);
   async function handleSubmit() {
     setOpenConfirm(false);
     setOpen(false);
@@ -40,7 +39,8 @@ export function EditSpigot() {
 
   //Temporary Function
   async function handleRetry() {
-    await profile.setSpigot(spigotID);
+    await profile.resyncSpigot();
+    location.reload();
   }
 
   return (
@@ -91,7 +91,10 @@ export function EditSpigot() {
                 </div>
 
                 <DialogFooter>
-                  <Button onClick={() => setOpenConfirm(true)}>
+                  <Button
+                    onClick={() => setOpenConfirm(true)}
+                    disabled={!spigotID}
+                  >
                     Save Changes
                   </Button>
                   <Button

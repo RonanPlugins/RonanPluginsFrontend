@@ -41,7 +41,7 @@ export function ResourceView() {
   // console.log(user?._id, resource.authorID._id);
 
   return (
-    <div className="max-w-6xl my-2 mx-auto flex lg:flex-row flex-col space-x-2">
+    <div className="max-w-6xl my-2 mx-auto flex lg:flex-row flex-col lg:space-x-2 space-y-2 lg:space-y-0">
       <div className="w-full lg:w-96">
         <ResourceSidebar resource={resource} />
       </div>
@@ -52,7 +52,7 @@ export function ResourceView() {
             {/* <ResourceMenuBar resource={resource} /> */}
             <div className="flex flex-col-reverse lg:flex-row">
               <div className="flex flex-row">
-                <ResourceImage classname="mr-2" id={resource.image} />
+                <ResourceImage classname="mr-2" id={resource._id} />
                 <div className="flex flex-row w-full">
                   <div className="flex flex-col">
                     <h3 className="text-primary font-bold text-2xl md:text-3xl">
@@ -67,7 +67,7 @@ export function ResourceView() {
                   classname="mx-auto my-auto"
                   name={resource.title}
                   version={resource.version}
-                  id={resource.jar}
+                  resource={resource}
                 />
                 {isAdmin && <ResourceDelete resource={resource} />}
               </div>
@@ -75,9 +75,9 @@ export function ResourceView() {
           </CardHeader>
           <CardContent className="py-2 mx-2">
             {/* Body of plugin data */}
-            <body className="border-t-4">
+            <main className="border-t-4">
               <TextEditor content={resource.description} canEdit={false} />
-            </body>
+            </main>
           </CardContent>
         </Card>
       </div>

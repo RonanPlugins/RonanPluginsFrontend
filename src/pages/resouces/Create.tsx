@@ -17,6 +17,8 @@ import {
 import { resizeFile } from "@/utils/imageResizer";
 import resourceAPI from "@/api/resource";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { Upload } from "lucide-react";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -108,6 +110,9 @@ export function ResourceCreate() {
         .then((data: any) => {
           if (data) {
             navigate(`/resource/${data._id}`);
+            toast("New Resource Created!", {
+              icon: <Upload />,
+            });
           } else {
             setPosting(false);
             setDescriptionError("An error has occured!");

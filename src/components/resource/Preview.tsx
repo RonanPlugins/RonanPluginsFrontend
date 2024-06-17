@@ -1,7 +1,7 @@
 import { ResourceImage } from "./Image";
 import { Link } from "react-router-dom";
 import date from "../../utils/date";
-import { Clock8Icon, Download } from "lucide-react";
+import { Clock8Icon, Crown, Download } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -15,12 +15,20 @@ export function ResourcePreview({ resource }: { resource: any }) {
     <div className="flex flex-col md:flex-row">
       <div className="flex flex-row">
         {/* Image */}
-        <Link className="my-auto" to={`../resource/${resource._id}`}>
-          <ResourceImage id={resource.image} />
+        <Link className="relative my-2" to={`../resource/${resource._id}`}>
+          <ResourceImage classname="mt-auto" id={resource._id} />
+          {resource.premium && (
+            <Crown
+              className="absolute -top-[10px] -right-[10px]"
+              fill="gold"
+              stroke="black"
+              size={20}
+            />
+          )}
         </Link>
         {/* Resource Info */}
         <div className="w-full flex flex-row flex-nowrap">
-          <div className="ml-2 grid">
+          <div className="ml-3 grid">
             <div className="flex">
               <p>
                 {/* Title */}

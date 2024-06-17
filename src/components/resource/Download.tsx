@@ -1,18 +1,19 @@
 import resourceAPI from "@/api/resource";
-import { Download } from "lucide-react";
+import { Download, DownloadIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import fileDownload from "js-file-download";
 import { extension } from "mime-types";
+import { toast } from "sonner";
 
 export function ResourceDownload({
   version,
-  id,
+  resource,
   name,
   classname,
 }: {
   version: string;
-  id: string;
+  resource: any;
   name: string;
   classname?: string;
 }) {
@@ -20,7 +21,7 @@ export function ResourceDownload({
 
   async function handleDownload() {
     setDownloading(true);
-    const jarFile = await resourceAPI.getJar(id);
+    const jarFile = await resourceAPI.getJar(resource._id);
     if (jarFile) {
       console.log(
         blobToFile(
@@ -29,6 +30,9 @@ export function ResourceDownload({
         )
       );
       fileDownload(jarFile, jarFile.name);
+      toast("Download has started", {
+        icon: <DownloadIcon />,
+      });
     }
     setDownloading(false);
   }

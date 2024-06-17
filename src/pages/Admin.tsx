@@ -31,7 +31,7 @@ export default function Admin() {
       <div className="resources">
         {users?.map((user) => {
           return (
-            <div className="p-2 flex flex-row">
+            <div key={user._id} className="p-2 flex flex-row">
               <Image url={user.avatarURL} />
               <div className="ml-2 grid">
                 <h3 className="text-primary font-bold hover:text-secondary-foreground hover:underline">

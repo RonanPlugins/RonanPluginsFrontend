@@ -5,6 +5,7 @@ import Nav from "./components/home/NavBar";
 import { ThemeProvider } from "./context/ThemeContext";
 import Footer from "./components/home/Footer";
 import UserProvider from "./context/UserContext";
+import { Toaster } from "./components/ui/sonner";
 
 // const client = new ApolloClient({
 //   uri: "/graphql",
@@ -18,6 +19,7 @@ function App() {
         <Nav />
         <Outlet />
         <Footer />
+        <Toaster />
       </ThemeProvider>
     </UserProvider>
   );

@@ -1,5 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ModeToggle } from "../ModeToggle";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
@@ -34,7 +33,9 @@ export default function Nav() {
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
 
           <ul className="flex items-center justify-between w-full">
+            {/* Nav bar, hidden in mobile */}
             <div className="hidden flex-col font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+              <img className="h-10" src="assets/logo.png" alt="Logo" />
               {navItems.map((item) => {
                 return <NavItem key={item.link} {...item} />;
               })}
@@ -63,6 +64,8 @@ export default function Nav() {
 
             {/* Empty spacer to push Sign Up and Log In links to the right */}
             <div className="flex-grow" />
+            <p>Site Under Developement</p>
+            <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex gap-4 items-center font-medium">
               {isLoggedIn() ? (
@@ -73,12 +76,11 @@ export default function Nav() {
                       className="rounded h-10 hover:ring-4"
                     />
                   </Link>
-                  <NavItem link={Links.Profile} title={"Profile"} />
+                  {/* <NavItem link={Links.Profile} title={"Profile"} /> */}
                 </>
               ) : (
                 <LoginDialog />
               )}
-              <ModeToggle />
             </div>
             {/* Place ModeToggle to the right side */}
           </ul>

@@ -17,10 +17,10 @@ export default function LoginDialog() {
 
   return (
     <Dialog>
-      <DialogTrigger className="font-bold flex flex-row">
-        <Button className="px-3 rounded-full">
-          <LogIn size={20} className="mr-2" /> Sign In
-        </Button>
+      <DialogTrigger className="font-bold flex flex-row bg-primary rounded-full p-2 text-sm hover:bg-primary/70 transition-colors hover:text-primary-foreground">
+        {/* <button className="px-3 rounded-full"> */}
+        <LogIn size={20} className="mr-2" /> Sign In
+        {/* </button> */}
       </DialogTrigger>
       <DialogContent className="h-1/3">
         <DialogHeader>
@@ -28,13 +28,13 @@ export default function LoginDialog() {
           <DialogDescription className="flex h-full items-center">
             <Button
               style={{ backgroundColor: "#5865F2" }}
-              className="flex items-center w-full"
+              className="flex items-center w-full hover:underline"
               variant={"default"}
               onClick={loginHandler}
             >
               <img className="h-6 w-6 mr-2" src="/assets/discord.svg" />
 
-              <span> Discord</span>
+              <span>Discord</span>
             </Button>
           </DialogDescription>
         </DialogHeader>

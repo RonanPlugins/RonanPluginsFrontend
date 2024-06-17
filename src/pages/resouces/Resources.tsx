@@ -21,7 +21,7 @@ export function Resources() {
   const [searchParams, setSearchParams] = useSearchParams();
   //Filters
   const [sort, setSort] = useState<string>(FILTERBY.LAST_UPDATE);
-  const perPage = 10;
+  const perPage = 20;
   const [page, setPage] = useState<number>(
     Number(searchParams.get("page")) || 0
   );
@@ -32,7 +32,7 @@ export function Resources() {
     setResources(posts);
     setTotalPages(Math.ceil((await resourceAPI.getCount()) / perPage));
     setLoading(false);
-    if (posts) {
+    if (posts && posts[0]) {
       if (page === 0) setSearchParams({});
       else setSearchParams({ page: `${page}` }); //navigate(page === 0 ? `.` : `./?page=${page}`);
     } else if (page !== 0) setPage(0);
@@ -52,7 +52,7 @@ export function Resources() {
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-6xl mx-auto flex lg:flex-row flex-col space-x-2 mt-2">
+    <div className="max-w-6xl mx-auto flex lg:flex-row flex-col space-x-2 my-2">
       <div className="w-full lg:w-96">
         {/* Title/Filter */}
         <Card>
@@ -87,8 +87,8 @@ export function Resources() {
         <div className="resources">
           {resources &&
             resources.map((resource) => (
-              <div className="resource">
-                <ResourcePreview key={resource._id} resource={resource} />
+              <div className="resource" key={resource._id}>
+                <ResourcePreview resource={resource} />
               </div>
             ))}
         </div>

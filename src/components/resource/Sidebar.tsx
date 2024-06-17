@@ -6,6 +6,8 @@ import memberAPI from "@/api/member";
 import { useEffect, useState } from "react";
 import Loading from "../common/Loading";
 import Image from "../common/Image";
+import { Button } from "../ui/button";
+import purchase from "@/api/purchase";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
   const [userProfile, setUser] = useState<any>({});
@@ -69,6 +71,14 @@ export function ResourceSidebar({ resource }: { resource: any }) {
             </dt>
             <dd>{date(resource.createdAt)}</dd>
           </dl>
+          {/* TEMP */}
+          <Button
+            onClick={() => {
+              purchase.resource(resource._id);
+            }}
+          >
+            Purchase
+          </Button>
         </CardContent>
       </Card>
       {/* Edit Resource */}

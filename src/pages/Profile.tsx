@@ -3,10 +3,10 @@ import { ResourcePreview } from "@/components/resource/Preview";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import resourceAPI from "@/api/resource";
-import SideBar_Developer from "@/components/profile/DeveloperProfileButtons";
 import { useNavigate } from "react-router-dom";
 import api from "@/api";
 import { Button } from "@/components/ui/button";
+import Sidebar from "@/components/profile/Sidebar";
 
 export default function Profile() {
   const { user, logout }: { user: any; logout: any } = useUserContext();
@@ -47,15 +47,15 @@ export default function Profile() {
             <div className="resources">
               {resources &&
                 resources.map((resource) => (
-                  <div className="resource">
-                    <ResourcePreview key={resource._id} resource={resource} />
+                  <div key={resource._id} className="resource">
+                    <ResourcePreview resource={resource} />
                   </div>
                 ))}
             </div>
           </div>
           <div className="max-w-2xl flex flex-col space-y-2 mx-2">
             <Button onClick={logoutHandler}>Logout</Button>
-            <SideBar_Developer />
+            <Sidebar />
           </div>
         </div>
       </div>

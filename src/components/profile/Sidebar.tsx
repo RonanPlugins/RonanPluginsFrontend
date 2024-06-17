@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import Links from "@/lib/Links";
 import { PERMISSION } from "@/utils/PERMISSION";
+import { EditStripe } from "./EditStripe";
 
-export default function SideBar_Developer() {
+export default function Sidebar() {
   const { user }: { user: any } = useUserContext();
   const naviage = useNavigate();
   return (
@@ -14,11 +15,9 @@ export default function SideBar_Developer() {
         {/* <Button className="mb-2 mx-1" onClick={() => naviage("./settings")}>
           Settings
         </Button> */}
-        {user.role >= PERMISSION.CREATOR && (
-          <Button className="" onClick={() => naviage(Links.ResourceNew)}>
-            New Resource
-          </Button>
-        )}
+        <Button className="" onClick={() => naviage(Links.ResourceNew)}>
+          New Resource
+        </Button>
         {user.role >= PERMISSION.ADMIN && (
           <Button
             className=""
@@ -30,6 +29,7 @@ export default function SideBar_Developer() {
         )}
       </div>
       <EditSpigot />
+      <EditStripe />
     </>
   );
 }
