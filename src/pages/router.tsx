@@ -10,6 +10,7 @@ import Admin from "./Admin.tsx";
 import { PERMISSION } from "@/utils/PERMISSION.ts";
 import ProfileOther from "./ProfileOther.tsx";
 import { ResourceEdit } from "./resouces/Editor.tsx";
+import StripeRefresh from "./stripe/StripeRefresh.tsx";
 // import AuthGuard from "./components/landing/AuthGuard.jsx";
 
 export const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/resource/:id",
         element: <ResourceView />,
+      },
+      {
+        path: "/refresh/:accountId",
+        element: <StripeRefresh />,
       },
       // Creator
       {

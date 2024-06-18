@@ -1,13 +1,14 @@
 import { ResourceImage } from "./Image";
 import { Link } from "react-router-dom";
 import date from "../../utils/date";
-import { Clock8Icon, Crown, Download } from "lucide-react";
+import { Clock8Icon, Download } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import PremiumIcon from "../common/PremiumIcon";
 
 export function ResourcePreview({ resource }: { resource: any }) {
   // console.log(resource);
@@ -17,14 +18,7 @@ export function ResourcePreview({ resource }: { resource: any }) {
         {/* Image */}
         <Link className="relative my-2" to={`../resource/${resource._id}`}>
           <ResourceImage classname="mt-auto" id={resource._id} />
-          {resource.premium && (
-            <Crown
-              className="absolute -top-[10px] -right-[10px]"
-              fill="gold"
-              stroke="black"
-              size={20}
-            />
-          )}
+          {resource.premium && <PremiumIcon />}
         </Link>
         {/* Resource Info */}
         <div className="w-full flex flex-row flex-nowrap">

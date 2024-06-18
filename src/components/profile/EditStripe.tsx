@@ -1,13 +1,3 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   Card,
   CardContent,
@@ -15,32 +5,54 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import profile from "@/api/profile";
+
+import { useUserContext } from "@/context/UserContext";
+import StripeJoin from "./StripeJoin";
 import { toast } from "sonner";
-import { CheckCircle2Icon } from "lucide-react";
+import profile from "@/api/profile";
+import { Button } from "../ui/button";
+import Loading from "../common/Loading";
+import PremiumIcon from "../common/PremiumIcon";
 
 export function EditStripe() {
-  const [key, setKey] = useState<string>("");
-  const [open, setOpen] = useState(false);
+  const { user } = useUserContext();
+  const [accountID, setID] = useState<string | null>(
+    user?.stripe?.account_id || null
+  );
+  const [status, setStatus] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  async function handleSubmit() {
-    setOpen(false);
-    await profile.setStripe(key);
-    toast("Stripe Api Key Added", {
-      icon: <CheckCircle2Icon />,
-    });
-  }
+  const getStatus = async () => {
+    if (accountID === null) {
+      setLoading(false);
+      return;
+    }
+    const newStatus = await profile.getStripeStatus();
+    if (newStatus !== null) setStatus(newStatus.enabled);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (accountID != user?.stripe?.account_id) {
+      toast.success("Account ID Created!", {
+        richColors: true,
+      });
+      // console.log("Account id has changed!");
+      user.stripe = { account_id: accountID };
+    }
+    getStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountID]);
 
   return (
-    <Card>
+    <Card className="relative">
+      {status && <PremiumIcon />}
       <CardHeader>
-        <CardTitle>Stripe API Key</CardTitle>
-        <CardDescription>
-          {"Accept payments using "}
+        <CardTitle className="text-center">Premium Developer</CardTitle>
+        <CardDescription className="text-center">
+          {`Accept${status ? "ing" : ""} payments using `}
           <Link
             className="font-bold hover:underline"
             to={"https://dashboard.stripe.com/"}
@@ -50,56 +62,22 @@ export function EditStripe() {
         </CardDescription>
       </CardHeader>
       <CardContent className="text-center">
-        <>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button onClick={() => setOpen((prev) => !prev)}>
-                Set Your Api Key
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Stripe Api Key</DialogTitle>
-                <DialogDescription>
-                  Adding your Stripe Api Key, allows us to generate a payment
-                  screen for you when customers would like to purchase your
-                  Premium resources.
-                  <p className="text-xs text-red-400">
-                    For security we cannot display your current api key if you
-                    already set one up!
-                  </p>
-                  <p>The api key should start with `sk_`</p>
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Api Key
-                  </Label>
-                  <Input
-                    id="name"
-                    placeholder="Your Stripe Secret Key"
-                    className="col-span-3"
-                    onChange={(e) => setKey(e.target.value)}
-                  />
-                </div>
+        {accountID ? (
+          <div>
+            {status !== true ? (
+              <div className="rounded-md border px-4 text-sm shadow-sm">
+                <span className="">
+                  {loading ? <Loading /> : "Pending Documents"}
+                </span>
               </div>
-
-              <DialogFooter>
-                <Button onClick={handleSubmit} disabled={!key}>
-                  Save Changes
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setOpen(false)}
-                >
-                  Cancel
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </>
+            ) : (
+              // Successful Stripe Account
+              <Button>View Portal</Button>
+            )}
+          </div>
+        ) : (
+          <StripeJoin setID={setID} />
+        )}
       </CardContent>
     </Card>
   );

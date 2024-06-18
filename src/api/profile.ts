@@ -3,7 +3,7 @@ import { client } from "./axiosClient";
 export default {
   setSpigot(spigotID: string): Promise<any> {
     return client
-      .post(`/profile/setSpigot`, null, { params: { spigotID } })
+      .post(`/profile/spigot`, null, { params: { spigotID } })
       .then(({ data }) => {
         return data;
       })
@@ -14,7 +14,7 @@ export default {
   },
   resyncSpigot(): Promise<any> {
     return client
-      .post(`/profile/resyncSpigot`)
+      .post(`/profile/spigot/sync`)
       .then(({ data }) => {
         return data;
       })
@@ -23,10 +23,31 @@ export default {
         return null;
       });
   },
-
-  getFullProfile(): Promise<any> {
+  createStripeAccount(): Promise<any> {
     return client
-      .get("/profile")
+      .get("/profile/stripe/create")
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
+  createStripeAccountLink(account_id: string): Promise<any> {
+    return client
+      .get(`/profile/stripe/link/${account_id}`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
+  getStripeStatus(): Promise<any> {
+    return client
+      .get(`/profile/stripe/status`)
       .then(({ data }) => {
         return data;
       })
