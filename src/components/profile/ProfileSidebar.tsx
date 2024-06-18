@@ -6,7 +6,7 @@ import Links from "@/lib/Links";
 import { PERMISSION } from "@/utils/PERMISSION";
 import { EditStripe } from "./EditStripe";
 
-export default function Sidebar() {
+export default function ProfileSidebar() {
   const { user }: { user: any } = useUserContext();
   const naviage = useNavigate();
   return (

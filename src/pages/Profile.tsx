@@ -6,7 +6,7 @@ import resourceAPI from "@/api/resource";
 import { useNavigate } from "react-router-dom";
 import api from "@/api";
 import { Button } from "@/components/ui/button";
-import Sidebar from "@/components/profile/Sidebar";
+import ProfileSidebar from "@/components/profile/ProfileSidebar";
 
 export default function Profile() {
   const { user, logout }: { user: any; logout: any } = useUserContext();
@@ -55,7 +55,7 @@ export default function Profile() {
           </div>
           <div className="max-w-2xl flex flex-col space-y-2 mx-2">
             <Button onClick={logoutHandler}>Logout</Button>
-            <Sidebar />
+            <ProfileSidebar />
           </div>
         </div>
       </div>
