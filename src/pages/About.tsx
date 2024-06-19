@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Links from "@/lib/Links";
+import Messages from "@/lib/Messages";
 import {
   Component,
   Gift,
@@ -9,14 +10,14 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function About() {
   return (
     <>
       <div className="columns-1 md:columns-2 min-h-[50vh]">
         <div className="flex p-4 my-10">
           <div className="w-full space-y-6">
             <header className="font-bold text-3xl md:text-4xl lg:text-6xl text-center md:text-left">
-              <h1 className="font-light">RonanPlugins</h1>
+              <h1 className="font-light">{Messages.BrandName}</h1>
               <p>Where creators meet</p>
               <p className="text-blue-400">developers</p>
             </header>

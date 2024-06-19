@@ -3,13 +3,13 @@ import { ResourcePreview } from "@/components/resource/Preview";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import resourceAPI from "@/api/resource";
-import { useNavigate } from "react-router-dom";
-import api from "@/api";
-import { Button } from "@/components/ui/button";
 import ProfileSidebar from "@/components/profile/ProfileSidebar";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import Links from "@/lib/Links";
 
 export default function Profile() {
-  const { user, logout }: { user: any; logout: any } = useUserContext();
+  const { user }: { user: any; logout: any } = useUserContext();
 
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
@@ -22,18 +22,10 @@ export default function Profile() {
     setLoading(false);
   }
 
-  const logoutHandler = async () => {
-    logout();
-    await api.logout();
-    navigate("/home");
-  };
-
   useEffect(() => {
     getResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (loading) return <Loading />;
 
   return (
     <div className="w-full my-2">
@@ -44,17 +36,34 @@ export default function Profile() {
       <div className="w-full">
         <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
           <div className="resourceContainer max-w-4xl grow mr-2 w-full">
-            <div className="resources">
-              {resources &&
+            <div className="resources h-full">
+              {resources && resources.length > 0 ? (
                 resources.map((resource) => (
                   <div key={resource._id} className="resource">
                     <ResourcePreview resource={resource} />
                   </div>
-                ))}
+                ))
+              ) : (
+                <div className="w-full h-full bg-primary-foreground rounded-md flex flex-col">
+                  {loading ? (
+                    <Loading />
+                  ) : (
+                    <>
+                      <h2 className="mx-auto my-2">No Resources yet!</h2>
+                      <Button
+                        variant="special"
+                        className="mx-auto my-5"
+                        onClick={() => navigate(Links.ResourceNew)}
+                      >
+                        Post Your First Resource
+                      </Button>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="max-w-2xl flex flex-col space-y-2 mx-2">
-            <Button onClick={logoutHandler}>Logout</Button>
             <ProfileSidebar />
           </div>
         </div>

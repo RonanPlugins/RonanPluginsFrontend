@@ -8,7 +8,7 @@ export function ModeToggle() {
 
   return (
     <Button
-      variant="outline"
+      variant="secondary"
       size="icon"
       onClick={() => {
         // console.log(theme);

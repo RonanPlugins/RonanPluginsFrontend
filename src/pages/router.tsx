@@ -1,17 +1,17 @@
 import App from "../App.tsx";
-import Home from "./Home.jsx";
+import About from "./About.tsx";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Profile from "./Profile.tsx";
 import AuthGuard from "@/components/common/AuthGuard.tsx";
-import { ResourceCreate } from "./resouces/Create.tsx";
-import { ResourceView } from "./resouces/View.tsx";
-import { Resources } from "./resouces/Resources.tsx";
+import { ResourceCreate } from "./resources/Create.tsx";
+import { ResourceView } from "./resources/View.tsx";
+import { Resources } from "./resources/index.tsx";
 import Admin from "./Admin.tsx";
 import { PERMISSION } from "@/utils/PERMISSION.ts";
 import ProfileOther from "./ProfileOther.tsx";
-import { ResourceEdit } from "./resouces/Editor.tsx";
+import { ResourceEdit } from "./resources/Editor.tsx";
 import StripeRefresh from "./stripe/StripeRefresh.tsx";
-// import AuthGuard from "./components/landing/AuthGuard.jsx";
+import { Servers } from "./servers/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -19,13 +19,18 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "*",
-        element: <Navigate to="/" replace />,
+        index: true,
+        element: <Navigate to="/about" replace />,
       },
       {
-        path: "/",
-        element: <Home />,
+        path: "*",
+        element: <Navigate to="/about" replace />,
       },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      //Resources
       {
         path: "/resources",
         element: <Resources />,
@@ -34,6 +39,12 @@ export const router = createBrowserRouter([
         path: "/resource/:id",
         element: <ResourceView />,
       },
+      //Servers
+      {
+        path: "/servers",
+        element: <Servers />,
+      },
+      //Stripe
       {
         path: "/refresh/:accountId",
         element: <StripeRefresh />,

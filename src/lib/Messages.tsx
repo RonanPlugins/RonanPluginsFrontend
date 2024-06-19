@@ -5,7 +5,7 @@ export default class Messages {
   static Support = "Support";
   static PrivacyPolicy = "Privacy Policy";
   static TermsAndConditions = "Terms And Conditions";
-  static BrandName = "RonanPlugins";
+  static BrandName = "MineCentral";
   static Navigation = "Navigation";
   static Pages = "Pages";
   static Home = "Home";

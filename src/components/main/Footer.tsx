@@ -2,7 +2,6 @@ import footerLib from "@/lib/Footer";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import Messages from "@/lib/Messages";
-import { ModeToggle } from "../ModeToggle";
 
 export default function Footer() {
   return (
@@ -25,8 +24,6 @@ export default function Footer() {
           })}
         </div>
       </div>
-
-      <ModeToggle />
       {/* <div className="mx-2"></div> */}
       {/* <div className="mx-2"></div> */}
     </div>

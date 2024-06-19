@@ -52,7 +52,7 @@ export function Resources() {
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-6xl mx-auto flex lg:flex-row flex-col space-x-2 my-2">
+    <div className="max-w-6xl mx-auto flex lg:flex-row flex-col space-x-2 my-2 space-y-2 md:space-y-0">
       <div className="w-full lg:w-96">
         {/* Title/Filter */}
         <Card>
@@ -61,7 +61,7 @@ export function Resources() {
           </CardHeader>
           <CardContent>
             <Select onValueChange={setSort} value={sort}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -72,12 +72,6 @@ export function Resources() {
                 ))}
               </SelectContent>
             </Select>
-          </CardContent>
-          <CardHeader>
-            <h2 className="font-bold">Categories</h2>
-          </CardHeader>
-          <CardContent>
-            <p>Chat</p>
           </CardContent>
         </Card>
       </div>

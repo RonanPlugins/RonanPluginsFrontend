@@ -3,7 +3,7 @@ import { client } from "./axiosClient";
 export default {
   getAll(): Promise<any> {
     return client
-      .get(`/member/get`)
+      .get(`/member`)
       .then(({ data }) => {
         return data;
       })
@@ -14,7 +14,7 @@ export default {
   },
   get(userID: string): Promise<any> {
     return client
-      .get(`/member/get/${userID}`)
+      .get(`/member/${userID}`)
       .then(({ data }) => {
         return data;
       })

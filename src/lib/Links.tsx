@@ -1,9 +1,11 @@
 export default class Links {
   // Local Pages
-  static Home = "/";
-  static Resources = "/resources";
-  static ResourceNew = "/resource/create";
   static About = "/about";
+  static Resources = "/resources";
+  static Resource = "/resource";
+  static Servers = "/servers";
+  static Server = "/server";
+  static ResourceNew = "/resource/create";
   static Login = "/login";
   static Profile = "/profile";
   static PrivacyPolicy = "/privacy";

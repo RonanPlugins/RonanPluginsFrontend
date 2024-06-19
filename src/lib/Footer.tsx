@@ -1,7 +1,8 @@
 import { Instagram, Twitter, Youtube } from "lucide-react";
+import Messages from "./Messages";
 
 export default class Footer {
-  static CopyrightText = "© 2024 RonanPlugins. All rights reserved";
+  static CopyrightText = `© 2024 ${Messages.BrandName}. All rights reserved`;
   static LogoPath = "/assets/logo.webp";
 
   static Links = [

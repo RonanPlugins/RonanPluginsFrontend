@@ -3,7 +3,7 @@ import Loading from "@/components/common/Loading";
 import { ResourceSidebar } from "@/components/resource/Sidebar";
 import { ResourceImage } from "@/components/resource/Image";
 import TextEditor from "@/components/textEditor/TextEditor";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -11,11 +11,10 @@ import { useParams } from "react-router-dom";
 import { Buffer } from "buffer";
 import { ResourceDownload } from "@/components/resource/Download";
 import { ResourceDelete } from "@/components/resource/Delete";
-import { ResourceMenuBar } from "@/components/resource/Menubar";
 
 export function ResourceView() {
   const { id } = useParams();
-  const { user, isAdmin }: { user: any; isAdmin: boolean } = useUserContext();
+  const { isAdmin }: { user: any; isAdmin: boolean } = useUserContext();
   const [loading, setLoading] = useState(true);
   const [resource, setResourceInfo] = useState<any | null>(null);
 

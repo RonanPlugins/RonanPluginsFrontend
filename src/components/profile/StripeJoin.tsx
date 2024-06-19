@@ -39,12 +39,10 @@ export default function StripeJoin({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {/* <Button className="bg-yellow-400 text-secondary-foreground hover:bg-yellow-500 dark:text-secondary">
-            Join Now
-          </Button> */}
-        <div className="h-10 px-4 py-2 text-sm font-medium rounded-md bg-yellow-400 text-secondary-foreground hover:bg-yellow-500 dark:text-secondary inline-flex items-center">
+        <Button variant="special">Join Now</Button>
+        {/* <div className="h-10 px-4 py-2 text-sm font-medium rounded-md bg-yellow-400 text-secondary-foreground hover:bg-yellow-500 dark:text-secondary inline-flex items-center">
           Join Now
-        </div>
+        </div> */}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

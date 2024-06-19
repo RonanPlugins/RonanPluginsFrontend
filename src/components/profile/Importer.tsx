@@ -46,9 +46,9 @@ export function EditSpigot() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Spigot</CardTitle>
+        <CardTitle>Spigot Importer</CardTitle>
         <CardDescription>
-          Sync your SpigotMC plugins to {Messages.BrandName}
+          Choose what SpigotMC plugins to import to {Messages.BrandName}
         </CardDescription>
       </CardHeader>
       <CardContent className="text-center">
