@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Links from "@/lib/Links";
 import Messages from "@/lib/Messages";
+import usePageTitle from "@/utils/usePageTitle";
 import {
   Component,
   Gift,
@@ -11,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function About() {
+  usePageTitle("About");
   return (
     <>
       <div className="columns-1 md:columns-2 min-h-[50vh]">

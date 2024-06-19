@@ -1,8 +1,10 @@
 import profile from "@/api/profile";
+import usePageTitle from "@/utils/usePageTitle";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function StripeRefresh() {
+  usePageTitle("Refreshing...");
   const { accountId } = useParams();
   const [accountLinkCreatePending, setAccountLinkCreatePending] =
     useState(false);

@@ -61,7 +61,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <Button
               size={"sm"}
               variant={"link"}
-              className="p-2"
+              className=""
               onClick={() => handleClick(1)}
             >
               1

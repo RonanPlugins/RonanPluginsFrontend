@@ -1,5 +1,5 @@
 import { useUserContext } from "@/context/UserContext";
-import { EditSpigot } from "./Importer";
+import { ImportSpigotSidebar } from "./ImportSpigotSidebar";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import Links from "@/lib/Links";
@@ -37,7 +37,7 @@ export default function ProfileSidebar() {
           </Button>
         )}
       </div>
-      <EditSpigot />
+      <ImportSpigotSidebar />
       <EditStripe />
 
       <Button variant="secondary" onClick={logoutHandler}>

@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { Buffer } from "buffer";
 import { ResourceDownload } from "@/components/resource/Download";
 import { ResourceDelete } from "@/components/resource/Delete";
+import usePageTitle from "@/utils/usePageTitle";
 
 export function ResourceView() {
   const { id } = useParams();
@@ -32,11 +33,14 @@ export function ResourceView() {
 
   useEffect(() => {
     getPlugin();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <Loading />;
   if (resource === null) return <>Error!</>;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  usePageTitle(resource.title);
   // console.log(user?._id, resource.authorID._id);
 
   return (

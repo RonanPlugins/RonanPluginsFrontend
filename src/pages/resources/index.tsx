@@ -13,15 +13,17 @@ import {
 import Pagination from "@/components/common/Pagination";
 import { useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import usePageTitle from "@/utils/usePageTitle";
 
 export function Resources() {
+  usePageTitle("Resources");
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
   //Filters
   const [sort, setSort] = useState<string>(FILTERBY.LAST_UPDATE);
-  const perPage = 20;
+  const perPage = 15;
   const [page, setPage] = useState<number>(
     Number(searchParams.get("page")) || 0
   );
@@ -52,7 +54,7 @@ export function Resources() {
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-6xl mx-auto flex lg:flex-row flex-col space-x-2 my-2 space-y-2 md:space-y-0">
+    <div className="max-w-6xl space-y-2 mx-auto flex lg:flex-row flex-col lg:space-x-2 my-2 lg:space-y-0">
       <div className="w-full lg:w-96">
         {/* Title/Filter */}
         <Card>
@@ -77,7 +79,7 @@ export function Resources() {
       </div>
 
       {/* Resources */}
-      <div className="max-w-4xl lg:max-w-6xl grid space-y-2">
+      <div className="w-full lg:max-w-6xl space-y-2">
         <div className="resources">
           {resources &&
             resources.map((resource) => (

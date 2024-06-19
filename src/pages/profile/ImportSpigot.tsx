@@ -22,7 +22,7 @@ import Messages from "@/lib/Messages";
 import { useState } from "react";
 import profile from "@/api/profile";
 
-export function EditSpigot() {
+export function ImportSpigot() {
   const { user }: { user: any } = useUserContext();
   const [spigotID, setSpigotID] = useState(user.spigot?.spigotID || "");
   const [open, setOpen] = useState(false);

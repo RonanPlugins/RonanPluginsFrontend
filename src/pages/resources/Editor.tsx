@@ -18,6 +18,7 @@ import Loading from "@/components/common/Loading";
 import resourceAPI from "@/api/resource";
 import { useNavigate, useParams } from "react-router-dom";
 import { Buffer } from "buffer";
+import usePageTitle from "@/utils/usePageTitle";
 
 const formSchema = z.object({
   title: z.string().min(3, {
@@ -31,6 +32,7 @@ const formSchema = z.object({
 });
 
 export function ResourceEdit() {
+  usePageTitle("Edit Resource");
   const { id } = useParams();
   const [posting, setPosting] = useState<boolean>(false);
   const [description, setDescription] = useState<string>();

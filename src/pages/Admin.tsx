@@ -11,8 +11,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import date from "../utils/date";
 import Image from "@/components/common/Image";
+import usePageTitle from "@/utils/usePageTitle";
 
 export default function Admin() {
+  usePageTitle("Admin");
   const [users, setUsers] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
