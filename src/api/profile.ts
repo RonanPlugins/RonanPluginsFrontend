@@ -1,8 +1,8 @@
-import { client } from "./axiosClient";
+import { backendApi } from "./axiosClient";
 
 export default {
   setSpigot(spigotID: string): Promise<any> {
-    return client
+    return backendApi
       .post(`/profile/spigot`, null, { params: { spigotID } })
       .then(({ data }) => {
         return data;
@@ -13,7 +13,7 @@ export default {
       });
   },
   resyncSpigot(): Promise<any> {
-    return client
+    return backendApi
       .post(`/profile/spigot/sync`)
       .then(({ data }) => {
         return data;
@@ -24,7 +24,7 @@ export default {
       });
   },
   createStripeAccount(): Promise<any> {
-    return client
+    return backendApi
       .get("/profile/stripe/create")
       .then(({ data }) => {
         return data;
@@ -35,7 +35,7 @@ export default {
       });
   },
   createStripeAccountLink(account_id: string): Promise<any> {
-    return client
+    return backendApi
       .get(`/profile/stripe/link/${account_id}`)
       .then(({ data }) => {
         return data;
@@ -46,7 +46,7 @@ export default {
       });
   },
   getStripeStatus(): Promise<any> {
-    return client
+    return backendApi
       .get(`/profile/stripe/status`)
       .then(({ data }) => {
         return data;

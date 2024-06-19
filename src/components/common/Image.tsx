@@ -8,7 +8,9 @@ export default function Image({
   classname?: string;
 }) {
   return (
-    <div className={`h-[80px] w-[80px] object-contain ${classname}`}>
+    <div
+      className={`flex-shrink-0 h-[80px] w-[80px] object-contain ${classname}`}
+    >
       <img
         className="rounded"
         src={

@@ -1,12 +1,24 @@
 import { Crown } from "lucide-react";
+import { Tooltip, TooltipProvider } from "../ui/tooltip";
+import { TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
 
 export default function PremiumIcon({ className }: { className?: string }) {
   return (
-    <Crown
+    <div
       className={className ? className : "absolute -top-[10px] -right-[10px]"}
-      fill="gold"
-      stroke="black"
-      size={20}
-    />
+    >
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <Crown fill="gold" stroke="black" size={20} />
+          </TooltipTrigger>
+          <TooltipContent>
+            <div className="bg-muted p-1 rounded-md shadow-md">
+              <p>Premium</p>
+            </div>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
   );
 }

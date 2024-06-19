@@ -1,8 +1,8 @@
-import { client } from "./axiosClient";
+import { backendApi } from "./axiosClient";
 
 export default {
   getAll(): Promise<any> {
-    return client
+    return backendApi
       .get(`/member`)
       .then(({ data }) => {
         return data;
@@ -13,7 +13,7 @@ export default {
       });
   },
   get(userID: string): Promise<any> {
-    return client
+    return backendApi
       .get(`/member/${userID}`)
       .then(({ data }) => {
         return data;

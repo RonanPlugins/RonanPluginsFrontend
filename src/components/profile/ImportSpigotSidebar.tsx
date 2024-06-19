@@ -50,7 +50,7 @@ export function ImportSpigotSidebar() {
           </div>
         ) : (
           <Button onClick={() => navigate("./import/spigot")}>
-            Import From Spigot
+            Configure Now
           </Button>
         )}
       </CardContent>

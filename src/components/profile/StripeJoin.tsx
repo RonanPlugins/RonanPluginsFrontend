@@ -47,33 +47,37 @@ export default function StripeJoin({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Join Our Team of Premium Developers</DialogTitle>
-          <DialogDescription>
-            <span>
-              Creating a Stripe account allows us to generate a payment screen
-              for you when customers want to purchase your Premium resources!
-            </span>
-            <br></br>
-            <span className="text-xs text-red-400">
-              Clicking below will generate an account number and create a link
-              to Stripe. You will need to fill in all required data before you
-              can start accepting payments!
-            </span>
-            <br></br>
-            <span className="text-center text-green-800">
-              We have a 0% fee for this service. You will be accepting payments
-              directly!
-            </span>
+          <DialogDescription asChild>
+            <div>
+              <p>
+                Creating a Stripe account allows us to generate a payment screen
+                for you when customers want to purchase your Premium resources!
+              </p>
+              <br></br>
+              <p className="text-foreground font-bold">
+                Clicking below will generate an account number and forward to
+                Stripe. You will need to fill in all required data before you
+                can start accepting payments!
+              </p>
+              <br></br>
+              <p className="text-xs text-center text-secondary-foreground">
+                We charge a 3% fee for this service. You will be able to post
+                resources up to $50 USD
+              </p>
+            </div>
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter>
-          <Button onClick={handleCreateAccount} disabled={loading}>
+          <Button
+            variant="special"
+            onClick={handleCreateAccount}
+            disabled={loading}
+          >
             {loading ? "Creating..." : "Create Account"}
           </Button>
-          <DialogClose>
-            <div className="h-10 px-4 py-2 text-sm font-medium rounded-md inline-flex items-center border border-input bg-background hover:bg-accent hover:text-accent-foreground">
-              Cancel
-            </div>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

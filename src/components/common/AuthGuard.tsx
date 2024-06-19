@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUserContext } from "@/context/UserContext";
 import Loading from "./Loading";
-import { PERMISSION } from "@/utils/PERMISSION";
+import { PERMISSION } from "minecentral-api";
 
 export default function AuthGuard({ role }: { role?: any }) {
   const { isLoggedIn, userLoaded, isAdmin, isDeveloper } = useUserContext();
@@ -13,7 +13,7 @@ export default function AuthGuard({ role }: { role?: any }) {
   //Permission
   if (role === PERMISSION.ADMIN && !isAdmin)
     return <Navigate to="/home" replace />;
-  if (role === PERMISSION.CREATOR && !isDeveloper)
+  if (role === PERMISSION.DEVELOPER && !isDeveloper)
     return <Navigate to="/home" replace />;
   //Passed all...
   return <Outlet />;

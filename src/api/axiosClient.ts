@@ -1,10 +1,14 @@
 import axios from "axios";
 
-export const client = axios.create({
+export const backendApi = axios.create({
   // https://api.ronanplugins.com
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "multipart/form-data",
   },
+});
+
+export const spigotApi = axios.create({
+  baseURL: `https://api.spiget.org/v2/`,
 });

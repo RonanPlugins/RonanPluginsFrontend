@@ -7,12 +7,12 @@ import { ResourceCreate } from "./resources/Create.tsx";
 import { ResourceView } from "./resources/View.tsx";
 import { Resources } from "./resources/index.tsx";
 import Admin from "./Admin.tsx";
-import { PERMISSION } from "@/utils/PERMISSION.ts";
 import ProfileOther from "./profile/ProfileOther.tsx";
 import { ResourceEdit } from "./resources/Editor.tsx";
 import StripeRefresh from "./stripe/StripeRefresh.tsx";
 import { Servers } from "./servers/index.tsx";
 import { ImportSpigot } from "./profile/ImportSpigot.tsx";
+import { PERMISSION } from "minecentral-api";
 
 export const router = createBrowserRouter([
   {
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
       },
       // Creator
       {
-        element: <AuthGuard role={PERMISSION.CREATOR} />,
+        element: <AuthGuard role={PERMISSION.DEVELOPER} />,
         children: [
           {
             path: "/resource/create",

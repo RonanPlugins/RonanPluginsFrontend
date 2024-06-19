@@ -1,8 +1,8 @@
-import { client } from "./axiosClient";
+import { backendApi } from "./axiosClient";
 
 export default {
   resource(id: string): Promise<any> {
-    return client
+    return backendApi
       .post(`/purchase/resource/${id}`)
       .then(({ data }) => {
         console.log("Purchased ", id);

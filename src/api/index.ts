@@ -1,4 +1,4 @@
-import { client } from "./axiosClient";
+import { backendApi } from "./axiosClient";
 
 export default {
   async loginDiscord() {
@@ -7,10 +7,10 @@ export default {
     // return client.get(`/auth/discord`);
   },
   async logout() {
-    client.post("/auth/logout");
+    backendApi.post("/auth/logout");
   },
   async autoLogin(): Promise<any | null> {
-    return client
+    return backendApi
       .get(`${import.meta.env.VITE_API_URL}/auth/login/success`)
       .then((response) => {
         if (response.status === 200) return response;

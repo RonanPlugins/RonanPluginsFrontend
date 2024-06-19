@@ -1,9 +1,9 @@
-import { client } from "./axiosClient";
+import { backendApi } from "./axiosClient";
 
 export default {
   create(resourceInfo: any): Promise<any> {
     console.log("New Create Resource Request", resourceInfo);
-    return client
+    return backendApi
       .post(`/resource`, resourceInfo)
       .then(({ data }) => {
         //console.log("POST", data);
@@ -16,7 +16,7 @@ export default {
   },
   edit(id: number, info: any): Promise<any> {
     console.log("Edit Resource Request", id, info);
-    return client
+    return backendApi
       .put(`/resource/${id}`, info)
       .then(({ data }) => {
         //console.log("POST", data);
@@ -29,7 +29,7 @@ export default {
   },
   delete(id: number): Promise<any> {
     console.log("Delete Resource Request", id);
-    return client
+    return backendApi
       .delete(`/resource/${id}`)
       .then(({ data }) => {
         //console.log("POST", data);
@@ -41,7 +41,7 @@ export default {
       });
   },
   getOne(resourceId: string | undefined): Promise<any> {
-    return client
+    return backendApi
       .get(`/resource/${resourceId}`)
       .then(({ data }) => {
         //console.log("POST", data);
@@ -53,7 +53,7 @@ export default {
       });
   },
   getAll(filter?: FilterParams): Promise<any> {
-    return client
+    return backendApi
       .get(`/resource`, { responseType: "json", params: { ...filter } })
       .then(({ data }) => {
         return data;
@@ -64,7 +64,7 @@ export default {
       });
   },
   getUser(userID: string): Promise<any> {
-    return client
+    return backendApi
       .get(`/resource/user/${userID}`, { responseType: "json" })
       .then(({ data }) => {
         return data;
@@ -75,7 +75,7 @@ export default {
       });
   },
   getCount(): Promise<any> {
-    return client
+    return backendApi
       .get(`/resource/count`, {
         responseType: "json",
       })
@@ -88,7 +88,7 @@ export default {
       });
   },
   getIcon(id: string): Promise<any> {
-    return client
+    return backendApi
       .get(`/resource/${id}/image`, {
         responseType: "blob",
       })
@@ -101,7 +101,7 @@ export default {
       });
   },
   getJar(id: string): Promise<any> {
-    return client
+    return backendApi
       .get(`/resource/${id}/file`, {
         responseType: "blob",
       })

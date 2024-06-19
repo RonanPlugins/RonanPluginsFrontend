@@ -1,5 +1,5 @@
 import api from "@/api";
-import { PERMISSION } from "@/utils/PERMISSION";
+import { PERMISSION } from "minecentral-api";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const initialState = {
@@ -38,7 +38,7 @@ export default function UserProvider({ children }: { children: any }) {
       if (data) {
         setUser(data);
         setAdmin(data.role === PERMISSION.ADMIN);
-        setDeveloper(data.role >= PERMISSION.CREATOR);
+        setDeveloper(data.role >= PERMISSION.DEVELOPER);
       }
       setUserLoaded(true);
     };

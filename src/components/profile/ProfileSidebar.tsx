@@ -3,9 +3,9 @@ import { ImportSpigotSidebar } from "./ImportSpigotSidebar";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import Links from "@/lib/Links";
-import { PERMISSION } from "@/utils/PERMISSION";
 import { EditStripe } from "./EditStripe";
 import api from "@/api/index";
+import { PERMISSION } from "minecentral-api";
 
 export default function ProfileSidebar() {
   const { user }: { user: any } = useUserContext();

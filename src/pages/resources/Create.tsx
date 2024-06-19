@@ -19,6 +19,7 @@ import resourceAPI from "@/api/resource";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
+import usePageTitle from "@/utils/usePageTitle";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -47,6 +48,7 @@ const formSchema = z.object({
 });
 
 export function ResourceCreate() {
+  usePageTitle("New Resource");
   //Are we posting this to the backend?
   const [posting, setPosting] = useState<boolean>(false);
   //Description state (read-only)
