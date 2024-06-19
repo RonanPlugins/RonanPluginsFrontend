@@ -50,16 +50,6 @@ export const router = createBrowserRouter([
         path: "/refresh/:accountId",
         element: <StripeRefresh />,
       },
-      // Creator
-      {
-        element: <AuthGuard role={PERMISSION.DEVELOPER} />,
-        children: [
-          {
-            path: "/resource/create",
-            element: <ResourceCreate />,
-          },
-        ],
-      },
       //Profile
       {
         element: <AuthGuard />,
@@ -67,6 +57,10 @@ export const router = createBrowserRouter([
           {
             path: "/profile",
             element: <Profile />,
+          },
+          {
+            path: "/resource/create",
+            element: <ResourceCreate />,
           },
           {
             path: "/resource/:id/edit",

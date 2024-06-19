@@ -7,7 +7,7 @@ const useLocalStorageCache = (key: any, initialValue: any) => {
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (value !== null) localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 
   return [value, setValue];

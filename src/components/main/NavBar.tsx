@@ -40,7 +40,7 @@ export default function Nav() {
       <main className="flex flex-col w-full gap-2">
         {/* Top Bar */}
 
-        <div className="relative flex flex-row max-w-4xl w-full px-2 items-center justify-between mx-auto">
+        <div className="relative flex flex-row max-w-5xl w-full px-2 items-center justify-between mx-auto">
           <div>
             <img className="h-10" src="assets/logo.png" alt="Logo" />
           </div>
@@ -96,7 +96,7 @@ export default function Nav() {
             <div className="px-2 flex flex-row gap-1">
               {navItems.map((item) => {
                 return (
-                  <NavItem className="rounded-t-md" key={item.link} {...item} />
+                  <NavItem className="rounded-t-sm" key={item.link} {...item} />
                 );
               })}
             </div>

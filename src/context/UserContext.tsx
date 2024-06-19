@@ -1,4 +1,5 @@
 import api from "@/api";
+import profile from "@/api/profile";
 import { PERMISSION } from "minecentral-api";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ const initialState = {
   userLoaded: false,
   isAdmin: false,
   isDeveloper: false,
+  isPremiumReady: false,
 };
 
 const UserContext = createContext(initialState);
@@ -22,6 +24,7 @@ export default function UserProvider({ children }: { children: any }) {
   const [userLoaded, setUserLoaded] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
   const [isDeveloper, setDeveloper] = useState(false);
+  const [isPremiumReady, setPremiumReady] = useState(false);
 
   const isLoggedIn = () => {
     return user !== null;
@@ -39,6 +42,8 @@ export default function UserProvider({ children }: { children: any }) {
         setUser(data);
         setAdmin(data.role === PERMISSION.ADMIN);
         setDeveloper(data.role >= PERMISSION.DEVELOPER);
+        const stripe = await profile.getStripeStatus();
+        setPremiumReady(stripe?.enabled);
       }
       setUserLoaded(true);
     };
@@ -47,7 +52,15 @@ export default function UserProvider({ children }: { children: any }) {
 
   return (
     <UserContext.Provider
-      value={{ user, isLoggedIn, logout, userLoaded, isAdmin, isDeveloper }}
+      value={{
+        user,
+        isLoggedIn,
+        logout,
+        userLoaded,
+        isAdmin,
+        isDeveloper,
+        isPremiumReady,
+      }}
     >
       {children}
     </UserContext.Provider>

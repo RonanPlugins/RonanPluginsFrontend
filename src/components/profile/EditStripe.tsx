@@ -11,48 +11,50 @@ import { Link } from "react-router-dom";
 import { useUserContext } from "@/context/UserContext";
 import StripeJoin from "./StripeJoin";
 import { toast } from "sonner";
-import profile from "@/api/profile";
 import { Button } from "../ui/button";
-import Loading from "../common/Loading";
 import PremiumIcon from "../common/PremiumIcon";
+import profile from "@/api/profile";
 
 export function EditStripe() {
-  const { user } = useUserContext();
+  const { user, isPremiumReady } = useUserContext();
   const [accountID, setID] = useState<string | null>(
     user?.stripe?.account_id || null
   );
-  const [status, setStatus] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [accountLinkCreatePending, setAccountLinkCreatePending] =
+    useState(false);
 
-  const getStatus = async () => {
-    if (accountID === null) {
-      setLoading(false);
-      return;
+  async function getLink() {
+    setAccountLinkCreatePending(true);
+    if (!accountID) return;
+    const link = await profile.createStripeAccountLink(accountID);
+    if (link === null) {
+      // setError(true);
+    } else {
+      window.location.href = link.url;
     }
-    const newStatus = await profile.getStripeStatus();
-    if (newStatus !== null) setStatus(newStatus.enabled);
-    setLoading(false);
-  };
+
+    setAccountLinkCreatePending(false);
+  }
 
   useEffect(() => {
-    if (accountID != user?.stripe?.account_id) {
+    if (user && accountID != user?.stripe?.account_id) {
       toast.success("Account ID Created!", {
         richColors: true,
       });
       // console.log("Account id has changed!");
       user.stripe = { account_id: accountID };
     }
-    getStatus();
+    // getStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountID]);
 
   return (
     <Card className="relative">
-      {status && <PremiumIcon />}
+      {isPremiumReady && <PremiumIcon />}
       <CardHeader>
         <CardTitle className="text-center">Premium Developer</CardTitle>
         <CardDescription className="text-center">
-          {`Accept${status ? "ing" : ""} payments using `}
+          {`Accept${isPremiumReady ? "ing" : ""} payments using `}
           <Link
             className="font-bold hover:underline"
             to={"https://dashboard.stripe.com/"}
@@ -64,15 +66,19 @@ export function EditStripe() {
       <CardContent className="text-center">
         {accountID ? (
           <div>
-            {status !== true ? (
-              <div className="rounded-md border px-4 text-sm shadow-sm">
-                <span className="">
-                  {loading ? <Loading /> : "Pending Documents"}
-                </span>
-              </div>
+            {!isPremiumReady ? (
+              <Button
+                variant="destructive"
+                className="mx-auto flex flex-col py-6"
+                disabled={accountLinkCreatePending}
+                onClick={getLink}
+              >
+                <p>Pending Documents</p>
+                <p className="text-xs">Click to Complete</p>
+              </Button>
             ) : (
               // Successful Stripe Account
-              <Button>View Portal</Button>
+              <Button variant="special">View Portal</Button>
             )}
           </div>
         ) : (

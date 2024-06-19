@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import profile from "@/api/profile";
 import { toast } from "sonner";
-import { CheckCircle2Icon, InfoIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

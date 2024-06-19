@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -22,12 +23,13 @@ import { Dispatch, useEffect, useState } from "react";
 import spigot from "@/api/spigot";
 import Image from "@/components/common/Image";
 import PremiumIcon from "@/components/common/PremiumIcon";
-import { Switch } from "@/components/ui/switch";
 import useLocalStorageCache from "@/hooks/useLocalStorageCache";
+import { TypeList } from "@/components/resource/TypeList";
+import { RESOURCE_TYPE } from "minecentral-api";
 
 interface ISelected_Resource {
   id: string;
-  category?: string;
+  category?: RESOURCE_TYPE;
   resource: any;
 }
 
@@ -41,6 +43,7 @@ export function ImportSpigot() {
   const [spigotID, setSpigotID] = useState<string>(
     user.spigotID || cachedSpigotID
   );
+  const [spigotIDCACHE, setSpigotIDCACHE] = useState<string>("");
   //Dialogs
   const [openSetAuthor, setOpenSetAuthor] = useState(spigotID === null);
   const [openEditResource, setOpenEditResource] = useState(false);
@@ -50,12 +53,13 @@ export function ImportSpigot() {
   const [selectedResources, setSelectedResources] = useState<
     ISelected_Resource[]
   >([]);
-  const [resourceEditting, setResourceEditting] =
-    useState<ISelected_Resource>();
+  const [resourceEditting, setResourceEditting] = useState<ISelected_Resource>({
+    id: "",
+    resource: "",
+  });
 
   async function handleImportAuthor() {
     if (!spigotID || spigotID === "") return;
-    setOpenSetAuthor(false);
     const spigotResources = await loadSpigotResources(spigotID);
     // console.log(spigotResources);
     setResources(spigotResources);
@@ -67,7 +71,7 @@ export function ImportSpigot() {
       handleImportAuthor();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [spigotID]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -75,8 +79,13 @@ export function ImportSpigot() {
     }
   };
 
+  const handleUpdateSpigotID = () => {
+    setOpenSetAuthor(false);
+    setSpigotID(spigotIDCACHE);
+    setSpigotIDCACHE("");
+  };
+
   function addOrUpdateEdittingResources(resource: ISelected_Resource) {
-    resource.category = "2";
     setOpenEditResource(false);
     //Add or Update Selected Resource array
     setSelectedResources((array) => {
@@ -130,12 +139,14 @@ export function ImportSpigot() {
               spigotID={spigotID}
             />
             <SetAuthor
+              spigotIDCACHE={spigotIDCACHE}
+              disabled={user.spigotID}
               spigotID={spigotID}
               open={openSetAuthor}
-              handleImportAuthor={handleImportAuthor}
+              onSubmit={handleUpdateSpigotID}
               handleKeyPress={handleKeyPress}
               onOpenChange={setOpenSetAuthor}
-              setSpigotID={setSpigotID}
+              setSpigotIDCACHE={setSpigotIDCACHE}
             />
           </div>
         </CardHeader>
@@ -143,6 +154,7 @@ export function ImportSpigot() {
       <EditResource
         onConfirm={addOrUpdateEdittingResources}
         resource={resourceEditting}
+        setResource={setResourceEditting}
         open={openEditResource}
         onOpenChange={setOpenEditResource}
       />
@@ -162,23 +174,25 @@ export function ImportSpigot() {
                   key={resource.id}
                   className="relative resource flex flex-row w-full"
                 >
+                  {resource.premium && <PremiumIcon />}
+
                   <Image
                     url={`https://www.spigotmc.org/${resource.icon.url}`}
                   />
-                  <div className="ml-3">
-                    <p className="text-primary font-bold">{resource.name}</p>
-                    {resource.premium && <PremiumIcon />}
-                  </div>
-                  <div className="ml-auto flex flex-col items-center justify-between">
-                    <Switch
-                      id={resource.id}
-                      // onClick={() => handleCheckedResource(resource.id)}
-                      checked={selected}
-                      className=""
-                    />
-                    <Button onClick={() => handleCheckedResource(resource)}>
-                      Select
-                    </Button>
+                  <div className="w-full flex flex-col">
+                    <p className="text-primary text-center font-bold text-lg">
+                      {resource.name}
+                    </p>
+                    <div className="grow"></div>
+                    <div className="self-center justify-self-end">
+                      <Button
+                        variant={selected ? "outline" : "default"}
+                        className="px-8"
+                        onClick={() => handleCheckedResource(resource)}
+                      >
+                        {selected ? "Configure" : "Select"}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               );
@@ -200,24 +214,32 @@ async function loadSpigotResources(authorID: string) {
 
 function SetAuthor({
   spigotID,
+  spigotIDCACHE,
   open,
   onOpenChange,
   handleKeyPress,
-  handleImportAuthor,
-  setSpigotID,
+  onSubmit: onSubmit,
+  setSpigotIDCACHE,
+  disabled,
 }: {
   spigotID: string;
+  spigotIDCACHE: string;
   open: boolean;
   onOpenChange: Dispatch<React.SetStateAction<boolean>>;
   handleKeyPress: any;
-  handleImportAuthor: any;
-  setSpigotID: Dispatch<React.SetStateAction<string>>;
+  onSubmit: any;
+  setSpigotIDCACHE: Dispatch<React.SetStateAction<string>>;
+  disabled: boolean;
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button onClick={() => onOpenChange((prev) => !prev)}>
-          {`${spigotID ? "Change" : "Set"} Author ID`}
+        <Button
+          onClick={() => onOpenChange((prev) => !prev)}
+          disabled={disabled}
+          variant={spigotID ? "outline" : "destructive"}
+        >
+          {`${spigotID ? "Correct" : "Set"} Author ID`}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
@@ -237,15 +259,18 @@ function SetAuthor({
               id="name"
               placeholder={spigotID ? spigotID : "Your SpigotMC.org user id"}
               className="col-span-3"
-              onChange={(e) => setSpigotID(e.target.value)}
+              onChange={(e) => setSpigotIDCACHE(e.target.value)}
               onKeyDown={handleKeyPress}
             />
           </div>
         </div>
 
         <DialogFooter>
-          <Button onClick={handleImportAuthor} disabled={!spigotID}>
-            Import Resources
+          <Button
+            onClick={onSubmit}
+            disabled={!spigotIDCACHE || spigotIDCACHE === ""}
+          >
+            {!spigotID ? `Import Resources` : "Update Author ID"}
           </Button>
           <Button
             type="button"
@@ -262,15 +287,26 @@ function SetAuthor({
 
 function EditResource({
   resource,
+  setResource,
   open,
   onOpenChange,
   onConfirm,
 }: {
   resource: ISelected_Resource | undefined;
+  setResource: Dispatch<React.SetStateAction<ISelected_Resource>>;
   open: boolean;
   onOpenChange: any;
   onConfirm: any;
 }) {
+  const selectCategory = (type: RESOURCE_TYPE) => {
+    setResource(
+      (prev): ISelected_Resource => ({
+        ...prev,
+        category: type,
+      })
+    );
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
@@ -280,10 +316,21 @@ function EditResource({
             <div>To Import this resource, please configure some options!</div>
           </DialogDescription>
         </DialogHeader>
-
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Select Category</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-2 grid-flow-col">
+            <TypeList
+              onSelect={selectCategory}
+              selected={resource?.category ? [resource.category] : []}
+              className="border-2 rounded p-1 text-center"
+            />
+          </CardContent>
+        </Card>
         <DialogFooter>
           <Button
-            type="submit"
+            disabled={true}
             variant="destructive"
             onClick={() => onConfirm(resource)}
           >

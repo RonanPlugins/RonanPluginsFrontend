@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
 import usePageTitle from "@/utils/usePageTitle";
+import { Switch } from "@/components/ui/switch";
+import { useUserContext } from "@/context/UserContext";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -49,7 +51,7 @@ const formSchema = z.object({
 
 export function ResourceCreate() {
   usePageTitle("New Resource");
-  //Are we posting this to the backend?
+  const { isPremiumReady } = useUserContext();
   const [posting, setPosting] = useState<boolean>(false);
   //Description state (read-only)
   const [description, setDescription] = useState(null);
@@ -74,7 +76,6 @@ export function ResourceCreate() {
       link_support: "",
       link_source: "",
       version: "",
-      premium: "",
     },
   });
 
@@ -137,22 +138,10 @@ export function ResourceCreate() {
           onSubmit={form.handleSubmit(handleCreatePost)}
           className="gap-8 flex flex-col"
         >
-          <FormField
-            control={form.control}
-            name="premium"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="me-3">Premium</FormLabel>
-                <FormControl>
-                  <label className="inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" className="sr-only peer" />
-                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                  </label>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
+          <div className={`${isPremiumReady ? "visible" : "hidden"}`}>
+            <p>Premium</p>
+            <Switch />
+          </div>
           <FormField
             control={form.control}
             name="title"
@@ -160,7 +149,7 @@ export function ResourceCreate() {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Title" {...field} />
+                  <Input placeholder="Resource name" {...field} />
                 </FormControl>
                 <FormDescription>
                   Name by which your resource will be displayed

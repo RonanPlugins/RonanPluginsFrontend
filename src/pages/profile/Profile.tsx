@@ -34,8 +34,8 @@ export default function Profile() {
       </h1>
 
       <div className="w-full">
-        <div className="max-w-6xl mx-auto flex md:flex-row flex-col">
-          <div className="resourceContainer max-w-4xl grow mr-2 w-full">
+        <div className="max-w-6xl mx-auto flex md:flex-row flex-col md:space-x-2">
+          <div className="resourceContainer max-w-4xl grow w-full">
             <div className="resources h-full">
               {resources && resources.length > 0 ? (
                 resources.map((resource) => (
@@ -63,7 +63,7 @@ export default function Profile() {
               )}
             </div>
           </div>
-          <div className="max-w-2xl flex flex-col space-y-2 mx-2">
+          <div className="max-w-xs flex flex-col space-y-2 mx-auto">
             <ProfileSidebar />
           </div>
         </div>
