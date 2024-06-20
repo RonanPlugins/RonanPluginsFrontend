@@ -1,4 +1,3 @@
-import TextEditor from "@/components/textEditor/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
@@ -22,6 +21,7 @@ import { Upload } from "lucide-react";
 import usePageTitle from "@/utils/usePageTitle";
 import { Switch } from "@/components/ui/switch";
 import { useUserContext } from "@/context/UserContext";
+import { TextEditor } from "@/components/textEditor/TextEditor";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -206,11 +206,12 @@ export function ResourceCreate() {
           <div>
             <FormLabel>Description</FormLabel>
             <div className="my-2"></div>
-            <TextEditor
+            {/* <TextEditor
               className="border-gray-700 border-t-0 rounded-bl-md rounded-br-md border-2 text-left p-2 min-h-64"
               onChange={setDescription}
               canEdit={true}
-            />
+            /> */}
+            <TextEditor />
             {descriptionError !== null && (
               <FormMessage>{descriptionError}</FormMessage>
             )}

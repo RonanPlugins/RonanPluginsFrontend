@@ -1,4 +1,3 @@
-import TextEditor from "@/components/textEditor/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
@@ -19,6 +18,7 @@ import resourceAPI from "@/api/resource";
 import { useNavigate, useParams } from "react-router-dom";
 import { Buffer } from "buffer";
 import usePageTitle from "@/utils/usePageTitle";
+import { TextEditor } from "@/components/textEditor/TextEditor";
 
 const formSchema = z.object({
   title: z.string().min(3, {
@@ -156,13 +156,14 @@ export function ResourceEdit() {
           />
           {/* Description field */}
 
-          <div>
+          <div className="max-w-4xl">
             <FormLabel>Description</FormLabel>
             <div className="my-2"></div>
             <TextEditor
-              className="border-gray-700 border-t-0 rounded-bl-md rounded-br-md border-2 text-left p-2 min-h-64"
-              onChange={setDescription}
-              canEdit={true}
+              // className="border-gray-700 border-t-0 rounded-bl-md rounded-br-md border-2 text-left p-2 min-h-64"
+              onChange={(data: any) => {
+                setDescription(data.level.content);
+              }}
               content={description}
             />
             {descriptionError !== null && (

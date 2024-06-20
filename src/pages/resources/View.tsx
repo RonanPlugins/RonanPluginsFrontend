@@ -2,7 +2,6 @@ import resourceAPI from "@/api/resource";
 import Loading from "@/components/common/Loading";
 import { ResourceSidebar } from "@/components/resource/Sidebar";
 import { ResourceImage } from "@/components/resource/Image";
-import TextEditor from "@/components/textEditor/TextEditor";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
@@ -11,11 +10,12 @@ import { useParams } from "react-router-dom";
 import { Buffer } from "buffer";
 import { ResourceDownload } from "@/components/resource/Download";
 import { ResourceDelete } from "@/components/resource/Delete";
+import { TextViewer } from "@/components/textEditor/TextViewer";
 import usePageTitle from "@/utils/usePageTitle";
 
 export function ResourceView() {
   const { id } = useParams();
-  const { isAdmin }: { user: any; isAdmin: boolean } = useUserContext();
+  const { isAdmin }: { isAdmin: boolean } = useUserContext();
   const [loading, setLoading] = useState(true);
   const [resource, setResourceInfo] = useState<any | null>(null);
 
@@ -31,16 +31,17 @@ export function ResourceView() {
     setLoading(false);
   }
 
+  usePageTitle(resource ? resource.title : "");
+
   useEffect(() => {
     getPlugin();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <Loading />;
   if (resource === null) return <>Error!</>;
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  usePageTitle(resource.title);
+  // usePageTitle(resource.title);
   // console.log(user?._id, resource.authorID._id);
 
   return (
@@ -79,7 +80,8 @@ export function ResourceView() {
           <CardContent className="py-2 mx-2">
             {/* Body of plugin data */}
             <main className="border-t-4">
-              <TextEditor content={resource.description} canEdit={false} />
+              <TextViewer content={resource.description} />
+              {/* content={resource.description} canEdit={false} /> */}
             </main>
           </CardContent>
         </Card>
