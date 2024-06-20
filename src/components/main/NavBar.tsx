@@ -45,10 +45,67 @@ export default function Nav() {
 
         <div className="relative flex flex-row max-w-5xl w-full px-2 items-center justify-between mx-auto">
           <div>
-            <img className="h-10" src="assets/logo.png" alt="Logo" />
+            <img
+              className="h-10 hidden md:block"
+              src="assets/logo.png"
+              alt="Logo"
+            />
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  size="icon"
+                  className="ml-2 shrink-0 md:hidden mb-2"
+                  variant="secondary"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent side="left" className="max-w-96">
+                <nav className="text-lg font-medium">
+                  {navItems.map((item) => {
+                    const activeNav =
+                      item.list.filter((link) =>
+                        location.pathname.includes(link)
+                      ).length > 0;
+                    return (
+                      <div key={item.title} className="grid">
+                        <NavItem
+                          active={activeNav}
+                          className="rounded-full mb-2"
+                          {...item}
+                          isSheet={true}
+                        />
+
+                        {item.link === Links.Resources && activeNav && (
+                          <div className="grid mx-4 mb-2">
+                            <NavFilterBar
+                              variant={"ghost"}
+                              className="grid flex-row w-full justify-start rounded-full"
+                              onSelect={(category: CATEGORY_PLUGIN) => {
+                                setCategory(category);
+                                setSheetOpen(false);
+                              }}
+                              selected={category}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </nav>
+
+                <div className="w-full flex justify-end">
+                  <ModeToggle className="" />
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
           <div className="absolute left-1/2 -translate-x-1/2">
-            <p>Site Under Developement</p>
+            <p className="font-bold text-red-600 animate-pulse">
+              Site Under Developement
+            </p>
           </div>
           {/* Login/Profile */}
           <div className="flex flex-row gap-2 justify-self-end">
@@ -56,63 +113,17 @@ export default function Nav() {
               <Link to={Links.Profile}>
                 <img
                   src={user?.avatarURL}
-                  className="rounded h-10 hover:ring-4"
+                  className="rounded-full h-10 hover:ring-4"
                 />
               </Link>
             ) : (
               <LoginDialog />
             )}
 
-            <ModeToggle />
+            <ModeToggle className="hidden md:flex" />
           </div>
         </div>
         <div className="w-full border-primary border-b-8 md:border-none">
-          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-            <SheetTrigger asChild>
-              <Button
-                size="icon"
-                className="ml-2 shrink-0 md:hidden mb-2"
-                variant="secondary"
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
-
-            <SheetContent side="left" className="max-w-96">
-              <nav className="text-lg font-medium">
-                {navItems.map((item) => {
-                  const activeNav =
-                    item.list.filter((link) => location.pathname.includes(link))
-                      .length > 0;
-                  return (
-                    <div key={item.title} className="grid">
-                      <NavItem
-                        active={activeNav}
-                        className="rounded-full mb-2"
-                        {...item}
-                        isSheet={true}
-                      />
-
-                      {item.link === Links.Resources && activeNav && (
-                        <div className="grid mx-4 mb-2">
-                          <NavFilterBar
-                            variant={"ghost"}
-                            className="grid flex-row w-full justify-start"
-                            onSelect={(category: CATEGORY_PLUGIN) => {
-                              setCategory(category);
-                              setSheetOpen(false);
-                            }}
-                            selected={category}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </nav>
-            </SheetContent>
-          </Sheet>
           {/* Group links in a flex container with horizontal spacing */}
           <nav className="max-w-4xl hidden md:flex flex-col w-full mx-auto">
             <div className="px-2 flex flex-row gap-1">

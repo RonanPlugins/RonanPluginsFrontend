@@ -1,5 +1,8 @@
+import Links from "@/lib/Links";
+import { getEnumValue } from "@/utils/enum";
 import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const initialState = {
   category: undefined,
@@ -17,23 +20,25 @@ export function ResourceProvider({ children }: { children: any }) {
     CATEGORY_PLUGIN | undefined
   >();
 
-  // useEffect(() => {
-  //   // console.log("Url changed!");
-  // }, [location]);
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (location.pathname === Links.Resources) {
+      const category: CATEGORY_PLUGIN | undefined = getEnumValue(
+        CATEGORY_PLUGIN,
+        searchParams.get("category")
+      );
+      if (category) {
+        setCategory(category);
+      }
+    }
+  }, []);
 
   function setCategory(category: CATEGORY_PLUGIN) {
     // console.log("Context", category);
     setCategoryContext(category);
-    const url = new URL(window.location.href);
-    const newParams: any = { category };
-    Object.keys(newParams).forEach((key) => {
-      if (newParams[key] !== null) {
-        url.searchParams.set(key, newParams[key]);
-      } else {
-        url.searchParams.delete(key);
-      }
-    });
-    window.history.replaceState({}, "", url.toString());
+    setUrlSearch({ category });
   }
 
   return (
@@ -46,4 +51,16 @@ export function ResourceProvider({ children }: { children: any }) {
       {children}
     </ResourceContext.Provider>
   );
+}
+
+function setUrlSearch(newParams: any) {
+  const url = new URL(window.location.href);
+  Object.keys(newParams).forEach((key) => {
+    if (newParams[key] !== null) {
+      url.searchParams.set(key, newParams[key]);
+    } else {
+      url.searchParams.delete(key);
+    }
+  });
+  window.history.replaceState({}, "", url.toString());
 }

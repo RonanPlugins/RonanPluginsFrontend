@@ -3,11 +3,12 @@ import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/context/ThemeContext";
 
-export function ModeToggle() {
+export function ModeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
 
   return (
     <Button
+      className={`${className}`}
       variant="secondary"
       size="icon"
       onClick={() => {

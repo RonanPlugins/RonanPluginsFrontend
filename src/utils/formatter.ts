@@ -1,4 +1,4 @@
-export function formatString(input: string): string {
+export function formatToTitleCase(input: string): string {
   // Convert the input string to lowercase
   const lowerCaseStr = input.toLowerCase();
 

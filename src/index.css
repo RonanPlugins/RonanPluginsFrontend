@@ -63,4 +63,8 @@
   .resources {
     @apply mx-auto space-y-2 max-w-4xl;
   }
+  .item {
+    margin-left: 8px;
+    margin-top: 8px;
+  }
 }
