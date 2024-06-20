@@ -8,14 +8,17 @@ import LoginDialog from "../common/LoginDialog";
 import { useUserContext } from "@/context/UserContext";
 import Links from "@/lib/Links";
 import { ModeToggle } from "../common/ModeToggle";
+import { NavFilterBar } from "../resource/NavFilterBar";
+import { useResourceContext } from "@/context/ResourceContext";
+import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const { isLoggedIn, user } = useUserContext();
-
+  const { category, setCategory } = useResourceContext();
   const location = useLocation();
   useEffect(() => {
-    setSheetOpen(false);
+    if (location.pathname !== "/resources") setSheetOpen(false);
   }, [location]);
 
   // const loc = useLocation();
@@ -37,7 +40,7 @@ export default function Nav() {
   ];
   return (
     <div className="pt-2 shadow-md w-full">
-      <main className="flex flex-col w-full gap-2">
+      <main className="flex flex-col w-full gap-2 border-primary border-b-8">
         {/* Top Bar */}
 
         <div className="relative flex flex-row max-w-5xl w-full px-2 items-center justify-between mx-auto">
@@ -63,7 +66,7 @@ export default function Nav() {
             <ModeToggle />
           </div>
         </div>
-        <div className="w-full border-primary border-b-8">
+        <div className="w-full border-primary border-b-8 md:border-none">
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
               <Button
@@ -76,16 +79,35 @@ export default function Nav() {
               </Button>
             </SheetTrigger>
 
-            <SheetContent side="left">
-              <nav className="grid gap-6 text-lg font-medium">
+            <SheetContent side="left" className="max-w-96">
+              <nav className="text-lg font-medium">
                 {navItems.map((item) => {
+                  const activeNav =
+                    item.list.filter((link) => location.pathname.includes(link))
+                      .length > 0;
                   return (
-                    <NavItem
-                      className="rounded-full"
-                      key={item.link}
-                      {...item}
-                      isSheet={true}
-                    />
+                    <div key={item.title} className="grid">
+                      <NavItem
+                        active={activeNav}
+                        className="rounded-full mb-2"
+                        {...item}
+                        isSheet={true}
+                      />
+
+                      {item.link === Links.Resources && activeNav && (
+                        <div className="grid mx-4 mb-2">
+                          <NavFilterBar
+                            variant={"ghost"}
+                            className="grid flex-row w-full justify-start"
+                            onSelect={(category: CATEGORY_PLUGIN) => {
+                              setCategory(category);
+                              setSheetOpen(false);
+                            }}
+                            selected={category}
+                          />
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </nav>
@@ -95,8 +117,16 @@ export default function Nav() {
           <nav className="max-w-4xl hidden md:flex flex-col w-full mx-auto">
             <div className="px-2 flex flex-row gap-1">
               {navItems.map((item) => {
+                const activeNav =
+                  item.list.filter((link) => location.pathname.includes(link))
+                    .length > 0;
                 return (
-                  <NavItem className="rounded-t-sm" key={item.link} {...item} />
+                  <NavItem
+                    active={activeNav}
+                    className="rounded-t-sm"
+                    key={item.title}
+                    {...item}
+                  />
                 );
               })}
             </div>

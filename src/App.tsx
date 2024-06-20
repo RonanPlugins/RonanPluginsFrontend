@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Footer from "./components/main/Footer";
 import UserProvider from "./context/UserContext";
 import { Toaster } from "./components/ui/sonner";
+import { ResourceProvider } from "./context/ResourceContext";
 
 // const client = new ApolloClient({
 //   uri: "/graphql",
@@ -14,14 +15,16 @@ import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (
-    <UserProvider>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <Nav />
-        <Outlet />
-        <Footer />
-        <Toaster />
-      </ThemeProvider>
-    </UserProvider>
+    <ResourceProvider>
+      <UserProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="theme">
+          <Nav />
+          <Outlet />
+          <Footer />
+          <Toaster />
+        </ThemeProvider>
+      </UserProvider>
+    </ResourceProvider>
   );
 }
 

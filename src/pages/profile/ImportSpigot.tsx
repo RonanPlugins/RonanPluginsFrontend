@@ -25,11 +25,11 @@ import Image from "@/components/common/Image";
 import PremiumIcon from "@/components/common/PremiumIcon";
 import useLocalStorageCache from "@/hooks/useLocalStorageCache";
 import { TypeList } from "@/components/resource/TypeList";
-import { RESOURCE_TYPE } from "minecentral-api";
+import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
 
 interface ISelected_Resource {
   id: string;
-  category?: RESOURCE_TYPE;
+  category?: CATEGORY_PLUGIN;
   resource: any;
 }
 
@@ -298,7 +298,7 @@ function EditResource({
   onOpenChange: any;
   onConfirm: any;
 }) {
-  const selectCategory = (type: RESOURCE_TYPE) => {
+  const selectCategory = (type: CATEGORY_PLUGIN) => {
     setResource(
       (prev): ISelected_Resource => ({
         ...prev,
@@ -320,7 +320,7 @@ function EditResource({
           <CardHeader>
             <CardTitle className="text-lg">Select Category</CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-2 grid-flow-col">
+          <CardContent className="grid gap-2 grid-cols-2 md:grid-cols-3">
             <TypeList
               onSelect={selectCategory}
               selected={resource?.category ? [resource.category] : []}

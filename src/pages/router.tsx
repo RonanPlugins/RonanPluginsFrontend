@@ -31,15 +31,6 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
-      //Resources
-      {
-        path: "/resources",
-        element: <Resources />,
-      },
-      {
-        path: "/resource/:id",
-        element: <ResourceView />,
-      },
       //Servers
       {
         path: "/servers",
@@ -49,6 +40,15 @@ export const router = createBrowserRouter([
       {
         path: "/refresh/:accountId",
         element: <StripeRefresh />,
+      },
+      //Resources
+      {
+        path: "/resources",
+        element: <Resources />,
+      },
+      {
+        path: "/resource/:id",
+        element: <ResourceView />,
       },
       //Profile
       {
