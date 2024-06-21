@@ -45,11 +45,18 @@ export default function Nav() {
 
         <div className="relative flex flex-row max-w-5xl w-full px-2 items-center justify-between mx-auto">
           <div>
-            <img
+            {/* <img
               className="h-10 hidden md:block"
-              src="assets/logo.png"
+              src="assets/favicon_512x512.png"
               alt="Logo"
-            />
+            /> */}
+
+            <div className="absolute left-1/2 -translate-x-1/2 -top-2 hidden md:block h-28 w-48">
+              <img
+                src="assets/logo_full.png"
+                className="object-cover object-center h-full w-full"
+              />
+            </div>
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -63,6 +70,12 @@ export default function Nav() {
               </SheetTrigger>
 
               <SheetContent side="left" className="max-w-96">
+                <div className="h-28 w-28 mx-auto -mt-10 -mb-4">
+                  <img
+                    src="assets/logo_full.png"
+                    className="object-cover object-center h-full w-full"
+                  />
+                </div>
                 <nav className="text-lg font-medium">
                   {navItems.map((item) => {
                     const activeNav =
@@ -78,19 +91,21 @@ export default function Nav() {
                           isSheet={true}
                         />
 
-                        {item.link === Links.Resources && activeNav && (
-                          <div className="grid mx-4 mb-2">
-                            <NavFilterBar
-                              variant={"ghost"}
-                              className="grid flex-row w-full justify-start rounded-full"
-                              onSelect={(category: CATEGORY_PLUGIN) => {
-                                setCategory(category);
-                                setSheetOpen(false);
-                              }}
-                              selected={category}
-                            />
-                          </div>
-                        )}
+                        {item.link === Links.Resources &&
+                          activeNav &&
+                          location.pathname === Links.Resources && (
+                            <div className="grid mx-4 mb-2">
+                              <NavFilterBar
+                                variant={"ghost"}
+                                className="grid flex-row w-full justify-start rounded-full"
+                                onSelect={(category: CATEGORY_PLUGIN) => {
+                                  setCategory(category);
+                                  setSheetOpen(false);
+                                }}
+                                selected={category}
+                              />
+                            </div>
+                          )}
                       </div>
                     );
                   })}
@@ -102,13 +117,9 @@ export default function Nav() {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="absolute left-1/2 -translate-x-1/2">
-            <p className="font-bold text-red-600 animate-pulse">
-              Site Under Developement
-            </p>
-          </div>
           {/* Login/Profile */}
           <div className="flex flex-row gap-2 justify-self-end">
+            <ModeToggle className="hidden md:flex" />
             {isLoggedIn() ? (
               <Link to={Links.Profile}>
                 <img
@@ -119,11 +130,9 @@ export default function Nav() {
             ) : (
               <LoginDialog />
             )}
-
-            <ModeToggle className="hidden md:flex" />
           </div>
         </div>
-        <div className="w-full border-primary border-b-8 md:border-none">
+        <div className="w-full border-primary border-b-8 md:border-none md:pt-14">
           {/* Group links in a flex container with horizontal spacing */}
           <nav className="max-w-4xl hidden md:flex flex-col w-full mx-auto">
             <div className="px-2 flex flex-row gap-1">

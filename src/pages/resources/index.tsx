@@ -2,7 +2,6 @@ import resourceAPI from "@/api/resource";
 import Loading from "@/components/common/Loading";
 import { useEffect, useState } from "react";
 import { ResourcePreview } from "@/components/resource/Preview";
-import { FILTERBY, getTitle } from "@/utils/FILTERBY";
 import {
   Select,
   SelectContent,
@@ -12,16 +11,18 @@ import {
 } from "@/components/ui/select";
 import Pagination from "@/components/common/Pagination";
 import { useSearchParams } from "react-router-dom";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import usePageTitle from "@/utils/usePageTitle";
 import { NavFilterBar } from "@/components/resource/NavFilterBar";
 import { useResourceContext } from "@/context/ResourceContext";
-import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatToTitleCase } from "@/utils/formatter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CircleX, Filter, Search } from "lucide-react";
+import { SORTBY, getTitle } from "@/utils/SORTBY";
+import { VERSION } from "@/utils/VERSION";
+// import { VERSION } from "minecentral-api/dist/plugins/VERSION";
 
 export function Resources() {
   usePageTitle("Resources");
@@ -31,7 +32,7 @@ export function Resources() {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
   //Sorting
-  const [sort, setSort] = useState<string>(FILTERBY.LAST_UPDATE);
+  const [sort, setSort] = useState<string>(SORTBY.LAST_UPDATE);
   //Filter
   const [filterShow, setFilterShow] = useState<boolean>(false); //Only used in mobile
   //Pagination
@@ -62,7 +63,7 @@ export function Resources() {
     <div className="">
       <div className="hidden md:flex flex-row mx-auto w-full justify-center bg-primary pb-2">
         <NavFilterBar
-          onSelect={(category: CATEGORY_PLUGIN) => {
+          onSelect={(category: any) => {
             setCategory(category);
           }}
           selected={category}
@@ -71,7 +72,7 @@ export function Resources() {
         />
       </div>
 
-      <div className="max-w-6xl space-y-2 mx-auto p-2 flex lg:flex-row flex-col lg:space-x-2 mb-2 lg:space-y-0">
+      <div className="max-w-6xl mx-auto p-2 flex lg:flex-row flex-col lg:space-x-2 mb-2 lg:space-y-0">
         <div className="w-full lg:w-96">
           {/* Title/Filter */}
           <Filters show={filterShow} />
@@ -183,35 +184,57 @@ function SearchBar({
 
 function Filters({ show }: { show: boolean }) {
   return (
-    <Card className={`${show ? "" : "hidden"} lg:block`}>
-      <CardHeader>
-        <Button
-          variant="outline"
-          className="mr-auto rounded-full hover:text-red"
-        >
-          <CircleX size={20} className="mr-2" />
-          Clear Filters
-        </Button>
-        <h2 className="font-bold">Filters</h2>
-      </CardHeader>
-      <CardContent className="grid gap-2">
-        {Object.keys(CATEGORY_PLUGIN)
-          .filter((v) => isNaN(Number(v)))
-          .map((filter) => (
-            <div className="flex items-center space-x-2">
-              <Checkbox id="terms" className="transition-colors" />
-              <label
-                htmlFor="terms"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+    <Card className={`${show ? "" : "hidden"} lg:block mb-2`}>
+      {/* Clear Filter Button */}
+      <Button
+        variant="outline"
+        className="mt-2 ml-2 mr-auto rounded-full hover:text-red"
+      >
+        <CircleX size={20} className="mr-2" />
+        Clear Filters
+      </Button>
+      {/* Filters */}
+      <div>
+        {/* Versions */}
+        <h2 className="font-bold pl-2">Minecraft Version</h2>
+        <div className="flex space-y-2 flex-wrap lg:block pl-2 justify-center">
+          {VERSION.map((filter) => {
+            return (
+              <div
+                key={filter}
+                className="item flex shrink items-center space-x-2"
               >
-                {formatToTitleCase(filter)}
-              </label>
-            </div>
-          ))}
-      </CardContent>
+                <Checkbox id="terms" className="transition-colors" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {formatToTitleCase(filter)}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </Card>
   );
 }
+
+/* <div className="flex space-y-2 flex-wrap lg:block pl-2 justify-center">
+  {enumToArray(CATEGORY_PLUGIN).map((filter) => {
+    return (
+      <div key={filter} className="item flex shrink items-center space-x-2">
+        <Checkbox id="terms" className="transition-colors" />
+        <label
+          htmlFor="terms"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          {formatToTitleCase(filter)}
+        </label>
+      </div>
+    );
+  })}
+</div>; */
 
 function Sortby({
   value,
@@ -226,7 +249,7 @@ function Sortby({
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        {Object.values(FILTERBY).map((filter) => (
+        {Object.values(SORTBY).map((filter) => (
           <SelectItem key={filter} value={filter}>
             {getTitle(filter)}
           </SelectItem>

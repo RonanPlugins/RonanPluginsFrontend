@@ -1,6 +1,6 @@
 import Links from "@/lib/Links";
 import { getEnumValue } from "@/utils/enum";
-import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
+import { CATEGORY_PLUGIN } from "minecentral-api";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
@@ -8,7 +8,6 @@ const initialState = {
   category: undefined,
   setCategory: (p: CATEGORY_PLUGIN) => {},
 };
-
 const ResourceContext = createContext(initialState);
 
 export const useResourceContext = () => {

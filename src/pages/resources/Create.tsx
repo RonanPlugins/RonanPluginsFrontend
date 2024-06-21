@@ -109,12 +109,15 @@ export function ResourceCreate() {
           linkSupport: formData.link_support,
           description,
           image: imageFile,
-          jar: selectedJar,
-          version: formData.version,
+          release: {
+            version: formData.version,
+            file: selectedJar,
+          },
         })
         .then((data: any) => {
           if (data) {
-            navigate(`/resource/${data._id}`);
+            console.log("New Resource created:", data);
+            navigate(`/resource/${data.id}`);
             toast("New Resource Created!", {
               icon: <Upload />,
             });
@@ -206,12 +209,7 @@ export function ResourceCreate() {
           <div>
             <FormLabel>Description</FormLabel>
             <div className="my-2"></div>
-            {/* <TextEditor
-              className="border-gray-700 border-t-0 rounded-bl-md rounded-br-md border-2 text-left p-2 min-h-64"
-              onChange={setDescription}
-              canEdit={true}
-            /> */}
-            <TextEditor />
+            <TextEditor content={description} onChange={setDescription} />
             {descriptionError !== null && (
               <FormMessage>{descriptionError}</FormMessage>
             )}

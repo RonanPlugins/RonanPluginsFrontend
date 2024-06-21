@@ -1,6 +1,7 @@
-import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
 import { Button } from "../ui/button";
 import { formatToTitleCase } from "@/utils/formatter";
+import { enumToArray } from "@/utils/enum";
+import { CATEGORY } from "minecentral-api";
 
 export function TypeList({
   selected,
@@ -8,17 +9,17 @@ export function TypeList({
   onSelect,
   variant,
 }: {
-  selected?: CATEGORY_PLUGIN;
+  selected?: any;
   className: string;
   onSelect: any;
   variant?: any;
 }) {
+  return <></>;
   return (
     <>
-      {Object.keys(CATEGORY_PLUGIN)
-        .filter((key) => !isNaN(Number(key))) //Filter out Number values (typescript stuff)
-        .map((key) => {
-          const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
+      {enumToArray(CATEGORY.PLUGIN) //Filter out Number values (typescript stuff)
+        .map((type) => {
+          // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
           return (
             <Button
               key={type}
@@ -26,7 +27,7 @@ export function TypeList({
               className={`${className}`}
               onClick={onSelect ? () => onSelect(type) : () => {}}
             >
-              {formatToTitleCase(type.toString())}
+              {formatToTitleCase(type)}
             </Button>
           );
         })}

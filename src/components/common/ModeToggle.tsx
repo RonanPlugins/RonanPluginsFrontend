@@ -9,7 +9,7 @@ export function ModeToggle({ className }: { className?: string }) {
   return (
     <Button
       className={`${className}`}
-      variant="secondary"
+      variant="ghost"
       size="icon"
       onClick={() => {
         // console.log(theme);

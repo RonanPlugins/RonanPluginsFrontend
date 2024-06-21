@@ -8,10 +8,12 @@ import Loading from "../common/Loading";
 import Image from "../common/Image";
 import { Button } from "../ui/button";
 import purchase from "@/api/purchase";
+import { useUserContext } from "@/context/UserContext";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
   const [userProfile, setUser] = useState<any>({});
   const [loading, setLoading] = useState(true);
+  const { user } = useUserContext();
 
   async function getUser() {
     const user = await memberAPI.get(`${resource.authorID._id}`);
@@ -82,19 +84,21 @@ export function ResourceSidebar({ resource }: { resource: any }) {
         </CardContent>
       </Card>
       {/* Edit Resource */}
-      <Card>
-        <CardTitle className="truncate p-2 rounded-t-md flex flex-row">
-          <Edit className="mr-2" />
-          <h2>Resource Tools</h2>
-        </CardTitle>
-        <CardContent className="p-3">
-          <Link to={"./edit"}>
-            <p>Edit Resource</p>
-          </Link>
-          <p>Edit Icon</p>
-          <p>Post Update</p>
-        </CardContent>
-      </Card>
+      {user?._id === userProfile._id && (
+        <Card>
+          <CardTitle className="truncate p-2 rounded-t-md flex flex-row">
+            <Edit className="mr-2" />
+            <h2>Resource Tools</h2>
+          </CardTitle>
+          <CardContent className="p-3">
+            <Link to={"./edit"}>
+              <p>Edit Resource</p>
+            </Link>
+            <p>Edit Icon</p>
+            <p>Post Update</p>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
