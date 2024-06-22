@@ -1,4 +1,4 @@
-import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
+import { CATEGORY_PLUGIN } from "minecentral-api";
 import { TypeList } from "./TypeList";
 
 type ButtonVariant =

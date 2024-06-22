@@ -10,7 +10,7 @@ import Links from "@/lib/Links";
 import { ModeToggle } from "../common/ModeToggle";
 import { NavFilterBar } from "../resource/NavFilterBar";
 import { useResourceContext } from "@/context/ResourceContext";
-import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
+import { CATEGORY_PLUGIN } from "minecentral-api";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);

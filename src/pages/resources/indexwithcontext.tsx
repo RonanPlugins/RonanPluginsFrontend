@@ -15,23 +15,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import usePageTitle from "@/utils/usePageTitle";
 import { NavFilterBar } from "@/components/resource/NavFilterBar";
 import { useResourceContext } from "@/context/ResourceContext";
-import { formatToTitleCase } from "@/utils/formatter";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { CircleX, Filter, Search } from "lucide-react";
+import { CircleX, Filter } from "lucide-react";
 import { SORTBY, getTitle } from "@/utils/SORTBY";
-import { PLUGIN_VERSION } from "minecentral-api";
-import {
-  MultiSelector,
-  MultiSelectorContent,
-  MultiSelectorInput,
-  MultiSelectorItem,
-  MultiSelectorList,
-  MultiSelectorTrigger,
-} from "../../context/MultiSelector";
+
+import { ResourceFilter } from "@/context/FilterContext";
+import { SearchBar } from "@/components/common/SearchBar";
+import { FilterVersion } from "@/components/resource/FilterVersion";
 // import { VERSION } from "minecentral-api/dist/plugins/VERSION";
 
-export function Resources() {
+export function ResourcesWithContext() {
   usePageTitle("Resources");
   const { category, setCategory } = useResourceContext();
   const [loading, setLoading] = useState(true);
@@ -78,7 +71,7 @@ export function Resources() {
   }, [filter_versions]);
 
   return (
-    <>
+    <ResourceFilter>
       {/* Resource Hot Filter Bar */}
       <div className="hidden md:flex flex-row mx-auto w-full justify-center bg-primary pb-2">
         <NavFilterBar
@@ -97,8 +90,6 @@ export function Resources() {
           {/* Title/Filter */}
           <Filters
             filter_clearEnabled={filter_clearEnabled}
-            filterValues={filter_versions}
-            setFilterValues={setFilter_Versions}
             show={filterShow}
           />
         </div>
@@ -106,7 +97,7 @@ export function Resources() {
         {/* Main Panel */}
         <div className="w-full lg:max-w-6xl space-y-2">
           {/* Search Bar */}
-          <SearchBar
+          <TopBar
             valueSortBy={sort}
             onSortChange={setSort}
             setShowFilter={setFilterShow}
@@ -129,7 +120,7 @@ export function Resources() {
           </div>
         </div>
       </main>
-    </>
+    </ResourceFilter>
   );
 }
 
@@ -157,7 +148,7 @@ function PageBar({
   );
 }
 
-function SearchBar({
+function TopBar({
   valueSortBy,
   onSortChange,
   setShowFilter,
@@ -182,20 +173,7 @@ function SearchBar({
             Filters
           </Button>
           {/* Search */}
-          <div className="w-full relative h-10">
-            <Search
-              size={20}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 z-10"
-            />
-            <Input
-              type="text"
-              placeholder="Search resources..."
-              className="pl-10 pr-3 text-md w-full"
-              // onChange={(e) => {
-              //   console.log(e.target.value);
-              // }}
-            />
-          </div>
+          <SearchBar />
         </div>
 
         {/* Sort */}
@@ -209,13 +187,9 @@ function SearchBar({
 
 function Filters({
   filter_clearEnabled,
-  filterValues,
-  setFilterValues,
   show,
 }: {
   filter_clearEnabled: boolean;
-  filterValues: string[];
-  setFilterValues: any;
   show: boolean;
 }) {
   return (
@@ -233,22 +207,7 @@ function Filters({
       <div className="mx-2">
         {/* Versions */}
         <h2 className="font-bold pl-2">Minecraft Version</h2>
-        <MultiSelector values={filterValues} onValuesChange={setFilterValues}>
-          <MultiSelectorTrigger className="border-input">
-            <MultiSelectorInput placeholder="Choose versions..." />
-          </MultiSelectorTrigger>
-          <MultiSelectorContent>
-            <MultiSelectorList>
-              {Object.values(PLUGIN_VERSION).map((filter) => {
-                return (
-                  <MultiSelectorItem key={filter} value={filter}>
-                    {formatToTitleCase(filter)}
-                  </MultiSelectorItem>
-                );
-              })}
-            </MultiSelectorList>
-          </MultiSelectorContent>
-        </MultiSelector>
+        <FilterVersion />
       </div>
     </Card>
   );

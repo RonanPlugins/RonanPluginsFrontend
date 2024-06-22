@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { formatToTitleCase } from "@/utils/formatter";
 import { enumToArray } from "@/utils/enum";
-import { CATEGORY } from "minecentral-api";
+import { CATEGORY_PLUGIN } from "minecentral-api";
 
 export function TypeList({
   selected,
@@ -14,10 +14,9 @@ export function TypeList({
   onSelect: any;
   variant?: any;
 }) {
-  return <></>;
   return (
     <>
-      {enumToArray(CATEGORY.PLUGIN) //Filter out Number values (typescript stuff)
+      {enumToArray(CATEGORY_PLUGIN) //Filter out Number values (typescript stuff)
         .map((type) => {
           // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
           return (

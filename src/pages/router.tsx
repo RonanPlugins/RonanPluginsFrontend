@@ -13,6 +13,7 @@ import StripeRefresh from "./stripe/StripeRefresh.tsx";
 import { Servers } from "./servers/index.tsx";
 import { ImportSpigot } from "./profile/ImportSpigot.tsx";
 import { PERMISSION } from "minecentral-api";
+import { ResourcesWithContext } from "./resources/indexwithcontext.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/resources",
         element: <Resources />,
+      },
+      {
+        path: "/resources2",
+        element: <ResourcesWithContext />,
       },
       {
         path: "/resource/:id",

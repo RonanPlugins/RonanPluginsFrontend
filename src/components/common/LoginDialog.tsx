@@ -31,7 +31,7 @@ export default function LoginDialog() {
           <DialogDescription className="flex h-full items-center">
             <Button
               style={{ backgroundColor: "#5865F2" }}
-              className="flex items-center w-full hover:underline"
+              className="flex items-center w-full hover:underlin hover:text-white"
               variant={"default"}
               onClick={loginHandler}
             >
