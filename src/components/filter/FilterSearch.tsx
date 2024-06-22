@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
-import { useFilterContext } from "@/context/FilterContext";
+import { useFilterResourceContext } from "@/context/FilterResourceContext";
 
-export const SearchBar = () => {
-  useFilterContext();
+export const FilterSearch = () => {
+  const { setFilter_search } = useFilterResourceContext();
   return (
     <div className="w-full relative h-10">
       <Search
@@ -14,9 +14,9 @@ export const SearchBar = () => {
         type="text"
         placeholder="Search resources..."
         className="pl-10 pr-3 text-md w-full"
-        // onChange={(e) => {
-        //   console.log(e.target.value);
-        // }}
+        onChange={(e) => {
+          setFilter_search(e.target.value);
+        }}
       />
     </div>
   );

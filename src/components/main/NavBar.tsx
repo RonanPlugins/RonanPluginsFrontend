@@ -8,14 +8,10 @@ import LoginDialog from "../common/LoginDialog";
 import { useUserContext } from "@/context/UserContext";
 import Links from "@/lib/Links";
 import { ModeToggle } from "../common/ModeToggle";
-import { NavFilterBar } from "../resource/NavFilterBar";
-import { useResourceContext } from "@/context/ResourceContext";
-import { CATEGORY_PLUGIN } from "minecentral-api";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const { isLoggedIn, user } = useUserContext();
-  const { category, setCategory } = useResourceContext();
   const location = useLocation();
   useEffect(() => {
     if (location.pathname !== "/resources") setSheetOpen(false);
@@ -91,7 +87,7 @@ export default function Nav() {
                           isSheet={true}
                         />
 
-                        {item.link === Links.Resources &&
+                        {/* {item.link === Links.Resources &&
                           activeNav &&
                           location.pathname === Links.Resources && (
                             <div className="grid mx-4 mb-2">
@@ -105,7 +101,7 @@ export default function Nav() {
                                 selected={category}
                               />
                             </div>
-                          )}
+                          )} */}
                       </div>
                     );
                   })}

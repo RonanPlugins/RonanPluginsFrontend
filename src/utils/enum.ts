@@ -1,6 +1,6 @@
 export function getEnumValue<T extends Record<string, string>>(
   enumObj: T,
-  str: string
+  str: string | null
 ): T[keyof T] | undefined {
   if (!str) return undefined;
   const lowerCaseStr = str.toLowerCase();

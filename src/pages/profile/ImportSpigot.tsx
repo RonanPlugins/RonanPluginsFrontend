@@ -24,12 +24,11 @@ import spigot from "@/api/spigot";
 import Image from "@/components/common/Image";
 import PremiumIcon from "@/components/common/PremiumIcon";
 import useLocalStorageCache from "@/hooks/useLocalStorageCache";
-import { TypeList } from "@/components/resource/TypeList";
-import { CATEGORY_PLUGIN } from "minecentral-api/dist/categories/CATEGORY_PLUGIN";
+import { PLUGIN_CATEGORY } from "minecentral-api";
 
 interface ISelected_Resource {
   id: string;
-  category?: CATEGORY_PLUGIN;
+  category?: PLUGIN_CATEGORY;
   resource: any;
 }
 
@@ -298,7 +297,7 @@ function EditResource({
   onOpenChange: any;
   onConfirm: any;
 }) {
-  const selectCategory = (type: CATEGORY_PLUGIN) => {
+  const selectCategory = (type: PLUGIN_CATEGORY) => {
     setResource(
       (prev): ISelected_Resource => ({
         ...prev,
@@ -321,11 +320,11 @@ function EditResource({
             <CardTitle className="text-lg">Select Category</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-2 grid-cols-2 md:grid-cols-3">
-            <TypeList
+            {/* <TypeList
               onSelect={selectCategory}
               selected={resource?.category ? [resource.category] : []}
               className="border-2 rounded p-1 text-center"
-            />
+            /> */}
           </CardContent>
         </Card>
         <DialogFooter>
