@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -20,17 +19,6 @@ import { Buffer } from "buffer";
 import usePageTitle from "@/utils/usePageTitle";
 import { TextEditor } from "@/components/textEditor/TextEditor";
 
-const formSchema = z.object({
-  title: z.string().min(3, {
-    message: "Title must be at least 3 characters",
-  }),
-  summary: z.string().min(1, {
-    message: "Please provide a summary",
-  }),
-  link_support: z.string().optional(),
-  link_source: z.string().optional(),
-});
-
 export function ResourceEdit() {
   usePageTitle("Edit Resource");
   const { id } = useParams();
@@ -43,17 +31,6 @@ export function ResourceEdit() {
 
   const navigate = useNavigate();
 
-  //Form defaults
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    values: {
-      title: "",
-      summary: "",
-      link_support: "",
-      link_source: "",
-    },
-  });
-
   async function getPlugin() {
     const pInfo = await resourceAPI.getOne(id);
     if (pInfo.description) {
@@ -63,10 +40,6 @@ export function ResourceEdit() {
       // console.log(pInfo.description);
     }
     setResource(pInfo);
-    form.setValue("title", pInfo.title);
-    form.setValue("summary", pInfo.tagLine);
-    form.setValue("link_support", pInfo.linkSupport);
-    form.setValue("link_source", pInfo.linkSource);
     setDescription(pInfo.description);
     setLoading(false);
   }
@@ -107,7 +80,7 @@ export function ResourceEdit() {
 
   return (
     <div className="mx-auto flex flex-col w-full text-left gap-2 p-5 max-w-5xl place-content-center">
-      <h1 className="font-bold text-center">Edit Resource</h1>
+      {/* <h1 className="font-bold text-center">Edit Resource</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleEdit)}
@@ -154,7 +127,7 @@ export function ResourceEdit() {
               </FormItem>
             )}
           />
-          {/* Description field */}
+          /* Description field 
 
           <div className="max-w-4xl">
             <FormLabel>Description</FormLabel>
@@ -171,7 +144,7 @@ export function ResourceEdit() {
             )}
           </div>
 
-          {/* Support Link */}
+          {/* Support Link 
           <FormField
             control={form.control}
             name="link_support"
@@ -188,7 +161,7 @@ export function ResourceEdit() {
             )}
           />
 
-          {/* Source Code Link */}
+          {/* Source Code Link 
           <FormField
             control={form.control}
             name="link_source"
@@ -211,7 +184,7 @@ export function ResourceEdit() {
             </Button>
           </div>
         </form>
-      </Form>
+      </Form> */}
     </div>
   );
 }
