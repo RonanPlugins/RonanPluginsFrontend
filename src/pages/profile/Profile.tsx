@@ -29,7 +29,10 @@ export default function Profile() {
 
   return (
     <div className="w-full my-2">
-      <h1 className="scroll-m-20 text-5xl font-extrabold tracking-tight text-center my-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
+      <h1
+        className="scroll-m-20 text-5xl font-extrabold tracking-tight text-center my-8 bg-gradient-to-r 
+        from-violet-600 to-rose-400 text-transparent bg-clip-text"
+      >
         Welcome Back {user.name}
       </h1>
 

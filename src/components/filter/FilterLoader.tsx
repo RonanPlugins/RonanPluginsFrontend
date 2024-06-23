@@ -3,23 +3,10 @@ import { PLUGIN_LOADER } from "minecentral-api";
 import { useFilterResourceContext } from "@/context/FilterResourceContext";
 import { formatToTitleCase } from "@/utils/formatter";
 import { Checkbox } from "../ui/checkbox";
+import { toggleFromArray } from "@/utils/array";
 
 export const FilterLoader = () => {
   const { filter_loader, setFilter_loader } = useFilterResourceContext();
-
-  function handleToggle(type: PLUGIN_LOADER) {
-    return setFilter_loader((prev) => {
-      if (!prev) {
-        return [type];
-      } else if (prev.includes(type)) {
-        // Remove the item if it's in the array
-        return prev.filter((item) => item !== type);
-      } else {
-        // Add the item if it's not in the array
-        return [...prev, type];
-      }
-    });
-  }
 
   return (
     <div className="flex flex-col space-y-2 mb-2">
@@ -30,7 +17,9 @@ export const FilterLoader = () => {
             <section
               key={type}
               className="flex flex-row items-center space-x-2 mr-auto cursor-pointer hover:text-secondary-foreground/50 transition-colors"
-              onClick={() => handleToggle(type)}
+              onClick={() =>
+                setFilter_loader((prev) => toggleFromArray(prev, type))
+              }
             >
               <Checkbox
                 checked={filter_loader ? filter_loader.includes(type) : false}

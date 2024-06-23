@@ -3,7 +3,7 @@ import Messages from "./Messages";
 
 export default class Footer {
   static CopyrightText = `© 2024 ${Messages.BrandName}. All rights reserved`;
-  static LogoPath = "/assets/logo.webp";
+  static LogoPath = "/assets/favicon_512x512.png";
 
   static Links = [
     {

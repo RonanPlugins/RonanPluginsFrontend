@@ -1,15 +1,14 @@
 import footerLib from "@/lib/Footer";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
-import Messages from "@/lib/Messages";
 
 export default function Footer() {
   return (
     <div className="bg-gray-100 dark:bg-secondary w-full h-64 grid grid-cols-2 lg:grid-cols-6">
-      <div className="col-span-1 lg:col-span-2 py-10 mx-auto">
+      <div className="col-span-1 lg:col-span-2 py-10 mx-2 lg:mx-auto">
         <div className="flex">
           <img src={footerLib.LogoPath} className="w-[45px] h-[45px]" />
-          <p className="ml-4 text-lg">{Messages.BrandName}</p>
+          {/* <p className="ml-4 text-lg">{Messages.BrandName}</p> */}
         </div>
         <div className="flex">
           <p className="text-lg">{footerLib.CopyrightText}</p>
