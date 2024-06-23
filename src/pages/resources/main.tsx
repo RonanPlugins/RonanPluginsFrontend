@@ -5,15 +5,18 @@ import { ResourcePreview } from "@/components/resource/Preview";
 
 import Pagination from "@/components/common/Pagination";
 import { useSearchParams } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import usePageTitle from "@/utils/usePageTitle";
 import { Button } from "@/components/ui/button";
-import { CircleX, Filter } from "lucide-react";
+import { Filter } from "lucide-react";
 import { FilterSearch } from "@/components/filter/FilterSearch";
 import { FilterVersion } from "@/components/filter/FilterVersion";
 import { useFilterResourceContext } from "@/context/FilterResourceContext";
 import { FilterSort } from "@/components/filter/FilterSort";
 import { FilterCategory } from "@/components/filter/FilterCategory";
+import { FilterClear } from "@/components/filter/FilterClear";
+import { FilterProxy } from "@/components/filter/FilterProxy";
+import { FilterLoader } from "@/components/filter/FilterLoader";
 // import { VERSION } from "minecentral-api/dist/plugins/VERSION";
 
 export function Resources() {
@@ -36,7 +39,9 @@ export function Resources() {
 
   async function getResources() {
     setLoading(true);
-    if (!sort) return;
+    if (!sort) {
+      return setLoading(false);
+    }
     const posts = await resourceAPI.getAll({ sort, page, count: perPage });
     setResources(posts);
     setTotalPages(Math.ceil((await resourceAPI.getCount()) / perPage));
@@ -56,7 +61,7 @@ export function Resources() {
   return (
     <>
       {/* Resource Hot Category Bar */}
-      <div className="hidden md:flex flex-row mx-auto w-full justify-center bg-primary pb-2">
+      <div className="hidden md:flex flex-row mx-auto w-full justify-center bg-primary pb-2 space-x-1">
         <FilterCategory />
       </div>
       {/* Main Div */}
@@ -144,19 +149,35 @@ function SearchBar({
 
 function Sidebar({ filter_show }: { filter_show: boolean }) {
   return (
-    <Card className={`${filter_show ? "" : "hidden"} lg:block mb-2`}>
+    <Card className={`${filter_show ? "" : "hidden"} lg:block mb-2 px-2`}>
       {/* Clear Filter Button */}
-      <Button
-        variant="outline"
-        className="mt-2 ml-2 mr-auto rounded-full hover:text-red"
-      >
-        <CircleX size={20} className="mr-2" />
-        Clear Filters
-      </Button>
+      <FilterClear />
       {/* Filters */}
+
+      {/* Category (mobile) */}
+      <div className="md:hidden mx-2">
+        <h2 className="font-bold pl-2">Category</h2>
+        <div className="flex flex-row flex-wrap mx-auto w-full justify-center pb-2 space-x-1">
+          <FilterCategory className="mt-1" variant={"outline"} />
+        </div>
+      </div>
+      {/* Loader */}
       <div className="mx-2">
-        {/* Versions */}
-        <h2 className="font-bold pl-2">Minecraft Version</h2>
+        <h2 className="font-bold">Loader</h2>
+        <CardContent>
+          <FilterLoader />
+        </CardContent>
+      </div>
+      {/* Proxy */}
+      <div className="mx-2">
+        <h2 className="font-bold">Proxies</h2>
+        <CardContent>
+          <FilterProxy />
+        </CardContent>
+      </div>
+      {/* Minecraft Versions */}
+      <div className="">
+        <h2 className="ml-2 font-bold">Minecraft Version</h2>
         <FilterVersion />
       </div>
     </Card>

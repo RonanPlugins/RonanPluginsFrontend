@@ -11,7 +11,13 @@ import { ModeToggle } from "../common/ModeToggle";
 
 export default function Nav() {
   const [sheetOpen, setSheetOpen] = useState(false);
-  const { isLoggedIn, user } = useUserContext();
+  const {
+    isLoggedIn,
+    user,
+  }: {
+    isLoggedIn: any;
+    user: any;
+  } = useUserContext();
   const location = useLocation();
   useEffect(() => {
     if (location.pathname !== "/resources") setSheetOpen(false);

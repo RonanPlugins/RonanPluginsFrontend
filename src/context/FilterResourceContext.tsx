@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { SORTBY } from "@/utils/SORTBY";
+import { PLUGIN_CATEGORY, PLUGIN_LOADER, PLUGIN_PROXY } from "minecentral-api";
 
 type FilterProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
@@ -15,11 +16,21 @@ interface FilterContextProps {
   filter_search: string | null;
   setFilter_search: React.Dispatch<React.SetStateAction<string | null>>;
   // Sort
-  filter_sort: string;
-  setFilter_sort: React.Dispatch<React.SetStateAction<string>>;
+  filter_sort: string | null;
+  setFilter_sort: React.Dispatch<React.SetStateAction<SORTBY | null>>;
   //Category
-  filter_category: string;
-  setFilter_category: React.Dispatch<React.SetStateAction<string>>;
+  filter_category: PLUGIN_CATEGORY | null;
+  setFilter_category: React.Dispatch<
+    React.SetStateAction<PLUGIN_CATEGORY | null>
+  >;
+  //Proxy
+  filter_proxy: PLUGIN_PROXY[] | null;
+  setFilter_proxy: React.Dispatch<React.SetStateAction<PLUGIN_PROXY[] | null>>;
+  //Loader
+  filter_loader: PLUGIN_LOADER[] | null;
+  setFilter_loader: React.Dispatch<
+    React.SetStateAction<PLUGIN_LOADER[] | null>
+  >;
 }
 
 const FilterResourceContext = createContext<FilterContextProps | null>(null);
@@ -38,9 +49,14 @@ export const FilterResource = ({ children }: FilterProps) => {
   const [filter_show, setFilter_show] = useState<boolean>(false); //Only used in mobile
   const [filter_versions, setFilter_versions] = useState<string[]>([]);
   const [filter_search, setFilter_search] = useState<string | null>(null);
-  const [filter_sort, setFilter_sort] = useState<string>(SORTBY.LAST_UPDATE);
-  const [filter_category, setFilter_category] = useState<string>(
+  const [filter_sort, setFilter_sort] = useState<SORTBY | null>(
     SORTBY.LAST_UPDATE
+  );
+  const [filter_category, setFilter_category] =
+    useState<PLUGIN_CATEGORY | null>(null);
+  const [filter_proxy, setFilter_proxy] = useState<PLUGIN_PROXY[] | null>(null);
+  const [filter_loader, setFilter_loader] = useState<PLUGIN_LOADER[] | null>(
+    null
   );
 
   return (
@@ -61,6 +77,12 @@ export const FilterResource = ({ children }: FilterProps) => {
         //Categories
         filter_category,
         setFilter_category,
+        //Proxy
+        filter_proxy,
+        setFilter_proxy,
+        //Loader
+        filter_loader,
+        setFilter_loader,
       }}
     >
       {children}

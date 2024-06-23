@@ -11,7 +11,10 @@ import { SORTBY, getTitle } from "@/utils/SORTBY";
 export const FilterSort = () => {
   const { filter_sort, setFilter_sort } = useFilterResourceContext();
   return (
-    <Select onValueChange={setFilter_sort} value={filter_sort}>
+    <Select
+      onValueChange={setFilter_sort}
+      value={filter_sort || SORTBY.LAST_UPDATE}
+    >
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>

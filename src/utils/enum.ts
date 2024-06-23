@@ -18,3 +18,11 @@ export function getEnumValue<T extends Record<string, string>>(
 export function enumToArray(T: object) {
   return Object.keys(T).filter((v) => isNaN(Number(v)));
 }
+
+export function enumKeys<T>(enumObj: T) {
+  return Object.values(enumObj)
+    .filter((v) => isNaN(Number(v)))
+    .map((v) => {
+      return v; //enumObj[v as any];
+    });
+}

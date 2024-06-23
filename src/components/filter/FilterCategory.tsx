@@ -4,18 +4,35 @@ import { PLUGIN_CATEGORY } from "minecentral-api";
 import { Button } from "../ui/button";
 import { formatToTitleCase } from "@/utils/formatter";
 
-export function FilterCategory({ className }: { className?: string }) {
+type ButtonVariant =
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link"
+  | "special";
+
+export function FilterCategory({
+  className,
+  variant = "ghost",
+}: {
+  className?: string;
+  variant?: ButtonVariant;
+}) {
   const { filter_category, setFilter_category } = useFilterResourceContext();
   return (
     <>
       {enumToArray(PLUGIN_CATEGORY) //Filter out Number values (typescript stuff)
-        .map((type) => {
+        .map((type: any) => {
           // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
           return (
             <Button
               key={type}
-              variant={filter_category === type ? "special" : "ghost"}
-              className={`${className}`}
+              variant={
+                filter_category?.toString() === type ? "special" : variant
+              }
+              className={`${className} rounded-full`}
               onClick={() => setFilter_category(type)}
             >
               {formatToTitleCase(type)}
@@ -23,11 +40,5 @@ export function FilterCategory({ className }: { className?: string }) {
           );
         })}
     </>
-    // <TypeList
-    //   variant="ghost"
-    //   className="rounded-full ml-1"
-    //   selected={filter_category}
-    //   onSelect={setFilter_category}
-    // />
   );
 }
