@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { SORTBY } from "@/utils/SORTBY";
 import { PLUGIN_CATEGORY, PLUGIN_LOADER, PLUGIN_PROXY } from "minecentral-api";
+import { useSearchParams } from "react-router-dom";
 
 type FilterProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
@@ -9,6 +10,8 @@ interface FilterContextProps {
   //Sidebar
   filter_show: boolean;
   setFilter_show: React.Dispatch<React.SetStateAction<boolean>>;
+  isFiltering: boolean;
+  setisFiltering: React.Dispatch<React.SetStateAction<boolean>>;
   //Versions
   filter_versions: string[];
   setFilter_versions: React.Dispatch<React.SetStateAction<string[]>>;
@@ -31,6 +34,13 @@ interface FilterContextProps {
   setFilter_loader: React.Dispatch<
     React.SetStateAction<PLUGIN_LOADER[] | null>
   >;
+  //Pages
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  page_amount: number;
+  setPageAmount: React.Dispatch<React.SetStateAction<number>>;
+  filterParams: any;
+  setFilterParams: any;
 }
 
 const FilterResourceContext = createContext<FilterContextProps | null>(null);
@@ -47,6 +57,7 @@ export const useFilterResourceContext = () => {
 
 export const FilterResource = ({ children }: FilterProps) => {
   const [filter_show, setFilter_show] = useState<boolean>(false); //Only used in mobile
+  const [isFiltering, setisFiltering] = useState<boolean>(false); //Only used in mobile
   const [filter_versions, setFilter_versions] = useState<string[]>([]);
   const [filter_search, setFilter_search] = useState<string | null>(null);
   const [filter_sort, setFilter_sort] = useState<SORTBY | null>(
@@ -58,6 +69,12 @@ export const FilterResource = ({ children }: FilterProps) => {
   const [filter_loader, setFilter_loader] = useState<PLUGIN_LOADER[] | null>(
     null
   );
+  //Pages
+  const [filterParams, setFilterParams] = useSearchParams();
+  const [page, setPage] = useState<number>(
+    Number(filterParams.get("page")) || 0
+  );
+  const [page_amount, setPageAmount] = useState<number>(20);
 
   return (
     <FilterResourceContext.Provider
@@ -65,6 +82,8 @@ export const FilterResource = ({ children }: FilterProps) => {
         // Sidebar
         filter_show,
         setFilter_show,
+        isFiltering,
+        setisFiltering,
         // Version
         filter_versions,
         setFilter_versions,
@@ -83,6 +102,13 @@ export const FilterResource = ({ children }: FilterProps) => {
         //Loader
         filter_loader,
         setFilter_loader,
+        //Page
+        page,
+        setPage,
+        page_amount,
+        setPageAmount,
+        filterParams,
+        setFilterParams,
       }}
     >
       {children}

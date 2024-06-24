@@ -179,8 +179,8 @@ export const DiscordTutorial = () => {
           style={{ width: "100%", height: 500 }}
           referrerPolicy="strict-origin-when-cross-origin"
           frameBorder={0}
-          webkitallowfullscreen="webkitallowfullscreen"
-          mozallowfullscreen="mozallowfullscreen"
+          // webkitallowfullscreen="webkitallowfullscreen"
+          // mozallowfullscreen="mozallowfullscreen"
           allow="clipboard-write"
         />
       </p>

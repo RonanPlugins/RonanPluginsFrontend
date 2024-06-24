@@ -5,7 +5,6 @@ import Profile from "./profile/Profile.tsx";
 import AuthGuard from "@/components/common/AuthGuard.tsx";
 import { ResourceCreate } from "./resources/Create.tsx";
 import { ResourceView } from "./resources/View.tsx";
-import { ResourcesIndex } from "./resources/index.tsx";
 import Admin from "./Admin.tsx";
 import ProfileOther from "./profile/ProfileOther.tsx";
 import { ResourceEdit } from "./resources/Editor.tsx";
@@ -13,6 +12,8 @@ import StripeRefresh from "./stripe/StripeRefresh.tsx";
 import { Servers } from "./servers/index.tsx";
 import { ImportSpigot } from "./profile/ImportSpigot.tsx";
 import { PERMISSION } from "minecentral-api";
+import { Resources } from "./resources/index.tsx";
+import { FilterResource } from "@/context/FilterResourceContext.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ export const router = createBrowserRouter([
       //Resources
       {
         path: "/resources",
-        element: <ResourcesIndex />,
+        element: (
+          <FilterResource>
+            <Resources />
+          </FilterResource>
+        ),
       },
       {
         path: "/resource/:id",

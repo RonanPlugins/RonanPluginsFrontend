@@ -1,16 +1,17 @@
 import { CircleX } from "lucide-react";
 import { useFilterResourceContext } from "@/context/FilterResourceContext";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const FilterClear = () => {
-  const [enabled, setEnabled] = useState(false);
   const {
+    isFiltering,
     filter_category,
     filter_search,
     filter_versions,
     filter_loader,
     filter_proxy,
+    setisFiltering,
     setFilter_category,
     setFilter_search,
     setFilter_versions,
@@ -28,7 +29,7 @@ export const FilterClear = () => {
   }
 
   useEffect(() => {
-    setEnabled(
+    setisFiltering(
       [
         filter_category,
         filter_search,
@@ -37,6 +38,7 @@ export const FilterClear = () => {
         filter_loader,
       ].some((val) => val)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     filter_category,
     filter_search,
@@ -51,7 +53,7 @@ export const FilterClear = () => {
         variant="outline"
         className="mx-auto rounded-full hover:text-red"
         onClick={clearFilter}
-        disabled={!enabled}
+        disabled={!isFiltering}
       >
         <CircleX size={20} className="mr-2" />
         Clear Filters

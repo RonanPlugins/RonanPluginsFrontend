@@ -42,7 +42,7 @@ export default function Profile() {
             <div className="resources h-full">
               {resources && resources.length > 0 ? (
                 resources.map((resource) => (
-                  <div key={resource._id} className="resource">
+                  <div key={resource._id}>
                     <ResourcePreview resource={resource} />
                   </div>
                 ))

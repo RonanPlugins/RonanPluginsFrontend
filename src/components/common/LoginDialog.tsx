@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 import api from "@/api";
 import { LogIn } from "lucide-react";
 
-export default function LoginDialog() {
+export default function LoginDialog({ className }: { className?: string }) {
   const loginHandler = () => {
     api.loginDiscord();
   };
@@ -21,7 +21,7 @@ export default function LoginDialog() {
       <DialogTrigger asChild>
         <Button
           variant="special"
-          className="font-bold flex flex-row rounded-full p-2 text-sm"
+          className={`font-bold flex flex-row rounded-full p-2 text-sm ${className}`}
         >
           <LogIn size={20} className="mr-2" /> Sign In
         </Button>

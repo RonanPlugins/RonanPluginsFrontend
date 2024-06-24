@@ -22,3 +22,14 @@ export function enumToArray(T: object) {
 export function enumToKeys(T: object) {
   return Object.values(T).filter((v) => isNaN(Number(v)));
 }
+
+export function castStringToEnum<T>(
+  enumType: T,
+  value: string
+): T[keyof T] | null {
+  const enumValues = Object.values(enumType);
+  if (enumValues.includes(value as T[keyof T])) {
+    return value as T[keyof T];
+  }
+  return null;
+}

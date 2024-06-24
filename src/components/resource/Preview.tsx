@@ -9,11 +9,12 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import PremiumIcon from "../common/PremiumIcon";
+import { Card } from "../ui/card";
 
 export function ResourcePreview({ resource }: { resource: any }) {
   // console.log(resource);
   return (
-    <div className="flex flex-col md:flex-row">
+    <Card className="flex flex-col md:flex-row p-2">
       <div className="flex flex-row">
         {/* Image */}
         <Link className="relative my-2" to={`../resource/${resource._id}`}>
@@ -76,6 +77,6 @@ export function ResourcePreview({ resource }: { resource: any }) {
           </p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

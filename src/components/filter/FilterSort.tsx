@@ -7,12 +7,13 @@ import {
   SelectValue,
 } from "../ui/select";
 import { SORTBY, getTitle } from "@/utils/SORTBY";
+import { castStringToEnum } from "@/utils/enum";
 
 export const FilterSort = () => {
   const { filter_sort, setFilter_sort } = useFilterResourceContext();
   return (
     <Select
-      onValueChange={setFilter_sort}
+      onValueChange={(val) => setFilter_sort(castStringToEnum(SORTBY, val))}
       value={filter_sort || SORTBY.LAST_UPDATE}
     >
       <SelectTrigger>

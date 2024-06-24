@@ -1,190 +1,167 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import Loading from "@/components/common/Loading";
-import resourceAPI from "@/api/resource";
-import { useNavigate, useParams } from "react-router-dom";
-import { Buffer } from "buffer";
-import usePageTitle from "@/utils/usePageTitle";
-import { TextEditor } from "@/components/textEditor/TextEditor";
+  CreateResource_Context,
+  useCreateResourceContext,
+} from "@/context/CreateResourceContext";
+import { useEffect } from "react";
+import { Upload } from "lucide-react";
+import { validateJar } from "@/utils/validators";
+import resource from "@/api/resource";
+import {
+  CreateCategory,
+  CreateDescription,
+  CreateOptionals,
+  CreateReleaseVersion,
+  CreateSubtitle,
+  CreateSupportVersions,
+  CreateTitle,
+  CreateUploadFile,
+} from "@/components/resource/ResourceFields";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export function ResourceEdit() {
-  usePageTitle("Edit Resource");
-  const { id } = useParams();
-  const [posting, setPosting] = useState<boolean>(false);
-  const [description, setDescription] = useState<string>();
-  //Errors
-  const [descriptionError, setDescriptionError] = useState<string | null>(null);
-  const [resource, setResource] = useState<any>();
-  const [loading, setLoading] = useState(true);
+  return (
+    <CreateResource_Context>
+      <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
+        New Resource
+      </h1>
+      <div className="grid gap-9 mx-auto my-2 max-w-6xl">
+        <Listener />
+        <CreateTitle />
+        <CreateSubtitle />
+        <CreateUploadFile />
+        <CreateReleaseVersion />
+        <CreateCategory />
+        <CreateSupportVersions />
+        <CreateOptionals className="grid gap-9 my-2" />
+        <CreateDescription />
+        <SubmitEdit />
+      </div>
+    </CreateResource_Context>
+  );
+}
 
-  const navigate = useNavigate();
+function SubmitEdit() {
+  const {
+    title,
+    subtitle,
+    file,
+    versions,
+    category,
+    description,
+    //Optional
+    language,
+    link_source,
+    discord,
+    tags,
+  } = useCreateResourceContext();
 
-  async function getPlugin() {
-    const pInfo = await resourceAPI.getOne(id);
-    if (pInfo.description) {
-      pInfo.description = Buffer.from(pInfo.description, "base64").toString(
-        "utf-8"
-      );
-      // console.log(pInfo.description);
+  const handleCreatePost = async () => {
+    const jarError = validateJar(file);
+    if (jarError) {
+      return; //setSelectedJarError(jarError);
     }
-    setResource(pInfo);
-    setDescription(pInfo.description);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    getPlugin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  //Posting a resource to backend + error checks
-  const handleEdit = async (formData: any) => {
     if (!description) {
-      return setDescriptionError("Please provide a description");
-    } else {
-      setDescriptionError(null);
+      return; //setDescriptionError("Please provide a description");
     }
-    setPosting(true);
+    // setPosting(true);
 
-    resourceAPI
-      .edit(resource._id, {
-        title: formData.title,
-        tagLine: formData.summary,
-        linkSource: formData.link_source,
-        linkSupport: formData.link_support,
+    // downsizeImage(image, (imageFile: any) => {
+    resource
+      .create({
+        title: title,
+        tagLine: subtitle,
+        linkSource: link_source,
+        // linkSupport: link_support,
         description,
+        // image: imageFile,
+        release: {
+          version: versions,
+          file,
+        },
       })
       .then((data: any) => {
         if (data) {
-          navigate(`/resource/${resource._id}`);
+          console.log("New Resource created:", data);
+          // navigate(`/resource/${data.id}`);
+          toast("New Resource Created!", {
+            icon: <Upload />,
+          });
         } else {
-          setPosting(false);
-          setDescriptionError("An error has occured!");
+          // setPosting(false);
+          // setDescriptionError("An error has occured!");
         }
+        // });
       });
   };
 
-  if (loading) return <Loading />;
-
   return (
-    <div className="mx-auto flex flex-col w-full text-left gap-2 p-5 max-w-5xl place-content-center">
-      {/* <h1 className="font-bold text-center">Edit Resource</h1>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleEdit)}
-          className="gap-8 flex flex-col"
-        >
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input placeholder="Title" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Name by which your resource will be displayed
-                </FormDescription>
-                {form.formState.errors.title && (
-                  <FormMessage>
-                    {form.formState.errors.title.message}
-                  </FormMessage>
-                )}
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="summary"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Summary</FormLabel>
-                <FormControl>
-                  <Input placeholder="Summary" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Brief one-line description of your resource
-                </FormDescription>
-                {form.formState.errors.summary && (
-                  <FormMessage>
-                    {form.formState.errors.summary.message}
-                  </FormMessage>
-                )}
-              </FormItem>
-            )}
-          />
-          /* Description field 
-
-          <div className="max-w-4xl">
-            <FormLabel>Description</FormLabel>
-            <div className="my-2"></div>
-            <TextEditor
-              // className="border-gray-700 border-t-0 rounded-bl-md rounded-br-md border-2 text-left p-2 min-h-64"
-              onChange={(data: any) => {
-                setDescription(data.level.content);
-              }}
-              content={description}
-            />
-            {descriptionError !== null && (
-              <FormMessage>{descriptionError}</FormMessage>
-            )}
-          </div>
-
-          {/* Support Link 
-          <FormField
-            control={form.control}
-            name="link_support"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Additional Support</FormLabel>
-                <FormControl>
-                  <Input placeholder="Support Link" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Discord/Website/Email link for additional support
-                </FormDescription>
-              </FormItem>
-            )}
-          />
-
-          {/* Source Code Link 
-          <FormField
-            control={form.control}
-            name="link_source"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Source Code</FormLabel>
-                <FormControl>
-                  <Input placeholder="Source Code URL" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Link to the source code for this resource
-                </FormDescription>
-              </FormItem>
-            )}
-          />
-
-          <div className="flex justify-center">
-            <Button className="w-[200px] " type="submit" disabled={posting}>
-              Update Resource
-            </Button>
-          </div>
-        </form>
-      </Form> */}
+    <div className="w-full flex">
+      <Button className="mx-auto" variant="special" onClick={handleCreatePost}>
+        Post New Resource
+      </Button>
     </div>
   );
+}
+
+//Shows a window dialog to remind user their form is not submitted!
+function Listener() {
+  const {
+    title,
+    subtitle,
+    file,
+    versions,
+    category,
+    description,
+    //Optional
+    language,
+    link_source,
+    discord,
+    tags,
+  } = useCreateResourceContext();
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (
+        [
+          title,
+          subtitle,
+          file,
+          versions,
+          category,
+          description,
+          //Optional
+          language,
+          link_source,
+          discord,
+          tags,
+        ].some((val) => val)
+      ) {
+        const confirmationMessage =
+          "You have unsaved changes. Are you sure you want to leave?";
+        e.returnValue = confirmationMessage; // Standard for most browsers
+        return confirmationMessage; // For old versions of some browsers
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [
+    title,
+    subtitle,
+    file,
+    versions,
+    category,
+    description,
+    //Optional
+    language,
+    link_source,
+    discord,
+    tags,
+  ]);
+
+  return <></>;
 }
