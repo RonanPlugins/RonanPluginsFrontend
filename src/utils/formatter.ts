@@ -1,4 +1,5 @@
-export function formatToTitleCase(input: string): string {
+export function formatToTitleCase(input: any): string {
+  if (!input) return "";
   // Convert the input string to lowercase
   const lowerCaseStr = input.toLowerCase();
 
@@ -10,7 +11,7 @@ export function formatToTitleCase(input: string): string {
 
   // Capitalize the first letter of each word
   const capitalizedWords = words.map(
-    (word) => word.charAt(0).toUpperCase() + word.slice(1)
+    (word: any) => word.charAt(0).toUpperCase() + word.slice(1)
   );
 
   // Join the words back into a single string

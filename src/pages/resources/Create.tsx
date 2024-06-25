@@ -3,8 +3,6 @@ import {
   useCreateResourceContext,
 } from "@/context/CreateResourceContext";
 import { useEffect } from "react";
-import { Upload } from "lucide-react";
-import { validateJar } from "@/utils/validators";
 import resource from "@/api/resource";
 import {
   CreateCategory,
@@ -17,6 +15,9 @@ import {
   CreateUploadFile,
 } from "@/components/resource/ResourceFields";
 import { Button } from "@/components/ui/button";
+import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export function ResourceCreate() {
@@ -25,7 +26,7 @@ export function ResourceCreate() {
       <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
         New Resource
       </h1>
-      <div className="grid gap-9 mx-auto my-2 max-w-6xl">
+      <div className="grid gap-9 mx-auto my-2 max-w-6xl px-2">
         <Listener />
         <CreateTitle />
         <CreateSubtitle />
@@ -55,45 +56,66 @@ function SubmitCreate() {
     link_source,
     discord,
     tags,
+    //Submitting
+    getFieldsIncomplete,
   } = useCreateResourceContext();
 
+  const navigate = useNavigate();
+
+  const element: React.ReactElement = (
+    <div className="flex items-center">
+      <CircleAlertIcon className="mr-2" />
+      <span className="first-letter:capitalize">
+        Please Fill All Required Fields!
+      </span>
+    </div>
+  );
+
   const handleCreatePost = async () => {
-    const jarError = validateJar(file);
-    if (jarError) {
-      return; //setSelectedJarError(jarError);
+    const errors = getFieldsIncomplete();
+    if (errors.length > 0) {
+      toast(element, {
+        icon: <CircleAlertIcon />,
+      });
+      return;
     }
-    if (!description) {
-      return; //setDescriptionError("Please provide a description");
-    }
+
+    // const jarError = validateJar(file);
+    // if (jarError) {
+    //   return; //setSelectedJarError(jarError);
+    // }
+    // if (!description) {
+    //   return; //setDescriptionError("Please provide a description");
+    // }
     // setPosting(true);
 
     // downsizeImage(image, (imageFile: any) => {
     resource
       .create({
-        title: title,
-        tagLine: subtitle,
-        linkSource: link_source,
-        // linkSupport: link_support,
+        title,
+        subtitle,
         description,
-        // image: imageFile,
-        release: {
-          version: releaseVersion,
-          file,
-        },
+        category,
+        file,
+        version: releaseVersion,
         // OPTIONALS
         language,
         discord,
         link_source,
         tags,
+        version_support: supportVersion,
       })
       .then((data: any) => {
         if (data) {
           console.log("New Resource created:", data);
-          // navigate(`/resource/${data.id}`);
+          navigate(`/resource/${data.id}`);
           toast("New Resource Created!", {
-            icon: <Upload />,
+            icon: <CheckIcon />,
           });
         } else {
+          toast("Error Posting New Resource!", {
+            icon: <AlertCircleIcon />,
+          });
           // setPosting(false);
           // setDescriptionError("An error has occured!");
         }
@@ -161,7 +183,8 @@ function Listener() {
     title,
     subtitle,
     file,
-    versions,
+    releaseVersion,
+    supportVersion,
     category,
     description,
     //Optional

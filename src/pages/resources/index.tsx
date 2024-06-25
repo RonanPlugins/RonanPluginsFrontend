@@ -121,8 +121,8 @@ function SearchBar() {
             Filters
             {!filter_show && isFiltering && (
               <span className="absolute -top-[5px] -right-[5px] flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 z-9"></span>
-                <span className="relative inline-flex rounded-full h-full w-full bg-accent z-10"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-md bg-accent opacity-75 z-9"></span>
+                <span className="relative inline-flex rounded-md h-full w-full bg-accent z-10"></span>
               </span>
             )}
           </Button>
@@ -152,7 +152,7 @@ function Sidebar() {
       {/* Filters */}
 
       {/* Category (mobile) */}
-      <div className="md:hidden mx-2">
+      <div className="lg:hidden mx-2">
         <h2 className="font-bold pl-2">Category</h2>
         <div className="flex flex-row flex-wrap mx-auto w-full justify-center pb-2 space-x-1">
           <FilterCategory className="mt-1" variant={"outline"} />

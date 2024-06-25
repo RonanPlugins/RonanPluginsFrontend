@@ -51,7 +51,7 @@ export const FilterClear = () => {
     <div className="flex w-full mt-2 justify-center">
       <Button
         variant="outline"
-        className="mx-auto rounded-full hover:text-red"
+        className="mx-auto rounded-md hover:text-red"
         onClick={clearFilter}
         disabled={!isFiltering}
       >

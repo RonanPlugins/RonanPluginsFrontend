@@ -13,7 +13,7 @@ export const FilterSearch = () => {
       <Input
         type="text"
         placeholder="Search resources..."
-        className="pl-10 pr-3 text-md w-full"
+        className="pl-10 pr-3 text-md w-full border-0"
         value={filter_search || ""}
         onChange={(e) => {
           setFilter_search(e.target.value);

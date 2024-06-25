@@ -40,7 +40,7 @@ export function ResourcePreview({ resource }: { resource: any }) {
                 </span>
               </p>
             </div>
-            <p className="text-sm md:text-base">{resource.tagLine}</p>
+            <p className="text-sm md:text-base">{resource.subtitle}</p>
           </div>
         </div>
       </div>

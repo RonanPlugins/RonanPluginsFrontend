@@ -32,7 +32,7 @@ export default function Footer() {
 const SocialButton = ({ children, href }: { href: string; children?: any }) => {
   return (
     <Link to={href}>
-      <Button className="rounded-full m-2">{children}</Button>
+      <Button className="rounded-md m-2">{children}</Button>
     </Link>
   );
 };

@@ -61,7 +61,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <Button
               size={"sm"}
               variant={"secondary"}
-              className="h-8 min-w-10 rounded-full mx-1"
+              className="h-8 min-w-10 rounded-md mx-1"
               onClick={() => handleClick(1)}
             >
               1
@@ -75,7 +75,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <Button
             size={"sm"}
             variant={"secondary"}
-            className="h-8 min-w-10 rounded-full mx-1"
+            className="h-8 min-w-10 rounded-md mx-1"
             key={page}
             onClick={() => handleClick(page)}
             style={{ fontWeight: page === currentPage ? "bold" : "normal" }}
@@ -91,7 +91,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <Button
               size={"sm"}
               variant={"secondary"}
-              className="h-8  min-w-10 rounded-full mx-1"
+              className="h-8  min-w-10 rounded-md mx-1"
               onClick={() => handleClick(totalPages)}
             >
               {totalPages}
@@ -107,7 +107,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         size={"sm"}
         variant={"secondary"}
-        className="px-3 mr-2 h-8 rounded-full"
+        className="px-3 mr-2 h-8 rounded-md"
         onClick={handlePrev}
         disabled={currentPage === 1}
       >
@@ -117,7 +117,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         size={"sm"}
         variant={"secondary"}
-        className="px-3 ml-2 h-8 rounded-full"
+        className="px-3 ml-2 h-8 rounded-md"
         onClick={handleNext}
         disabled={currentPage === totalPages}
       >

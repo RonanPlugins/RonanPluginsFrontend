@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ export function BottomBar() {
 
   useEffect(() => {
     toggleVisibility(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const toggleVisibility = (forceDisable = false) => {
@@ -41,9 +42,9 @@ export function BottomBar() {
   };
 
   return (
-    <div className="fixed lg:hidden bottom-0 left-0 w-full flex flex-col-reverse z-50">
+    <div className="fixed lg:hidden bottom-0 left-0 w-screen flex flex-col-reverse z-50">
       <div
-        className={`z-10 bg-background py-2 animate-in duration-200 
+        className={`z-10 bg-background dark:bg-secondary py-2 animate-in duration-200 
         slide-in-from-bottom-full flex flex-col ${
           isVisible
             ? "rounded-t-none"
@@ -54,12 +55,12 @@ export function BottomBar() {
           <div className="flex flex-row justify-between items-center mx-2">
             <img
               className="ml-2 h-10 hover:cursor-pointer filter grayscale"
-              src="assets/favicon_512x512.png"
-              alt="Logo"
+              src="/assets/favicon_512x512.png"
+              aria-label="Logo"
               onClick={() => navigate(Links.About)}
             />
             <Button variant="ghost" onClick={() => toggleVisibility(false)}>
-              {isVisible ? <X size={28} /> : <Menu size={28} />}
+              {isVisible ? <XIcon size={32} /> : <MenuIcon size={32} />}
             </Button>
           </div>
         </div>
@@ -88,9 +89,9 @@ function BottomBarPage({
     <div className="-z-1 flex flex-col items-center justify-center">
       {isVisible && (
         <div
-          className={`p-4 flex flex-col gap-2 items-center bg-background w-full transition-all duration-500 rounded-t-xl ${animationClass}`}
+          className={`p-4 flex flex-col gap-2 items-center bg-background dark:bg-secondary w-full transition-all duration-500 rounded-t-xl ${animationClass}`}
         >
-          <div className="flex flex-row gap-2 w-2/3">
+          <div className="flex flex-col gap-2 w-full">
             {navItems.map((item) => {
               const activeNav =
                 item.list.filter((link) => location.pathname.includes(link))
@@ -98,7 +99,7 @@ function BottomBarPage({
               return (
                 <NavItem
                   active={activeNav}
-                  className="rounded-full w-1/3 text-center"
+                  className="rounded-md w-2/3 text-center mx-auto my-1"
                   key={item.title}
                   {...item}
                 />
@@ -106,12 +107,12 @@ function BottomBarPage({
             })}
           </div>
           <div className="flex flex-row gap-2 w-2/3 justify-center">
-            <ModeToggle className="rounded-full w-1/4" variant="outline" />
+            <ModeToggle variant="outline" />
             {isLoggedIn() ? (
               <Link to={Links.Profile}>
                 <img
                   src={user?.avatarURL}
-                  className="rounded-full h-10 hover:ring-4"
+                  className="rounded-md h-10 hover:ring-4"
                 />
               </Link>
             ) : (

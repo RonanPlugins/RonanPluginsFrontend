@@ -1,4 +1,3 @@
-import { toggleFromArray } from "@/utils/array";
 import { enumToArray } from "@/utils/enum";
 import { formatToTitleCase } from "@/utils/formatter";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
@@ -9,6 +8,15 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateResourceContext } from "@/context/CreateResourceContext";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/context/MultiSelector";
 
 export function CreateTitle() {
   const { title, set_title } = useCreateResourceContext();
@@ -57,7 +65,7 @@ export function CreateUploadFile() {
       <Input
         type="file"
         accept=".zip,.jar"
-        className="text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded-full file:text-xs file:font-medium
+        className="text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded-md file:text-xs file:font-medium
                     file:bg-secondary file:text-secondary-foreground hover:file:cursor-pointer cursor-pointer hover:file:bg-primary"
         onChange={(e) => {
           set_file(e.target.files?.[0] || null);
@@ -93,26 +101,33 @@ export function CreateReleaseVersion() {
 
 export function CreateCategory() {
   const { category, set_category } = useCreateResourceContext();
+
   return (
     <div className="flex flex-col space-y-3">
       <Label>Category</Label>
+
       <div className="flex flex-row flex-wrap justify-center">
-        {enumToArray(PLUGIN_CATEGORY) //Filter out Number values (typescript stuff)
-          .map((type: any) => {
-            // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
-            return (
-              <Button
-                key={type}
-                variant={category === type ? "special" : "secondary"}
-                className="mb-2 mx-1 rounded-full max-w-36 w-full"
-                onClick={() => {
-                  set_category(type);
-                }}
-              >
-                {formatToTitleCase(type)}
-              </Button>
-            );
-          })}
+        <Select onValueChange={(val: any) => set_category(val)}>
+          <SelectTrigger className="border-secondary text-muted-foreground">
+            {formatToTitleCase(category) || "Choose Category..."}
+          </SelectTrigger>
+          <SelectContent>
+            {enumToArray(PLUGIN_CATEGORY) //Filter out Number values (typescript stuff)
+              .map((type: any) => {
+                // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
+                return (
+                  <SelectItem
+                    key={type}
+                    value={type}
+                    // variant={category === type ? "special" : "secondary"}
+                    className="mb-2 mx-1 rounded-md max-w-36 w-full"
+                  >
+                    {formatToTitleCase(type)}
+                  </SelectItem>
+                );
+              })}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
@@ -124,24 +139,25 @@ export function CreateSupportVersions() {
     <div className="flex flex-col space-y-3">
       <Label>Supported Minecraft Versions</Label>
       <div className="flex flex-row flex-wrap justify-center">
-        {Object.values(PLUGIN_VERSION) //Filter out Number values (typescript stuff)
-          .map((type: any) => {
-            // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
-            return (
-              <Button
-                key={type}
-                variant={
-                  supportVersion?.includes(type) ? "special" : "secondary"
-                }
-                className="mb-2 mx-1 rounded-full max-w-20 w-full"
-                onClick={() => {
-                  set_supportVersion((prev) => toggleFromArray(prev, type));
-                }}
-              >
-                {formatToTitleCase(type)}
-              </Button>
-            );
-          })}
+        <MultiSelector
+          values={supportVersion || []}
+          onValuesChange={set_supportVersion}
+        >
+          <MultiSelectorTrigger className="border-secondary">
+            <MultiSelectorInput placeholder="Choose versions..." />
+          </MultiSelectorTrigger>
+          <MultiSelectorContent>
+            <MultiSelectorList>
+              {Object.values(PLUGIN_VERSION).map((filter) => {
+                return (
+                  <MultiSelectorItem key={filter} value={filter}>
+                    {formatToTitleCase(filter)}
+                  </MultiSelectorItem>
+                );
+              })}
+            </MultiSelectorList>
+          </MultiSelectorContent>
+        </MultiSelector>
       </div>
       <p className="text-sm text-muted-foreground">
         What versions of Minecraft is your resource{" "}
@@ -220,7 +236,7 @@ export function CreateOptionals({ className }: { className: string }) {
           <DialogTrigger asChild>
             <Button
               variant="outline"
-              className="text-sm text-muted-foreground pointer"
+              className="text-sm text-muted-foreground pointer text-wrap"
             >
               Click to learn how to Find/Enable your Discord Server Widget.
               Copy/paste your Server ID above.

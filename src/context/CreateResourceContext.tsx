@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { PLUGIN_CATEGORY } from "minecentral-api";
 
@@ -41,6 +41,8 @@ interface CreateResourceProps {
   // Tags
   tags: string | null;
   set_tags: React.Dispatch<React.SetStateAction<string | null>>;
+  // Submitting
+  getFieldsIncomplete: () => any[];
 }
 
 const CreateResourceContext = createContext<CreateResourceProps | null>(null);
@@ -70,6 +72,20 @@ export const CreateResource_Context = ({
   const [link_source, set_linkSource] = useState<string | null>(null);
   const [discord, set_discord] = useState<string | null>(null);
   const [tags, set_tags] = useState<string | null>(null);
+
+  function getFieldsIncomplete() {
+    //Return a list of fields that are incomplete
+
+    return [
+      title,
+      subtitle,
+      file,
+      releaseVersion,
+      supportVersion,
+      category,
+      description,
+    ].filter((val) => !val);
+  }
 
   return (
     <CreateResourceContext.Provider
@@ -108,6 +124,8 @@ export const CreateResource_Context = ({
         // Tags
         tags,
         set_tags,
+        // Submit
+        getFieldsIncomplete,
       }}
     >
       {children}

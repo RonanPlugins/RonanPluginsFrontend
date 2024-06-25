@@ -62,7 +62,7 @@ export function ResourceView() {
                     <h3 className="text-primary font-bold text-2xl md:text-3xl">
                       {resource.title}
                     </h3>
-                    <p className="text-base font-normal">{resource.tagLine}</p>
+                    <p className="text-base font-normal">{resource.subtitle}</p>
                   </div>
                 </div>
               </div>

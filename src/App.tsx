@@ -5,7 +5,7 @@ import Nav from "./components/main/NavBar";
 import { ThemeProvider } from "./context/ThemeContext";
 import Footer from "./components/main/Footer";
 import UserProvider from "./context/UserContext";
-import { Toaster } from "./components/ui/sonner";
+import { Toaster } from "sonner";
 
 // const client = new ApolloClient({
 //   uri: "/graphql",
