@@ -121,8 +121,8 @@ function SearchBar() {
             Filters
             {!filter_show && isFiltering && (
               <span className="absolute -top-[5px] -right-[5px] flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-md bg-accent opacity-75 z-9"></span>
-                <span className="relative inline-flex rounded-md h-full w-full bg-accent z-10"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-xl bg-accent opacity-75 z-9"></span>
+                <span className="relative inline-flex rounded-xl h-full w-full bg-accent z-10"></span>
               </span>
             )}
           </Button>

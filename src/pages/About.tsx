@@ -26,7 +26,7 @@ export default function About() {
             <div className="py-4 text-center md:text-left flex md:inline-block flex-wrap space-y-2">
               <div className="grow w-full md:w-0">
                 <Link to={Links.Resources}>
-                  <Button className="rounded-md md:ml-0 w-full max-w-xl md:w-fit md:mr-2">
+                  <Button className="rounded-xl md:ml-0 w-full max-w-xl md:w-fit md:mr-2">
                     Browse Marketplace
                   </Button>
                 </Link>
@@ -35,7 +35,7 @@ export default function About() {
               <div className="grow w-full md:w-0">
                 <Link to={Links.Discord}>
                   <Button
-                    className="rounded-md w-full max-w-xl md:w-fit"
+                    className="rounded-xl w-full max-w-xl md:w-fit"
                     variant="secondary"
                   >
                     Join Our Discord

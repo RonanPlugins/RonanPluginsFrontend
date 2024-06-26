@@ -11,4 +11,7 @@ export const backendApi = axios.create({
 
 export const spigotApi = axios.create({
   baseURL: `https://api.spiget.org/v2/`,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });

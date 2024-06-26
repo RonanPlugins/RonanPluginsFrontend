@@ -41,7 +41,7 @@ export function ImportSpigotSidebar() {
       <CardContent className="text-center">
         {user.spigot?.spigotID ? (
           <div>
-            <div className="rounded-md border px-4 py-1 text-sm shadow-sm">
+            <div className="rounded-xl border px-4 py-1 text-sm shadow-sm">
               {spigotID}
             </div>
             <Button className="mt-2" onClick={handleRetry}>

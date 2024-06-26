@@ -2,7 +2,7 @@ import {
   CreateResource_Context,
   useCreateResourceContext,
 } from "@/context/CreateResourceContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import resource from "@/api/resource";
 import {
   CreateCategory,
@@ -19,6 +19,11 @@ import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
+import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
+import { ImportFromSpigot } from "@/components/resource/ImportFromSpigot";
+import { Separator } from "@radix-ui/react-select";
+import Loading from "@/components/common/Loading";
 
 export function ResourceCreate() {
   return (
@@ -28,10 +33,12 @@ export function ResourceCreate() {
       </h1>
       <div className="grid gap-9 mx-auto my-2 max-w-6xl px-2">
         <Listener />
+        <ImportFromSpigot />
         <CreateTitle />
         <CreateSubtitle />
         <CreateUploadFile />
         <CreateReleaseVersion />
+        <Separator className="border-b-4" />
         <CreateCategory />
         <CreateSupportVersions />
         <CreateOptionals className="grid gap-9 my-2" />
@@ -43,6 +50,7 @@ export function ResourceCreate() {
 }
 
 function SubmitCreate() {
+  const [posting, setPosting] = useState(false);
   const {
     title,
     subtitle,
@@ -54,6 +62,7 @@ function SubmitCreate() {
     //Optional
     language,
     link_source,
+    link_support,
     discord,
     tags,
     //Submitting
@@ -62,19 +71,10 @@ function SubmitCreate() {
 
   const navigate = useNavigate();
 
-  const element: React.ReactElement = (
-    <div className="flex items-center">
-      <CircleAlertIcon className="mr-2" />
-      <span className="first-letter:capitalize">
-        Please Fill All Required Fields!
-      </span>
-    </div>
-  );
-
   const handleCreatePost = async () => {
     const errors = getFieldsIncomplete();
     if (errors.length > 0) {
-      toast(element, {
+      toast("Please Fill All Required Fields!", {
         icon: <CircleAlertIcon />,
       });
       return;
@@ -90,20 +90,32 @@ function SubmitCreate() {
     // setPosting(true);
 
     // downsizeImage(image, (imageFile: any) => {
+
+    const categoryNumber: number = getEnumIndexByKey(
+      PLUGIN_CATEGORY,
+      category || PLUGIN_CATEGORY.MISC
+    );
+    const supportVersions: number[] | undefined = supportVersion?.map((key) =>
+      getEnumIndexByValue(PLUGIN_VERSION, key)
+    );
+    setPosting(true);
+
     resource
       .create({
         title,
         subtitle,
         description,
-        category,
+        category: categoryNumber,
+        //Release
         file,
         version: releaseVersion,
         // OPTIONALS
         language,
         discord,
-        link_source,
+        linkSource: link_source,
+        linkSupport: link_support,
         tags,
-        version_support: supportVersion,
+        versionSupport: supportVersions,
       })
       .then((data: any) => {
         if (data) {
@@ -120,13 +132,16 @@ function SubmitCreate() {
           // setDescriptionError("An error has occured!");
         }
         // });
+      })
+      .finally(() => {
+        setPosting(false);
       });
   };
 
   return (
     <div className="w-full flex">
       <Button className="mx-auto" variant="special" onClick={handleCreatePost}>
-        Post New Resource
+        {posting ? <Loading /> : `Post New Resource`}
       </Button>
     </div>
   );

@@ -99,7 +99,7 @@ function BottomBarPage({
               return (
                 <NavItem
                   active={activeNav}
-                  className="rounded-md w-2/3 text-center mx-auto my-1"
+                  className="rounded-xl w-2/3 text-center mx-auto my-1"
                   key={item.title}
                   {...item}
                 />
@@ -112,7 +112,7 @@ function BottomBarPage({
               <Link to={Links.Profile}>
                 <img
                   src={user?.avatarURL}
-                  className="rounded-md h-10 hover:ring-4"
+                  className="rounded-xl h-10 hover:ring-4"
                 />
               </Link>
             ) : (

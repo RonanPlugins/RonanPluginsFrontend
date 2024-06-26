@@ -5,6 +5,7 @@ import Links from "@/lib/Links";
 import LoginDialog from "../common/LoginDialog";
 import NavItem from "./NavItem";
 import { navItems } from "./NavBar";
+import { ImageSmall } from "../common/Image";
 
 export function TopBar() {
   const {
@@ -28,14 +29,11 @@ export function TopBar() {
           </div>
         </div>
         {/* Login/Profile */}
-        <div className="flex flex-row gap-2 justify-self-end">
+        <div className="flex flex-row gap-2 justify-self-end items-center">
           <ModeToggle className="hidden md:flex" />
           {isLoggedIn() ? (
             <Link to={Links.Profile}>
-              <img
-                src={user?.avatarURL}
-                className="rounded-md h-10 hover:ring-4"
-              />
+              <ImageSmall url={user?.avatarURL} classname="h-10 hover:ring-4" />
             </Link>
           ) : (
             <LoginDialog />
@@ -53,7 +51,7 @@ export function TopBar() {
               return (
                 <NavItem
                   active={activeNav}
-                  className="rounded-t-sm"
+                  className="rounded-t-lg"
                   key={item.title}
                   {...item}
                 />

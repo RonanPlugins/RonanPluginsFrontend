@@ -1,5 +1,5 @@
 import resourceAPI from "@/api/resource";
-import { Download, DownloadIcon } from "lucide-react";
+import { Download, DownloadIcon, FileWarning } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import fileDownload from "js-file-download";
@@ -32,6 +32,11 @@ export function ResourceDownload({
       fileDownload(jarFile, jarFile.name);
       toast("Download has started", {
         icon: <DownloadIcon />,
+      });
+    } else {
+      toast("Error downloading file!", {
+        icon: <FileWarning />,
+        className: "bg-red-700 border-none text-white",
       });
     }
     setDownloading(false);

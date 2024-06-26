@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { PLUGIN_CATEGORY } from "minecentral-api";
+import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 
 type CreateResourcePropsType = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive
@@ -17,8 +17,10 @@ interface CreateResourceProps {
   file: any;
   set_file: React.Dispatch<React.SetStateAction<any>>;
   // Release Version
-  releaseVersion: string | null;
-  set_releaseVersion: React.Dispatch<React.SetStateAction<string | null>>;
+  releaseVersion: PLUGIN_VERSION | null;
+  set_releaseVersion: React.Dispatch<
+    React.SetStateAction<PLUGIN_VERSION | null>
+  >;
   // Supported Versions
   supportVersion: string[] | null;
   set_supportVersion: React.Dispatch<React.SetStateAction<string[] | null>>;
@@ -32,9 +34,11 @@ interface CreateResourceProps {
   // Language
   language: string | null;
   set_language: React.Dispatch<React.SetStateAction<string | null>>;
-  // Source
+  // Source/Support
   link_source: string | null;
   set_linkSource: React.Dispatch<React.SetStateAction<string | null>>;
+  link_support: string | null;
+  set_linkSupport: React.Dispatch<React.SetStateAction<string | null>>;
   // Discord
   discord: string | null;
   set_discord: React.Dispatch<React.SetStateAction<string | null>>;
@@ -63,13 +67,16 @@ export const CreateResource_Context = ({
   const [title, set_title] = useState<string | null>(null);
   const [subtitle, set_subtitle] = useState<string | null>(null);
   const [file, set_file] = useState<any>();
-  const [releaseVersion, set_releaseVersion] = useState<string | null>(null);
+  const [releaseVersion, set_releaseVersion] = useState<PLUGIN_VERSION | null>(
+    null
+  );
   const [supportVersion, set_supportVersion] = useState<string[] | null>(null);
   const [category, set_category] = useState<PLUGIN_CATEGORY | null>(null);
   const [description, set_description] = useState<string | null>(null);
   //Optional
   const [language, set_language] = useState<string | null>(null);
   const [link_source, set_linkSource] = useState<string | null>(null);
+  const [link_support, set_linkSupport] = useState<string | null>(null);
   const [discord, set_discord] = useState<string | null>(null);
   const [tags, set_tags] = useState<string | null>(null);
 
@@ -115,9 +122,11 @@ export const CreateResource_Context = ({
         // Language
         language,
         set_language,
-        // Source
+        // Source/Support
         link_source,
         set_linkSource,
+        link_support,
+        set_linkSupport,
         // Discord
         discord,
         set_discord,

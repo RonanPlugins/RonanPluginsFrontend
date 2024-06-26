@@ -32,7 +32,7 @@ export function FilterCategory({
               variant={
                 filter_category?.toString() === type ? "special" : variant
               }
-              className={`${className} rounded-md`}
+              className={`${className} rounded-xl`}
               onClick={() => setFilter_category(type)}
             >
               {formatToTitleCase(type)}

@@ -13,7 +13,7 @@ export default function PremiumIcon({ className }: { className?: string }) {
             <Crown fill="gold" stroke="black" size={20} />
           </TooltipTrigger>
           <TooltipContent>
-            <div className="bg-muted p-1 rounded-md shadow-md">
+            <div className="bg-muted p-1 rounded-xl shadow-md">
               <p>Premium</p>
             </div>
           </TooltipContent>

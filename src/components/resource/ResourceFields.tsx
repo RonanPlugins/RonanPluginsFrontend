@@ -65,7 +65,7 @@ export function CreateUploadFile() {
       <Input
         type="file"
         accept=".zip,.jar"
-        className="text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded-md file:text-xs file:font-medium
+        className="text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded-xl file:text-xs file:font-medium
                     file:bg-secondary file:text-secondary-foreground hover:file:cursor-pointer cursor-pointer hover:file:bg-primary"
         onChange={(e) => {
           set_file(e.target.files?.[0] || null);
@@ -120,7 +120,7 @@ export function CreateCategory() {
                     key={type}
                     value={type}
                     // variant={category === type ? "special" : "secondary"}
-                    className="mb-2 mx-1 rounded-md max-w-36 w-full"
+                    className="mb-2 mx-1 rounded-xl max-w-36 w-full"
                   >
                     {formatToTitleCase(type)}
                   </SelectItem>
@@ -148,13 +148,15 @@ export function CreateSupportVersions() {
           </MultiSelectorTrigger>
           <MultiSelectorContent>
             <MultiSelectorList>
-              {Object.values(PLUGIN_VERSION).map((filter) => {
-                return (
-                  <MultiSelectorItem key={filter} value={filter}>
-                    {formatToTitleCase(filter)}
-                  </MultiSelectorItem>
-                );
-              })}
+              {Object.values(PLUGIN_VERSION)
+                .reverse()
+                .map((filter) => {
+                  return (
+                    <MultiSelectorItem key={filter} value={filter}>
+                      {formatToTitleCase(filter)}
+                    </MultiSelectorItem>
+                  );
+                })}
             </MultiSelectorList>
           </MultiSelectorContent>
         </MultiSelector>
@@ -184,6 +186,8 @@ export function CreateOptionals({ className }: { className: string }) {
     set_language,
     link_source,
     set_linkSource,
+    link_support,
+    set_linkSupport,
     discord,
     set_discord,
     tags,
@@ -214,6 +218,22 @@ export function CreateOptionals({ className }: { className: string }) {
           value={link_source || ""}
           onChange={(e: any) => {
             set_linkSource(e.target.value);
+          }}
+        />
+
+        <p className="text-sm text-muted-foreground">
+          A link to your projects source code or repository
+        </p>
+      </section>
+
+      {/* Support Link */}
+      <section className="flex flex-col space-y-3">
+        <Label>Additional Support Link</Label>
+        <Input
+          placeholder="Support Link"
+          value={link_support || ""}
+          onChange={(e: any) => {
+            set_linkSupport(e.target.value);
           }}
         />
 
@@ -258,7 +278,7 @@ export function CreateOptionals({ className }: { className: string }) {
           }}
         />
 
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground max-w-2xl">
           Improve discoverability by adding{" "}
           <span className="font-bold">relevant</span> tags to your resource. Use
           letters, numbers, and dashes to create your tags, and separate them

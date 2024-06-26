@@ -47,7 +47,7 @@ export default function Profile() {
                   </div>
                 ))
               ) : (
-                <div className="w-full h-full bg-primary-foreground rounded-md flex flex-col">
+                <div className="w-full h-full bg-primary-foreground rounded-xl flex flex-col">
                   {loading ? (
                     <Loading />
                   ) : (

@@ -10,7 +10,6 @@ import ProfileOther from "./profile/ProfileOther.tsx";
 import { ResourceEdit } from "./resources/Editor.tsx";
 import StripeRefresh from "./stripe/StripeRefresh.tsx";
 import { Servers } from "./servers/index.tsx";
-import { ImportSpigot } from "./profile/ImportSpigot.tsx";
 import { PERMISSION } from "minecentral-api";
 import { Resources } from "./resources/index.tsx";
 import { FilterResource } from "@/context/FilterResourceContext.tsx";
@@ -70,10 +69,6 @@ export const router = createBrowserRouter([
           {
             path: "/resource/:id/edit",
             element: <ResourceEdit />,
-          },
-          {
-            path: "/profile/import/spigot",
-            element: <ImportSpigot />,
           },
         ],
       },

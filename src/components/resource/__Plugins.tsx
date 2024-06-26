@@ -34,7 +34,7 @@ const SPIGETS = () => {
 
   return (
     <div className="mx-4 my-4">
-      <h1 className="text-center font-bold text-secondary px-4 bg-primary rounded-md">
+      <h1 className="text-center font-bold text-secondary px-4 bg-primary rounded-xl">
         Premium Plugins
       </h1>
       {/* Premium Plugins */}
@@ -44,7 +44,7 @@ const SPIGETS = () => {
         ))}
       </div>
       {/* Free Plugins */}
-      <h1 className="text-center font-bold text-secondary px-4 bg-primary rounded-md">
+      <h1 className="text-center font-bold text-secondary px-4 bg-primary rounded-xl">
         Free Plugins
       </h1>
       <div className="my-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mx-5">
