@@ -16,7 +16,6 @@ import {
 } from "@/components/resource/ResourceFields";
 import { Button } from "@/components/ui/button";
 import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
@@ -56,7 +55,7 @@ function SubmitCreate() {
     subtitle,
     file,
     releaseVersion,
-    supportVersion,
+    supportVersions,
     category,
     description,
     //Optional
@@ -73,7 +72,7 @@ function SubmitCreate() {
 
   const handleCreatePost = async () => {
     const errors = getFieldsIncomplete();
-    if (errors.length > 0) {
+    if (errors.length > 0 || !file || !releaseVersion) {
       toast("Please Fill All Required Fields!", {
         icon: <CircleAlertIcon />,
       });
@@ -95,8 +94,8 @@ function SubmitCreate() {
       PLUGIN_CATEGORY,
       category || PLUGIN_CATEGORY.MISC
     );
-    const supportVersions: number[] | undefined = supportVersion?.map((key) =>
-      getEnumIndexByValue(PLUGIN_VERSION, key)
+    const supportVersionsList: number[] | undefined = supportVersions?.map(
+      (key) => getEnumIndexByValue(PLUGIN_VERSION, key)
     );
     setPosting(true);
 
@@ -115,7 +114,7 @@ function SubmitCreate() {
         linkSource: link_source,
         linkSupport: link_support,
         tags,
-        versionSupport: supportVersions,
+        versionSupport: supportVersionsList,
       })
       .then((data: any) => {
         if (data) {
@@ -154,7 +153,7 @@ function Listener() {
     subtitle,
     file,
     releaseVersion,
-    supportVersion,
+    supportVersions,
     category,
     description,
     //Optional
@@ -172,7 +171,7 @@ function Listener() {
           subtitle,
           file,
           releaseVersion,
-          supportVersion,
+          supportVersions,
           category,
           description,
           //Optional
@@ -199,7 +198,7 @@ function Listener() {
     subtitle,
     file,
     releaseVersion,
-    supportVersion,
+    supportVersions,
     category,
     description,
     //Optional

@@ -6,6 +6,7 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "../ui/dialog";
+import { Buffer } from "buffer";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { Label } from "../ui/label";
@@ -167,10 +168,5 @@ function getDescriptionFromBase64(base64: string) {
   return description;
 }
 function base64ToString(base64: string): string {
-  // Decode Base64 to a binary string
-  const binaryString = atob(base64);
-  // Convert the binary string to a Uint8Array
-  const bytes = Uint8Array.from(binaryString, (char) => char.charCodeAt(0));
-  // Decode the Uint8Array to a UTF-8 string
-  return new TextDecoder().decode(bytes);
+  return Buffer.from(base64, "base64").toString("utf-8");
 }

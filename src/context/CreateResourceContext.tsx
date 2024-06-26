@@ -22,8 +22,8 @@ interface CreateResourceProps {
     React.SetStateAction<PLUGIN_VERSION | null>
   >;
   // Supported Versions
-  supportVersion: string[] | null;
-  set_supportVersion: React.Dispatch<React.SetStateAction<string[] | null>>;
+  supportVersions: string[] | null;
+  set_supportVersions: React.Dispatch<React.SetStateAction<string[] | null>>;
   // Category
   category: PLUGIN_CATEGORY | null;
   set_category: React.Dispatch<React.SetStateAction<PLUGIN_CATEGORY | null>>;
@@ -70,7 +70,9 @@ export const CreateResource_Context = ({
   const [releaseVersion, set_releaseVersion] = useState<PLUGIN_VERSION | null>(
     null
   );
-  const [supportVersion, set_supportVersion] = useState<string[] | null>(null);
+  const [supportVersions, set_supportVersions] = useState<string[] | null>(
+    null
+  );
   const [category, set_category] = useState<PLUGIN_CATEGORY | null>(null);
   const [description, set_description] = useState<string | null>(null);
   //Optional
@@ -83,15 +85,9 @@ export const CreateResource_Context = ({
   function getFieldsIncomplete() {
     //Return a list of fields that are incomplete
 
-    return [
-      title,
-      subtitle,
-      file,
-      releaseVersion,
-      supportVersion,
-      category,
-      description,
-    ].filter((val) => !val);
+    return [title, subtitle, supportVersions, category, description].filter(
+      (val) => !val
+    );
   }
 
   return (
@@ -110,8 +106,8 @@ export const CreateResource_Context = ({
         releaseVersion,
         set_releaseVersion,
         //Support Version
-        supportVersion,
-        set_supportVersion,
+        supportVersions,
+        set_supportVersions,
         // Category
         category,
         set_category,

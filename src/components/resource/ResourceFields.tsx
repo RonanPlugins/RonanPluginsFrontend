@@ -134,14 +134,14 @@ export function CreateCategory() {
 }
 
 export function CreateSupportVersions() {
-  const { supportVersion, set_supportVersion } = useCreateResourceContext();
+  const { supportVersions, set_supportVersions } = useCreateResourceContext();
   return (
     <div className="flex flex-col space-y-3">
       <Label>Supported Minecraft Versions</Label>
       <div className="flex flex-row flex-wrap justify-center">
         <MultiSelector
-          values={supportVersion || []}
-          onValuesChange={set_supportVersion}
+          values={supportVersions || []}
+          onValuesChange={set_supportVersions}
         >
           <MultiSelectorTrigger className="border-secondary">
             <MultiSelectorInput placeholder="Choose versions..." />

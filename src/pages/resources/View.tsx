@@ -14,7 +14,6 @@ import { ResourceDownload } from "@/components/resource/Download";
 import { ResourceDelete } from "@/components/resource/Delete";
 import { TextViewer } from "@/components/textEditor/TextViewer";
 import usePageTitle from "@/utils/usePageTitle";
-import { Button } from "@/components/ui/button";
 import { ResourcePages } from "@/components/resource/Pages";
 
 export function ResourceView() {
