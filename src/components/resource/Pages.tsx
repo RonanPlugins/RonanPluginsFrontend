@@ -20,7 +20,8 @@ export function ResourcePages({ resource }: { resource: any }) {
           const isActive = active === enumVal;
           return (
             <p
-              className={`w-full px-6 border-b-4 text-lg ${
+              key={val}
+              className={`w-full px-6 border-b-4 text-lg hover:cursor-pointer ${
                 isActive
                   ? "border-accent"
                   : "border-accent-foreground hover:border-accent text-muted-foreground hover:text-secondary-foreground"

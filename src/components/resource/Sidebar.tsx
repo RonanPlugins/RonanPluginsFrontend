@@ -18,6 +18,7 @@ import { Separator } from "../ui/separator";
 import { ImageSmall } from "../common/Image";
 import { Button } from "../ui/button";
 import { ResourceDownloadCard } from "@/pages/resources/View";
+import { UploadIcon } from "./UploadIcon";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
   return (
@@ -125,10 +126,10 @@ function Tools({ resource }: { resource: any }) {
           </CardTitle>
           <CardContent className="p-3">
             <Separator className="mb-2 h-1" />
-            <Link to={"./edit"}>
+            <Link className="hover:text-muted-foreground" to={"./edit"}>
               <p>Edit Resource</p>
             </Link>
-            <p>Edit Icon</p>
+            <UploadIcon resource={resource} />
             <p>Post Update</p>
           </CardContent>
         </Card>

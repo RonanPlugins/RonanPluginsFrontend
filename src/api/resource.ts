@@ -14,12 +14,23 @@ export default {
         return null;
       });
   },
-  edit(id: number, info: any): Promise<any> {
+  edit(id: string, info: any): Promise<any> {
     console.log("Edit Resource Request", id, info);
     return backendApi
       .put(`/resource/${id}`, info)
       .then(({ data }) => {
-        //console.log("POST", data);
+        console.log("PUT", data);
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
+  editIcon(id: any, icon: any): Promise<any> {
+    return backendApi
+      .put(`/resource/${id}/icon`, icon)
+      .then(({ data }) => {
         return data;
       })
       .catch((err) => {

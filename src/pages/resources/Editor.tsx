@@ -56,7 +56,7 @@ export function ResourceEdit() {
         <CreateSupportVersions />
         <CreateOptionals className="grid gap-9 my-2" />
         <CreateDescription />
-        <SubmitEdit />
+        <SubmitEdit resource={resource} />
       </div>
     </CreateResource_Context>
   );
@@ -90,7 +90,7 @@ function Loader({ resource }: { resource: any }) {
       );
     const versions = resource.versionSupport?.map((index: any) => {
       const obj = Object.values(PLUGIN_VERSION)[index];
-      console.log(index, obj);
+      // console.log(index, obj);
       return obj;
     });
     if (versions) set_supportVersions(versions);
@@ -104,7 +104,7 @@ function Loader({ resource }: { resource: any }) {
   return <></>;
 }
 
-function SubmitEdit() {
+function SubmitEdit({ resource }: { resource: any }) {
   const [posting, setPosting] = useState(false);
   const {
     title,
@@ -145,7 +145,7 @@ function SubmitEdit() {
     setPosting(true);
 
     resourceAPI
-      .create({
+      .edit(resource._id, {
         title,
         subtitle,
         description,

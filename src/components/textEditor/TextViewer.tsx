@@ -27,6 +27,7 @@ export function TextViewer({ content = "" }: { content?: string }) {
     toolbar: false,
     plugins: ["autoresize", "importcss"],
     autoresize_overflow_padding: 10,
+    content_style: "img {max-width: 100%;}",
     ...theme,
   };
 

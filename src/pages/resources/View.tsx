@@ -42,7 +42,7 @@ export function ResourceView() {
 
   if (loading) return <Loading />;
   if (resource === null) return <>Error!</>;
-  console.log(resource);
+  // console.log(resource);
 
   return (
     <div className="max-w-7xl my-3 mx-2 lg:mx-auto flex lg:flex-row flex-col lg:space-x-2 space-y-3 lg:space-y-0">
