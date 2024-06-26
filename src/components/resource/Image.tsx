@@ -22,7 +22,5 @@ export function ResourceImage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return <Loading />;
-
-  return <Image classname={classname} url={image} />;
+  return <Image loading={loading} classname={classname} url={image} />;
 }

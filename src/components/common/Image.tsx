@@ -1,28 +1,36 @@
+import Loading from "./Loading";
+
 export default function Image({
   image,
   url,
   classname,
+  loading,
 }: {
   image?: any;
   url?: string | null;
   classname?: string;
+  loading?: boolean;
 }) {
   return (
     <div
       className={`flex-shrink-0 h-[88px] w-[88px] object-contain rounded-xl bg-inherit p-1 ${classname}`}
     >
-      <img
-        className="rounded-xl w-[80px] h-[80px] bg-muted"
-        src={
-          url
-            ? url
-            : `${
-                image
-                  ? `${import.meta.env.VITE_IMAGES_URL}${image}`
-                  : `/assets/unavailable.webp`
-              }`
-        }
-      />
+      {!loading ? (
+        <img
+          className="rounded-xl w-[80px] h-[80px] bg-muted"
+          src={
+            url
+              ? url
+              : `${
+                  image
+                    ? `${import.meta.env.VITE_IMAGES_URL}${image}`
+                    : `/assets/unavailable.webp`
+                }`
+          }
+        />
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
