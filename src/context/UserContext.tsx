@@ -42,8 +42,8 @@ export default function UserProvider({ children }: { children: any }) {
         setUser(data);
         setAdmin(data.role === PERMISSION.ADMIN);
         setDeveloper(data.role >= PERMISSION.DEVELOPER);
-        const stripe = await profile.getStripeStatus();
-        setPremiumReady(stripe?.enabled);
+        // const stripe = await profile.getStripeStatus();
+        setPremiumReady(data.stripe?.verified);
       }
       setUserLoaded(true);
     };

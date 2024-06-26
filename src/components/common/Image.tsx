@@ -29,7 +29,7 @@ export default function Image({
           }
         />
       ) : (
-        <Loading />
+        <Loading className="rounded-xl w-[80px] h-[80px] bg-muted flex" />
       )}
     </div>
   );

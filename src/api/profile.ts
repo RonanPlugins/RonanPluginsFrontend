@@ -45,15 +45,15 @@ export default {
         return null;
       });
   },
-  getStripeStatus(): Promise<any> {
-    return backendApi
-      .get(`/profile/stripe/status`)
-      .then(({ data }) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-        return null;
-      });
-  },
+  // getStripeStatus(): Promise<any> {
+  //   return backendApi
+  //     .get(`/profile/stripe/status`)
+  //     .then(({ data }) => {
+  //       return data;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return null;
+  //     });
+  // },
 };
