@@ -27,7 +27,7 @@ export default {
         return null;
       });
   },
-  editIcon(id: any, icon: any): Promise<any> {
+  editIcon(id: string, icon: File): Promise<any> {
     return backendApi
       .put(`/resource/${id}/icon`, icon)
       .then(({ data }) => {
@@ -98,7 +98,7 @@ export default {
         return null;
       });
   },
-  getIcon(id: string): Promise<any> {
+  getIcon(id: string): Promise<string | null> {
     return backendApi
       .get(`/resource/${id}/image`, {
         responseType: "blob",

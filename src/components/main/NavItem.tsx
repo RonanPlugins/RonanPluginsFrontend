@@ -22,7 +22,7 @@ function NavItem({
 
     <Link
       to={link}
-      className={`${className} p-2 px-6 md:text-base transition-colors duration-200 ease-in-out font-bold text-secondary-foreground ${focusedClass}`}
+      className={`${className} p-3 px-6 md:text-base transition-colors duration-200 ease-in-out font-bold text-secondary-foreground ${focusedClass}`}
     >
       {title ? title : link}
     </Link>

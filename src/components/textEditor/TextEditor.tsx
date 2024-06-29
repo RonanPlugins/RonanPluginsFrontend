@@ -6,7 +6,7 @@ export function TextEditor({
   onChange = () => {},
   content = "",
 }: {
-  onChange?: any;
+  onChange?: React.Dispatch<React.SetStateAction<string | null>>;
   content?: string | null;
 }) {
   const editorRef = useRef<Editor>(null);

@@ -28,7 +28,7 @@ export default function Admin() {
   }, []);
   if (loading) return <Loading />;
   return (
-    <div className="resourceContainer my-2">
+    <div className="resourceContainer my-3">
       <h1>Members</h1>
       <div className="resources">
         {users?.map((user) => {

@@ -1,6 +1,7 @@
 import footerLib from "@/lib/Footer";
-import { Button } from "../ui/button";
+import { PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 
 export default function Footer() {
   return (
@@ -29,7 +30,10 @@ export default function Footer() {
   );
 }
 
-const SocialButton = ({ children, href }: { href: string; children?: any }) => {
+const SocialButton = ({
+  children,
+  href,
+}: PropsWithChildren & { href: string }) => {
   return (
     <Link to={href}>
       <Button className="rounded-xl m-2">{children}</Button>

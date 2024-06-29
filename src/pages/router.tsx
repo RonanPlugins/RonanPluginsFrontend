@@ -13,6 +13,8 @@ import { Servers } from "./servers/index.tsx";
 import { PERMISSION } from "minecentral-api";
 import { Resources } from "./resources/index.tsx";
 import { FilterResource } from "@/context/FilterResourceContext.tsx";
+import Login from "@/components/main/Login.tsx";
+import Signup from "@/components/main/Signup.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
       //Servers
       {
@@ -54,7 +64,7 @@ export const router = createBrowserRouter([
         path: "/resource/:id",
         element: <ResourceView />,
       },
-      //Profile
+      //Login Protected
       {
         element: <AuthGuard />,
         children: [

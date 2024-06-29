@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Links from "@/lib/Links";
 import { ModeToggle } from "../common/ModeToggle";
-import LoginDialog from "../common/LoginDialog";
+import LoginDialog from "./LoginDialog";
 import { useUserContext } from "@/context/UserContext";
 import { navItems } from "./NavBar";
 import NavItem from "./NavItem";
@@ -14,7 +14,7 @@ export function BottomBar() {
   const location = useLocation();
 
   const [isVisible, setIsVisible] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [animationClass, setAnimationClass] = useState("");
 
   useEffect(() => {
@@ -77,21 +77,15 @@ function BottomBarPage({
   isVisible: boolean;
   animationClass: string;
 }) {
-  const {
-    isLoggedIn,
-    user,
-  }: {
-    isLoggedIn: any;
-    user: any;
-  } = useUserContext();
+  const { isLoggedIn, user } = useUserContext();
 
   return (
     <div className="-z-1 flex flex-col items-center justify-center">
       {isVisible && (
         <div
-          className={`p-4 flex flex-col gap-2 items-center bg-background dark:bg-secondary w-full transition-all duration-500 rounded-t-xl ${animationClass}`}
+          className={`p-4 flex flex-col gap-3 items-center bg-background dark:bg-secondary w-full transition-all duration-500 rounded-t-xl ${animationClass}`}
         >
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex flex-col gap-3 w-full">
             {navItems.map((item) => {
               const activeNav =
                 item.list.filter((link) => location.pathname.includes(link))
@@ -106,7 +100,7 @@ function BottomBarPage({
               );
             })}
           </div>
-          <div className="flex flex-row gap-2 w-2/3 justify-center">
+          <div className="flex flex-row gap-3 w-2/3 justify-center">
             <ModeToggle variant="outline" />
             {isLoggedIn() ? (
               <Link to={Links.Profile}>

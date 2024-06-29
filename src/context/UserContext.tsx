@@ -1,9 +1,8 @@
 import api from "@/api";
-import profile from "@/api/profile";
 import { PERMISSION } from "minecentral-api";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const initialState = {
+const initialState: InitialStateUser = {
   user: null,
   isLoggedIn: () => false,
   logout: () => {},
@@ -13,7 +12,32 @@ const initialState = {
   isPremiumReady: false,
 };
 
-const UserContext = createContext(initialState);
+interface InitialStateUser {
+  user: User | null;
+  isLoggedIn: () => boolean;
+  logout: () => void;
+  userLoaded: boolean;
+  isAdmin: boolean;
+  isDeveloper: boolean;
+  isPremiumReady: boolean;
+}
+
+interface User {
+  _id: string;
+  email: string;
+  name: string;
+  avatarURL: string;
+  lastLogin: string;
+  role: number;
+  stripe: StripeUser;
+}
+
+interface StripeUser {
+  account_id: string;
+  verified: boolean;
+}
+
+const UserContext = createContext<InitialStateUser>(initialState);
 
 export const useUserContext = () => {
   return useContext(UserContext);

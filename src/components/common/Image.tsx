@@ -6,7 +6,7 @@ export default function Image({
   classname,
   loading,
 }: {
-  image?: any;
+  image?: string;
   url?: string | null;
   classname?: string;
   loading?: boolean;
@@ -40,7 +40,7 @@ export function ImageSmall({
   url,
   classname,
 }: {
-  image?: any;
+  image?: string;
   url?: string | null;
   classname?: string;
 }) {

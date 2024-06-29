@@ -46,7 +46,7 @@ export default function SPIGET({ pluginData }: { pluginData: any }) {
 
   return (
     <Card className="text-center">
-      <CardTitle className="truncate mx-2 my-2">
+      <CardTitle className="truncate mx-2 my-3">
         {plugin?.name}
         <p className="text-sm font-normal">
           {new Date(plugin?.updateDate * 1000).toLocaleString()}
@@ -54,7 +54,7 @@ export default function SPIGET({ pluginData }: { pluginData: any }) {
       </CardTitle>
       <CardContent>
         <img
-          className="mx-auto my-2 h-20 hover: border rounded-xl bg-white bg-gradient-to-r from-cyan-500 to-blue-500"
+          className="mx-auto my-3 h-20 hover: border rounded-xl bg-white bg-gradient-to-r from-cyan-500 to-blue-500"
           src={"https://www.spigotmc.org/" + plugin?.icon.url}
         />
         <div className="flex">

@@ -29,7 +29,7 @@ export default function Nav() {
   // console.log(loc);
 
   return (
-    <nav className="flex flex-col w-full lg:mt-2 lg:border-b-8 lg:border-primary gap-2">
+    <nav className="flex flex-col w-full lg:mt-2 lg:border-b-8 lg:border-primary gap-3">
       {/* Top Bar WHEN ON DESKTOP */}
       <div className="hidden lg:block">
         <TopBar />

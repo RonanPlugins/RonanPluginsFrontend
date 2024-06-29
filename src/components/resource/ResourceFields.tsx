@@ -174,7 +174,7 @@ export function CreateDescription() {
   return (
     <div>
       <Label>Description</Label>
-      <div className="my-2"></div>
+      <div className="my-3"></div>
       <TextEditor content={description} onChange={set_description} />
     </div>
   );
@@ -201,7 +201,7 @@ export function CreateOptionals({ className }: { className: string }) {
         <Input
           placeholder="Supported Languages"
           value={language || ""}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             set_language(e.target.value);
           }}
         />
@@ -216,7 +216,7 @@ export function CreateOptionals({ className }: { className: string }) {
         <Input
           placeholder="Source Code Link"
           value={link_source || ""}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             set_linkSource(e.target.value);
           }}
         />
@@ -232,7 +232,7 @@ export function CreateOptionals({ className }: { className: string }) {
         <Input
           placeholder="Support Link"
           value={link_support || ""}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             set_linkSupport(e.target.value);
           }}
         />
@@ -247,7 +247,7 @@ export function CreateOptionals({ className }: { className: string }) {
         <Input
           placeholder="Discord Server ID"
           value={discord || ""}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             set_discord(e.target.value);
           }}
         />
@@ -273,7 +273,7 @@ export function CreateOptionals({ className }: { className: string }) {
         <Input
           placeholder="First,Second,Third"
           value={tags || ""}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             set_tags(e.target.value);
           }}
         />

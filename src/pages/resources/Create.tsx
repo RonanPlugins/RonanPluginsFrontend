@@ -30,7 +30,7 @@ export function ResourceCreate() {
       <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
         New Resource
       </h1>
-      <div className="grid gap-9 mx-auto my-2 max-w-6xl px-2">
+      <div className="grid gap-9 mx-auto my-3 max-w-6xl px-2">
         <Listener />
         <ImportFromSpigot />
         <CreateTitle />
@@ -40,7 +40,7 @@ export function ResourceCreate() {
         <Separator className="border-b-4" />
         <CreateCategory />
         <CreateSupportVersions />
-        <CreateOptionals className="grid gap-9 my-2" />
+        <CreateOptionals className="grid gap-9 my-3" />
         <CreateDescription />
         <SubmitCreate />
       </div>

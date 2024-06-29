@@ -2,19 +2,13 @@ import { useUserContext } from "@/context/UserContext";
 import { Link, useLocation } from "react-router-dom";
 import { ModeToggle } from "../common/ModeToggle";
 import Links from "@/lib/Links";
-import LoginDialog from "../common/LoginDialog";
+import LoginDialog from "./LoginDialog";
 import NavItem from "./NavItem";
 import { navItems } from "./NavBar";
 import { ImageSmall } from "../common/Image";
 
 export function TopBar() {
-  const {
-    isLoggedIn,
-    user,
-  }: {
-    isLoggedIn: any;
-    user: any;
-  } = useUserContext();
+  const { isLoggedIn, user } = useUserContext();
   const location = useLocation();
 
   return (
@@ -29,7 +23,7 @@ export function TopBar() {
           </div>
         </div>
         {/* Login/Profile */}
-        <div className="flex flex-row gap-2 justify-self-end items-center">
+        <div className="flex flex-row gap-3 justify-self-end items-center">
           <ModeToggle className="hidden md:flex" />
           {isLoggedIn() ? (
             <Link to={Links.Profile}>

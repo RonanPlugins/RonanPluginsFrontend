@@ -37,14 +37,13 @@ export function EditStripe() {
   }
 
   useEffect(() => {
-    if (user && accountID != user?.stripe?.account_id) {
+    if (user && accountID && accountID != user?.stripe?.account_id) {
       toast.success("Account ID Created!", {
         richColors: true,
       });
       // console.log("Account id has changed!");
-      user.stripe = { account_id: accountID };
+      user.stripe = { ...user.stripe, account_id: accountID };
     }
-    // getStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountID]);
 

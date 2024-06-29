@@ -3,7 +3,7 @@ import { useUserContext } from "@/context/UserContext";
 import Loading from "./Loading";
 import { PERMISSION } from "minecentral-api";
 
-export default function AuthGuard({ role }: { role?: any }) {
+export default function AuthGuard({ role }: { role?: number }) {
   const { isLoggedIn, userLoaded, isAdmin, isDeveloper } = useUserContext();
 
   //Loading

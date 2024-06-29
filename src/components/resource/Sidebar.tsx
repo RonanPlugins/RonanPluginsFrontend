@@ -62,7 +62,7 @@ function Info({ resource }: { resource: any }) {
           )}
         </div>
       </CardHeader>
-      <CardContent className="relative px-3 grid gap-2">
+      <CardContent className="relative px-3 grid gap-3">
         <Separator className="h-1" />
 
         <div className="flex flex-row items-center">
@@ -90,7 +90,7 @@ function Info({ resource }: { resource: any }) {
             <dd>{`Updated ${date(resource.updatedAt)}`}</dd>
           </dl>
         </div>
-        <div className="absolute bottom-0 right-0 p-2 lg:hidden">
+        <div className="absolute bottom-0 right-0 p-3 lg:hidden">
           <ResourceDownloadCard resource={resource} />
         </div>
       </CardContent>
@@ -120,7 +120,7 @@ function Tools({ resource }: { resource: any }) {
     <>
       {user?._id === resource.authorID._id && (
         <Card>
-          <CardTitle className="truncate p-2 rounded-t-xl flex flex-row font-bold">
+          <CardTitle className="truncate p-3 rounded-t-xl flex flex-row font-bold">
             <Edit className="mr-2" />
             <h2>Resource Tools</h2>
           </CardTitle>
@@ -141,21 +141,21 @@ function Tools({ resource }: { resource: any }) {
 function Links({ resource }: { resource: any }) {
   return (
     <Card>
-      <CardTitle className="truncate p-2 flex flex-row font-bold">
+      <CardTitle className="truncate p-3 flex flex-row font-bold">
         <LinkIcon className="mr-2" />
         <h2>Links</h2>
       </CardTitle>
       <CardContent className="p-3">
         <Separator className="mb-2 h-1" />
         <Link
-          className="flex flex-row gap-2 items-center hover:underline"
+          className="flex flex-row gap-3 items-center hover:underline"
           to={resource.linkSupport}
         >
           <CircleHelp size={18} />
           <p>Support</p>
         </Link>
         <Link
-          className="flex flex-row gap-2 items-center hover:underline"
+          className="flex flex-row gap-3 items-center hover:underline"
           to={resource.linkSource}
         >
           <SquareCodeIcon size={18} />
@@ -169,7 +169,7 @@ function Links({ resource }: { resource: any }) {
 function Contributers({ resource }: { resource: any }) {
   return (
     <Card>
-      <CardTitle className="truncate p-2 flex flex-row font-bold">
+      <CardTitle className="truncate p-3 flex flex-row font-bold">
         <LinkIcon className="mr-2" />
         <h2>Contributors</h2>
       </CardTitle>

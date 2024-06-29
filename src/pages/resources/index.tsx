@@ -26,7 +26,12 @@ export function Resources() {
     useFilterResourceContext();
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
+  const [totalResources, setTotalResources] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
+
+  useEffect(() => {
+    setTotalPages(Math.ceil(totalResources / page_amount));
+  }, [totalResources, page_amount]);
 
   async function getResources() {
     setLoading(true);
@@ -39,7 +44,7 @@ export function Resources() {
       count: page_amount,
     });
     setResources(posts);
-    setTotalPages(Math.ceil((await resourceAPI.getCount()) / page_amount));
+    setTotalResources(await resourceAPI.getCount());
     setLoading(false);
     if (posts && posts[0]) {
       if (page === 0) setFilterParams({});
@@ -60,14 +65,14 @@ export function Resources() {
         <FilterCategory />
       </div>
       {/* Main Div */}
-      <main className="max-w-6xl mx-auto p-2 flex lg:flex-row flex-col lg:space-x-2 mb-2 lg:space-y-0">
+      <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
         <div className="w-full lg:w-96">
           {/* Title/Filter */}
           <Sidebar />
         </div>
 
         {/* Main Panel */}
-        <div className="w-full lg:max-w-6xl space-y-1">
+        <div className="w-full lg:max-w-6xl space-y-2">
           {/* Search Bar */}
           <SearchBar />
           {/* Pagination */}
@@ -193,9 +198,7 @@ function ResourceList({
       {!loading ? (
         resources &&
         resources.map((resource) => (
-          <div key={resource._id}>
-            <ResourcePreview resource={resource} />
-          </div>
+          <ResourcePreview key={resource._id} resource={resource} />
         ))
       ) : (
         <Loading className="w-full" />

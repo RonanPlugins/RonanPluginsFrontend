@@ -48,13 +48,13 @@ export function ResourceEdit() {
 
       <Loader resource={resource} />
 
-      <div className="grid gap-9 mx-auto my-2 max-w-6xl">
+      <div className="grid gap-9 mx-auto my-3 max-w-6xl">
         <Listener />
         <CreateTitle />
         <CreateSubtitle />
         <CreateCategory />
         <CreateSupportVersions />
-        <CreateOptionals className="grid gap-9 my-2" />
+        <CreateOptionals className="grid gap-9 my-3" />
         <CreateDescription />
         <SubmitEdit resource={resource} />
       </div>

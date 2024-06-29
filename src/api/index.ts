@@ -6,10 +6,15 @@ export default {
     location.replace(`${import.meta.env.VITE_API_URL}/auth/discord`);
     // return client.get(`/auth/discord`);
   },
+  async loginGithub() {
+    // const params = new URLSearchParams({ username, password });
+    location.replace(`${import.meta.env.VITE_API_URL}/auth/github`);
+    // return client.get(`/auth/discord`);
+  },
   async logout() {
     backendApi.post("/auth/logout");
   },
-  async autoLogin(): Promise<any | null> {
+  async autoLogin(): Promise<any> {
     return backendApi
       .get(`${import.meta.env.VITE_API_URL}/auth/login/success`)
       .then((response) => {
@@ -22,7 +27,7 @@ export default {
         if (response) return response.data.user;
         return null;
       })
-      .catch((err: any) => {
+      .catch(() => {
         // console.log("Cant login auto login!", err);
         return null;
         // throw new Error("authentication failed!");

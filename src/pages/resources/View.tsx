@@ -91,7 +91,7 @@ export function ResourceDownloadCard({ resource }: { resource: any }) {
   const { isAdmin }: { isAdmin: boolean } = useUserContext();
 
   return (
-    <div className="ml-auto flex flex-col md:flex-row justify-center gap-2  lg:min-w-36">
+    <div className="ml-auto flex flex-col md:flex-row justify-center gap-3  lg:min-w-36">
       {isAdmin && <ResourceDelete resource={resource} />}
       <ResourceDownload
         classname=""

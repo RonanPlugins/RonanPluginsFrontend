@@ -53,7 +53,7 @@ export default function About() {
           src="./assets/homethingy.png"
         ></img>
       </div>
-      <div className="pt-20 bg-gray-100 dark:bg-secondary w-full p-2 flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
+      <div className="pt-20 bg-gray-100 dark:bg-secondary w-full p-3 flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
         {Features.map((feature) => {
           return (
             <div

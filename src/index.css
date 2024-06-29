@@ -58,7 +58,7 @@
     @apply bg-background text-foreground;
   }
   .resources {
-    @apply mx-auto space-y-2 max-w-4xl;
+    @apply mx-auto space-y-3 max-w-4xl;
   }
   .item {
     margin-left: 8px;

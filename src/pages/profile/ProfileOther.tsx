@@ -40,7 +40,7 @@ export default function ProfileOther() {
   if (loading) return <Loading />;
 
   return (
-    <div className="w-full text-center my-2">
+    <div className="w-full text-center my-3">
       <h1 className="scroll-m-20 text-5xl font-extrabold tracking-tight text-center my-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
         {`${userProfile?.name}'s Profile`}
       </h1>

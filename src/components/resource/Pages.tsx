@@ -11,7 +11,7 @@ export function ResourcePages({ resource }: { resource: any }) {
     PAGE[PAGE.OVERVIEW as unknown as keyof typeof PAGE]
   );
   return (
-    <div className="flex flex-row items-start gap-2 text-center font-bold">
+    <div className="flex flex-row items-start gap-3 text-center font-bold">
       {Object.keys(PAGE)
         .filter((v: any) => !isNaN(v))
         .map((val: string) => {

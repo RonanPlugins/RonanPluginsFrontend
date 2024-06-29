@@ -113,7 +113,7 @@
 //   }
 
 //   return (
-//     <div className="my-2 max-w-4xl w-full mx-auto flex flex-col space-y-2">
+//     <div className="my-3 max-w-4xl w-full mx-auto flex flex-col space-y-2">
 //       <Card className="w-full">
 //         <CardHeader className="flex flex-row justify-between">
 //           <div>
@@ -319,7 +319,7 @@
 //           <CardHeader>
 //             <CardTitle className="text-lg">Select Category</CardTitle>
 //           </CardHeader>
-//           <CardContent className="grid gap-2 grid-cols-2 md:grid-cols-3">
+//           <CardContent className="grid gap-3 grid-cols-2 md:grid-cols-3">
 //             {/* <TypeList
 //               onSelect={selectCategory}
 //               selected={resource?.category ? [resource.category] : []}

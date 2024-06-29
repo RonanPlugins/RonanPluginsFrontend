@@ -18,10 +18,10 @@ export function ResourcePreview({ resource }: { resource: any }) {
 
 function LayoutList({ resource }: { resource: any }) {
   return (
-    <Card className="flex flex-col md:flex-row p-2">
+    <Card className="flex flex-col md:flex-row p-3">
       <div className="flex flex-row">
         {/* Image */}
-        <Link className="relative my-2" to={`../resource/${resource._id}`}>
+        <Link className="relative my-3" to={`../resource/${resource._id}`}>
           <ResourceImage classname="mt-auto" id={resource._id} />
           {resource.premium && <PremiumIcon />}
         </Link>
@@ -87,10 +87,10 @@ function LayoutList({ resource }: { resource: any }) {
 
 function layoutGallery({ resource }: { resource: any }) {
   return (
-    <Card className="flex flex-col md:flex-row p-2">
+    <Card className="flex flex-col md:flex-row p-3">
       <div className="flex flex-row">
         {/* Image */}
-        <Link className="relative my-2" to={`../resource/${resource._id}`}>
+        <Link className="relative my-3" to={`../resource/${resource._id}`}>
           <ResourceImage classname="mt-auto" id={resource._id} />
           {resource.premium && <PremiumIcon />}
         </Link>

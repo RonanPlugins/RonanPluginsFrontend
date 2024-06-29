@@ -28,7 +28,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="w-full my-2">
+    <div className="w-full my-3">
       <h1
         className="scroll-m-20 text-5xl font-extrabold tracking-tight text-center my-8 bg-gradient-to-r 
         from-violet-600 to-rose-400 text-transparent bg-clip-text"
@@ -52,7 +52,7 @@ export default function Profile() {
                     <Loading />
                   ) : (
                     <>
-                      <h2 className="mx-auto my-2">No Resources yet!</h2>
+                      <h2 className="mx-auto my-3">No Resources yet!</h2>
                       <Button
                         variant="special"
                         className="mx-auto my-5"
