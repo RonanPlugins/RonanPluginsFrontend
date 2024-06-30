@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import api from "@/api";
 import { Separator } from "../ui/separator";
+import { Card, CardContent } from "../ui/card";
+import { Input } from "../ui/input";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -11,26 +15,28 @@ export default function Signup() {
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      toast("Passwords do not match", {
+        className: "bg-red-500 text-white border-none",
+      });
       return;
     }
     // Handle signup logic here
     console.log("Signup with credentials:", { email, password });
+    api.signup(email, password).then((data) => {
+      console.log("SIGNUP!", data);
+    });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+    <Card className="max-w-xl w-full mx-auto my-3">
+      <CardContent>
+        <h2 className="text-4xl font-bold mb-6 text-center">Sign Up</h2>
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium">
               Email
             </label>
-            <input
+            <Input
               type="email"
               id="email"
               value={email}
@@ -40,13 +46,10 @@ export default function Signup() {
             />
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-medium">
               Password
             </label>
-            <input
+            <Input
               type="password"
               id="password"
               value={password}
@@ -58,11 +61,11 @@ export default function Signup() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium"
             >
               Confirm Password
             </label>
-            <input
+            <Input
               type="password"
               id="confirmPassword"
               value={confirmPassword}
@@ -73,12 +76,21 @@ export default function Signup() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            variant="special"
+            className="w-full py-2 px-4 rounded-md shadow-sm"
           >
             Sign Up
           </Button>
         </form>
-      </div>
-    </div>
+        <div className="flex flex-row items-center justify-center">
+          <p>Already have an account?</p>
+          <Link to={"../login"}>
+            <Button variant="link" className="p-1">
+              Login
+            </Button>
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

@@ -11,6 +11,9 @@ export function TopBar() {
   const { isLoggedIn, user } = useUserContext();
   const location = useLocation();
 
+  const isSignInScreen =
+    location.pathname === "/signup" || location.pathname === "/login";
+
   return (
     <>
       <div className="flex relative flex-row max-w-5xl w-full px-2 items-center justify-between mx-auto">
@@ -30,7 +33,7 @@ export function TopBar() {
               <ImageSmall url={user?.avatarURL} classname="h-10 hover:ring-4" />
             </Link>
           ) : (
-            <LoginDialog />
+            !isSignInScreen && <LoginDialog />
           )}
         </div>
       </div>

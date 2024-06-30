@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 
 import { LogIn } from "lucide-react";
-import Login from "./Login";
+import { LoginScreen } from "./Login";
 
 export default function LoginDialog({ className }: { className?: string }) {
   return (
@@ -15,8 +15,8 @@ export default function LoginDialog({ className }: { className?: string }) {
           <LogIn size={20} className="mr-2" /> Sign In
         </Button>
       </DialogTrigger>
-      <DialogContent className="">
-        <Login />
+      <DialogContent>
+        <LoginScreen isDialog={true} />
       </DialogContent>
     </Dialog>
   );
