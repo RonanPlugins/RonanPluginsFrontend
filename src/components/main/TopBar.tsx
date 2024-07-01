@@ -28,7 +28,7 @@ export function TopBar() {
         {/* Login/Profile */}
         <div className="flex flex-row gap-3 justify-self-end items-center">
           <ModeToggle className="hidden md:flex" />
-          {isLoggedIn() ? (
+          {isLoggedIn ? (
             <Link to={Links.Profile}>
               <ImageSmall url={user?.avatarURL} classname="h-10 hover:ring-4" />
             </Link>

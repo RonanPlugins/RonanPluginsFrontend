@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import api from "@/api";
 import { Separator } from "../ui/separator";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
+import { useUserContext } from "@/context/UserContext";
 
 export default function Login({ isDialog = false }: { isDialog?: boolean }) {
   return (
@@ -21,6 +22,8 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { refresh } = useUserContext();
 
   useEffect(() => {
     setError("");
@@ -30,11 +33,14 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
     e.preventDefault();
     // Handle login logic here
     // console.log("Login with credentials:", { email, password });
-    api.loginLocal(email, password).then((data) => {
-      if (data) {
-        //
+    api.loginLocal(email, password).then(async (response) => {
+      console.log(response);
+      console.log(response?.data?.message);
+      if (response?.status === 200) {
+        await refresh();
+        navigate("/profile");
       } else {
-        setError("Invalid email or password");
+        setError(response?.data?.message || "Invalid email or password");
         toast("Invalid email or password", {
           className: "text-white bg-red-500 border-none",
         });
@@ -63,6 +69,7 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
           <Input
             type="email"
             id="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="mt-1 block w-full px-3 py-2  border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -76,6 +83,7 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
           <Input
             type="password"
             id="password"
+            autoComplete="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -91,7 +99,7 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
         </Button>
         {error && (
           <p className="text-center text-destructive dark:text-red-500 font-bold">
-            Invalid email or password
+            {error}
           </p>
         )}
       </form>

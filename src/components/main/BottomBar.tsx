@@ -102,7 +102,7 @@ function BottomBarPage({
           </div>
           <div className="flex flex-row gap-3 w-2/3 justify-center">
             <ModeToggle variant="outline" />
-            {isLoggedIn() ? (
+            {isLoggedIn ? (
               <Link to={Links.Profile}>
                 <img
                   src={user?.avatarURL}

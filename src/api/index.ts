@@ -5,15 +5,11 @@ export default {
     return backendApiJSON
       .post(`/auth/login`, { email, password })
       .then((response) => {
-        if (response.status === 200) return response;
-        return null;
+        return response;
       })
-      .then((response: any | null) => {
-        if (response) return response.data.user;
-        return null;
-      })
-      .catch(() => {
-        return null;
+      .catch((err) => {
+        console.log(err);
+        return err.response;
       });
   },
   async loginDiscord() {
@@ -25,15 +21,11 @@ export default {
   async logout() {
     backendApi.post("/auth/logout");
   },
-  async signup(email: string, password: string): Promise<any> {
+  async register(email: string, password: string, name: string): Promise<any> {
     return backendApiJSON
-      .post("/auth/signup", { email, password })
+      .post("/auth/register", { email, password, name })
       .then((response) => {
-        if (response.status === 200) return response;
-        return null;
-      })
-      .then((response: any | null) => {
-        if (response) return response.data.user;
+        if (response.status === 200) return response.data;
         return null;
       })
       .catch(() => {

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import api from "@/api";
-import { Separator } from "../ui/separator";
 import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Signup() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -22,7 +22,7 @@ export default function Signup() {
     }
     // Handle signup logic here
     console.log("Signup with credentials:", { email, password });
-    api.signup(email, password).then((data) => {
+    api.register(email, password, username).then((data) => {
       console.log("SIGNUP!", data);
     });
   };
@@ -39,8 +39,22 @@ export default function Signup() {
             <Input
               type="email"
               id="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium">
+              Username
+            </label>
+            <Input
+              type="name"
+              id="name"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
@@ -54,6 +68,7 @@ export default function Signup() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
