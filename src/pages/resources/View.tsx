@@ -4,7 +4,7 @@ import {
   ResourceSidebar,
   ResourceSidebarBottom,
 } from "@/components/resource/Sidebar";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { useUserContext } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -45,40 +45,31 @@ export function ResourceView() {
   // console.log(resource);
 
   return (
-    <div className="max-w-7xl my-3 mx-2 lg:mx-auto flex lg:flex-row flex-col lg:space-x-2 space-y-3 lg:space-y-0">
+    <div className="max-w-7xl p-3 lg:mx-auto flex lg:flex-row flex-col lg:space-x-2 space-y-3 lg:space-y-0">
       <div className="w-full lg:max-w-80">
         <ResourceSidebar resource={resource} />
       </div>
       <div className="w-full space-y-3">
-        <div className="flex flex-col md:flex-row gap-3">
-          <Card className="grow">
-            {/* Plugin Header */}
-            <CardHeader>
-              {/* <ResourceMenuBar resource={resource} /> */}
-              <ResourcePages resource={resource} />
-            </CardHeader>
-          </Card>
-          <div className="hidden lg:block my-auto mr-2">
-            <ResourceDownloadCard resource={resource} />
-          </div>
-        </div>
         <Card className="grow">
-          <CardContent className="py-2 mx-2">
-            {/* Body of plugin data */}
-            <main>
-              <TextViewer content={resource.description} />
-            </main>
-            <div className="mt-2 text-muted-foreground text-sm">
-              {resource.tags && (
-                <>
-                  <p className="font-bold">Tags</p>
-                  <p>{resource.tags}</p>
-                </>
-              )}
+          <div className="flex flex-row justify-between border-b-8 border-primary">
+            <ResourcePages resource={resource} />
+            <div className="hidden lg:block my-auto mr-2 py-2">
+              <ResourceDownloadButton resource={resource} />
             </div>
-          </CardContent>
+          </div>
+          {/* Body of plugin data */}
+          <main>
+            <TextViewer content={resource.description} />
+          </main>
+          {resource.tags && (
+            <div className="text-muted-foreground text-sm flex flex-col m-3">
+              <p className="font-bold">Tags</p>
+              <p>{resource.tags}</p>
+            </div>
+          )}
         </Card>
       </div>
+
       <div className="lg:hidden w-full lg:w-96">
         <ResourceSidebarBottom resource={resource} />
       </div>
@@ -87,14 +78,14 @@ export function ResourceView() {
   );
 }
 
-export function ResourceDownloadCard({ resource }: { resource: any }) {
+export function ResourceDownloadButton({ resource }: { resource: any }) {
   const { isAdmin }: { isAdmin: boolean } = useUserContext();
 
   return (
-    <div className="ml-auto flex flex-col md:flex-row justify-center gap-3  lg:min-w-36">
+    <div className="ml-auto flex flex-col md:flex-row justify-center gap-3 lg:min-w-36">
       {isAdmin && <ResourceDelete resource={resource} />}
       <ResourceDownload
-        classname=""
+        classname="font-bold"
         name={resource.title}
         version={resource.version}
         resource={resource}

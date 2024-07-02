@@ -13,11 +13,11 @@ export default function Image({
 }) {
   return (
     <div
-      className={`flex-shrink-0 h-[88px] w-[88px] object-contain rounded-xl bg-inherit p-1 ${classname}`}
+      className={`flex-shrink-0 h-[88px] w-[88px] object-contain rounded-xl bg-muted-foreground p-1 ${classname}`}
     >
       {!loading ? (
         <img
-          className="rounded-xl w-[80px] h-[80px] bg-muted"
+          className="rounded-xl w-[80px] h-[80px]"
           src={
             url
               ? url
@@ -29,7 +29,7 @@ export default function Image({
           }
         />
       ) : (
-        <Loading className="rounded-xl w-[80px] h-[80px] bg-muted flex" />
+        <Loading className="rounded-xl w-[80px] h-[80px] bg-muted-foreground flex" />
       )}
     </div>
   );
@@ -46,10 +46,10 @@ export function ImageSmall({
 }) {
   return (
     <div
-      className={`flex-shrink-0 h-[60px] w-[60px] object-contain bg-inherit p-1 rounded-full ${classname}`}
+      className={`flex-shrink-0 h-[58px] w-[58px] object-contain bg-muted-foreground p-1 rounded-full ${classname}`}
     >
       <img
-        className="w-full h-full bg-background rounded-full"
+        className="w-full h-full rounded-full"
         src={
           url
             ? url

@@ -11,7 +11,7 @@ export function ResourcePages({ resource }: { resource: any }) {
     PAGE[PAGE.OVERVIEW as unknown as keyof typeof PAGE]
   );
   return (
-    <div className="flex flex-row items-start gap-3 text-center font-bold">
+    <div className="flex flex-row items-start gap-1 text-center font-bold px-2 pt-2 self-end">
       {Object.keys(PAGE)
         .filter((v: any) => !isNaN(v))
         .map((val: string) => {
@@ -21,10 +21,8 @@ export function ResourcePages({ resource }: { resource: any }) {
           return (
             <p
               key={val}
-              className={`w-full px-6 border-b-4 text-lg hover:cursor-pointer ${
-                isActive
-                  ? "border-accent"
-                  : "border-accent-foreground hover:border-accent text-muted-foreground hover:text-secondary-foreground"
+              className={`max-w-32 w-full py-2 px-5 hover:cursor-pointer rounded-t-lg text-base ${
+                isActive ? "bg-primary" : "hover:bg-primary bg-secondary"
               }`}
               onClick={() => setActive(enumVal)}
             >

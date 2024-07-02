@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import resourceAPI from "@/api/resource";
-import Loading from "../common/Loading";
 import Image from "../common/Image";
 
 export function ResourceImage({
@@ -11,7 +10,7 @@ export function ResourceImage({
   id: string;
   classname?: string;
 }) {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

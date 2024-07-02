@@ -30,11 +30,11 @@ export function ResourceDownload({
         )
       );
       fileDownload(jarFile, jarFile.name);
-      toast("Download has started", {
+      toast.success("Download has started", {
         icon: <DownloadIcon />,
       });
     } else {
-      toast("Error downloading file!", {
+      toast.error("Error downloading file!", {
         icon: <FileWarning />,
         className: "bg-red-700 border-none text-white",
       });

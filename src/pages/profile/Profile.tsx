@@ -49,12 +49,14 @@ export default function Profile() {
                   </div>
                 ))
               ) : (
-                <div className="w-full h-full bg-primary-foreground rounded-xl flex flex-col">
+                <div className="w-full h-full bg-card rounded-xl flex flex-col">
                   {loading ? (
                     <Loading />
                   ) : (
                     <>
-                      <h2 className="mx-auto my-3">No Resources yet!</h2>
+                      <h2 className="mx-auto my-3 font-bold">
+                        Quite Empty Here...
+                      </h2>
                       <Button
                         variant="special"
                         className="mx-auto my-5"

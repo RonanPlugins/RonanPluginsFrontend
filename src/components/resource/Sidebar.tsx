@@ -17,7 +17,7 @@ import { formatToTitleCase } from "@/utils/formatter";
 import { Separator } from "../ui/separator";
 import { ImageSmall } from "../common/Image";
 import { Button } from "../ui/button";
-import { ResourceDownloadCard } from "@/pages/resources/View";
+import { ResourceDownloadButton } from "@/pages/resources/View";
 import { UploadIcon } from "./UploadIcon";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
@@ -91,7 +91,7 @@ function Info({ resource }: { resource: any }) {
           </dl>
         </div>
         <div className="absolute bottom-0 right-0 p-3 lg:hidden">
-          <ResourceDownloadCard resource={resource} />
+          <ResourceDownloadButton resource={resource} />
         </div>
       </CardContent>
     </Card>
@@ -118,7 +118,7 @@ function Tools({ resource }: { resource: any }) {
 
   return (
     <>
-      {user?._id === resource.authorID._id && (
+      {user?._id === resource.authorID?._id && (
         <Card>
           <CardTitle className="truncate p-3 rounded-t-xl flex flex-row font-bold">
             <Edit className="mr-2" />
@@ -167,6 +167,7 @@ function Links({ resource }: { resource: any }) {
 }
 
 function Contributers({ resource }: { resource: any }) {
+  if (!resource.authorID) return <></>;
   return (
     <Card>
       <CardTitle className="truncate p-3 flex flex-row font-bold">
@@ -174,7 +175,7 @@ function Contributers({ resource }: { resource: any }) {
         <h2>Contributors</h2>
       </CardTitle>
       <CardContent className="p-3">
-        <Separator className="mb-2 h-1" />
+        <Separator className="mb-3 h-1" />
 
         <Link to={`../user/${resource.authorID?._id}`}>
           <Button
