@@ -13,10 +13,12 @@ import { Servers } from "./servers/index.tsx";
 import { PERMISSION } from "minecentral-api";
 import { Resources } from "./resources/index.tsx";
 import { FilterResource } from "@/context/FilterResourceContext.tsx";
-import Login from "@/components/main/Login.tsx";
-import Signup from "@/components/main/Signup.tsx";
-import EmailValidated from "@/components/main/EmailValidated.tsx";
+import EmailValidated from "@/components/account/EmailValidated.tsx";
 import LoginGuard from "@/components/common/LoginGuard.tsx";
+import Login from "@/components/account/Login.tsx";
+import Signup from "@/components/account/Signup.tsx";
+import { EmailVerificationSent } from "@/components/account/EmailVerificationSent.tsx";
+import EmailVerify from "@/components/account/EmailVerify.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -46,12 +48,19 @@ export const router = createBrowserRouter([
             path: "/signup",
             element: <Signup />,
           },
+          {
+            path: "/email-sent/:email",
+            element: <EmailVerificationSent />,
+          },
+          {
+            path: "/email-validated/:id",
+            element: <EmailValidated />,
+          },
+          {
+            path: "/email-verify/:token",
+            element: <EmailVerify />,
+          },
         ],
-      },
-
-      {
-        path: "/email-validated/:id",
-        element: <EmailValidated />,
       },
       //Servers
       {

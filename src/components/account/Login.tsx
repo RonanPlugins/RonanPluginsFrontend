@@ -7,8 +7,10 @@ import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
 import { useUserContext } from "@/context/UserContext";
+import usePageTitle from "@/utils/usePageTitle";
 
 export default function Login({ isDialog = false }: { isDialog?: boolean }) {
+  usePageTitle("Login");
   return (
     <Card className="max-w-xl w-full mx-auto my-3">
       <CardContent>
@@ -35,15 +37,24 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
     // console.log("Login with credentials:", { email, password });
     api.loginLocal(email, password).then(async (response) => {
       console.log(response);
-      console.log(response?.data?.message);
       if (response?.status === 200) {
         await refresh();
         navigate("/profile");
       } else {
-        setError(response?.data?.message || "Invalid email or password");
-        toast("Invalid email or password", {
-          className: "text-white bg-red-500 border-none",
-        });
+        console.log(response.data);
+        switch (response.data.status) {
+          case "email-or-password":
+            toast("Invalid email or password", {
+              className: "text-white bg-red-500 border-none",
+            });
+            break;
+          case "email-verify":
+            toast("Please verify your email", {
+              className: "text-white bg-red-500 border-none",
+            });
+            navigate(`/email-sent/${email}`);
+        }
+        setError(response?.data?.message || "Invalid Credentials");
       }
     });
   };

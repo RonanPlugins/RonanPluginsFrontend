@@ -28,9 +28,31 @@ export default {
         if (response.status === 200) return response.data;
         return null;
       })
-      .catch(() => {
-        return null;
+      .catch((err) => {
+        if (err.response?.data) return err.response?.data || null;
       });
+  },
+  async resendRegister(email: string): Promise<any> {
+    return backendApiJSON
+      .post("/auth/register-resend", { email })
+      .then((response) => {
+        if (response.status === 200) return response.data;
+        return null;
+      })
+      .catch((err) => {
+        if (err.response?.data) return err.response?.data || null;
+      });
+  },
+  async verifyEmail(token: string): Promise<any> {
+    return backendApiJSON.post("/auth/email-verify", { token });
+    // .then((response) => {
+    //   if (response.status === 200) return response.data;
+    //   return null;
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    //   return null;
+    // });
   },
   async autoLogin(): Promise<any> {
     return backendApi

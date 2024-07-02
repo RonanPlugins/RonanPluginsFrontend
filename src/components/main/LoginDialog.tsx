@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 
 import { LogIn } from "lucide-react";
-import { LoginScreen } from "./Login";
+import { LoginScreen } from "../account/Login";
 
 export default function LoginDialog({ className }: { className?: string }) {
   return (

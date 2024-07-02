@@ -7,8 +7,10 @@ import ProfileSidebar from "@/components/profile/ProfileSidebar";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Links from "@/lib/Links";
+import usePageTitle from "@/utils/usePageTitle";
 
 export default function Profile() {
+  usePageTitle("Profile");
   const { user }: { user: any; logout: any } = useUserContext();
 
   const [loading, setLoading] = useState(true);

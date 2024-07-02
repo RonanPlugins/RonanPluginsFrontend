@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import api from "@/api";
 import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Loading from "../common/Loading";
+import usePageTitle from "@/utils/usePageTitle";
 
 export default function Signup() {
+  usePageTitle("Register");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [signingUp, setSigningUp] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setError("");
+  }, [email]);
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,9 +32,23 @@ export default function Signup() {
     }
     // Handle signup logic here
     console.log("Signup with credentials:", { email, password });
-    api.register(email, password, username).then((data) => {
-      console.log("SIGNUP!", data);
-    });
+    setSigningUp(true);
+    api
+      .register(email, password, username)
+      .then((data) => {
+        console.log("SIGNUP EVENT", data);
+        switch (data.status) {
+          case "email-inuse":
+            setError("Email already in use!");
+            break;
+          case "email-sent":
+            navigate(`/email-sent/${email}`);
+            break;
+          default:
+            console.log("Case not handled");
+        }
+      })
+      .finally(() => setSigningUp(false));
   };
 
   return (
@@ -89,19 +113,25 @@ export default function Signup() {
               required
             />
           </div>
+          {error && (
+            <p className="text-center text-destructive dark:text-red-500 font-bold">
+              {error}
+            </p>
+          )}
           <Button
             type="submit"
             variant="special"
             className="w-full py-2 px-4 rounded-md shadow-sm"
+            disabled={signingUp}
           >
-            Sign Up
+            {signingUp ? <Loading /> : "Sign Up"}
           </Button>
         </form>
         <div className="flex flex-row items-center justify-center">
           <p>Already have an account?</p>
           <Link to={"../login"}>
             <Button variant="link" className="p-1">
-              Login
+              Login here
             </Button>
           </Link>
         </div>

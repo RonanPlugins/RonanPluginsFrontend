@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Card, CardHeader } from "../ui/card";
+import usePageTitle from "@/utils/usePageTitle";
 
 export default function EmailValidated() {
+  usePageTitle("Verified");
   const { id } = useParams();
 
   return (
