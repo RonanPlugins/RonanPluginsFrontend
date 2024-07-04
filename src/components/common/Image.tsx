@@ -17,7 +17,7 @@ export default function Image({
     >
       {!loading ? (
         <img
-          className="rounded-xl w-[80px] h-[80px]"
+          className="rounded-xl w-[80px] h-[80px] bg-background"
           src={
             url
               ? url

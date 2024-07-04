@@ -49,10 +49,7 @@ function Info({ resource }: { resource: any }) {
       {/* Information */}
       <div className="absolute top-0 w-full h-[120px] bg-primary rounded-t-xl" />
       <CardHeader className="mt-[60px]">
-        <ResourceImage
-          classname="z-10 !bg-primary-foreground -ml-2"
-          id={resource._id}
-        />
+        <ResourceImage classname="z-10 !bg-card -ml-2" id={resource._id} />
         <h2 className="font-bold text-2xl">{resource.title}</h2>
 
         <p>{resource.subtitle}</p>
@@ -66,7 +63,7 @@ function Info({ resource }: { resource: any }) {
         <Separator className="h-1" />
 
         <div className="flex flex-row items-center">
-          <Download className="mr-1" size={18} />
+          <Download className="mr-2" size={18} />
           <p className="my-auto">
             <span className="text-xl font-bold">
               {resource.downloads || "N/A"}

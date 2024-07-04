@@ -15,11 +15,21 @@ import { ResourceDelete } from "@/components/resource/Delete";
 import { TextViewer } from "@/components/textEditor/TextViewer";
 import usePageTitle from "@/utils/usePageTitle";
 import { ResourcePages } from "@/components/resource/Pages";
+// import discord from "@/api/discord";
 
 export function ResourceView() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [resource, setResourceInfo] = useState<any | null>(null);
+
+  // const discordID = "182633513474850818";
+
+  // const [discordData, setDiscordDate] = useState();
+
+  // async function getDiscord() {
+  //   const data = await discord.getDiscord(discordID);
+  //   console.log(data);
+  // }
 
   async function getPlugin() {
     const pInfo = await resourceAPI.getOne(id);
@@ -37,6 +47,7 @@ export function ResourceView() {
 
   useEffect(() => {
     getPlugin();
+    // getDiscord();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,24 +61,22 @@ export function ResourceView() {
         <ResourceSidebar resource={resource} />
       </div>
       <div className="w-full space-y-3">
-        <Card className="grow">
-          <div className="flex flex-row justify-between border-b-8 border-primary">
-            <ResourcePages resource={resource} />
-            <div className="hidden lg:block my-auto mr-2 py-2">
-              <ResourceDownloadButton resource={resource} />
-            </div>
+        <div className="flex flex-row justify-between border-b-8 border-primary">
+          <ResourcePages resource={resource} />
+          <div className="hidden lg:block my-auto py-2">
+            <ResourceDownloadButton resource={resource} />
           </div>
-          {/* Body of plugin data */}
-          <main>
-            <TextViewer content={resource.description} />
-          </main>
-          {resource.tags && (
-            <div className="text-muted-foreground text-sm flex flex-col m-3">
-              <p className="font-bold">Tags</p>
-              <p>{resource.tags}</p>
-            </div>
-          )}
-        </Card>
+        </div>
+        {/* Body of plugin data */}
+        <main>
+          <TextViewer content={resource.description} />
+        </main>
+        {resource.tags && (
+          <div className="text-muted-foreground text-sm flex flex-col m-3">
+            <p className="font-bold">Tags</p>
+            <p>{resource.tags}</p>
+          </div>
+        )}
       </div>
 
       <div className="lg:hidden w-full lg:w-96">
