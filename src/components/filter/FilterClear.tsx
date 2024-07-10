@@ -3,7 +3,7 @@ import { useFilterResourceContext } from "@/context/FilterResourceContext";
 import { Button } from "../ui/button";
 import { useEffect } from "react";
 
-export const FilterClear = () => {
+export function FilterClear({ className }: { className: string }) {
   const {
     isFiltering,
     filter_category,
@@ -48,7 +48,7 @@ export const FilterClear = () => {
   ]);
 
   return (
-    <div className="flex w-full mt-2 justify-center">
+    <div className={`flex justify-center ${className}`}>
       <Button
         variant="outline"
         className="mx-auto rounded-xl hover:text-red"
@@ -60,4 +60,4 @@ export const FilterClear = () => {
       </Button>
     </div>
   );
-};
+}

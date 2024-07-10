@@ -1,8 +1,8 @@
 import { discordApi } from "./axiosClient";
 export default {
-  getDiscord(guild: string): Promise<any> {
+  getDiscord(serverId: string): Promise<any> {
     return discordApi
-      .get(`/guilds/${guild}/preview?with_counts=true&with_expiration=true`)
+      .get(`/guilds/${serverId}/widget.json`)
       .then(({ data }) => {
         return data;
       })

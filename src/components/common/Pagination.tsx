@@ -75,7 +75,9 @@ const Pagination: React.FC<PaginationProps> = ({
           <Button
             size={"sm"}
             variant={"secondary"}
-            className="h-8 min-w-10 rounded-xl mx-1"
+            className={`h-8 min-w-10 rounded-xl mx-1 ${
+              page === currentPage ? "!bg-primary" : ""
+            }`}
             key={page}
             onClick={() => handleClick(page)}
             style={{ fontWeight: page === currentPage ? "bold" : "normal" }}
@@ -91,7 +93,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <Button
               size={"sm"}
               variant={"secondary"}
-              className="h-8  min-w-10 rounded-xl mx-1"
+              className="h-8 min-w-10 rounded-xl mx-1"
               onClick={() => handleClick(totalPages)}
             >
               {totalPages}

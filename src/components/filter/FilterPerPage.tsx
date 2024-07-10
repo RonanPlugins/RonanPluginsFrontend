@@ -7,13 +7,13 @@ import {
   SelectValue,
 } from "../ui/select";
 
-const options: number[] = [2, 5, 10, 20, 32, 64];
+const options: number[] = [8, 16, 32, 64];
 
 export const FilterPerPage = () => {
   const { page_amount, setPageAmount } = useFilterResourceContext();
   return (
     <Select
-      onValueChange={(val) => setPageAmount(Number(val) || 10)}
+      onValueChange={(val) => setPageAmount(Number(val) || 8)}
       value={String(page_amount)}
     >
       <SelectTrigger>

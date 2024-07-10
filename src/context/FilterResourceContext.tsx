@@ -74,7 +74,7 @@ export const FilterResource = ({ children }: FilterProps) => {
   const [page, setPage] = useState<number>(
     Number(filterParams.get("page")) || 0
   );
-  const [page_amount, setPageAmount] = useState<number>(20);
+  const [page_amount, setPageAmount] = useState<number>(16);
 
   return (
     <FilterResourceContext.Provider

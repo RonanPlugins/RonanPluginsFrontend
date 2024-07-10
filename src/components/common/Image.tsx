@@ -13,11 +13,11 @@ export default function Image({
 }) {
   return (
     <div
-      className={`flex-shrink-0 h-[88px] w-[88px] object-contain rounded-xl bg-muted-foreground p-1 ${classname}`}
+      className={`flex-shrink-0 h-[96px] w-[96px] object-contain rounded-xl ring-4 ring-card ${classname}`}
     >
       {!loading ? (
         <img
-          className="rounded-xl w-[80px] h-[80px] bg-background"
+          className="rounded-xl w-[96px] h-[96px] bg-muted"
           src={
             url
               ? url
@@ -29,7 +29,7 @@ export default function Image({
           }
         />
       ) : (
-        <Loading className="rounded-xl w-[80px] h-[80px] bg-muted-foreground flex" />
+        <Loading className="rounded-xl w-[96px] h-[96px] bg-muted flex" />
       )}
     </div>
   );
@@ -46,7 +46,7 @@ export function ImageSmall({
 }) {
   return (
     <div
-      className={`flex-shrink-0 h-[58px] w-[58px] object-contain bg-muted-foreground p-1 rounded-full ${classname}`}
+      className={`flex-shrink-0 h-[58px] w-[58px] object-contain bg-muted p-1 rounded-full ${classname}`}
     >
       <img
         className="w-full h-full rounded-full"

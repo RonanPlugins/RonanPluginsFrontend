@@ -1,5 +1,4 @@
 import resourceAPI from "@/api/resource";
-import Loading from "@/components/common/Loading";
 import { useEffect, useState } from "react";
 import { ResourcePreview } from "@/components/resource/Preview";
 
@@ -14,16 +13,27 @@ import { useFilterResourceContext } from "@/context/FilterResourceContext";
 import { FilterSort } from "@/components/filter/FilterSort";
 import { FilterCategory } from "@/components/filter/FilterCategory";
 import { FilterClear } from "@/components/filter/FilterClear";
-import { FilterProxy } from "@/components/filter/FilterProxy";
-import { FilterLoader } from "@/components/filter/FilterLoader";
 import { FilterPerPage } from "@/components/filter/FilterPerPage";
-// import { VERSION } from "minecentral-api/dist/plugins/VERSION";
+import {
+  getEnumIndexByKey,
+  getEnumIndexByValue,
+  getEnumValue,
+} from "@/utils/enum";
+import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 
 export function Resources() {
   usePageTitle("Resources");
 
-  const { filter_sort, page, setPage, page_amount, setFilterParams } =
-    useFilterResourceContext();
+  const {
+    filter_sort,
+    page,
+    setPage,
+    page_amount,
+    setFilterParams,
+    filter_search,
+    filter_versions,
+    filter_category,
+  } = useFilterResourceContext();
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
   const [totalResources, setTotalResources] = useState<number>(0);
@@ -31,7 +41,14 @@ export function Resources() {
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalResources / page_amount));
+    getResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalResources, page_amount]);
+
+  useEffect(() => {
+    getResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter_sort, page, filter_versions, filter_search, filter_category]);
 
   async function getResources() {
     setLoading(true);
@@ -42,6 +59,13 @@ export function Resources() {
       sort: filter_sort,
       page,
       count: page_amount,
+      search: filter_search,
+      versions: filter_versions?.map((key) =>
+        getEnumIndexByValue(PLUGIN_VERSION, key)
+      ),
+      category: filter_category
+        ? getEnumIndexByKey(PLUGIN_CATEGORY, filter_category)
+        : null,
     });
     setResources(posts);
     setTotalResources(await resourceAPI.getCount());
@@ -52,11 +76,6 @@ export function Resources() {
     } else if (page !== 0) setPage(0);
     // console.log(posts);
   }
-
-  useEffect(() => {
-    getResources();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter_sort, page]);
 
   return (
     <>
@@ -79,7 +98,11 @@ export function Resources() {
           <PageBar pageTotal={totalPages} />
           {/* Resource Preview List */}
           <div className="resources">
-            <ResourceList loading={loading} resources={resources} />
+            <ResourceList
+              loading={loading}
+              resources={resources}
+              amount={page_amount}
+            />
           </div>
           {/* Pagination */}
           <PageBar pageTotal={totalPages} />
@@ -91,18 +114,17 @@ export function Resources() {
 
 function PageBar({ pageTotal }: { pageTotal: number }) {
   const { page, setPage } = useFilterResourceContext();
+  if (pageTotal <= 1) return <></>;
   return (
     <div className="w-full flex">
       <div className="mx-auto">
-        {pageTotal > 1 && (
-          <Pagination
-            currentPage={page + 1}
-            totalPages={pageTotal}
-            onPageChange={(page) => {
-              setPage(page - 1);
-            }}
-          />
-        )}
+        <Pagination
+          currentPage={page + 1}
+          totalPages={pageTotal}
+          onPageChange={(page) => {
+            setPage(page - 1);
+          }}
+        />
       </div>
     </div>
   );
@@ -113,14 +135,14 @@ function SearchBar() {
     useFilterResourceContext();
 
   return (
-    <Card className="">
+    <Card className="lg:hidden">
       <CardContent className="flex flex-wrap pl-0 pb-2">
         <div className="item flex flex-row grow">
           {/* Filter (mobile) */}
           <Button
             variant={filter_show ? "special" : "outline"}
             onClick={() => setFilter_show((prev: boolean) => !prev)}
-            className="relative lg:hidden mr-2"
+            className="relative mr-2"
           >
             <Filter className="pr-1" size={20} />
             Filters
@@ -152,31 +174,52 @@ function Sidebar() {
   const { filter_show } = useFilterResourceContext();
   return (
     <Card className={`${filter_show ? "" : "hidden"} lg:block mb-2 px-2`}>
-      {/* Clear Filter Button */}
-      <FilterClear />
       {/* Filters */}
 
+      <div className="hidden lg:flex flex-col gap-2 my-2">
+        <div className="flex flex-row grow">
+          {/* Search */}
+          <FilterSearch />
+        </div>
+
+        {/* Sort */}
+        <div className="grow min-w-48">
+          <FilterSort />
+        </div>
+
+        <div className="flex flex-row items-center">
+          <div className="w-16">
+            <FilterPerPage />
+          </div>
+
+          <FilterClear className="ml-auto" />
+        </div>
+      </div>
+      {/* Clear Filter Button */}
+      <div className="lg:hidden">
+        <FilterClear className="mx-auto mt-2" />
+      </div>
       {/* Category (mobile) */}
       <div className="lg:hidden mx-2">
-        <h2 className="font-bold pl-2">Category</h2>
+        <h2 className="font-bold">Category</h2>
         <div className="flex flex-row flex-wrap mx-auto w-full justify-center pb-2 space-x-1">
           <FilterCategory className="mt-1" variant={"outline"} />
         </div>
       </div>
       {/* Loader */}
-      <div className="mx-2">
+      {/* <div className="mx-2">
         <h2 className="font-bold">Loader</h2>
         <CardContent>
           <FilterLoader />
         </CardContent>
-      </div>
+      </div> */}
       {/* Proxy */}
-      <div className="mx-2">
+      {/* <div className="mx-2">
         <h2 className="font-bold">Proxies</h2>
         <CardContent>
           <FilterProxy />
         </CardContent>
-      </div>
+      </div> */}
       {/* Minecraft Versions */}
       <div className="">
         <h2 className="ml-2 font-bold">Minecraft Version</h2>
@@ -189,20 +232,40 @@ function Sidebar() {
 function ResourceList({
   loading,
   resources,
+  amount,
 }: {
   loading: boolean;
   resources: any[] | null;
+  amount: number;
 }) {
   return (
     <>
-      {!loading ? (
-        resources &&
-        resources.map((resource) => (
-          <ResourcePreview key={resource._id} resource={resource} />
-        ))
-      ) : (
-        <Loading className="w-full" />
-      )}
+      {!loading
+        ? resources &&
+          resources.map((resource) => (
+            <ResourcePreview key={resource._id} resource={resource} />
+          ))
+        : Array.from({ length: amount }, () => <LoadingResource />)}
     </>
+  );
+}
+
+function LoadingResource() {
+  return (
+    <div className="border bg-card rounded-xl p-3 w-full mx-auto ">
+      <div className="animate-pulse flex space-x-3">
+        <div className="rounded-xl bg-slate-700 h-[96px] w-[96px]"></div>
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 bg-slate-700 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="h-2 bg-slate-700 rounded col-span-2"></div>
+              <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+            </div>
+            <div className="h-2 bg-slate-700 rounded"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

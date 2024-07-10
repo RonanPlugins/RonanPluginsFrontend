@@ -85,7 +85,7 @@ function BottomBarPage({
         <div
           className={`p-4 flex flex-col gap-3 items-center bg-background dark:bg-secondary w-full transition-all duration-500 rounded-t-xl ${animationClass}`}
         >
-          <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col w-2/3">
             {navItems.map((item) => {
               const activeNav =
                 item.list.filter((link) => location.pathname.includes(link))
@@ -93,7 +93,8 @@ function BottomBarPage({
               return (
                 <NavItem
                   active={activeNav}
-                  className="rounded-xl w-2/3 text-center mx-auto my-1"
+                  className="rounded-xl text-center my-1"
+                  isSheet={true}
                   key={item.title}
                   {...item}
                 />
@@ -110,7 +111,7 @@ function BottomBarPage({
                 />
               </Link>
             ) : (
-              <LoginDialog className="w-1/4" />
+              <LoginDialog className="" />
             )}
           </div>
         </div>

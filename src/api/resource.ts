@@ -1,3 +1,4 @@
+import { PLUGIN_CATEGORY } from "minecentral-api";
 import { backendApi } from "./axiosClient";
 
 export default {
@@ -130,4 +131,7 @@ interface FilterParams {
   sort: string; //FILTERBY enum
   page: number; //Page currently on
   count: number; //How many per page
+  search: string | null; //Search string
+  category: number | null; //Category ID
+  versions: number[] | null; //Versions list
 }
