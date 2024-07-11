@@ -8,6 +8,7 @@ import { Input } from "../ui/input";
 import { toast } from "sonner";
 import { useUserContext } from "@/context/UserContext";
 import usePageTitle from "@/utils/usePageTitle";
+import Links from "@/lib/Links";
 
 export default function Login({ isDialog = false }: { isDialog?: boolean }) {
   usePageTitle("Login");
@@ -70,9 +71,9 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
   };
 
   return (
-    <div className="max-w-xl w-full mx-auto my-3">
-      <h2 className="text-4xl font-bold mb-6 text-center">Login</h2>
-      <form onSubmit={handleLogin} className="space-y-4">
+    <>
+      <h2 className="text-4xl font-bold mb-6 mt-2 text-center">Login</h2>
+      <form onSubmit={handleLogin} className="space-y-4 px-1">
         <div>
           <label htmlFor="email" className="block text-sm font-medium">
             Email
@@ -83,7 +84,7 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full px-3 py-2  border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border rounded-xl shadow-sm focus:outline-none sm:text-sm"
             required
           />
         </div>
@@ -97,14 +98,14 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
             autoComplete="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border rounded-xl shadow-sm focus:outline-non sm:text-sm"
             required
           />
         </div>
 
         <Button
           type="submit"
-          className="w-full bg-accent text-black py-2 px-4 rounded-md shadow-sm hover:bg-accent-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full bg-accent text-black py-2 px-4 rounded-xl shadow-sm hover:bg-accent-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Login
         </Button>
@@ -116,7 +117,7 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
       </form>
       <div className="flex flex-row items-center justify-center">
         <p className="mr-1">Don't have an account yet? </p>
-        <Link to={"../signup"}>
+        <Link to={`../${Links.Register}`}>
           <Button className="p-0" variant="link">
             Register now
           </Button>
@@ -124,18 +125,18 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
       </div>
       <Separator className="mb-2 border-2" />
       <div className="mt-6">
-        <p className="text-center text-muted-foreground">or sign in with</p>
+        <p className="text-center text-muted-foreground">or login with</p>
         <div className="mt-2 flex justify-center space-x-4">
           <Button
             onClick={() => handleSocialLogin("discord")}
-            className="text-white py-2 px-4 rounded-md shadow-sm bg-[#5865F2]"
+            className="text-white py-2 px-4 rounded-xl shadow-sm bg-[#5865F2]"
           >
             <img src="/assets/discord.svg" className="h-5 w-5 mr-2" alt="" />
             Discord
           </Button>
           <Button
             onClick={() => handleSocialLogin("github")}
-            className="text-white py-2 px-4 rounded-md shadow-sm bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700"
+            className="text-white py-2 px-4 rounded-xl shadow-sm bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700"
           >
             <img src="/assets/github.svg" className="h-5 w-5 mr-2" alt="" />
             GitHub
@@ -151,6 +152,6 @@ export function LoginScreen({ isDialog = false }: { isDialog?: boolean }) {
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 }

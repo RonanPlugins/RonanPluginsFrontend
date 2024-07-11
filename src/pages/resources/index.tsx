@@ -7,19 +7,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import usePageTitle from "@/utils/usePageTitle";
 import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
-import { FilterSearch } from "@/components/filter/FilterSearch";
-import { FilterVersion } from "@/components/filter/FilterVersion";
-import { useFilterResourceContext } from "@/context/FilterResourceContext";
-import { FilterSort } from "@/components/filter/FilterSort";
-import { FilterCategory } from "@/components/filter/FilterCategory";
-import { FilterClear } from "@/components/filter/FilterClear";
-import { FilterPerPage } from "@/components/filter/FilterPerPage";
-import {
-  getEnumIndexByKey,
-  getEnumIndexByValue,
-  getEnumValue,
-} from "@/utils/enum";
+import { FilterSearch } from "@/components/filters/FilterSearch";
+import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
+import { FilterClear } from "@/components/filters/FilterClear";
+import { FilterPerPage } from "@/components/filters/FilterPerPage";
+import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
+import { Link } from "react-router-dom";
+import Links from "@/lib/Links";
+import { useUserContext } from "@/context/UserContext";
+import { FilterCategory_Resource } from "@/components/filters/resources/FilterCategory_Resource";
+import { FilterSort_Resource } from "@/components/filters/resources/FilterSort_Resource";
+import { FilterVersion_Resource } from "@/components/filters/resources/FilterVersion_Resource";
 
 export function Resources() {
   usePageTitle("Resources");
@@ -33,7 +32,7 @@ export function Resources() {
     filter_search,
     filter_versions,
     filter_category,
-  } = useFilterResourceContext();
+  } = useFilterContext_Resource();
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
   const [totalResources, setTotalResources] = useState<number>(0);
@@ -81,12 +80,12 @@ export function Resources() {
     <>
       {/* Resource Hot Category Bar */}
       <div className="hidden lg:flex flex-row mx-auto w-full justify-center bg-primary pb-1 -mt-1 space-x-1">
-        <FilterCategory />
+        <FilterCategory_Resource />
       </div>
       {/* Main Div */}
       <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
-        <div className="w-full lg:w-96">
-          {/* Title/Filter */}
+        <div className="w-full lg:max-w-80">
+          {/* Filters */}
           <Sidebar />
         </div>
 
@@ -113,7 +112,7 @@ export function Resources() {
 }
 
 function PageBar({ pageTotal }: { pageTotal: number }) {
-  const { page, setPage } = useFilterResourceContext();
+  const { page, setPage } = useFilterContext_Resource();
   if (pageTotal <= 1) return <></>;
   return (
     <div className="w-full flex">
@@ -132,7 +131,7 @@ function PageBar({ pageTotal }: { pageTotal: number }) {
 
 function SearchBar() {
   const { filter_show, setFilter_show, isFiltering } =
-    useFilterResourceContext();
+    useFilterContext_Resource();
 
   return (
     <Card className="lg:hidden">
@@ -159,7 +158,7 @@ function SearchBar() {
 
         {/* Sort */}
         <div className="item grow min-w-48">
-          <FilterSort />
+          <FilterSort_Resource />
         </div>
 
         <div className="item min-w-16">
@@ -171,22 +170,20 @@ function SearchBar() {
 }
 
 function Sidebar() {
-  const { filter_show } = useFilterResourceContext();
+  const { filter_show } = useFilterContext_Resource();
   return (
     <Card className={`${filter_show ? "" : "hidden"} lg:block mb-2 px-2`}>
       {/* Filters */}
-
       <div className="hidden lg:flex flex-col gap-2 my-2">
+        <CreateResourceButton />
         <div className="flex flex-row grow">
           {/* Search */}
           <FilterSearch />
         </div>
-
         {/* Sort */}
         <div className="grow min-w-48">
-          <FilterSort />
+          <FilterSort_Resource />
         </div>
-
         <div className="flex flex-row items-center">
           <div className="w-16">
             <FilterPerPage />
@@ -203,7 +200,7 @@ function Sidebar() {
       <div className="lg:hidden mx-2">
         <h2 className="font-bold">Category</h2>
         <div className="flex flex-row flex-wrap mx-auto w-full justify-center pb-2 space-x-1">
-          <FilterCategory className="mt-1" variant={"outline"} />
+          <FilterCategory_Resource className="mt-1" variant={"outline"} />
         </div>
       </div>
       {/* Loader */}
@@ -223,7 +220,7 @@ function Sidebar() {
       {/* Minecraft Versions */}
       <div className="">
         <h2 className="ml-2 font-bold">Minecraft Version</h2>
-        <FilterVersion />
+        <FilterVersion_Resource />
       </div>
     </Card>
   );
@@ -267,5 +264,31 @@ function LoadingResource() {
         </div>
       </div>
     </div>
+  );
+}
+
+function CreateResourceButton() {
+  const { isLoggedIn } = useUserContext();
+
+  return (
+    <>
+      {isLoggedIn ? (
+        <Link to={Links.ResourceNew}>
+          <Button className="w-full flex flex-col h-auto p-1">
+            <p>Post New Resource</p>
+            <p className="text-xs font-normal">or import from SpigotMC</p>
+          </Button>
+        </Link>
+      ) : (
+        <Link to={Links.Register}>
+          <Button className="w-full flex flex-col h-auto p-1 flex-wrap">
+            <p>Login or Register</p>
+            <p className="text-xs font-normal text-wrap">
+              Post your own resources and make money sharing your projects!
+            </p>
+          </Button>
+        </Link>
+      )}
+    </>
   );
 }

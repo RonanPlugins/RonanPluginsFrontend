@@ -12,7 +12,7 @@ export function TopBar() {
   const location = useLocation();
 
   const isSignInScreen =
-    location.pathname === "/signup" || location.pathname === "/login";
+    location.pathname === Links.Register || location.pathname === Links.Login;
 
   return (
     <>

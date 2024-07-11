@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
-import { useFilterResourceContext } from "@/context/FilterResourceContext";
+import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 
 export const FilterSearch = () => {
-  const { filter_search, setFilter_search } = useFilterResourceContext();
+  const { filter_search, setFilter_search } = useFilterContext_Resource();
   return (
     <div className="w-full relative h-10">
       <Search

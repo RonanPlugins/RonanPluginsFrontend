@@ -1,5 +1,5 @@
 import { CircleX } from "lucide-react";
-import { useFilterResourceContext } from "@/context/FilterResourceContext";
+import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import { Button } from "../ui/button";
 import { useEffect } from "react";
 
@@ -17,7 +17,7 @@ export function FilterClear({ className }: { className: string }) {
     setFilter_versions,
     setFilter_loader,
     setFilter_proxy,
-  } = useFilterResourceContext();
+  } = useFilterContext_Resource();
 
   function clearFilter() {
     setFilter_category(null);

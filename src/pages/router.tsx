@@ -12,13 +12,14 @@ import StripeRefresh from "./stripe/StripeRefresh.tsx";
 import { Servers } from "./servers/index.tsx";
 import { PERMISSION } from "minecentral-api";
 import { Resources } from "./resources/index.tsx";
-import { FilterResource } from "@/context/FilterResourceContext.tsx";
+import { Filter_Resource } from "@/context/FilterContext_Resource.tsx";
 import EmailValidated from "@/components/account/EmailValidated.tsx";
 import LoginGuard from "@/components/common/LoginGuard.tsx";
 import Login from "@/components/account/Login.tsx";
 import Signup from "@/components/account/Signup.tsx";
 import { EmailVerificationSent } from "@/components/account/EmailVerificationSent.tsx";
 import EmailVerify from "@/components/account/EmailVerify.tsx";
+import { Filter_Server } from "@/context/FilterContext_Server.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
             element: <Login />,
           },
           {
-            path: "/signup",
+            path: "/register",
             element: <Signup />,
           },
           {
@@ -65,7 +66,11 @@ export const router = createBrowserRouter([
       //Servers
       {
         path: "/servers",
-        element: <Servers />,
+        element: (
+          <Filter_Server>
+            <Servers />
+          </Filter_Server>
+        ),
       },
       //Stripe
       {
@@ -76,9 +81,9 @@ export const router = createBrowserRouter([
       {
         path: "/resources",
         element: (
-          <FilterResource>
+          <Filter_Resource>
             <Resources />
-          </FilterResource>
+          </Filter_Resource>
         ),
       },
       {

@@ -12,7 +12,7 @@ export default function LoginDialog({ className }: { className?: string }) {
           variant="special"
           className={`font-bold flex flex-row rounded-xl p-3 text-sm ${className}`}
         >
-          <LogIn size={20} className="mr-2" /> Sign In
+          <LogIn size={20} className="mr-2" /> Login
         </Button>
       </DialogTrigger>
       <DialogContent>

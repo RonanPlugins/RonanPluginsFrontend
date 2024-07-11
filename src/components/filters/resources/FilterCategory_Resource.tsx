@@ -1,7 +1,7 @@
-import { useFilterResourceContext } from "@/context/FilterResourceContext";
+import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import { enumToArray } from "@/utils/enum";
 import { PLUGIN_CATEGORY } from "minecentral-api";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { formatToTitleCase } from "@/utils/formatter";
 
 type ButtonVariant =
@@ -13,14 +13,14 @@ type ButtonVariant =
   | "link"
   | "special";
 
-export function FilterCategory({
+export function FilterCategory_Resource({
   className,
   variant = "ghost",
 }: {
   className?: string;
   variant?: ButtonVariant;
 }) {
-  const { filter_category, setFilter_category } = useFilterResourceContext();
+  const { filter_category, setFilter_category } = useFilterContext_Resource();
   return (
     <>
       {enumToArray(PLUGIN_CATEGORY) //Filter out Number values (typescript stuff)

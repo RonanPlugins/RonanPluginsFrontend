@@ -1,4 +1,4 @@
-import { useFilterResourceContext } from "@/context/FilterResourceContext";
+import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
 const options: number[] = [8, 16, 32, 64];
 
 export const FilterPerPage = () => {
-  const { page_amount, setPageAmount } = useFilterResourceContext();
+  const { page_amount, setPageAmount } = useFilterContext_Resource();
   return (
     <Select
       onValueChange={(val) => setPageAmount(Number(val) || 8)}

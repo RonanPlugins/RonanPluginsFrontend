@@ -1,4 +1,4 @@
-import { useFilterResourceContext } from "@/context/FilterResourceContext";
+import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import {
   MultiSelector,
   MultiSelectorContent,
@@ -6,12 +6,12 @@ import {
   MultiSelectorItem,
   MultiSelectorList,
   MultiSelectorTrigger,
-} from "../../context/MultiSelector";
+} from "../../../context/MultiSelector";
 import { PLUGIN_VERSION } from "minecentral-api";
 import { formatToTitleCase } from "@/utils/formatter";
 
-export const FilterVersion = () => {
-  const { filter_versions, setFilter_versions } = useFilterResourceContext();
+export const FilterVersion_Resource = () => {
+  const { filter_versions, setFilter_versions } = useFilterContext_Resource();
   return (
     <MultiSelector values={filter_versions} onValuesChange={setFilter_versions}>
       <MultiSelectorTrigger className="border-input">

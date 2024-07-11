@@ -6,6 +6,7 @@ import { Card } from "../ui/card";
 import api from "@/api";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import Links from "@/lib/Links";
 
 export default function EmailVerify() {
   usePageTitle("Verifying...");
@@ -45,7 +46,7 @@ export default function EmailVerify() {
   }
 
   useEffect(() => {
-    if (!token) navigate("/signup");
+    if (!token) navigate(Links.Register);
     else verify();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
