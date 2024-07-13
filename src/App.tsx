@@ -19,7 +19,7 @@ function App() {
         <Nav />
         <Outlet />
         <Footer />
-        <Toaster />
+        <Toaster richColors />
       </ThemeProvider>
     </UserProvider>
   );

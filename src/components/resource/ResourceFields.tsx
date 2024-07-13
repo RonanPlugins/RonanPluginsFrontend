@@ -1,7 +1,7 @@
 import { enumToArray } from "@/utils/enum";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
-import { DiscordTutorial } from "./DiscordTutorial";
+import { DiscordTutorial } from "../common/DiscordTutorial";
 import { TextEditor } from "@/components/textEditor/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -18,7 +18,7 @@ import {
   MultiSelectorTrigger,
 } from "@/context/MultiSelector";
 
-export function CreateTitle() {
+export function ResourceCreateTitle() {
   const { title, set_title } = useCreateResourceContext();
   return (
     <section className="flex flex-col space-y-3">
@@ -38,7 +38,7 @@ export function CreateTitle() {
   );
 }
 
-export function CreateSubtitle() {
+export function ResourceCreateSubtitle() {
   const { subtitle, set_subtitle } = useCreateResourceContext();
   return (
     <section className="flex flex-col space-y-3">
@@ -57,7 +57,7 @@ export function CreateSubtitle() {
     </section>
   );
 }
-export function CreateUploadFile() {
+export function ResourceCreateUploadFile() {
   const { set_file } = useCreateResourceContext();
   return (
     <section className="flex flex-col space-y-3">
@@ -79,7 +79,7 @@ export function CreateUploadFile() {
   );
 }
 
-export function CreateReleaseVersion() {
+export function ResourceCreateReleaseVersion() {
   const { releaseVersion, set_releaseVersion } = useCreateResourceContext();
   return (
     <div className="flex flex-col space-y-3">
@@ -99,7 +99,7 @@ export function CreateReleaseVersion() {
   );
 }
 
-export function CreateCategory() {
+export function ResourceCreateCategory() {
   const { category, set_category } = useCreateResourceContext();
 
   return (
@@ -109,7 +109,7 @@ export function CreateCategory() {
       <div className="flex flex-row flex-wrap justify-center">
         <Select onValueChange={(val: any) => set_category(val)}>
           <SelectTrigger className="border-secondary text-muted-foreground">
-            {formatToTitleCase(category) || "Choose Category..."}
+            {toTitleCase(category) || "Choose Category..."}
           </SelectTrigger>
           <SelectContent>
             {enumToArray(PLUGIN_CATEGORY) //Filter out Number values (typescript stuff)
@@ -122,7 +122,7 @@ export function CreateCategory() {
                     // variant={category === type ? "special" : "secondary"}
                     className="mb-2 mx-1 rounded-xl max-w-36 w-full"
                   >
-                    {formatToTitleCase(type)}
+                    {toTitleCase(type)}
                   </SelectItem>
                 );
               })}
@@ -133,7 +133,7 @@ export function CreateCategory() {
   );
 }
 
-export function CreateSupportVersions() {
+export function ResourceCreateSupportVersions() {
   const { supportVersions, set_supportVersions } = useCreateResourceContext();
   return (
     <div className="flex flex-col space-y-3">
@@ -153,7 +153,7 @@ export function CreateSupportVersions() {
                 .map((filter) => {
                   return (
                     <MultiSelectorItem key={filter} value={filter}>
-                      {formatToTitleCase(filter)}
+                      {toTitleCase(filter)}
                     </MultiSelectorItem>
                   );
                 })}
@@ -169,7 +169,7 @@ export function CreateSupportVersions() {
   );
 }
 
-export function CreateDescription() {
+export function ResourceCreateDescription() {
   const { description, set_description } = useCreateResourceContext();
   return (
     <div>
@@ -180,7 +180,7 @@ export function CreateDescription() {
   );
 }
 
-export function CreateOptionals({ className }: { className: string }) {
+export function ResourceCreateOptionals({ className }: { className: string }) {
   const {
     language,
     set_language,

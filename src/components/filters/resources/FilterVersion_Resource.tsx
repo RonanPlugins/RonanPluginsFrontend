@@ -8,7 +8,7 @@ import {
   MultiSelectorTrigger,
 } from "../../../context/MultiSelector";
 import { PLUGIN_VERSION } from "minecentral-api";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 
 export const FilterVersion_Resource = () => {
   const { filter_versions, setFilter_versions } = useFilterContext_Resource();
@@ -22,7 +22,7 @@ export const FilterVersion_Resource = () => {
           {Object.values(PLUGIN_VERSION).map((filter) => {
             return (
               <MultiSelectorItem key={filter} value={filter}>
-                {formatToTitleCase(filter)}
+                {toTitleCase(filter)}
               </MultiSelectorItem>
             );
           })}

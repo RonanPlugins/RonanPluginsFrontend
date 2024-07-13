@@ -1,15 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { SERVER_CATEGORY, SERVER_SORTBY } from "minecentral-api";
-import {
-  Filter_Common,
-  FilterContextProps_Common,
-  useFilterContext_Common,
-} from "./FilterContext_Common";
+import { Filter_Common, useFilterContext_Common } from "./FilterContext_Common";
 
 type FilterProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
-interface FilterContextProps extends FilterContextProps_Common {
+interface FilterContextProps {
   //Versions
   filter_versions: string[];
   setFilter_versions: React.Dispatch<React.SetStateAction<string[]>>;
@@ -32,7 +28,8 @@ export const useFilterContext_Server = () => {
       "useFilterContext_Server must be used within FilterContext_Server.Provider"
     );
   }
-  return context;
+  const common = useFilterContext_Common();
+  return { ...context, ...common };
 };
 
 export const Filter_Server = ({ children }: FilterProps) => {
@@ -57,7 +54,6 @@ export const Filter_Server = ({ children }: FilterProps) => {
           //Categories
           filter_category,
           setFilter_category,
-          ...useFilterContext_Common(),
         }}
       >
         {children}

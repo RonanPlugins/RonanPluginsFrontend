@@ -20,6 +20,9 @@ import Signup from "@/components/account/Signup.tsx";
 import { EmailVerificationSent } from "@/components/account/EmailVerificationSent.tsx";
 import EmailVerify from "@/components/account/EmailVerify.tsx";
 import { Filter_Server } from "@/context/FilterContext_Server.tsx";
+import { userLoader } from "@/loaders/userLoader.ts";
+import { ServerCreate } from "./servers/Create.tsx";
+import { ServerView } from "./servers/View.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +93,10 @@ export const router = createBrowserRouter([
         path: "/resource/:id",
         element: <ResourceView />,
       },
+      {
+        path: "/server/:id",
+        element: <ServerView />,
+      },
       //Login Protected
       {
         element: <RoleGuard />,
@@ -106,11 +113,21 @@ export const router = createBrowserRouter([
             path: "/resource/:id/edit",
             element: <ResourceEdit />,
           },
+          //Server
+          {
+            path: "/server/create",
+            element: <ServerCreate />,
+          },
+          {
+            path: "/server/:id/edit",
+            element: <ResourceEdit />,
+          },
         ],
       },
       {
         element: <ProfileOther />,
         path: "/user/:userID",
+        loader: userLoader,
       },
       //Admin
       {

@@ -1,4 +1,3 @@
-import { PLUGIN_CATEGORY } from "minecentral-api";
 import { backendApi } from "./axiosClient";
 
 export default {

@@ -6,15 +6,11 @@ import {
   PLUGIN_PROXY,
   PLUGIN_SORTBY,
 } from "minecentral-api";
-import {
-  Filter_Common,
-  FilterContextProps_Common,
-  useFilterContext_Common,
-} from "./FilterContext_Common";
+import { Filter_Common, useFilterContext_Common } from "./FilterContext_Common";
 
 type FilterProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
-interface FilterContextProps extends FilterContextProps_Common {
+interface FilterContextProps {
   //Versions
   filter_versions: string[];
   setFilter_versions: React.Dispatch<React.SetStateAction<string[]>>;
@@ -45,7 +41,8 @@ export const useFilterContext_Resource = () => {
       "useFilterContext_Resource must be used within FilterContext_Resource.Provider"
     );
   }
-  return context;
+  const common = useFilterContext_Common();
+  return { ...context, ...common };
 };
 
 export const Filter_Resource = ({ children }: FilterProps) => {
@@ -80,7 +77,6 @@ export const Filter_Resource = ({ children }: FilterProps) => {
           //Loader
           filter_loader,
           setFilter_loader,
-          ...useFilterContext_Common(),
         }}
       >
         {children}

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
 import { FilterSearch } from "@/components/filters/FilterSearch";
 import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
-import { FilterClear } from "@/components/filters/FilterClear";
+import { FilterClear_Resource } from "@/components/filters/FilterClear";
 import { FilterPerPage } from "@/components/filters/FilterPerPage";
 import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
@@ -19,35 +19,43 @@ import { useUserContext } from "@/context/UserContext";
 import { FilterCategory_Resource } from "@/components/filters/resources/FilterCategory_Resource";
 import { FilterSort_Resource } from "@/components/filters/resources/FilterSort_Resource";
 import { FilterVersion_Resource } from "@/components/filters/resources/FilterVersion_Resource";
+import useDebounce from "@/hooks/useDebounce";
+import { useFilterContext_Common } from "@/context/FilterContext_Common";
 
 export function Resources() {
   usePageTitle("Resources");
 
   const {
     filter_sort,
+    filter_versions,
+    filter_category,
     page,
     setPage,
     page_amount,
     setFilterParams,
     filter_search,
-    filter_versions,
-    filter_category,
   } = useFilterContext_Resource();
   const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState<any[] | null>(null);
   const [totalResources, setTotalResources] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const deboucedSearchFilter = useDebounce(filter_search);
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalResources / page_amount));
-    getResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalResources, page_amount]);
 
   useEffect(() => {
     getResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter_sort, page, filter_versions, filter_search, filter_category]);
+  }, [
+    filter_sort,
+    page,
+    filter_versions,
+    deboucedSearchFilter,
+    filter_category,
+  ]);
 
   async function getResources() {
     setLoading(true);
@@ -66,10 +74,10 @@ export function Resources() {
         ? getEnumIndexByKey(PLUGIN_CATEGORY, filter_category)
         : null,
     });
-    setResources(posts);
-    setTotalResources(await resourceAPI.getCount());
+    setTotalResources(posts.totalCount);
+    setResources(posts.resources);
     setLoading(false);
-    if (posts && posts[0]) {
+    if (posts.resources && posts.resources[0]) {
       if (page === 0) setFilterParams({});
       else setFilterParams({ page: `${page}` }); //navigate(page === 0 ? `.` : `./?page=${page}`);
     } else if (page !== 0) setPage(0);
@@ -112,7 +120,7 @@ export function Resources() {
 }
 
 function PageBar({ pageTotal }: { pageTotal: number }) {
-  const { page, setPage } = useFilterContext_Resource();
+  const { page, setPage } = useFilterContext_Common();
   if (pageTotal <= 1) return <></>;
   return (
     <div className="w-full flex">
@@ -131,7 +139,7 @@ function PageBar({ pageTotal }: { pageTotal: number }) {
 
 function SearchBar() {
   const { filter_show, setFilter_show, isFiltering } =
-    useFilterContext_Resource();
+    useFilterContext_Common();
 
   return (
     <Card className="lg:hidden">
@@ -170,7 +178,7 @@ function SearchBar() {
 }
 
 function Sidebar() {
-  const { filter_show } = useFilterContext_Resource();
+  const { filter_show } = useFilterContext_Common();
   return (
     <Card className={`${filter_show ? "" : "hidden"} lg:block mb-2 px-2`}>
       {/* Filters */}
@@ -189,12 +197,12 @@ function Sidebar() {
             <FilterPerPage />
           </div>
 
-          <FilterClear className="ml-auto" />
+          <FilterClear_Resource className="ml-auto" />
         </div>
       </div>
       {/* Clear Filter Button */}
       <div className="lg:hidden">
-        <FilterClear className="mx-auto mt-2" />
+        <FilterClear_Resource className="mx-auto mt-2" />
       </div>
       {/* Category (mobile) */}
       <div className="lg:hidden mx-2">
@@ -237,7 +245,7 @@ function ResourceList({
 }) {
   return (
     <>
-      {!loading
+      {!loading || resources
         ? resources &&
           resources.map((resource) => (
             <ResourcePreview key={resource._id} resource={resource} />

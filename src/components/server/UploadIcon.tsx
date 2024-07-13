@@ -4,11 +4,11 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import resourceAPI from "@/api/resource";
 import { CheckCircleIcon, FileWarning, ImageUpIcon } from "lucide-react";
 import Loading from "../common/Loading";
+import server from "@/api/server";
 
-export function ResourceUploadIcon({ resource }: { resource: any }) {
+export function ServerUploadIcon({ resource }: { resource: any }) {
   const [file, set_file] = useState<File | null>(null);
   const [uploading, set_uploading] = useState<boolean>(false);
   const [open, set_open] = useState<boolean>(false);
@@ -16,7 +16,7 @@ export function ResourceUploadIcon({ resource }: { resource: any }) {
   function uploadIcon() {
     if (!file) return;
     set_uploading(true);
-    resourceAPI
+    server
       .editIcon(resource._id, file)
       .then((data) => {
         if (data) {
@@ -37,12 +37,12 @@ export function ResourceUploadIcon({ resource }: { resource: any }) {
   return (
     <>
       <Dialog open={open} onOpenChange={set_open}>
-        <DialogTrigger className="flex flex-row gap-2 items-center hover:text-primary">
+        <DialogTrigger className="flex flex-row items-center gap-2 hover:text-primary">
           <ImageUpIcon size={16} />
-          <p>Upload Icon</p>
+          <p className="">Change Banner</p>
         </DialogTrigger>
         <DialogContent>
-          <h2>Upload Resource Icon</h2>
+          <h2>Upload Server Banner</h2>
           <Input
             type="file"
             accept=".jpg,.png"

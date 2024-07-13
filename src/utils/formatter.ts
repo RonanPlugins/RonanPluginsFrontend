@@ -1,4 +1,4 @@
-export function formatToTitleCase(input: any): string {
+export function toTitleCase(input: any): string {
   if (!input) return "";
   // Convert the input string to lowercase
   const lowerCaseStr = input.toLowerCase();
@@ -17,4 +17,9 @@ export function formatToTitleCase(input: any): string {
   // Join the words back into a single string
   const formattedStr = capitalizedWords.join(" ");
   return formattedStr;
+}
+
+export function toCaps(input: any): string {
+  if (!input || !(typeof input === "string")) return "";
+  return input.toUpperCase().trim();
 }

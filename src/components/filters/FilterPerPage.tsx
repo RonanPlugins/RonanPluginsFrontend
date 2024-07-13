@@ -1,4 +1,3 @@
-import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import {
   Select,
   SelectContent,
@@ -6,11 +5,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useFilterContext_Common } from "@/context/FilterContext_Common";
 
 const options: number[] = [8, 16, 32, 64];
 
 export const FilterPerPage = () => {
-  const { page_amount, setPageAmount } = useFilterContext_Resource();
+  const { page_amount, setPageAmount } = useFilterContext_Common();
   return (
     <Select
       onValueChange={(val) => setPageAmount(Number(val) || 8)}

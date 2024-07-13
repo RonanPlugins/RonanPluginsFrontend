@@ -31,3 +31,10 @@ export const discordApi = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const mcstatusioAPI = axios.create({
+  baseURL: `https://api.mcstatus.io/v2`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});

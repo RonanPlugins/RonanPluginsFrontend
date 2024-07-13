@@ -6,6 +6,7 @@ export default class Links {
   static Servers = "/servers";
   static Server = "/server";
   static ResourceNew = "/resource/create";
+  static ServerNew = "/server/create";
   static Login = "/login";
   static Register = "/register";
   static Profile = "/profile";

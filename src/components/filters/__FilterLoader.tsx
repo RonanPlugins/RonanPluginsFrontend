@@ -1,7 +1,7 @@
 import { enumToArray } from "@/utils/enum";
 import { PLUGIN_LOADER } from "minecentral-api";
 import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 import { Checkbox } from "../ui/checkbox";
 import { toggleFromArray } from "@/utils/array";
 
@@ -25,7 +25,7 @@ export const FilterLoader = () => {
                 checked={filter_loader ? filter_loader.includes(type) : false}
                 key={type}
               />
-              <p>{formatToTitleCase(type)}</p>
+              <p>{toTitleCase(type)}</p>
             </section>
           );
         })}

@@ -1,43 +1,42 @@
-import Loading from "@/components/common/Loading";
 import { ResourcePreview } from "@/components/resource/Preview";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import resourceAPI from "@/api/resource";
-import memberAPI from "@/api/member";
+import { useEffect } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useUserContext } from "@/context/UserContext";
+import { UserLoaderParams } from "@/loaders/userLoader";
 
 export default function ProfileOther() {
-  const { user }: { user: any } = useUserContext();
-  const [userProfile, setUser] = useState<any>({});
-  const [loading, setLoading] = useState(true);
-  const [resources, setResources] = useState<any[] | null>(null);
-  const { userID } = useParams();
+  const { user, isLoggedIn } = useUserContext();
+  // const [userProfile, setUser] = useState<any>({});
+  // const [loading, setLoading] = useState(true);
+  // const [resources, setResources] = useState<any[] | null>(null);
+  const { userID, userProfile, resources } =
+    useLoaderData() as UserLoaderParams;
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userID === user?._id) navigate("../profile");
+    if (isLoggedIn && userID === user?._id) navigate("../profile");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function getResources() {
-    const posts = await resourceAPI.getUser(`${userID}`);
-    // console.log("response", posts);
-    setResources(posts);
-  }
+  // async function getResources() {
+  //   const posts = await resourceAPI.getUser(`${userID}`);
+  //   // console.log("response", posts);
+  //   setResources(posts);
+  // }
 
-  async function getUser() {
-    const user = await memberAPI.get(`${userID}`);
-    setUser(user);
-  }
+  // async function getUser() {
+  //   const user = await memberAPI.get(`${userID}`);
+  //   setUser(user);
+  // }
 
-  useEffect(() => {
-    getResources();
-    getUser();
-    setLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   // getResources();
+  //   // getUser();
+  //   // setLoading(false);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  if (loading) return <Loading />;
+  // if (loading) return <Loading />;
 
   return (
     <div className="w-full text-center my-3">
@@ -51,7 +50,7 @@ export default function ProfileOther() {
         </h2>
         <div className="resources">
           {resources &&
-            resources.map((resource) => (
+            resources.map((resource: any) => (
               <ResourcePreview key={resource._id} resource={resource} />
             ))}
         </div>

@@ -2,10 +2,11 @@ import { CircleX } from "lucide-react";
 import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import { Button } from "../ui/button";
 import { useEffect } from "react";
+import { useFilterContext_Server } from "@/context/FilterContext_Server";
+import { useFilterContext_Common } from "@/context/FilterContext_Common";
 
-export function FilterClear({ className }: { className: string }) {
+export function FilterClear_Resource({ className }: { className: string }) {
   const {
-    isFiltering,
     filter_category,
     filter_search,
     filter_versions,
@@ -47,6 +48,17 @@ export function FilterClear({ className }: { className: string }) {
     filter_loader,
   ]);
 
+  return <ClearButton clearFilter={clearFilter} className={className} />;
+}
+
+function ClearButton({
+  clearFilter,
+  className,
+}: {
+  clearFilter: any;
+  className: string;
+}) {
+  const { isFiltering } = useFilterContext_Common();
   return (
     <div className={`flex justify-center ${className}`}>
       <Button
@@ -60,4 +72,34 @@ export function FilterClear({ className }: { className: string }) {
       </Button>
     </div>
   );
+}
+
+export function FilterClear_Server({ className }: { className: string }) {
+  const {
+    filter_category,
+    filter_search,
+    filter_versions,
+    setisFiltering,
+    setFilter_category,
+    setFilter_search,
+    setFilter_versions,
+  } = useFilterContext_Server();
+
+  function clearFilter() {
+    setFilter_category(null);
+    setFilter_search(null);
+    setFilter_versions([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
+
+  useEffect(() => {
+    setisFiltering(
+      [filter_category, filter_search, filter_versions.length].some(
+        (val) => val
+      )
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter_category, filter_search, filter_versions]);
+
+  return <ClearButton clearFilter={clearFilter} className={className} />;
 }

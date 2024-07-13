@@ -1,7 +1,7 @@
 import { enumToArray } from "@/utils/enum";
 import { PLUGIN_PROXY } from "minecentral-api";
 import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 import { Checkbox } from "../ui/checkbox";
 import { toggleFromArray } from "@/utils/array";
 
@@ -24,7 +24,7 @@ export const FilterProxy = () => {
               <Checkbox
                 checked={filter_proxy ? filter_proxy.includes(type) : false}
               />
-              <p>{formatToTitleCase(type)}</p>
+              <p>{toTitleCase(type)}</p>
             </section>
           );
         })}

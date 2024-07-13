@@ -6,21 +6,22 @@ import {
   Clock8Icon,
   Download,
   Edit,
+  Edit3Icon,
   LinkIcon,
   SquareCodeIcon,
+  UploadCloud,
 } from "lucide-react";
 import date from "../../utils/date";
 import { useUserContext } from "@/context/UserContext";
 import { ResourceImage } from "./Image";
 import { PLUGIN_CATEGORY } from "minecentral-api";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 import { Separator } from "../ui/separator";
 import { ImageSmall } from "../common/Image";
 import { Button } from "../ui/button";
 import { ResourceDownloadButton } from "@/pages/resources/View";
-import { UploadIcon } from "./UploadIcon";
-import { useEffect, useState } from "react";
-import discord from "@/api/discord";
+import { ResourceUploadIcon } from "./UploadIcon";
+import { DiscordWidget } from "../common/DiscordWidget";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
   return (
@@ -56,7 +57,7 @@ function Info({ resource }: { resource: any }) {
 
         <p>{resource.subtitle}</p>
         <div className="text-sm text-muted-foreground">
-          {formatToTitleCase(
+          {toTitleCase(
             PLUGIN_CATEGORY[resource.category || PLUGIN_CATEGORY.MISC]
           )}
         </div>
@@ -125,11 +126,18 @@ function Tools({ resource }: { resource: any }) {
           </CardTitle>
           <CardContent className="p-3">
             <Separator className="mb-2 h-1" />
-            <Link className="hover:text-muted-foreground" to={"./edit"}>
+            <Link
+              className="hover:text-primary flex flex-row items-center gap-2"
+              to={"./edit"}
+            >
+              <Edit3Icon size={16} />
               <p>Edit Resource</p>
             </Link>
-            <UploadIcon resource={resource} />
-            <p>Post Update</p>
+            <ResourceUploadIcon resource={resource} />
+            <div className="hover:text-primary flex flex-row items-center gap-2">
+              <UploadCloud size={16} />
+              <p>Post Update</p>
+            </div>
           </CardContent>
         </Card>
       )}
@@ -147,20 +155,20 @@ function Links({ resource }: { resource: any }) {
       <CardContent className="p-3">
         <Separator className="mb-2 h-1" />
         <Link
-          className="flex flex-row gap-2 items-center hover:text-primary transition-colors duration-200"
+          className="flex flex-row gap-2 items-center hover:text-primary"
           to={resource.linkSupport}
         >
-          <CircleHelp size={18} />
+          <CircleHelp size={16} />
           <p>Support</p>
         </Link>
         <Link
-          className="flex flex-row gap-2 items-center hover:text-primary transition-colors duration-200"
+          className="flex flex-row gap-2 items-center hover:text-primary"
           to={resource.linkSource}
         >
-          <SquareCodeIcon size={18} />
+          <SquareCodeIcon size={16} />
           <p>Source Code</p>
         </Link>
-        {resource.discord && <DiscordLink discordID={resource.discord} />}
+        {resource.discord && <DiscordWidget discordID={resource.discord} />}
       </CardContent>
     </Card>
   );
@@ -195,49 +203,5 @@ function Contributers({ resource }: { resource: any }) {
         </Link>
       </CardContent>
     </Card>
-  );
-}
-
-function DiscordLink({ discordID }: { discordID: string }) {
-  //const discordID = "182633513474850818";
-  const [onlineCount, setOnlineCount] = useState<number | null>(null);
-  const [inviteLink, setInviteLink] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
-
-  async function getDiscord() {
-    const data = await discord.getDiscord(discordID);
-    console.log(data);
-    setOnlineCount(data.presence_count);
-    setInviteLink(data.instant_invite);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    getDiscord();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function DiscordBox() {
-    return (
-      <div className="mt-2 w-full bg-[#7289da] hover:bg-[#5673dc] p-2 rounded-xl flex flex-row flex-wrap items-center">
-        <img src="/assets/discord.svg" className="h-6 w-6 mr-2" alt="" />
-        <h2 className="text-xl font-bold mr-2">Discord</h2>
-        {onlineCount && (
-          <p className="ml-auto text-sm">
-            <span className="font-bold">{onlineCount}</span> Members Online
-          </p>
-        )}
-      </div>
-    );
-  }
-
-  if (loading) return <></>;
-
-  if (!inviteLink) return <></>;
-
-  return (
-    <a href={inviteLink} target="_blank" rel="noopener noreferrer">
-      <DiscordBox />
-    </a>
   );
 }

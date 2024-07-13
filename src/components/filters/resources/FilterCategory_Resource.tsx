@@ -2,7 +2,7 @@ import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import { enumToArray } from "@/utils/enum";
 import { PLUGIN_CATEGORY } from "minecentral-api";
 import { Button } from "../../ui/button";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 
 type ButtonVariant =
   | "default"
@@ -35,7 +35,7 @@ export function FilterCategory_Resource({
               className={`${className} rounded-xl`}
               onClick={() => setFilter_category(type)}
             >
-              {formatToTitleCase(type)}
+              {toTitleCase(type)}
             </Button>
           );
         })}

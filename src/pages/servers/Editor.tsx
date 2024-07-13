@@ -1,64 +1,66 @@
-import {
-  CreateResource_Context,
-  useCreateResourceContext,
-} from "@/context/CreateResourceContext";
 import { useEffect, useState } from "react";
 import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
-import resourceAPI from "@/api/resource";
 import { Buffer } from "buffer";
-import {
-  ResourceCreateCategory,
-  ResourceCreateDescription,
-  ResourceCreateOptionals,
-  ResourceCreateSubtitle,
-  ResourceCreateSupportVersions,
-  ResourceCreateTitle,
-} from "@/components/resource/ResourceFields";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Loading from "@/components/common/Loading";
-import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
+import { SERVER_CATEGORY } from "minecentral-api";
 import { useNavigate, useParams } from "react-router-dom";
-import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
+import { getEnumIndexByKey } from "@/utils/enum";
+import serverAPI from "@/api/server";
+import {
+  ServerCreateAddress,
+  ServerCreateCategory,
+  ServerCreateDescription,
+  ServerCreateOptionals,
+  ServerCreateSubtitle,
+  ServerCreateTitle,
+} from "@/components/server/ServerFields";
+import { Separator } from "@radix-ui/react-separator";
+import {
+  CreateServer_Context,
+  useCreateServerContext,
+} from "@/context/CreateServerContext";
 
-export function ResourceEdit() {
+export function ServerEdit() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [resource, setResource] = useState(null);
+  const [server, setServer] = useState(null);
 
-  function getResource() {
-    resourceAPI.getOne(id).then((data) => {
-      setResource(data);
+  function getServer() {
+    serverAPI.getOne(id).then((data) => {
+      setServer(data);
       setLoading(false);
     });
   }
 
   useEffect(() => {
-    getResource();
+    getServer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <Loading />;
 
   return (
-    <CreateResource_Context>
+    <CreateServer_Context>
       <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
-        Edit Resource
+        Edit Server
       </h1>
 
-      <Loader resource={resource} />
+      <Loader resource={server} />
 
       <div className="grid gap-9 mx-auto my-3 max-w-6xl">
         <Listener />
-        <ResourceCreateTitle />
-        <ResourceCreateSubtitle />
-        <ResourceCreateCategory />
-        <ResourceCreateSupportVersions />
-        <ResourceCreateOptionals className="grid gap-9 my-3" />
-        <ResourceCreateDescription />
-        <SubmitEdit resource={resource} />
+        <ServerCreateTitle />
+        <ServerCreateSubtitle />
+        <ServerCreateAddress />
+        <Separator className="border-b-4" />
+        <ServerCreateCategory />
+        <ServerCreateOptionals className="grid gap-9 my-3" />
+        <ServerCreateDescription />
+        <SubmitEdit server={server} />
       </div>
-    </CreateResource_Context>
+    </CreateServer_Context>
   );
 }
 
@@ -70,11 +72,8 @@ function Loader({ resource }: { resource: any }) {
     set_tags,
     set_category,
     set_language,
-    set_linkSource,
-    set_linkSupport,
-    set_supportVersions,
     set_discord,
-  } = useCreateResourceContext();
+  } = useCreateServerContext();
 
   useEffect(() => {
     if (resource.title) set_title(resource.title);
@@ -86,17 +85,9 @@ function Loader({ resource }: { resource: any }) {
     if (resource.tags) set_tags(resource.tags);
     if (resource.category)
       set_category(
-        PLUGIN_CATEGORY[resource.category as keyof typeof PLUGIN_CATEGORY]
+        SERVER_CATEGORY[resource.category as keyof typeof SERVER_CATEGORY]
       );
-    const versions = resource.versionSupport?.map((index: any) => {
-      const obj = Object.values(PLUGIN_VERSION)[index];
-      // console.log(index, obj);
-      return obj;
-    });
-    if (versions) set_supportVersions(versions);
     if (resource.language) set_language(resource.language);
-    if (resource.linkSource) set_linkSource(resource.linkSource);
-    if (resource.linkSupport) set_linkSupport(resource.linkSupport);
     if (resource.discord) set_discord(resource.discord);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -104,25 +95,22 @@ function Loader({ resource }: { resource: any }) {
   return <></>;
 }
 
-function SubmitEdit({ resource }: { resource: any }) {
+function SubmitEdit({ server }: { server: any }) {
   const [posting, setPosting] = useState(false);
   const {
     title,
     subtitle,
-    file,
-    releaseVersion,
-    supportVersions,
     category,
     description,
+    address,
+    port,
     //Optional
     language,
-    link_source,
-    link_support,
     discord,
     tags,
     //Submitting
     getFieldsIncomplete,
-  } = useCreateResourceContext();
+  } = useCreateServerContext();
 
   const navigate = useNavigate();
 
@@ -136,40 +124,33 @@ function SubmitEdit({ resource }: { resource: any }) {
     }
 
     const categoryNumber: number = getEnumIndexByKey(
-      PLUGIN_CATEGORY,
-      category || PLUGIN_CATEGORY.MISC
-    );
-    const supportVersionsList: number[] | undefined = supportVersions?.map(
-      (key: any) => getEnumIndexByValue(PLUGIN_VERSION, key)
+      SERVER_CATEGORY,
+      category || SERVER_CATEGORY.ADVENTURE
     );
     setPosting(true);
 
-    resourceAPI
-      .edit(resource._id, {
+    serverAPI
+      .edit(server._id, {
         title,
         subtitle,
         description,
         category: categoryNumber,
-        //Release
-        file,
-        version: releaseVersion,
+        address,
+        port,
         // OPTIONALS
         language,
         discord,
-        linkSource: link_source,
-        linkSupport: link_support,
         tags,
-        versionSupport: supportVersionsList,
       })
       .then((data: any) => {
         if (data) {
-          console.log("Resource updated:", data);
-          navigate(`/resource/${data.id}`);
-          toast("Resource Updated!", {
+          console.log("Server updated:", data);
+          navigate(`/server/${data.id}`);
+          toast("Server Updated!", {
             icon: <CheckIcon />,
           });
         } else {
-          toast("Error Editting Resource!", {
+          toast("Error Editting Server!", {
             icon: <AlertCircleIcon />,
           });
           // setPosting(false);
@@ -196,17 +177,15 @@ function Listener() {
   const {
     title,
     subtitle,
-    file,
-    releaseVersion,
-    supportVersions,
     category,
     description,
+    address,
+    port,
     //Optional
     language,
-    link_source,
     discord,
     tags,
-  } = useCreateResourceContext();
+  } = useCreateServerContext();
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -214,14 +193,12 @@ function Listener() {
         [
           title,
           subtitle,
-          file,
-          releaseVersion,
-          supportVersions,
+          address,
+          port,
           category,
           description,
           //Optional
           language,
-          link_source,
           discord,
           tags,
         ].some((val) => val)
@@ -241,14 +218,12 @@ function Listener() {
   }, [
     title,
     subtitle,
-    file,
-    releaseVersion,
-    supportVersions,
+    address,
+    port,
     category,
     description,
     //Optional
     language,
-    link_source,
     discord,
     tags,
   ]);

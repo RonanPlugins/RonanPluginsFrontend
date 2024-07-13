@@ -1,49 +1,44 @@
 import {
-  CreateResource_Context,
-  useCreateResourceContext,
-} from "@/context/CreateResourceContext";
-import { useEffect, useState } from "react";
-import resource from "@/api/resource";
+  ServerCreateAddress,
+  ServerCreateCategory,
+  ServerCreateDescription,
+  ServerCreateOptionals,
+  ServerCreateSubtitle,
+  ServerCreateTitle,
+} from "@/components/server/ServerFields";
+
+import { Separator } from "@radix-ui/react-select";
 import {
-  ResourceCreateCategory,
-  ResourceCreateDescription,
-  ResourceCreateOptionals,
-  ResourceCreateReleaseVersion,
-  ResourceCreateSubtitle,
-  ResourceCreateSupportVersions,
-  ResourceCreateTitle,
-  ResourceCreateUploadFile,
-} from "@/components/resource/ResourceFields";
-import { Button } from "@/components/ui/button";
-import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
+  CreateServer_Context,
+  useCreateServerContext,
+} from "@/context/CreateServerContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
-import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
-import { ImportFromSpigot } from "@/components/resource/ImportFromSpigot";
-import { Separator } from "@radix-ui/react-select";
+import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
+import { SERVER_CATEGORY } from "minecentral-api";
+import { getEnumIndexByKey } from "@/utils/enum";
+import server from "@/api/server";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
-export function ResourceCreate() {
+export function ServerCreate() {
   return (
-    <CreateResource_Context>
+    <CreateServer_Context>
       <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
-        New Resource
+        Add Your Server
       </h1>
       <div className="grid gap-9 mx-auto my-3 max-w-6xl px-2">
         <Listener />
-        <ImportFromSpigot />
-        <ResourceCreateTitle />
-        <ResourceCreateSubtitle />
-        <ResourceCreateUploadFile />
-        <ResourceCreateReleaseVersion />
+        <ServerCreateTitle />
+        <ServerCreateSubtitle />
+        <ServerCreateAddress />
         <Separator className="border-b-4" />
-        <ResourceCreateCategory />
-        <ResourceCreateSupportVersions />
-        <ResourceCreateOptionals className="grid gap-9 my-3" />
-        <ResourceCreateDescription />
+        <ServerCreateCategory />
+        <ServerCreateOptionals className="grid gap-9 my-3" />
+        <ServerCreateDescription />
         <SubmitCreate />
       </div>
-    </CreateResource_Context>
+    </CreateServer_Context>
   );
 }
 
@@ -52,26 +47,23 @@ function SubmitCreate() {
   const {
     title,
     subtitle,
-    file,
-    releaseVersion,
-    supportVersions,
+    address,
+    port,
     category,
     description,
     //Optional
     language,
-    link_source,
-    link_support,
     discord,
     tags,
     //Submitting
     getFieldsIncomplete,
-  } = useCreateResourceContext();
+  } = useCreateServerContext();
 
   const navigate = useNavigate();
 
   const handleCreatePost = async () => {
     const errors = getFieldsIncomplete();
-    if (errors.length > 0 || !file || !releaseVersion) {
+    if (errors.length > 0) {
       toast("Please Fill All Required Fields!", {
         icon: <CircleAlertIcon />,
       });
@@ -79,48 +71,41 @@ function SubmitCreate() {
     }
 
     const categoryNumber: number = getEnumIndexByKey(
-      PLUGIN_CATEGORY,
-      category || PLUGIN_CATEGORY.MISC
-    );
-    const supportVersionsList: number[] | undefined = supportVersions?.map(
-      (key) => getEnumIndexByValue(PLUGIN_VERSION, key)
+      SERVER_CATEGORY,
+      category || SERVER_CATEGORY.ADVENTURE
     );
     setPosting(true);
-    toast.loading("Posting Resource...", {
-      id: "create-resource",
+    toast.loading("Creating Server...", {
+      id: "create-server",
       duration: Infinity,
     });
 
-    resource
+    server
       .create({
         title,
         subtitle,
         description,
         category: categoryNumber,
-        //Release
-        file,
-        version: releaseVersion,
+        address,
+        port,
         // OPTIONALS
         language,
         discord,
-        linkSource: link_source,
-        linkSupport: link_support,
         tags,
-        versionSupport: supportVersionsList,
       })
       .then((data: any) => {
         if (data) {
           console.log("New Resource created:", data);
-          navigate(`/resource/${data.id}`);
-          toast.success("Resource Posted!", {
+          navigate(`/server/${data.id}`);
+          toast.success("Server Posted!", {
             icon: <CheckIcon />,
-            id: "create-resource",
+            id: "create-server",
             duration: 3000,
           });
         } else {
-          toast.error("Error Posting New Resource!", {
+          toast.error("Error Adding Server!", {
             icon: <AlertCircleIcon />,
-            id: "create-resource",
+            id: "create-server",
             duration: 3000,
           });
           // setPosting(false);
@@ -141,7 +126,7 @@ function SubmitCreate() {
         onClick={handleCreatePost}
         disabled={posting}
       >
-        Post New Resource
+        Add Your Server
       </Button>
     </div>
   );
@@ -152,17 +137,15 @@ function Listener() {
   const {
     title,
     subtitle,
-    file,
-    releaseVersion,
-    supportVersions,
+    address,
+    port,
     category,
     description,
     //Optional
     language,
-    link_source,
     discord,
     tags,
-  } = useCreateResourceContext();
+  } = useCreateServerContext();
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -170,14 +153,12 @@ function Listener() {
         [
           title,
           subtitle,
-          file,
-          releaseVersion,
-          supportVersions,
+          address,
+          port,
           category,
           description,
           //Optional
           language,
-          link_source,
           discord,
           tags,
         ].some((val) => val)
@@ -197,14 +178,12 @@ function Listener() {
   }, [
     title,
     subtitle,
-    file,
-    releaseVersion,
-    supportVersions,
+    address,
+    port,
     category,
     description,
     //Optional
     language,
-    link_source,
     discord,
     tags,
   ]);

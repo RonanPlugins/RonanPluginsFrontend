@@ -1,6 +1,6 @@
 import { enumToArray } from "@/utils/enum";
 import { Button } from "../../ui/button";
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 import { useFilterContext_Server } from "@/context/FilterContext_Server";
 import { SERVER_CATEGORY } from "minecentral-api";
 
@@ -35,7 +35,7 @@ export function FilterCategory_Server({
               className={`${className} rounded-xl`}
               onClick={() => setFilter_category(type)}
             >
-              {formatToTitleCase(type)}
+              {toTitleCase(type)}
             </Button>
           );
         })}

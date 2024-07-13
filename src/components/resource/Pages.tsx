@@ -1,4 +1,4 @@
-import { formatToTitleCase } from "@/utils/formatter";
+import { toTitleCase } from "@/utils/formatter";
 import { useState } from "react";
 
 enum PAGE {
@@ -26,7 +26,7 @@ export function ResourcePages({ resource }: { resource: any }) {
               }`}
               onClick={() => setActive(enumVal)}
             >
-              {formatToTitleCase(enumVal)}
+              {toTitleCase(enumVal)}
             </p>
           );
         })}
