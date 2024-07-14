@@ -1,27 +1,23 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import {
-  CalendarDays,
-  Clock8Icon,
-  Edit,
-  Edit3Icon,
-  LinkIcon,
-} from "lucide-react";
+import { CalendarDays, Clock8Icon, Edit, Edit3Icon } from "lucide-react";
 import date from "../../utils/date";
 import { useUserContext } from "@/context/UserContext";
-import { PLUGIN_CATEGORY } from "minecentral-api";
-import { toTitleCase } from "@/utils/formatter";
+import { SERVER_CATEGORY } from "minecentral-api";
 import { Separator } from "../ui/separator";
 
 import { ServerUploadIcon } from "./UploadIcon";
 
 import { ServerImage } from "./Image";
 import { DiscordWidget } from "../common/DiscordWidget";
+import { Report } from "../common/Report";
+import { getEnumValue } from "@/utils/enum";
 
 export function ServerSidebar({ server }: { server: any }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-1 gap-3">
       <Info server={server} />
+
       <div className="hidden lg:grid gap-3">
         <Tools server={server} />
         <Links server={server} />
@@ -45,14 +41,14 @@ function Info({ server }: { server: any }) {
       {/* Information */}
       <div className="absolute top-0 w-full h-[120px] bg-primary rounded-t-xl" />
       <CardHeader className="mt-[60px]">
-        <ServerImage classname="z-10 !bg-card" server={server} />
+        <ServerImage classname="!bg-card" server={server} />
         <h2 className="font-bold text-2xl">{server.title}</h2>
 
         <p>{server.subtitle}</p>
-        <div className="text-sm text-muted-foreground">
-          {toTitleCase(
-            PLUGIN_CATEGORY[server.category || PLUGIN_CATEGORY.MISC]
-          )}
+        <div className="text-sm text-muted-foreground flex flex-row items-center">
+          {server.category && getEnumValue(SERVER_CATEGORY, server.category)}
+          {/* Report Button */}
+          <Report item={server} />
         </div>
       </CardHeader>
       <CardContent className="relative px-3 grid gap-3">

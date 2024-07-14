@@ -9,9 +9,12 @@ export function DiscordWidget({ discordID }: { discordID: string }) {
 
   async function getDiscord() {
     const data = await discord.getDiscord(discordID);
-    console.log(data);
-    setOnlineCount(data.presence_count);
-    setInviteLink(data.instant_invite);
+    try {
+      setOnlineCount(data.presence_count);
+      setInviteLink(data.instant_invite);
+    } catch (err) {
+      //
+    }
     setLoading(false);
   }
 

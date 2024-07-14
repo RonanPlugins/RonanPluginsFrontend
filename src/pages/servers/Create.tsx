@@ -16,7 +16,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
 import { SERVER_CATEGORY } from "minecentral-api";
-import { getEnumIndexByKey } from "@/utils/enum";
+import {
+  getEnumIndexByKey,
+  getEnumIndexByValue,
+  stringArrayToEnumIndexArray,
+} from "@/utils/enum";
 import server from "@/api/server";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -24,7 +28,7 @@ import { Button } from "@/components/ui/button";
 export function ServerCreate() {
   return (
     <CreateServer_Context>
-      <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
+      <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF] drop-shadow-lg">
         Add Your Server
       </h1>
       <div className="grid gap-9 mx-auto my-3 max-w-6xl px-2">
@@ -49,7 +53,7 @@ function SubmitCreate() {
     subtitle,
     address,
     port,
-    category,
+    categories,
     description,
     //Optional
     language,
@@ -70,10 +74,11 @@ function SubmitCreate() {
       return;
     }
 
-    const categoryNumber: number = getEnumIndexByKey(
+    const categoryList = stringArrayToEnumIndexArray(
       SERVER_CATEGORY,
-      category || SERVER_CATEGORY.ADVENTURE
+      categories
     );
+
     setPosting(true);
     toast.loading("Creating Server...", {
       id: "create-server",
@@ -85,7 +90,7 @@ function SubmitCreate() {
         title,
         subtitle,
         description,
-        category: categoryNumber,
+        category: categoryList,
         address,
         port,
         // OPTIONALS
@@ -139,7 +144,7 @@ function Listener() {
     subtitle,
     address,
     port,
-    category,
+    categories,
     description,
     //Optional
     language,
@@ -155,7 +160,7 @@ function Listener() {
           subtitle,
           address,
           port,
-          category,
+          categories,
           description,
           //Optional
           language,
@@ -180,7 +185,7 @@ function Listener() {
     subtitle,
     address,
     port,
-    category,
+    categories,
     description,
     //Optional
     language,

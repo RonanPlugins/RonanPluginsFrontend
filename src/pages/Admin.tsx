@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import date from "../utils/date";
 import Image from "@/components/common/Image";
 import usePageTitle from "@/utils/usePageTitle";
+import { TooltipWidget } from "@/components/common/TooltipWidget";
 
 export default function Admin() {
   usePageTitle("Admin");
@@ -46,16 +47,9 @@ export default function Admin() {
               <div className="self-end ml-auto text-xs">
                 <dl className="flex flex-row">
                   <dt className="text-secondary-foreground/50 mr-2">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Clock8 size={16} aria-label="last seen" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Last Seen</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <TooltipWidget tooltip="Last Seen">
+                      <Clock8 size={16} aria-label="last seen" />
+                    </TooltipWidget>
                   </dt>
                   <dd className="hover:underline">{date(user.lastLogin)}</dd>
                 </dl>

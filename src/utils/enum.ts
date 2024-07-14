@@ -34,7 +34,7 @@ export function castStringToEnum<T>(
   return null;
 }
 
-export function getEnumIndexByKey(enumType: any, value: number): number {
+export function getEnumIndexByKey(enumType: any, value: string): number {
   // Get an array of the enum keys
   const enumKeys = Object.keys(enumType).filter((key) => !isNaN(Number(key)));
   // Find the key that matches the value
@@ -59,3 +59,19 @@ export function getEnumIndexByValue2(enumType: any, value: string): number {
   // Return the index of the matching key in the enum keys array
   return enumKeys.indexOf(matchingKey as string);
 }
+
+export const stringArrayToEnumIndexArray = <T extends Record<string, string>>(
+  enumType: T,
+  stringArray: string[] | null
+): number[] => {
+  if (!stringArray) return [];
+  return stringArray.map((str) => {
+    const enumIndex = Object.keys(enumType).findIndex(
+      (key) => enumType[key as keyof T] === str
+    );
+    if (enumIndex === -1) {
+      throw new Error(`Invalid enum value: ${str}`);
+    }
+    return enumIndex;
+  });
+};

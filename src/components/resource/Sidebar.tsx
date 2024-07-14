@@ -22,6 +22,7 @@ import { Button } from "../ui/button";
 import { ResourceDownloadButton } from "@/pages/resources/View";
 import { ResourceUploadIcon } from "./UploadIcon";
 import { DiscordWidget } from "../common/DiscordWidget";
+import { Report } from "../common/Report";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
   return (
@@ -56,10 +57,12 @@ function Info({ resource }: { resource: any }) {
         <h2 className="font-bold text-2xl">{resource.title}</h2>
 
         <p>{resource.subtitle}</p>
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-muted-foreground flex flex-row">
           {toTitleCase(
             PLUGIN_CATEGORY[resource.category || PLUGIN_CATEGORY.MISC]
           )}
+          {/* Report Button */}
+          <Report item={resource} />
         </div>
       </CardHeader>
       <CardContent className="relative px-3 grid gap-3">

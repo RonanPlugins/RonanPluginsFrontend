@@ -1,4 +1,4 @@
-import { enumToArray } from "@/utils/enum";
+import { enumToArray, getEnumValue } from "@/utils/enum";
 import { toTitleCase } from "@/utils/formatter";
 import { DiscordTutorial } from "../common/DiscordTutorial";
 import { TextEditor } from "@/components/textEditor/TextEditor";
@@ -9,6 +9,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { SERVER_CATEGORY } from "minecentral-api";
 import { useCreateServerContext } from "@/context/CreateServerContext";
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/context/MultiSelector";
 
 export function ServerCreateTitle() {
   const { title, set_title } = useCreateServerContext();
@@ -66,7 +74,7 @@ export function ServerCreateAddress() {
       <section className="flex flex-col space-y-3 col-span-1">
         <Label>Server Port</Label>
         <Input
-          placeholder="33125"
+          placeholder="25565"
           value={port || ""}
           onChange={(e: any) => {
             set_port(e.target.value);
@@ -78,34 +86,34 @@ export function ServerCreateAddress() {
 }
 
 export function ServerCreateCategory() {
-  const { category, set_category } = useCreateServerContext();
+  const { categories, set_categories } = useCreateServerContext();
 
   return (
     <div className="flex flex-col space-y-3">
-      <Label>Category</Label>
+      <Label>Related Categories</Label>
 
       <div className="flex flex-row flex-wrap justify-center">
-        <Select onValueChange={(val: any) => set_category(val)}>
-          <SelectTrigger className="border-secondary text-muted-foreground">
-            {toTitleCase(category) || "Choose Category..."}
-          </SelectTrigger>
-          <SelectContent>
-            {enumToArray(SERVER_CATEGORY) //Filter out Number values (typescript stuff)
-              .map((type: any) => {
-                // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
-                return (
-                  <SelectItem
-                    key={type}
-                    value={type}
-                    // variant={category === type ? "special" : "secondary"}
-                    className="mb-2 mx-1 rounded-xl max-w-36 w-full"
-                  >
-                    {toTitleCase(type)}
-                  </SelectItem>
-                );
-              })}
-          </SelectContent>
-        </Select>
+        <MultiSelector
+          values={categories || []}
+          onValuesChange={set_categories}
+        >
+          <MultiSelectorTrigger className="border-secondary">
+            <MultiSelectorInput placeholder="Choose categories..." />
+          </MultiSelectorTrigger>
+          <MultiSelectorContent>
+            <MultiSelectorList>
+              {Object.values(SERVER_CATEGORY)
+                .reverse()
+                .map((filter) => {
+                  return (
+                    <MultiSelectorItem key={filter} value={filter}>
+                      {getEnumValue(SERVER_CATEGORY, filter)}
+                    </MultiSelectorItem>
+                  );
+                })}
+            </MultiSelectorList>
+          </MultiSelectorContent>
+        </MultiSelector>
       </div>
     </div>
   );

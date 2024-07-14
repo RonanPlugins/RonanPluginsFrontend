@@ -98,7 +98,7 @@ export function Resources() {
         </div>
 
         {/* Main Panel */}
-        <div className="w-full lg:max-w-6xl space-y-2">
+        <div className="w-full lg:max-w-6xl space-y-2 lg:space-y-0">
           {/* Search Bar */}
           <SearchBar />
           {/* Pagination */}

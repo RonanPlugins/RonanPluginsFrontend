@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { SERVER_CATEGORY } from "minecentral-api";
 
 type CreateServerPropsType = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive
@@ -14,8 +13,8 @@ interface CreateServerProps {
   subtitle: string | null;
   set_subtitle: React.Dispatch<React.SetStateAction<string | null>>;
   // Category
-  category: SERVER_CATEGORY | null;
-  set_category: React.Dispatch<React.SetStateAction<SERVER_CATEGORY | null>>;
+  categories: string[] | null;
+  set_categories: React.Dispatch<React.SetStateAction<string[] | null>>;
   // Description
   description: string | null;
   set_description: React.Dispatch<React.SetStateAction<string | null>>;
@@ -53,7 +52,7 @@ export const useCreateServerContext = () => {
 export const CreateServer_Context = ({ children }: CreateServerPropsType) => {
   const [title, set_title] = useState<string | null>(null);
   const [subtitle, set_subtitle] = useState<string | null>(null);
-  const [category, set_category] = useState<SERVER_CATEGORY | null>(null);
+  const [categories, set_categories] = useState<string[] | null>(null);
   const [description, set_description] = useState<string | null>(null);
   const [address, set_address] = useState<string | null>(null);
   const [port, set_port] = useState<string | null>(null);
@@ -85,8 +84,8 @@ export const CreateServer_Context = ({ children }: CreateServerPropsType) => {
         port,
         set_port,
         // Category
-        category,
-        set_category,
+        categories,
+        set_categories,
         // Description
         description,
         set_description,

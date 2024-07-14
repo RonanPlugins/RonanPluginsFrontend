@@ -10,6 +10,7 @@ import {
 } from "../ui/tooltip";
 import PremiumIcon from "../common/PremiumIcon";
 import { Card } from "../ui/card";
+import { TooltipWidget } from "../common/TooltipWidget";
 
 export function ResourcePreview({ resource }: { resource: any }) {
   // console.log(resource);
@@ -95,16 +96,9 @@ function LayoutGallery({ resource }: { resource: any }) {
         {/* Last Updated */}
         <dl className="flex flex-row justify-end">
           <dt className="mr-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Clock8Icon size={16} aria-label="last updated" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Last Updated</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <TooltipWidget tooltip="Last Updated!!!">
+              <Clock8Icon size={16} aria-label="last updated" />
+            </TooltipWidget>
           </dt>
           <dd className="hover:underline">
             <Link to={`../resource/${resource._id}`}>
@@ -144,16 +138,9 @@ function Updated({ resource }: { resource: any }) {
   return (
     <dl className={`flex flex-row justify-end`}>
       <dt className="mr-1">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Clock8Icon size={16} aria-label="last updated" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Last Updated</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <TooltipWidget tooltip="Last Updated">
+          <Clock8Icon size={16} aria-label="last updated" />
+        </TooltipWidget>
       </dt>
       <dd className="hover:underline">
         <Link to={`../resource/${resource._id}`}>

@@ -68,7 +68,7 @@ function Loader({ resource }: { resource: any }) {
     set_subtitle,
     set_description,
     set_tags,
-    set_category,
+    set_categories: set_category,
     set_language,
     set_linkSource,
     set_linkSupport,
@@ -112,7 +112,7 @@ function SubmitEdit({ resource }: { resource: any }) {
     file,
     releaseVersion,
     supportVersions,
-    category,
+    categories: category,
     description,
     //Optional
     language,
@@ -199,7 +199,7 @@ function Listener() {
     file,
     releaseVersion,
     supportVersions,
-    category,
+    categories: category,
     description,
     //Optional
     language,

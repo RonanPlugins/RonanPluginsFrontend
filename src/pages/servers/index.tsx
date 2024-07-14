@@ -2,12 +2,14 @@ import server from "@/api/server";
 import { FilterClear_Server } from "@/components/filters/FilterClear";
 import { FilterPerPage } from "@/components/filters/FilterPerPage";
 import { FilterSearch } from "@/components/filters/FilterSearch";
+import { FilterCategory_Server } from "@/components/filters/servers/FilterCategory_Server";
 import { ServerPreview } from "@/components/server/Preview";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFilterContext_Common } from "@/context/FilterContext_Common";
 import { useFilterContext_Server } from "@/context/FilterContext_Server";
 import { useUserContext } from "@/context/UserContext";
+import useDebounce from "@/hooks/useDebounce";
 import Links from "@/lib/Links";
 import usePageTitle from "@/utils/usePageTitle";
 import { Filter } from "lucide-react";
@@ -30,6 +32,7 @@ export function Servers() {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [servers, setServers] = useState<any[] | null>(null);
   const [totalServers, setTotalServers] = useState<number>(0);
+  const deboucedSearchFilter = useDebounce(filter_search);
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalServers / page_amount));
@@ -39,7 +42,7 @@ export function Servers() {
   useEffect(() => {
     getServers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter_sort, page, filter_search]);
+  }, [filter_sort, page, deboucedSearchFilter]);
 
   async function getServers() {
     setLoading(true);
@@ -75,7 +78,7 @@ export function Servers() {
         </div>
 
         {/* Main Panel */}
-        <div className="w-full lg:max-w-6xl space-y-2">
+        <div className="w-full lg:max-w-6xl space-y-2 lg:space-y-0">
           {/* Search Bar */}
           <SearchBar />
           {/* Pagination */}
@@ -183,7 +186,7 @@ function Sidebar() {
       <div className="lg:hidden mx-2">
         <h2 className="font-bold">Category</h2>
         <div className="flex flex-row flex-wrap mx-auto w-full justify-center pb-2 space-x-1">
-          {/* <FilterCategory_Resource className="mt-1" variant={"outline"} /> */}
+          <FilterCategory_Server className="mt-1" variant={"outline"} />
         </div>
       </div>
       {/* Loader */}

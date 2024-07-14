@@ -22,14 +22,6 @@ interface FilterContextProps {
   setFilter_category: React.Dispatch<
     React.SetStateAction<PLUGIN_CATEGORY | null>
   >;
-  //Proxy
-  filter_proxy: PLUGIN_PROXY[] | null;
-  setFilter_proxy: React.Dispatch<React.SetStateAction<PLUGIN_PROXY[] | null>>;
-  //Loader
-  filter_loader: PLUGIN_LOADER[] | null;
-  setFilter_loader: React.Dispatch<
-    React.SetStateAction<PLUGIN_LOADER[] | null>
-  >;
 }
 
 const FilterContext_Resource = createContext<FilterContextProps | null>(null);
@@ -53,10 +45,6 @@ export const Filter_Resource = ({ children }: FilterProps) => {
   );
   const [filter_category, setFilter_category] =
     useState<PLUGIN_CATEGORY | null>(null);
-  const [filter_proxy, setFilter_proxy] = useState<PLUGIN_PROXY[] | null>(null);
-  const [filter_loader, setFilter_loader] = useState<PLUGIN_LOADER[] | null>(
-    null
-  );
 
   return (
     <Filter_Common>
@@ -71,12 +59,6 @@ export const Filter_Resource = ({ children }: FilterProps) => {
           //Categories
           filter_category,
           setFilter_category,
-          //Proxy
-          filter_proxy,
-          setFilter_proxy,
-          //Loader
-          filter_loader,
-          setFilter_loader,
         }}
       >
         {children}

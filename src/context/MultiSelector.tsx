@@ -23,6 +23,7 @@ type MultiSelectorProps = {
   values: string[];
   onValuesChange: (value: string[]) => void;
   loop?: boolean;
+  maxItems?: number; //Maximum amount of selected items
 } & React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
 interface MultiSelectContextProps {
@@ -34,6 +35,7 @@ interface MultiSelectContextProps {
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   activeIndex: number;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+  maxItems: number;
 }
 
 const MultiSelectContext = createContext<MultiSelectContextProps | null>(null);
@@ -50,6 +52,7 @@ const MultiSelector = ({
   values: value,
   onValuesChange: onValueChange,
   loop = false,
+  maxItems = 5, // Default maxItems to 5
   className,
   children,
   dir,
@@ -64,7 +67,9 @@ const MultiSelector = ({
       if (value.includes(val)) {
         onValueChange(value.filter((item) => item !== val));
       } else {
-        onValueChange([...value, val]);
+        if (maxItems < 0 || value.length < maxItems) {
+          onValueChange([...value, val]);
+        }
       }
     },
     [value]
@@ -134,6 +139,7 @@ const MultiSelector = ({
         setInputValue,
         activeIndex,
         setActiveIndex,
+        maxItems,
       }}
     >
       <Command
@@ -176,7 +182,7 @@ const MultiSelectorTrigger = forwardRef<
           key={item}
           className={cn(
             "px-1 rounded-xl flex items-center gap-1",
-            activeIndex === index && "ring-2 ring-muted-foreground "
+            activeIndex === index && "ring-2 ring-muted-foreground"
           )}
           variant={"default"}
         >
@@ -268,7 +274,12 @@ const MultiSelectorItem = forwardRef<
     typeof CommandPrimitive.Item
   >
 >(({ className, value, children, ...props }, ref) => {
-  const { value: Options, onValueChange, setInputValue } = useMultiSelect();
+  const {
+    value: Options,
+    onValueChange,
+    setInputValue,
+    maxItems,
+  } = useMultiSelect();
 
   const mousePreventDefault = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -276,19 +287,23 @@ const MultiSelectorItem = forwardRef<
   }, []);
 
   const isIncluded = Options.includes(value);
+  const isDisabled = !isIncluded && maxItems > 0 && Options.length >= maxItems; // Disable if maxItems is reached
+
   return (
     <CommandItem
       ref={ref}
       {...props}
       onSelect={() => {
-        onValueChange(value);
-        setInputValue("");
+        if (!isDisabled) {
+          onValueChange(value);
+          setInputValue("");
+        }
       }}
       className={cn(
         "rounded-xl cursor-pointer px-2 py-1 transition-colors flex justify-between ",
         className,
         isIncluded && "opacity-50 cursor-default",
-        props.disabled && "opacity-50 cursor-not-allowed"
+        (isDisabled || props.disabled) && "opacity-50 cursor-not-allowed"
       )}
       onMouseDown={mousePreventDefault}
     >

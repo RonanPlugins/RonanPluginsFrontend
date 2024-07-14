@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 
 type CreateResourcePropsType = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive
@@ -17,16 +16,14 @@ interface CreateResourceProps {
   file: any;
   set_file: React.Dispatch<React.SetStateAction<any>>;
   // Release Version
-  releaseVersion: PLUGIN_VERSION | null;
-  set_releaseVersion: React.Dispatch<
-    React.SetStateAction<PLUGIN_VERSION | null>
-  >;
+  releaseVersion: string | null;
+  set_releaseVersion: React.Dispatch<React.SetStateAction<string | null>>;
   // Supported Versions
   supportVersions: string[] | null;
   set_supportVersions: React.Dispatch<React.SetStateAction<string[] | null>>;
   // Category
-  category: PLUGIN_CATEGORY | null;
-  set_category: React.Dispatch<React.SetStateAction<PLUGIN_CATEGORY | null>>;
+  categories: string[] | null;
+  set_categories: React.Dispatch<React.SetStateAction<string[] | null>>;
   // Description
   description: string | null;
   set_description: React.Dispatch<React.SetStateAction<string | null>>;
@@ -67,13 +64,11 @@ export const CreateResource_Context = ({
   const [title, set_title] = useState<string | null>(null);
   const [subtitle, set_subtitle] = useState<string | null>(null);
   const [file, set_file] = useState<any>();
-  const [releaseVersion, set_releaseVersion] = useState<PLUGIN_VERSION | null>(
-    null
-  );
+  const [releaseVersion, set_releaseVersion] = useState<string | null>(null);
   const [supportVersions, set_supportVersions] = useState<string[] | null>(
     null
   );
-  const [category, set_category] = useState<PLUGIN_CATEGORY | null>(null);
+  const [categories, set_categories] = useState<string[] | null>(null);
   const [description, set_description] = useState<string | null>(null);
   //Optional
   const [language, set_language] = useState<string | null>(null);
@@ -85,7 +80,7 @@ export const CreateResource_Context = ({
   function getFieldsIncomplete() {
     //Return a list of fields that are incomplete
 
-    return [title, subtitle, supportVersions, category, description].filter(
+    return [title, subtitle, supportVersions, categories, description].filter(
       (val) => !val
     );
   }
@@ -109,8 +104,8 @@ export const CreateResource_Context = ({
         supportVersions,
         set_supportVersions,
         // Category
-        category,
-        set_category,
+        categories,
+        set_categories,
         // Description
         description,
         set_description,

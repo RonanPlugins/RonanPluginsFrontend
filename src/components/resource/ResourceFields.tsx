@@ -1,4 +1,3 @@
-import { enumToArray } from "@/utils/enum";
 import { toTitleCase } from "@/utils/formatter";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 import { DiscordTutorial } from "../common/DiscordTutorial";
@@ -8,7 +7,6 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateResourceContext } from "@/context/CreateResourceContext";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import {
   MultiSelector,
   MultiSelectorContent,
@@ -17,6 +15,7 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from "@/context/MultiSelector";
+import { getEnumValue } from "@/utils/enum";
 
 export function ResourceCreateTitle() {
   const { title, set_title } = useCreateResourceContext();
@@ -100,34 +99,34 @@ export function ResourceCreateReleaseVersion() {
 }
 
 export function ResourceCreateCategory() {
-  const { category, set_category } = useCreateResourceContext();
+  const { categories, set_categories } = useCreateResourceContext();
 
   return (
     <div className="flex flex-col space-y-3">
-      <Label>Category</Label>
+      <Label>Related Categories</Label>
 
       <div className="flex flex-row flex-wrap justify-center">
-        <Select onValueChange={(val: any) => set_category(val)}>
-          <SelectTrigger className="border-secondary text-muted-foreground">
-            {toTitleCase(category) || "Choose Category..."}
-          </SelectTrigger>
-          <SelectContent>
-            {enumToArray(PLUGIN_CATEGORY) //Filter out Number values (typescript stuff)
-              .map((type: any) => {
-                // const type = CATEGORY_PLUGIN[key as keyof typeof CATEGORY_PLUGIN];
-                return (
-                  <SelectItem
-                    key={type}
-                    value={type}
-                    // variant={category === type ? "special" : "secondary"}
-                    className="mb-2 mx-1 rounded-xl max-w-36 w-full"
-                  >
-                    {toTitleCase(type)}
-                  </SelectItem>
-                );
-              })}
-          </SelectContent>
-        </Select>
+        <MultiSelector
+          values={categories || []}
+          onValuesChange={set_categories}
+        >
+          <MultiSelectorTrigger className="border-secondary">
+            <MultiSelectorInput placeholder="Choose categories..." />
+          </MultiSelectorTrigger>
+          <MultiSelectorContent>
+            <MultiSelectorList>
+              {Object.values(PLUGIN_CATEGORY)
+                .reverse()
+                .map((filter) => {
+                  return (
+                    <MultiSelectorItem key={filter} value={filter}>
+                      {getEnumValue(PLUGIN_CATEGORY, filter)}
+                    </MultiSelectorItem>
+                  );
+                })}
+            </MultiSelectorList>
+          </MultiSelectorContent>
+        </MultiSelector>
       </div>
     </div>
   );
@@ -142,6 +141,7 @@ export function ResourceCreateSupportVersions() {
         <MultiSelector
           values={supportVersions || []}
           onValuesChange={set_supportVersions}
+          maxItems={-1}
         >
           <MultiSelectorTrigger className="border-secondary">
             <MultiSelectorInput placeholder="Choose versions..." />

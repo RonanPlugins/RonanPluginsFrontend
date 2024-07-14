@@ -33,7 +33,10 @@ export function FilterCategory_Resource({
                 filter_category?.toString() === type ? "special" : variant
               }
               className={`${className} rounded-xl`}
-              onClick={() => setFilter_category(type)}
+              onClick={() => {
+                if (filter_category === type) setFilter_category(null);
+                else setFilter_category(type);
+              }}
             >
               {toTitleCase(type)}
             </Button>

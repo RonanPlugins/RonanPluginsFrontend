@@ -19,14 +19,18 @@ import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
-import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
+import {
+  getEnumIndexByValue,
+  stringArrayToEnumIndexArray,
+  stringArrayToEnumValueArray,
+} from "@/utils/enum";
 import { ImportFromSpigot } from "@/components/resource/ImportFromSpigot";
 import { Separator } from "@radix-ui/react-select";
 
 export function ResourceCreate() {
   return (
     <CreateResource_Context>
-      <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF]">
+      <h1 className="scroll-m-20 text-5xl font-extrabold text-center mt-6 mb-2 text-[#14B8FF] drop-shadow-lg">
         New Resource
       </h1>
       <div className="grid gap-9 mx-auto my-3 max-w-6xl px-2">
@@ -55,7 +59,7 @@ function SubmitCreate() {
     file,
     releaseVersion,
     supportVersions,
-    category,
+    categories,
     description,
     //Optional
     language,
@@ -77,14 +81,15 @@ function SubmitCreate() {
       });
       return;
     }
-
-    const categoryNumber: number = getEnumIndexByKey(
+    const categoryList = stringArrayToEnumIndexArray(
       PLUGIN_CATEGORY,
-      category || PLUGIN_CATEGORY.MISC
+      categories
     );
-    const supportVersionsList: number[] | undefined = supportVersions?.map(
-      (key) => getEnumIndexByValue(PLUGIN_VERSION, key)
+    const supportVersionsList = stringArrayToEnumIndexArray(
+      PLUGIN_VERSION,
+      supportVersions
     );
+
     setPosting(true);
     toast.loading("Posting Resource...", {
       id: "create-resource",
@@ -96,7 +101,7 @@ function SubmitCreate() {
         title,
         subtitle,
         description,
-        category: categoryNumber,
+        category: categoryList,
         //Release
         file,
         version: releaseVersion,
@@ -155,7 +160,7 @@ function Listener() {
     file,
     releaseVersion,
     supportVersions,
-    category,
+    categories,
     description,
     //Optional
     language,
@@ -173,7 +178,7 @@ function Listener() {
           file,
           releaseVersion,
           supportVersions,
-          category,
+          categories,
           description,
           //Optional
           language,
@@ -200,7 +205,7 @@ function Listener() {
     file,
     releaseVersion,
     supportVersions,
-    category,
+    categories,
     description,
     //Optional
     language,
