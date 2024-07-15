@@ -2,12 +2,6 @@ import { ResourceImage } from "./Image";
 import { Link } from "react-router-dom";
 import date from "../../utils/date";
 import { Clock8Icon, Download } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 import PremiumIcon from "../common/PremiumIcon";
 import { Card } from "../ui/card";
 import { TooltipWidget } from "../common/TooltipWidget";

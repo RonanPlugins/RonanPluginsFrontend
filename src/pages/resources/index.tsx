@@ -21,6 +21,7 @@ import { FilterSort_Resource } from "@/components/filters/resources/FilterSort_R
 import { FilterVersion_Resource } from "@/components/filters/resources/FilterVersion_Resource";
 import useDebounce from "@/hooks/useDebounce";
 import { useFilterContext_Common } from "@/context/FilterContext_Common";
+import { Ads_ResourceList } from "@/components/common/Ads_ResourceList";
 
 export function Resources() {
   usePageTitle("Resources");
@@ -247,9 +248,14 @@ function ResourceList({
     <>
       {!loading || resources
         ? resources &&
-          resources.map((resource) => (
-            <ResourcePreview key={resource._id} resource={resource} />
-          ))
+          resources.map((resource, index) => {
+            return (
+              <div key={resource._id}>
+                <ResourcePreview resource={resource} />
+                {index > 0 && index % 5 === 0 && <Ads_ResourceList />}
+              </div>
+            );
+          })
         : Array.from({ length: amount }, (_, index) => (
             <LoadingResource key={index} />
           ))}
