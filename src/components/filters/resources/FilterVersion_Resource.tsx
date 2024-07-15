@@ -13,7 +13,11 @@ import { toTitleCase } from "@/utils/formatter";
 export const FilterVersion_Resource = () => {
   const { filter_versions, setFilter_versions } = useFilterContext_Resource();
   return (
-    <MultiSelector values={filter_versions} onValuesChange={setFilter_versions}>
+    <MultiSelector
+      values={filter_versions}
+      onValuesChange={setFilter_versions}
+      maxItems={-1}
+    >
       <MultiSelectorTrigger className="border-input">
         <MultiSelectorInput placeholder="Choose versions..." />
       </MultiSelectorTrigger>

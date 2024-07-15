@@ -92,7 +92,7 @@ export function Resources() {
       </div>
       {/* Main Div */}
       <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
-        <div className="w-full lg:max-w-80">
+        <div className="w-full lg:max-w-80 self-start sticky top-3">
           {/* Filters */}
           <Sidebar />
         </div>
@@ -152,7 +152,7 @@ function SearchBar() {
             className="relative mr-2"
           >
             <Filter className="pr-1" size={20} />
-            Filters
+            More Filters
             {!filter_show && isFiltering && (
               <span className="absolute -top-[5px] -right-[5px] flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-xl bg-accent opacity-75 z-9"></span>
@@ -250,7 +250,9 @@ function ResourceList({
           resources.map((resource) => (
             <ResourcePreview key={resource._id} resource={resource} />
           ))
-        : Array.from({ length: amount }, () => <LoadingResource />)}
+        : Array.from({ length: amount }, (_, index) => (
+            <LoadingResource key={index} />
+          ))}
     </>
   );
 }

@@ -47,7 +47,7 @@ export function getEnumIndexByValue(enumType: any, value: string): number {
   // Get the keys of the enum
   const enumKeys = Object.values(enumType).filter((key) => !isNaN(Number(key)));
   // Return the index of the value in the keys array
-  console.log(enumKeys);
+  // console.log(enumKeys);
   return enumKeys.indexOf(value);
 }
 

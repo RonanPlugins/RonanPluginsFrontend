@@ -1,12 +1,10 @@
-import { enumToArray, getEnumValue } from "@/utils/enum";
-import { toTitleCase } from "@/utils/formatter";
+import { getEnumValue } from "@/utils/enum";
 import { DiscordTutorial } from "../common/DiscordTutorial";
 import { TextEditor } from "@/components/textEditor/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { SERVER_CATEGORY } from "minecentral-api";
 import { useCreateServerContext } from "@/context/CreateServerContext";
 import {

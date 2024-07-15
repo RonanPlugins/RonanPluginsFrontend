@@ -66,9 +66,9 @@ export function Servers() {
 
   return (
     <>
-      {/* Resource Hot Category Bar */}
-      <div className="hidden lg:flex flex-row mx-auto w-full justify-center bg-primary pb-1 -mt-1 space-x-1">
-        {/* <FilterCategory /> */}
+      {/* Hot Category Bar */}
+      <div className="hidden lg:flex flex-row flex-wrap mx-auto w-full justify-center bg-primary pb-1 -mt-1">
+        <FilterCategory_Server />
       </div>
       {/* Main Div */}
       <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
@@ -236,8 +236,10 @@ function CreateServerButton() {
     <>
       {isLoggedIn ? (
         <Link to={Links.ServerNew}>
-          <Button className="w-full flex flex-col p-1">
+          <Button className="w-full flex flex-col h-auto p-1">
             <p>Add Your Server</p>
+
+            <p className="text-xs font-normal">get your server noticed</p>
           </Button>
         </Link>
       ) : (

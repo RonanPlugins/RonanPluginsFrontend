@@ -1,4 +1,4 @@
-import { enumToArray } from "@/utils/enum";
+import { enumToArray, getEnumValue } from "@/utils/enum";
 import { Button } from "../../ui/button";
 import { toTitleCase } from "@/utils/formatter";
 import { useFilterContext_Server } from "@/context/FilterContext_Server";
@@ -32,10 +32,10 @@ export function FilterCategory_Server({
               variant={
                 filter_category?.toString() === type ? "special" : variant
               }
-              className={`${className} rounded-xl`}
+              className={`${className} rounded-xl lg:px-2 xl:px-3`}
               onClick={() => setFilter_category(type)}
             >
-              {toTitleCase(type)}
+              {getEnumValue(SERVER_CATEGORY, type)}
             </Button>
           );
         })}

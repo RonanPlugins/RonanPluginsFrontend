@@ -58,9 +58,7 @@ function Info({ resource }: { resource: any }) {
 
         <p>{resource.subtitle}</p>
         <div className="text-sm text-muted-foreground flex flex-row">
-          {toTitleCase(
-            PLUGIN_CATEGORY[resource.category || PLUGIN_CATEGORY.MISC]
-          )}
+          {resource.category && toTitleCase(PLUGIN_CATEGORY[resource.category])}
           {/* Report Button */}
           <Report item={resource} />
         </div>
