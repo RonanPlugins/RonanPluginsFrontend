@@ -1,4 +1,5 @@
 import server from "@/api/server";
+import Pagination from "@/components/common/Pagination";
 import { FilterClear_Server } from "@/components/filters/FilterClear";
 import { FilterPerPage } from "@/components/filters/FilterPerPage";
 import { FilterSearch } from "@/components/filters/FilterSearch";
@@ -67,12 +68,12 @@ export function Servers() {
   return (
     <>
       {/* Hot Category Bar */}
-      <div className="hidden lg:flex flex-row flex-wrap mx-auto w-full justify-center bg-primary pb-1 -mt-1">
-        <FilterCategory_Server />
+      <div className="hidden lg:h-10 lg:flex flex-row mx-auto w-full items-center justify-center bg-card space-x-1">
+        <FilterCategory_Server className="!h-8" />
       </div>
       {/* Main Div */}
       <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
-        <div className="w-full lg:max-w-80">
+        <div className="w-full lg:max-w-80 self-start sticky top-14">
           {/* Filters */}
           <Sidebar />
         </div>
@@ -82,7 +83,7 @@ export function Servers() {
           {/* Search Bar */}
           <SearchBar />
           {/* Pagination */}
-          <PageBar pageTotal={totalPages} />
+          <PageBar className="mb-3" pageTotal={totalPages} />
           {/* Resource Preview List */}
           <div className="resources">
             <ServerList
@@ -90,29 +91,58 @@ export function Servers() {
               servers={servers}
               amount={page_amount}
             />
+            <ServerList
+              loading={loading}
+              servers={servers}
+              amount={page_amount}
+            />
+            <ServerList
+              loading={loading}
+              servers={servers}
+              amount={page_amount}
+            />
+            <ServerList
+              loading={loading}
+              servers={servers}
+              amount={page_amount}
+            />
+            <ServerList
+              loading={loading}
+              servers={servers}
+              amount={page_amount}
+            />
+            <ServerList
+              loading={loading}
+              servers={servers}
+              amount={page_amount}
+            />
           </div>
           {/* Pagination */}
-          <PageBar pageTotal={totalPages} />
+          <PageBar className="mt-3" pageTotal={totalPages} />
         </div>
       </main>
     </>
   );
 }
 
-function PageBar({ pageTotal }: { pageTotal: number }) {
-  // const { page, setPage } = useFilterResourceContext();
+function PageBar({
+  pageTotal,
+  className,
+}: {
+  pageTotal: number;
+  className: string;
+}) {
+  const { page, setPage } = useFilterContext_Common();
   if (pageTotal <= 1) return <></>;
   return (
-    <div className="w-full flex">
-      <div className="mx-auto">
-        {/* <Pagination
-          currentPage={page + 1}
-          totalPages={pageTotal}
-          onPageChange={(page) => {
-            setPage(page - 1);
-          }}
-        /> */}
-      </div>
+    <div className={`w-full flex mx-auto justify-center ${className}`}>
+      <Pagination
+        currentPage={page + 1}
+        totalPages={pageTotal}
+        onPageChange={(page) => {
+          setPage(page - 1);
+        }}
+      />
     </div>
   );
 }

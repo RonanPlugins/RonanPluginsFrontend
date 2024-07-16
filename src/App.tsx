@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Footer from "./components/main/Footer";
 import UserProvider from "./context/UserContext";
 import { Toaster } from "sonner";
+import ScrollButton from "./components/common/ScrollButton";
 
 // const client = new ApolloClient({
 //   uri: "/graphql",
@@ -20,6 +21,7 @@ function App() {
         <Outlet />
         <Footer />
         <Toaster richColors />
+        <ScrollButton />
       </ThemeProvider>
     </UserProvider>
   );

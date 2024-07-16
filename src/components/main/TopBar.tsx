@@ -15,32 +15,17 @@ export function TopBar() {
     location.pathname === Links.Register || location.pathname === Links.Login;
 
   return (
-    <>
-      <div className="flex relative flex-row max-w-5xl w-full px-2 items-center justify-between mx-auto">
-        <div>
-          <div className="absolute left-1/2 -translate-x-1/2 -top-2 h-28 w-48">
+    <div className="flex flex-col w-full gap-3 z-50 h-12 bg-primary">
+      <div className="w-full">
+        {/* Group links in a flex container with horizontal spacing */}
+        <nav className="max-w-6xl hidden md:flex w-full mx-auto flex-row px-3">
+          {/* <div className="h-16 w-32">
             <img
               src="assets/logo_full.png"
               className="object-cover object-center h-full w-full"
             />
-          </div>
-        </div>
-        {/* Login/Profile */}
-        <div className="flex flex-row gap-3 justify-self-end items-center">
-          <ModeToggle className="hidden md:flex" />
-          {isLoggedIn ? (
-            <Link to={Links.Profile}>
-              <ImageSmall url={user?.avatarURL} classname="h-10 hover:ring-4" />
-            </Link>
-          ) : (
-            !isSignInScreen && <LoginDialog />
-          )}
-        </div>
-      </div>
-      <div className="w-full pt-14">
-        {/* Group links in a flex container with horizontal spacing */}
-        <nav className="max-w-4xl hidden md:flex flex-col w-full mx-auto">
-          <div className="px-2 flex flex-row gap-1">
+          </div> */}
+          <div className="flex flex-row items-center -translate-x-3">
             {navItems.map((item) => {
               const activeNav =
                 item.list.filter((link) => location.pathname.includes(link))
@@ -48,15 +33,28 @@ export function TopBar() {
               return (
                 <NavItem
                   active={activeNav}
-                  className="rounded-t-lg"
+                  className="py-3 px-5 md:text-base transition-colors duration-200 ease-in-out font-bold text-secondary-foreground"
                   key={item.title}
                   {...item}
                 />
               );
             })}
           </div>
+          <div className="ml-auto flex flex-row gap-3 justify-self-end items-center">
+            <ModeToggle className="hidden md:flex" />
+            {isLoggedIn ? (
+              <Link to={Links.Profile}>
+                <ImageSmall
+                  url={user?.avatarURL}
+                  classname="h-10 hover:ring-4"
+                />
+              </Link>
+            ) : (
+              !isSignInScreen && <LoginDialog />
+            )}
+          </div>
         </nav>
       </div>
-    </>
+    </div>
   );
 }

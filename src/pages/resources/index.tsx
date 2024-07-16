@@ -54,9 +54,18 @@ export function Resources() {
     filter_sort,
     page,
     filter_versions,
+    page_amount,
     deboucedSearchFilter,
     filter_category,
   ]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   async function getResources() {
     setLoading(true);
@@ -88,22 +97,22 @@ export function Resources() {
   return (
     <>
       {/* Resource Hot Category Bar */}
-      <div className="hidden lg:flex flex-row mx-auto w-full justify-center bg-primary pb-1 -mt-1 space-x-1">
-        <FilterCategory_Resource />
+      <div className="hidden lg:h-10 lg:flex flex-row mx-auto w-full items-center justify-center bg-card space-x-1">
+        <FilterCategory_Resource className="!h-8" />
       </div>
       {/* Main Div */}
       <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
-        <div className="w-full lg:max-w-80 self-start sticky top-3">
+        <div className="w-full lg:max-w-80 self-start sticky top-14">
           {/* Filters */}
           <Sidebar />
         </div>
 
         {/* Main Panel */}
-        <div className="w-full lg:max-w-6xl space-y-2 lg:space-y-0">
+        <div className="w-full lg:max-w-6xl">
           {/* Search Bar */}
           <SearchBar />
           {/* Pagination */}
-          <PageBar pageTotal={totalPages} />
+          <PageBar className="mb-3" pageTotal={totalPages} />
           {/* Resource Preview List */}
           <div className="resources">
             <ResourceList
@@ -113,27 +122,31 @@ export function Resources() {
             />
           </div>
           {/* Pagination */}
-          <PageBar pageTotal={totalPages} />
+          <PageBar className="mt-3" pageTotal={totalPages} />
         </div>
       </main>
     </>
   );
 }
 
-function PageBar({ pageTotal }: { pageTotal: number }) {
+function PageBar({
+  pageTotal,
+  className,
+}: {
+  pageTotal: number;
+  className: string;
+}) {
   const { page, setPage } = useFilterContext_Common();
   if (pageTotal <= 1) return <></>;
   return (
-    <div className="w-full flex">
-      <div className="mx-auto">
-        <Pagination
-          currentPage={page + 1}
-          totalPages={pageTotal}
-          onPageChange={(page) => {
-            setPage(page - 1);
-          }}
-        />
-      </div>
+    <div className={`w-full flex mx-auto justify-center ${className}`}>
+      <Pagination
+        currentPage={page + 1}
+        totalPages={pageTotal}
+        onPageChange={(page) => {
+          setPage(page - 1);
+        }}
+      />
     </div>
   );
 }
