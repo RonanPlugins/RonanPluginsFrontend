@@ -43,7 +43,7 @@ export default function StripeJoin({
           Join Now
         </div> */}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Join Our Team of Premium Developers</DialogTitle>
           <DialogDescription asChild>

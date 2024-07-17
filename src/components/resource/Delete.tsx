@@ -33,7 +33,7 @@ export function ResourceDelete({ resource }: { resource: any }) {
             Delete
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>{resource.title}</DialogTitle>
             <DialogDescription>

@@ -46,7 +46,7 @@ export function ImageSmall({
 }) {
   return (
     <div
-      className={`flex-shrink-0 h-[58px] w-[58px] object-contain bg-muted p-1 rounded-full ${classname}`}
+      className={`flex-shrink-0 h-[44px] w-[44px] object-contain bg-muted p-1 rounded-full ${classname}`}
     >
       <img
         className="w-full h-full rounded-full"

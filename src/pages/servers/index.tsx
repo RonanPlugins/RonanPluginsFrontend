@@ -91,31 +91,6 @@ export function Servers() {
               servers={servers}
               amount={page_amount}
             />
-            <ServerList
-              loading={loading}
-              servers={servers}
-              amount={page_amount}
-            />
-            <ServerList
-              loading={loading}
-              servers={servers}
-              amount={page_amount}
-            />
-            <ServerList
-              loading={loading}
-              servers={servers}
-              amount={page_amount}
-            />
-            <ServerList
-              loading={loading}
-              servers={servers}
-              amount={page_amount}
-            />
-            <ServerList
-              loading={loading}
-              servers={servers}
-              amount={page_amount}
-            />
           </div>
           {/* Pagination */}
           <PageBar className="mt-3" pageTotal={totalPages} />
@@ -246,7 +221,7 @@ function ServerList({
   servers: any[] | null;
   amount: number;
 }) {
-  console.log(servers);
+  // console.log(servers);
   return (
     <div className="grid md:grid-cols-2 gap-3">
       {!loading || servers
@@ -254,7 +229,7 @@ function ServerList({
           servers.map((server) => (
             <ServerPreview key={server._id} server={server} />
           ))
-        : Array.from({ length: amount }, () => <LoadingServer />)}
+        : Array.from({ length: amount }, (_, i) => <LoadingServer key={i} />)}
     </div>
   );
 }

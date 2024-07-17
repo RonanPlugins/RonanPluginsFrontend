@@ -19,11 +19,7 @@ import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
-import {
-  getEnumIndexByValue,
-  stringArrayToEnumIndexArray,
-  stringArrayToEnumValueArray,
-} from "@/utils/enum";
+import { stringArrayToEnumIndexArray } from "@/utils/enum";
 import { ImportFromSpigot } from "@/components/resource/ImportFromSpigot";
 import { Separator } from "@radix-ui/react-select";
 

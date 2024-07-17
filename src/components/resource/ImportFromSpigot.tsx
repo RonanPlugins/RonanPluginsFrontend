@@ -98,6 +98,7 @@ export function ImportFromSpigot() {
           <Button className="ml-auto">{spigotButtonText}</Button>
         </DialogTrigger>
         <DialogContent>
+          <h2 className="text-2xl font-bold">Import From Spigot</h2>
           <Label>Spigot Resource Link</Label>
           <Input
             value={spigotResourceURL}

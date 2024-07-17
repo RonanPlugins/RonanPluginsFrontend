@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { CheckCircleIcon, FileWarning, ImageUpIcon } from "lucide-react";
-import Loading from "../common/Loading";
 import server from "@/api/server";
 
 export function ServerUploadIcon({ resource }: { resource: any }) {

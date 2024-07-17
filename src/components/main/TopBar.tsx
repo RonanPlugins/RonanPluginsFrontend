@@ -46,7 +46,7 @@ export function TopBar() {
               <Link to={Links.Profile}>
                 <ImageSmall
                   url={user?.avatarURL}
-                  classname="h-10 hover:ring-4"
+                  classname="h-10 hover:ring-2"
                 />
               </Link>
             ) : (

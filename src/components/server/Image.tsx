@@ -29,8 +29,8 @@ export function ServerImage({
           src={`${import.meta.env.VITE_IMAGES_URL}${image}`}
         />
       ) : (
-        <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-primary text-xl">
-          {extractInitials(server.title)}
+        <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-primary">
+          <p className="text-3xl font-bold">{extractInitials(server.title)}</p>
         </div>
       )}
     </div>
