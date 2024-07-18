@@ -64,7 +64,7 @@ export const CreateServer_Context = ({ children }: CreateServerPropsType) => {
   function getFieldsIncomplete() {
     //Return a list of fields that are incomplete
 
-    return [title, subtitle, category, description, address, port].filter(
+    return [title, subtitle, categories, description, address].filter(
       (val) => !val
     );
   }

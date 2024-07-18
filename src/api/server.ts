@@ -12,16 +12,8 @@ export default {
         return null;
       });
   },
-  create(data: any): Promise<any> {
-    return backendApi
-      .post(`/server`, data)
-      .then(({ data }) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-        return null;
-      });
+  create(data: any) {
+    return backendApi.post(`/server`, data);
   },
   getStatus(address: string): Promise<any> {
     return mcstatusioAPI

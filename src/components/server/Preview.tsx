@@ -71,8 +71,14 @@ function LayoutList({
                 ) : (
                   <>
                     <Users size={20} />
-                    {status ? status.players.online : 0}/
-                    {status ? status.players.max : 0}
+                    {status && status.players ? (
+                      <>
+                        {status ? status.players.online : 0}/
+                        {status ? status.players.max : 0}
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </>
                 )}
               </div>
@@ -80,7 +86,9 @@ function LayoutList({
             <p className="text-sm md:text-base">{server.subtitle}</p>
             <div className="mt-3 flex flex-row justify-between items-center">
               <p>
-                {toCaps(server.address)}:{toCaps(server.port)}
+                {`${toCaps(server.address)}${
+                  server.port ? ":" + toCaps(server.port) : ""
+                }`}
               </p>
               <CopyServerIP server={server} />
             </div>

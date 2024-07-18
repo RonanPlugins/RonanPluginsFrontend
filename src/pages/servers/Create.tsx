@@ -99,11 +99,18 @@ function SubmitCreate() {
         tags,
       })
       .then((data: any) => {
-        if (data) {
-          console.log("New Resource created:", data);
-          navigate(`/server/${data.id}`);
-          toast.success("Server Posted!", {
-            icon: <CheckIcon />,
+        console.log("New Resource created:", data);
+        navigate(`/server/${data.id}`);
+        toast.success("Server Posted!", {
+          icon: <CheckIcon />,
+          id: "create-server",
+          duration: 3000,
+        });
+      })
+      .catch((err) => {
+        if (err.response && err.response.data) {
+          toast.error("Error! Server already exists!", {
+            icon: <AlertCircleIcon />,
             id: "create-server",
             duration: 3000,
           });
@@ -113,10 +120,7 @@ function SubmitCreate() {
             id: "create-server",
             duration: 3000,
           });
-          // setPosting(false);
-          // setDescriptionError("An error has occured!");
         }
-        // });
       })
       .finally(() => {
         setPosting(false);
