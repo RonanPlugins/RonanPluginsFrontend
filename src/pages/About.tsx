@@ -53,6 +53,81 @@ export default function About() {
           src="./assets/homethingy.png"
         ></img>
       </div>
+      <section className="shadow-lg rounded-lg p-6 mb-8 grow w-full">
+        <h2 className="text-2xl font-semibold mb-4">About Us</h2>
+        <p className="text-lg mb-6">
+          Welcome to MineCentral! We're passionate about Minecraft and dedicated
+          to bringing the best resources to the Minecraft community. Our
+          platform is your go-to destination for everything Minecraft-related,
+          whether you're a server owner, plugin developer, or just a player
+          looking for exciting new experiences.
+        </p>
+
+        <h3 className="text-xl font-semibold mb-3">What We Offer</h3>
+        <ul className="list-disc list-inside mb-6 space-y-2">
+          <li>
+            <strong>Plugin/Resource Repository:</strong> Discover a vast
+            collection of Minecraft plugins and resources, carefully curated and
+            categorized for your convenience. Upload your own creations or
+            download the latest tools to enhance your gameplay.
+          </li>
+          <li>
+            <strong>Server Discovery:</strong> Find the perfect Minecraft server
+            to join or showcase your own. Our advanced filtering algorithm
+            ensures you can easily search for servers based on your preferences
+            and interests.
+          </li>
+          <li>
+            <strong>Premium Resources:</strong> Take your Minecraft experience
+            to the next level with premium resources. Create, buy, or sell
+            high-quality content that stands out and adds unique value to the
+            community.
+          </li>
+        </ul>
+
+        <h3 className="text-xl font-semibold mb-3">Our Mission</h3>
+        <p className="text-lg mb-6">
+          We aim to foster a thriving Minecraft community by providing a
+          platform that connects creators and players. Our goal is to make it
+          easy for you to find and share the best Minecraft content, whether
+          it's a plugin that adds new features, a resource that enhances your
+          server, or a server that offers a great new adventure.
+        </p>
+
+        <h3 className="text-xl font-semibold mb-3">Why Choose Us?</h3>
+        <ul className="list-disc list-inside mb-6 space-y-2">
+          <li>
+            <strong>User-Friendly Interface:</strong> Our site is designed with
+            you in mind, making it easy to navigate, upload, and find what
+            you're looking for.
+          </li>
+          <li>
+            <strong>Robust Filtering:</strong> Our advanced algorithms ensure
+            you find exactly what you need quickly and efficiently.
+          </li>
+          <li>
+            <strong>Community-Centric:</strong> We value our community and
+            strive to support creators and players alike with a platform that
+            meets their needs.
+          </li>
+        </ul>
+
+        <p className="text-lg">
+          Thank you for visiting MineCentral.net. We’re excited to have you join
+          our community and look forward to seeing the amazing contributions
+          you'll bring to the Minecraft universe!
+        </p>
+        <p className="text-lg mt-4">
+          Feel free to reach out with any questions or suggestions. Happy
+          mining!
+        </p>
+
+        <footer className="mt-8 text-center text-gray-600">
+          <p>
+            <strong>- The MineCentral Team</strong>
+          </p>
+        </footer>
+      </section>
       <div className="pt-20 bg-gray-100 dark:bg-secondary w-full p-3 flex flex-row flex-wrap gap-[90px] mt-[30px] justify-center text-center align-middle min-h-[300px] h-auto">
         {Features.map((feature) => {
           return (

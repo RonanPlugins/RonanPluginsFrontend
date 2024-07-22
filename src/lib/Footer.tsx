@@ -2,7 +2,7 @@ import { Instagram, Twitter, Youtube } from "lucide-react";
 import Messages from "./Messages";
 
 export default class Footer {
-  static CopyrightText = `© 2024 ${Messages.BrandName}. All rights reserved`;
+  static CopyrightText = `© 2024 ${Messages.BrandName}. Not affiliated with Microsoft, Mojang AB, or Minecraft.`;
   static LogoPath = "/assets/favicon_512x512.png";
 
   static Links = [

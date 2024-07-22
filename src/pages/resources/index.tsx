@@ -101,14 +101,14 @@ export function Resources() {
         <FilterCategory_Resource className="!h-8" />
       </div>
       {/* Main Div */}
-      <main className="max-w-6xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
+      <main className="max-w-7xl mx-auto p-3 flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0">
         <div className="w-full lg:max-w-80 self-start sticky top-14">
           {/* Filters */}
           <Sidebar />
         </div>
 
         {/* Main Panel */}
-        <div className="w-full lg:max-w-6xl">
+        <div className="w-full">
           {/* Search Bar */}
           <SearchBar />
           {/* Pagination */}
