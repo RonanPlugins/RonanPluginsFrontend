@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useFilterContext_Common } from "@/context/FilterContext_Common";
 
-export const FilterSearch = () => {
+export const FilterSearch = ({ text }: { text: string }) => {
   const { filter_search, setFilter_search } = useFilterContext_Common();
   return (
     <div className="w-full relative h-10">
@@ -12,7 +12,7 @@ export const FilterSearch = () => {
       />
       <Input
         type="text"
-        placeholder="Search resources..."
+        placeholder={text}
         className="pl-10 pr-3 text-md w-full border-0"
         value={filter_search || ""}
         onChange={(e) => {

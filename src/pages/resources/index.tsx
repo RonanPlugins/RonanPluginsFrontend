@@ -11,11 +11,7 @@ import { FilterSearch } from "@/components/filters/FilterSearch";
 import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import { FilterClear_Resource } from "@/components/filters/FilterClear";
 import { FilterPerPage } from "@/components/filters/FilterPerPage";
-import {
-  getEnumIndex,
-  getEnumIndexByKey,
-  getEnumIndexByValue,
-} from "@/utils/enum";
+import { getEnumIndex, getEnumIndexByValue } from "@/utils/enum";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 import { Link } from "react-router-dom";
 import Links from "@/lib/Links";
@@ -179,7 +175,7 @@ function SearchBar() {
             )}
           </Button>
           {/* Search */}
-          <FilterSearch />
+          <FilterSearch text="Search resources..." />
         </div>
 
         {/* Sort */}
@@ -204,7 +200,7 @@ function Sidebar() {
         <CreateResourceButton />
         <div className="flex flex-row grow">
           {/* Search */}
-          <FilterSearch />
+          <FilterSearch text="Search resources..." />
         </div>
         {/* Sort */}
         <div className="grow min-w-48">

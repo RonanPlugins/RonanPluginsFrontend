@@ -153,7 +153,7 @@ function SearchBar() {
             )}
           </Button>
           {/* Search */}
-          <FilterSearch />
+          <FilterSearch text="Search servers..." />
         </div>
 
         {/* Sort */}
@@ -178,7 +178,7 @@ function Sidebar() {
         <CreateServerButton />
         <div className="flex flex-row grow">
           {/* Search */}
-          <FilterSearch />
+          <FilterSearch text="Search servers..." />
         </div>
         {/* Sort */}
         <div className="grow min-w-48">{<FilterSort_Server />}</div>
