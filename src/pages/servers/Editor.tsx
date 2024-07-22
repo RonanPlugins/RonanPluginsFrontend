@@ -178,8 +178,13 @@ function SubmitEdit({ server }: { server: any }) {
 
   return (
     <div className="w-full flex">
-      <Button className="mx-auto" variant="special" onClick={handleEditPost}>
-        {posting ? <Loading /> : `Update Resource`}
+      <Button
+        className="mx-auto"
+        variant="special"
+        onClick={handleEditPost}
+        disabled={posting}
+      >
+        Update Server
       </Button>
     </div>
   );
