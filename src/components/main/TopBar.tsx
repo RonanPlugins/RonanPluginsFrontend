@@ -19,12 +19,6 @@ export function TopBar() {
       <div className="w-full">
         {/* Group links in a flex container with horizontal spacing */}
         <nav className="max-w-6xl hidden md:flex w-full mx-auto flex-row px-3">
-          {/* <div className="h-16 w-32">
-            <img
-              src="assets/logo_full.png"
-              className="object-cover object-center h-full w-full"
-            />
-          </div> */}
           <div className="flex flex-row items-center -translate-x-3">
             {navItems.map((item) => {
               const activeNav =
@@ -39,6 +33,14 @@ export function TopBar() {
                 />
               );
             })}
+          </div>
+          <div className="h-12 py-1 absolute left-1/2 -translate-x-1/2">
+            <Link to={Links.About}>
+              <img
+                src="assets/logo_full.png"
+                className="object-cover object-center h-full w-full"
+              />
+            </Link>
           </div>
           <div className="ml-auto flex flex-row gap-3 justify-self-end items-center">
             <ModeToggle className="hidden md:flex" />
