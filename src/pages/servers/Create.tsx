@@ -104,7 +104,7 @@ function SubmitCreate() {
       })
       .then((data: any) => {
         console.log("New Resource created:", data);
-        navigate(`/server/${data.id}`);
+        navigate(`/server/${data.data.id}`);
         toast.success("Server Posted!", {
           icon: <CheckIcon />,
           id: "create-server",
