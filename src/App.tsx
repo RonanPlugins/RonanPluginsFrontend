@@ -18,7 +18,9 @@ function App() {
     <UserProvider>
       <ThemeProvider defaultTheme="dark" storageKey="theme">
         <Nav />
-        <Outlet />
+        <main className="min-h-screen">
+          <Outlet />
+        </main>
         <Footer />
         <Toaster richColors />
         <ScrollButton />

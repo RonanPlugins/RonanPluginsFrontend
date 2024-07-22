@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import resourceAPI from "@/api/resource";
 import { CheckCircleIcon, FileWarning, ImageUpIcon } from "lucide-react";
-import Loading from "../common/Loading";
 
 export function ResourceUploadIcon({ resource }: { resource: any }) {
   const [file, set_file] = useState<File | null>(null);
@@ -16,8 +15,12 @@ export function ResourceUploadIcon({ resource }: { resource: any }) {
   function uploadIcon() {
     if (!file) return;
     set_uploading(true);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
     resourceAPI
-      .editIcon(resource._id, file)
+      .editIcon(resource._id, formData)
       .then((data) => {
         if (data) {
           toast("New Icon Uploaded!", { icon: <CheckCircleIcon /> });

@@ -1,6 +1,5 @@
 import { enumToArray, getEnumValue } from "@/utils/enum";
 import { Button } from "../../ui/button";
-import { toTitleCase } from "@/utils/formatter";
 import { useFilterContext_Server } from "@/context/FilterContext_Server";
 import { SERVER_CATEGORY } from "minecentral-api";
 

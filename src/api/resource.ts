@@ -27,7 +27,7 @@ export default {
         return null;
       });
   },
-  editIcon(id: string, icon: File): Promise<any> {
+  editIcon(id: string, icon: FormData): Promise<any> {
     return backendApi
       .put(`/resource/${id}/icon`, icon)
       .then(({ data }) => {

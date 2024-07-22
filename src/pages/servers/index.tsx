@@ -4,6 +4,7 @@ import { FilterClear_Server } from "@/components/filters/FilterClear";
 import { FilterPerPage } from "@/components/filters/FilterPerPage";
 import { FilterSearch } from "@/components/filters/FilterSearch";
 import { FilterCategory_Server } from "@/components/filters/servers/FilterCategory_Server";
+import { FilterSort_Server } from "@/components/filters/servers/FilterSort_Server";
 import { ServerPreview } from "@/components/server/Preview";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,8 +13,10 @@ import { useFilterContext_Server } from "@/context/FilterContext_Server";
 import { useUserContext } from "@/context/UserContext";
 import useDebounce from "@/hooks/useDebounce";
 import Links from "@/lib/Links";
+import { getEnumIndex } from "@/utils/enum";
 import usePageTitle from "@/utils/usePageTitle";
 import { Filter } from "lucide-react";
+import { SERVER_CATEGORY } from "minecentral-api";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -25,6 +28,7 @@ export function Servers() {
     page,
     page_amount,
     filter_search,
+    filter_category,
     setFilterParams,
     setPage,
   } = useFilterContext_Server();
@@ -43,7 +47,7 @@ export function Servers() {
   useEffect(() => {
     getServers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter_sort, page, deboucedSearchFilter]);
+  }, [filter_sort, page, deboucedSearchFilter, filter_category]);
 
   async function getServers() {
     setLoading(true);
@@ -55,6 +59,9 @@ export function Servers() {
       page,
       count: page_amount,
       search: filter_search,
+      category: filter_category
+        ? getEnumIndex(SERVER_CATEGORY, filter_category)
+        : null,
     });
     setTotalServers(posts.totalCount);
     setServers(posts.servers);
@@ -174,7 +181,7 @@ function Sidebar() {
           <FilterSearch />
         </div>
         {/* Sort */}
-        <div className="grow min-w-48">{/* <FilterSort_Resource /> */}</div>
+        <div className="grow min-w-48">{<FilterSort_Server />}</div>
         <div className="flex flex-row items-center">
           <div className="w-16">
             <FilterPerPage />

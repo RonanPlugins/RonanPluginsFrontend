@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import serverAPI from "@/api/server";
 import Loading from "../common/Loading";
 import { Users } from "lucide-react";
-import { Button } from "../ui/button";
 import { CopyServerIP } from "./CopyServerIp";
 
 interface ServerStatus {
@@ -24,12 +23,12 @@ export function ServerPreview({ server }: { server: any }) {
   const [loading, setLoading] = useState(true);
   const [serverStatus, setServerStatus] = useState<ServerStatus>();
   useEffect(() => {
-    console.log("Server Loaded", server);
+    // console.log("Server Loaded", server);
     if (!server.address) return;
     serverAPI
       .getStatus(`${server.address}${server.port ? ":" + server.port : ""}`)
       .then((data) => {
-        console.log("Data", data);
+        // console.log("Data", data);
         setServerStatus(data);
       })
       .finally(() => {
@@ -51,14 +50,14 @@ function LayoutList({
   loading: boolean;
 }) {
   return (
-    <Card className="flex flex-col md:flex-row p-3 gap-3">
+    <Card className="flex flex-col md:flex-row gap-3">
       <div className="flex flex-col flex-grow">
         {/* Image */}
         <Link className="w-full" to={`../server/${server._id}`}>
           <ServerImage server={server} classname="flex-grow" />
         </Link>
         {/* Server Info */}
-        <div className="w-full flex flex-row flex-nowrap my-1">
+        <div className="w-full flex flex-row flex-nowrap px-3 pb-3">
           <div className="flex flex-col w-full">
             <div className="flex flex-row justify-between items-center">
               {/* Title */}

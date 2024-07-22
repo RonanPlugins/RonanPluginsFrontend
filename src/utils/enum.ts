@@ -43,6 +43,12 @@ export function getEnumIndexByKey(enumType: any, value: string): number {
   return enumKeys.indexOf(matchingKey as string);
 }
 
+export function getEnumIndex(enumType: any, value: any): number | null {
+  const values = Object.keys(enumType);
+  console.log(values, value);
+  return values.indexOf(value) || null;
+}
+
 export function getEnumIndexByValue(enumType: any, value: string): number {
   // Get the keys of the enum
   const enumKeys = Object.values(enumType).filter((key) => !isNaN(Number(key)));
@@ -75,3 +81,23 @@ export const stringArrayToEnumIndexArray = <T extends Record<string, string>>(
     return enumIndex;
   });
 };
+
+// Function to get the string value of an enum based on its index
+export function getEnumValueByIndex<T>(
+  enumObj: T,
+  index: number
+): string | undefined {
+  const values = Object.values(enumObj);
+  if (index >= 0 && index < values.length) {
+    return values[index] as string;
+  }
+  return undefined;
+}
+
+export function getEnumKeyByIndex<T>(
+  enumObj: T,
+  index: number
+): T[keyof T] | undefined {
+  const values = Object.values(enumObj) as T[keyof T][];
+  return values[index];
+}

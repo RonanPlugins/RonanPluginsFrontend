@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import Loading from "@/components/common/Loading";
 import { SERVER_CATEGORY } from "minecentral-api";
 import { useNavigate, useParams } from "react-router-dom";
-import { getEnumIndexByKey } from "@/utils/enum";
+import { getEnumKeyByIndex, stringArrayToEnumIndexArray } from "@/utils/enum";
 import serverAPI from "@/api/server";
 import {
   ServerCreateAddress,
@@ -47,7 +47,7 @@ export function ServerEdit() {
         Edit Server
       </h1>
 
-      <Loader resource={server} />
+      <Loader server={server} />
 
       <div className="grid gap-9 mx-auto my-3 max-w-6xl">
         <Listener />
@@ -64,31 +64,44 @@ export function ServerEdit() {
   );
 }
 
-function Loader({ resource }: { resource: any }) {
+function Loader({ server }: { server: any }) {
   const {
     set_title,
     set_subtitle,
     set_description,
     set_tags,
-    set_category,
+    set_categories,
     set_language,
     set_discord,
+    set_address,
+    set_port,
   } = useCreateServerContext();
 
   useEffect(() => {
-    if (resource.title) set_title(resource.title);
-    if (resource.subtitle) set_subtitle(resource.subtitle);
-    if (resource.description)
+    if (!server) {
+      console.warn("Severe! No data loaded for edit server page!");
+      return;
+    }
+    if (server.title) set_title(server.title);
+    if (server.subtitle) set_subtitle(server.subtitle);
+    if (server.description)
       set_description(
-        Buffer.from(resource.description, "base64").toString("utf-8")
+        Buffer.from(server.description, "base64").toString("utf-8")
       );
-    if (resource.tags) set_tags(resource.tags);
-    if (resource.category)
-      set_category(
-        SERVER_CATEGORY[resource.category as keyof typeof SERVER_CATEGORY]
-      );
-    if (resource.language) set_language(resource.language);
-    if (resource.discord) set_discord(resource.discord);
+    if (server.tags) set_tags(server.tags);
+    if (server.category) {
+      const cats: SERVER_CATEGORY[] = [];
+      for (const cat of server.category) {
+        const result = getEnumKeyByIndex(SERVER_CATEGORY, cat);
+        if (result) cats.push(result);
+      }
+      set_categories(cats);
+    }
+    if (server.language) set_language(server.language);
+    if (server.discord) set_discord(server.discord);
+    if (server.address) set_address(server.address);
+    if (server.port) set_port(server.port);
+    console.log(server);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -100,7 +113,7 @@ function SubmitEdit({ server }: { server: any }) {
   const {
     title,
     subtitle,
-    category,
+    categories,
     description,
     address,
     port,
@@ -123,9 +136,9 @@ function SubmitEdit({ server }: { server: any }) {
       return;
     }
 
-    const categoryNumber: number = getEnumIndexByKey(
+    const categoryList = stringArrayToEnumIndexArray(
       SERVER_CATEGORY,
-      category || SERVER_CATEGORY.ADVENTURE
+      categories
     );
     setPosting(true);
 
@@ -134,7 +147,7 @@ function SubmitEdit({ server }: { server: any }) {
         title,
         subtitle,
         description,
-        category: categoryNumber,
+        category: categoryList,
         address,
         port,
         // OPTIONALS
@@ -177,7 +190,7 @@ function Listener() {
   const {
     title,
     subtitle,
-    category,
+    categories,
     description,
     address,
     port,
@@ -195,7 +208,7 @@ function Listener() {
           subtitle,
           address,
           port,
-          category,
+          categories,
           description,
           //Optional
           language,
@@ -220,7 +233,7 @@ function Listener() {
     subtitle,
     address,
     port,
-    category,
+    categories,
     description,
     //Optional
     language,

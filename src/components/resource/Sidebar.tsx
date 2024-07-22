@@ -23,6 +23,8 @@ import { ResourceDownloadButton } from "@/pages/resources/View";
 import { ResourceUploadIcon } from "./UploadIcon";
 import { DiscordWidget } from "../common/DiscordWidget";
 import { Report } from "../common/Report";
+import { getEnumValueByIndex } from "@/utils/enum";
+import { CategoriesToString } from "../common/CategoriesToString";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
   return (
@@ -58,7 +60,8 @@ function Info({ resource }: { resource: any }) {
 
         <p>{resource.subtitle}</p>
         <div className="text-sm text-muted-foreground flex flex-row">
-          {resource.category && toTitleCase(PLUGIN_CATEGORY[resource.category])}
+          {resource.category &&
+            CategoriesToString(PLUGIN_CATEGORY, resource.category)}
           {/* Report Button */}
           <Report item={resource} />
         </div>

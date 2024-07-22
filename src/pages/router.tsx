@@ -23,6 +23,7 @@ import { Filter_Server } from "@/context/FilterContext_Server.tsx";
 import { userLoader } from "@/loaders/userLoader.ts";
 import { ServerCreate } from "./servers/Create.tsx";
 import { ServerView } from "./servers/View.tsx";
+import { ServerEdit } from "./servers/Editor.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -120,7 +121,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/server/:id/edit",
-            element: <ResourceEdit />,
+            element: <ServerEdit />,
           },
         ],
       },

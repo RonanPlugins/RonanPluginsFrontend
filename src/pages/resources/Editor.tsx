@@ -19,7 +19,11 @@ import { toast } from "sonner";
 import Loading from "@/components/common/Loading";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 import { useNavigate, useParams } from "react-router-dom";
-import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
+import {
+  getEnumIndexByValue,
+  getEnumKeyByIndex,
+  stringArrayToEnumIndexArray,
+} from "@/utils/enum";
 
 export function ResourceEdit() {
   const { id } = useParams();
@@ -68,7 +72,7 @@ function Loader({ resource }: { resource: any }) {
     set_subtitle,
     set_description,
     set_tags,
-    set_categories: set_category,
+    set_categories,
     set_language,
     set_linkSource,
     set_linkSupport,
@@ -77,6 +81,7 @@ function Loader({ resource }: { resource: any }) {
   } = useCreateResourceContext();
 
   useEffect(() => {
+    console.log(resource);
     if (resource.title) set_title(resource.title);
     if (resource.subtitle) set_subtitle(resource.subtitle);
     if (resource.description)
@@ -84,10 +89,14 @@ function Loader({ resource }: { resource: any }) {
         Buffer.from(resource.description, "base64").toString("utf-8")
       );
     if (resource.tags) set_tags(resource.tags);
-    if (resource.category)
-      set_category(
-        PLUGIN_CATEGORY[resource.category as keyof typeof PLUGIN_CATEGORY]
-      );
+    if (resource.category) {
+      const cats: PLUGIN_CATEGORY[] = [];
+      for (const cat of resource.category) {
+        const result = getEnumKeyByIndex(PLUGIN_CATEGORY, cat);
+        if (result) cats.push(result);
+      }
+      set_categories(cats);
+    }
     const versions = resource.versionSupport?.map((index: any) => {
       const obj = Object.values(PLUGIN_VERSION)[index];
       // console.log(index, obj);
@@ -112,7 +121,7 @@ function SubmitEdit({ resource }: { resource: any }) {
     file,
     releaseVersion,
     supportVersions,
-    categories: category,
+    categories,
     description,
     //Optional
     language,
@@ -135,9 +144,9 @@ function SubmitEdit({ resource }: { resource: any }) {
       return;
     }
 
-    const categoryNumber: number = getEnumIndexByKey(
+    const categoryList = stringArrayToEnumIndexArray(
       PLUGIN_CATEGORY,
-      category || PLUGIN_CATEGORY.MISC
+      categories
     );
     const supportVersionsList: number[] | undefined = supportVersions?.map(
       (key: any) => getEnumIndexByValue(PLUGIN_VERSION, key)
@@ -149,7 +158,7 @@ function SubmitEdit({ resource }: { resource: any }) {
         title,
         subtitle,
         description,
-        category: categoryNumber,
+        category: categoryList,
         //Release
         file,
         version: releaseVersion,

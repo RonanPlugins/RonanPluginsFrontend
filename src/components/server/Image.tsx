@@ -1,5 +1,5 @@
-import { toTitleCase } from "@/utils/formatter";
 import { useEffect, useState } from "react";
+import serverAPI from "@/api/server";
 
 export function ServerImage({
   server,
@@ -9,13 +9,14 @@ export function ServerImage({
   classname?: string;
 }) {
   const [image, setImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // server.getIcon(id).then((data) => {
-    //   setImage(data);
-    //   setLoading(false);
-    // });
+    serverAPI.getIcon(server._id).then((data) => {
+      setImage(data);
+      // console.log(data);
+      // setLoading(false);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -25,8 +26,8 @@ export function ServerImage({
     >
       {image ? (
         <img
-          className="absolute top-0 left-0 w-full h-full object-contain"
-          src={`${import.meta.env.VITE_IMAGES_URL}${image}`}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          src={`${image}`}
         />
       ) : (
         <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-primary">

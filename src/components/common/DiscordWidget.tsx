@@ -1,4 +1,5 @@
 import discord from "@/api/discord";
+import { isValidDiscordServerId } from "@/utils/discord";
 import { useEffect, useState } from "react";
 
 export function DiscordWidget({ discordID }: { discordID: string }) {
@@ -19,7 +20,7 @@ export function DiscordWidget({ discordID }: { discordID: string }) {
   }
 
   useEffect(() => {
-    getDiscord();
+    if (isValidDiscordServerId(discordID)) getDiscord();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

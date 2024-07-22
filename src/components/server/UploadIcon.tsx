@@ -15,8 +15,12 @@ export function ServerUploadIcon({ resource }: { resource: any }) {
   function uploadIcon() {
     if (!file) return;
     set_uploading(true);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
     server
-      .editIcon(resource._id, file)
+      .editIcon(resource._id, formData)
       .then((data) => {
         if (data) {
           toast("New Icon Uploaded!", { icon: <CheckCircleIcon /> });
@@ -44,7 +48,7 @@ export function ServerUploadIcon({ resource }: { resource: any }) {
           <h2>Upload Server Banner</h2>
           <Input
             type="file"
-            accept=".jpg,.png"
+            accept=".jpg,.png,.gif"
             className="text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded-xl file:text-xs file:font-medium
                     file:bg-secondary file:text-secondary-foreground hover:file:cursor-pointer cursor-pointer hover:file:bg-primary"
             onChange={(e) => {

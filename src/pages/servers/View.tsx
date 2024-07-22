@@ -44,8 +44,10 @@ export function ServerView() {
       <div className="w-full lg:max-w-80">
         <ServerSidebar server={server} />
       </div>
+
       <div className="w-full space-y-3">
         {/* Body of server data */}
+
         <main>
           <TextViewer content={server.description} />
         </main>

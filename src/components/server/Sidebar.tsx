@@ -11,12 +11,17 @@ import { ServerUploadIcon } from "./UploadIcon";
 import { ServerImage } from "./Image";
 import { DiscordWidget } from "../common/DiscordWidget";
 import { Report } from "../common/Report";
-import { getEnumValue } from "@/utils/enum";
+import { CategoriesToString } from "../common/CategoriesToString";
+import { CopyServerIP } from "./CopyServerIp";
+import { Vote } from "./Vote";
 
 export function ServerSidebar({ server }: { server: any }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-1 gap-3">
+      <ServerImage classname="!bg-card" server={server} />
       <Info server={server} />
+      <CopyServerIP server={server} />
+      <Vote server={server} />
 
       <div className="hidden lg:grid gap-3">
         <Tools server={server} />
@@ -39,14 +44,15 @@ function Info({ server }: { server: any }) {
   return (
     <Card className="relative">
       {/* Information */}
-      <div className="absolute top-0 w-full h-[120px] bg-primary rounded-t-xl" />
-      <CardHeader className="mt-[60px]">
-        <ServerImage classname="!bg-card" server={server} />
+      {/* <div className="absolute top-0 w-full h-[120px] bg-primary rounded-t-xl" /> */}
+      {/* <CardHeader className="mt-[110px]"> */}
+      <CardHeader className="">
         <h2 className="font-bold text-2xl">{server.title}</h2>
 
         <p>{server.subtitle}</p>
         <div className="text-sm text-muted-foreground flex flex-row items-center">
-          {server.category && getEnumValue(SERVER_CATEGORY, server.category)}
+          {server.category &&
+            CategoriesToString(SERVER_CATEGORY, server.category)}
           {/* Report Button */}
           <Report item={server} />
         </div>
@@ -60,14 +66,7 @@ function Info({ server }: { server: any }) {
             <dt className="mr-2 my-auto">
               <CalendarDays size={18} aria-label="last updated" />
             </dt>
-            <dd>{`Created ${date(server.createdAt)}`}</dd>
-          </dl>
-          {/* Last Updated */}
-          <dl className="flex flex-row">
-            <dt className="mr-2 my-auto">
-              <Clock8Icon size={18} aria-label="last updated" />
-            </dt>
-            <dd>{`Updated ${date(server.updatedAt)}`}</dd>
+            <dd>{`Released ${date(server.createdAt)}`}</dd>
           </dl>
         </div>
       </CardContent>

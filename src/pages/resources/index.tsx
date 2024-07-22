@@ -11,7 +11,11 @@ import { FilterSearch } from "@/components/filters/FilterSearch";
 import { useFilterContext_Resource } from "@/context/FilterContext_Resource";
 import { FilterClear_Resource } from "@/components/filters/FilterClear";
 import { FilterPerPage } from "@/components/filters/FilterPerPage";
-import { getEnumIndexByKey, getEnumIndexByValue } from "@/utils/enum";
+import {
+  getEnumIndex,
+  getEnumIndexByKey,
+  getEnumIndexByValue,
+} from "@/utils/enum";
 import { PLUGIN_CATEGORY, PLUGIN_VERSION } from "minecentral-api";
 import { Link } from "react-router-dom";
 import Links from "@/lib/Links";
@@ -81,7 +85,7 @@ export function Resources() {
         getEnumIndexByValue(PLUGIN_VERSION, key)
       ),
       category: filter_category
-        ? getEnumIndexByKey(PLUGIN_CATEGORY, filter_category)
+        ? getEnumIndex(PLUGIN_CATEGORY, filter_category)
         : null,
     });
     setTotalResources(posts.totalCount);
