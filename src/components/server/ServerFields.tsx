@@ -196,3 +196,57 @@ export function ServerCreateOptionals({ className }: { className: string }) {
     </div>
   );
 }
+
+export function ServerCreateVotifier() {
+  const {
+    vote_ip,
+    set_vote_ip,
+    vote_port,
+    set_vote_port,
+    vote_token,
+    set_vote_token,
+  } = useCreateServerContext();
+  return (
+    <div className="grid grid-cols-4 gap-3">
+      <section className="flex flex-col space-y-3 col-span-3">
+        <Label>
+          Votifier IP Address{" "}
+          <span className="text-muted-foreground">(optional)</span>
+        </Label>
+        <Input
+          placeholder="0.0.0.0"
+          value={vote_ip || ""}
+          onChange={(e: any) => {
+            set_vote_ip(e.target.value);
+          }}
+        />
+      </section>
+      <section className="flex flex-col space-y-3 col-span-1">
+        <Label>
+          Votifier Port{" "}
+          <span className="text-muted-foreground">(optional)</span>
+        </Label>
+        <Input
+          placeholder="25565"
+          value={vote_port || ""}
+          onChange={(e: any) => {
+            set_vote_port(e.target.value);
+          }}
+        />
+      </section>
+      <section className="flex flex-col space-y-3 col-span-4">
+        <Label>
+          Votifier Token{" "}
+          <span className="text-muted-foreground">(optional)</span>
+        </Label>
+        <Input
+          placeholder="Votifier Token"
+          value={vote_token || ""}
+          onChange={(e: any) => {
+            set_vote_token(e.target.value);
+          }}
+        />
+      </section>
+    </div>
+  );
+}

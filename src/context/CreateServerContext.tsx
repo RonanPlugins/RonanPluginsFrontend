@@ -18,12 +18,19 @@ interface CreateServerProps {
   // Description
   description: string | null;
   set_description: React.Dispatch<React.SetStateAction<string | null>>;
-  // Description
+  // Address
   address: string | null;
   port: string | null;
   set_address: React.Dispatch<React.SetStateAction<string | null>>;
   set_port: React.Dispatch<React.SetStateAction<string | null>>;
   // *** OPTIONAL FIELDS ***
+  // Votified
+  vote_ip: string | null;
+  vote_port: string | null;
+  vote_token: string | null;
+  set_vote_ip: React.Dispatch<React.SetStateAction<string | null>>;
+  set_vote_port: React.Dispatch<React.SetStateAction<string | null>>;
+  set_vote_token: React.Dispatch<React.SetStateAction<string | null>>;
   // Language
   language: string | null;
   set_language: React.Dispatch<React.SetStateAction<string | null>>;
@@ -57,6 +64,9 @@ export const CreateServer_Context = ({ children }: CreateServerPropsType) => {
   const [address, set_address] = useState<string | null>(null);
   const [port, set_port] = useState<string | null>(null);
   //Optional
+  const [vote_ip, set_vote_ip] = useState<string | null>(null);
+  const [vote_port, set_vote_port] = useState<string | null>(null);
+  const [vote_token, set_vote_token] = useState<string | null>(null);
   const [language, set_language] = useState<string | null>(null);
   const [discord, set_discord] = useState<string | null>(null);
   const [tags, set_tags] = useState<string | null>(null);
@@ -90,6 +100,13 @@ export const CreateServer_Context = ({ children }: CreateServerPropsType) => {
         description,
         set_description,
         // *** OPTIONAL FIELDS ***
+        // Votified
+        vote_ip,
+        vote_port,
+        vote_token,
+        set_vote_ip,
+        set_vote_port,
+        set_vote_token,
         // Language
         language,
         set_language,

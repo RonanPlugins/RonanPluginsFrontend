@@ -5,6 +5,7 @@ import {
   ServerCreateOptionals,
   ServerCreateSubtitle,
   ServerCreateTitle,
+  ServerCreateVotifier,
 } from "@/components/server/ServerFields";
 
 import { Separator } from "@radix-ui/react-select";
@@ -16,11 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { AlertCircleIcon, CheckIcon, CircleAlertIcon } from "lucide-react";
 import { SERVER_CATEGORY } from "minecentral-api";
-import {
-  getEnumIndexByKey,
-  getEnumIndexByValue,
-  stringArrayToEnumIndexArray,
-} from "@/utils/enum";
+import { stringArrayToEnumIndexArray } from "@/utils/enum";
 import server from "@/api/server";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -40,6 +37,7 @@ export function ServerCreate() {
         <ServerCreateCategory />
         <ServerCreateOptionals className="grid gap-9 my-3" />
         <ServerCreateDescription />
+        <ServerCreateVotifier />
         <SubmitCreate />
       </div>
     </CreateServer_Context>
@@ -56,6 +54,9 @@ function SubmitCreate() {
     categories,
     description,
     //Optional
+    vote_ip,
+    vote_port,
+    vote_token,
     language,
     discord,
     tags,
@@ -94,6 +95,9 @@ function SubmitCreate() {
         address,
         port,
         // OPTIONALS
+        vote_ip,
+        vote_port,
+        vote_token,
         language,
         discord,
         tags,
