@@ -7,14 +7,13 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { CheckCircle2 } from "lucide-react";
-import { toast } from "sonner";
 
 export function CopyServerIP({ server }: { server: any }) {
   function copyIP() {
     navigator.clipboard.writeText(
       `${server.address}${server.port ? ":" + server.port : ""}`
     );
-    toast.success("IP Address copied to clipboard!");
+    // toast.success("IP Address copied to clipboard!");
   }
   return (
     <Dialog>
