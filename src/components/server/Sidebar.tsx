@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { CalendarDays, Clock8Icon, Edit, Edit3Icon } from "lucide-react";
+import { CalendarDays, Edit, Edit3Icon } from "lucide-react";
 import date from "../../utils/date";
 import { useUserContext } from "@/context/UserContext";
 import { SERVER_CATEGORY } from "minecentral-api";

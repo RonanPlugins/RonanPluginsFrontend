@@ -42,10 +42,23 @@ export function ServerUploadIcon({ resource }: { resource: any }) {
       <Dialog open={open} onOpenChange={set_open}>
         <DialogTrigger className="flex flex-row items-center gap-2 hover:text-primary">
           <ImageUpIcon size={16} />
-          <p className="">Change Banner</p>
+          <p>Change Banner</p>
         </DialogTrigger>
         <DialogContent>
           <h2>Upload Server Banner</h2>
+          <div className="flex flex-col gap-2">
+            <h3>Guidelines</h3>
+            <ul className="list-disc list-inside">
+              <li>A safe aspect ratio is 4:1</li>
+              <li>
+                Your banners minimum recommened size is{" "}
+                <strong>3,000 by 750 pixels</strong>.
+              </li>
+              <li>
+                Use a wider image and horizontally center all important content.
+              </li>
+            </ul>
+          </div>
           <Input
             type="file"
             accept=".jpg,.png,.gif"
@@ -55,6 +68,9 @@ export function ServerUploadIcon({ resource }: { resource: any }) {
               set_file(e.target.files?.[0] || null);
             }}
           />
+          <p className="text-muted-foreground text-center">
+            Accepted file types are <strong>.jpg, .png, and .gif</strong>.
+          </p>
           <DialogFooter>
             <Button onClick={uploadIcon} disabled={!file || uploading}>
               Submit
