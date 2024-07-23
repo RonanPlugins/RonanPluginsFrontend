@@ -29,7 +29,7 @@ export function ServerImage({
     >
       {image ? (
         <img
-          className="absolute w-full top-0 left-0 object-cover"
+          className="absolute w-full top-0 left-0 h-full object-cover "
           src={`${image}`}
         />
       ) : (
