@@ -87,6 +87,17 @@ export default {
         return null;
       });
   },
+  vote(serverID: string, name: string): Promise<string | null> {
+    return backendApi
+      .put(`/server/vote/${serverID}/${name}`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
 };
 
 interface FilterParams {

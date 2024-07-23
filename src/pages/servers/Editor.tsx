@@ -15,6 +15,7 @@ import {
   ServerCreateOptionals,
   ServerCreateSubtitle,
   ServerCreateTitle,
+  ServerCreateVotifier,
 } from "@/components/server/ServerFields";
 import { Separator } from "@radix-ui/react-separator";
 import {
@@ -58,6 +59,7 @@ export function ServerEdit() {
         <ServerCreateCategory />
         <ServerCreateOptionals className="grid gap-9 my-3" />
         <ServerCreateDescription />
+        <ServerCreateVotifier />
         <SubmitEdit server={server} />
       </div>
     </CreateServer_Context>
@@ -75,6 +77,9 @@ function Loader({ server }: { server: any }) {
     set_discord,
     set_address,
     set_port,
+    set_vote_ip,
+    set_vote_port,
+    set_vote_token,
   } = useCreateServerContext();
 
   useEffect(() => {
@@ -101,6 +106,9 @@ function Loader({ server }: { server: any }) {
     if (server.discord) set_discord(server.discord);
     if (server.address) set_address(server.address);
     if (server.port) set_port(server.port);
+    if (server.vote_ip) set_vote_ip(server.vote_ip);
+    if (server.vote_port) set_vote_port(server.vote_port);
+    if (server.vote_token) set_vote_token(server.vote_token);
     console.log(server);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -121,6 +129,9 @@ function SubmitEdit({ server }: { server: any }) {
     language,
     discord,
     tags,
+    vote_ip,
+    vote_port,
+    vote_token,
     //Submitting
     getFieldsIncomplete,
   } = useCreateServerContext();
@@ -154,6 +165,9 @@ function SubmitEdit({ server }: { server: any }) {
         language,
         discord,
         tags,
+        vote_ip,
+        vote_port,
+        vote_token,
       })
       .then((data: any) => {
         if (data) {
@@ -203,6 +217,9 @@ function Listener() {
     language,
     discord,
     tags,
+    vote_ip,
+    vote_port,
+    vote_token,
   } = useCreateServerContext();
 
   useEffect(() => {
@@ -219,6 +236,9 @@ function Listener() {
           language,
           discord,
           tags,
+          vote_ip,
+          vote_port,
+          vote_token,
         ].some((val) => val)
       ) {
         const confirmationMessage =
@@ -244,6 +264,9 @@ function Listener() {
     language,
     discord,
     tags,
+    vote_ip,
+    vote_port,
+    vote_token,
   ]);
 
   return <></>;
