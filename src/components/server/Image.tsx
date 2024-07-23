@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import serverAPI from "@/api/server";
+import Image from "../common/Image";
 
 export function ServerImage({
   server,
@@ -22,11 +23,13 @@ export function ServerImage({
 
   return (
     <div
-      className={`relative w-full h-0 pb-[calc(15/117*100%)] ${classname} bg-muted`}
+      className={`relative ${
+        classname ? classname : "w-full pb-[calc(15/117*100%)]"
+      } h-0`}
     >
       {image ? (
         <img
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute w-full top-0 left-0 object-cover"
           src={`${image}`}
         />
       ) : (
@@ -36,6 +39,16 @@ export function ServerImage({
       )}
     </div>
   );
+}
+
+export function ServerImageIcon({
+  base64,
+  classname,
+}: {
+  base64: any;
+  classname?: string;
+}) {
+  return <Image loading={false} classname={classname} url={base64} />;
 }
 
 function extractInitials(input: string): string {

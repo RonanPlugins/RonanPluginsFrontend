@@ -15,7 +15,6 @@ import date from "../../utils/date";
 import { useUserContext } from "@/context/UserContext";
 import { ResourceImage } from "./Image";
 import { PLUGIN_CATEGORY } from "minecentral-api";
-import { toTitleCase } from "@/utils/formatter";
 import { Separator } from "../ui/separator";
 import { ImageSmall } from "../common/Image";
 import { Button } from "../ui/button";
@@ -23,7 +22,6 @@ import { ResourceDownloadButton } from "@/pages/resources/View";
 import { ResourceUploadIcon } from "./UploadIcon";
 import { DiscordWidget } from "../common/DiscordWidget";
 import { Report } from "../common/Report";
-import { getEnumValueByIndex } from "@/utils/enum";
 import { CategoriesToString } from "../common/CategoriesToString";
 
 export function ResourceSidebar({ resource }: { resource: any }) {
@@ -172,7 +170,11 @@ function Links({ resource }: { resource: any }) {
           <SquareCodeIcon size={16} />
           <p>Source Code</p>
         </Link>
-        {resource.discord && <DiscordWidget discordID={resource.discord} />}
+        {resource.discord && (
+          <div className="mt-2">
+            <DiscordWidget discordID={resource.discord} />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

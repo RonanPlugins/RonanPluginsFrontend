@@ -26,7 +26,7 @@ export function DiscordWidget({ discordID }: { discordID: string }) {
 
   function DiscordBox() {
     return (
-      <div className="mt-2 w-full bg-[#7289da] hover:bg-[#5673dc] p-2 rounded-xl flex flex-row flex-wrap items-center">
+      <div className="w-full bg-[#7289da] hover:bg-[#5673dc] p-2 rounded-xl flex flex-row flex-wrap items-center">
         <img src="/assets/discord.svg" className="h-6 w-6 mr-2" alt="" />
         <h2 className="text-xl font-bold mr-2">Discord</h2>
         {onlineCount && (

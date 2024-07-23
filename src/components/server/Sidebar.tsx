@@ -8,17 +8,17 @@ import { Separator } from "../ui/separator";
 
 import { ServerUploadIcon } from "./UploadIcon";
 
-import { ServerImage } from "./Image";
 import { DiscordWidget } from "../common/DiscordWidget";
 import { Report } from "../common/Report";
 import { CategoriesToString } from "../common/CategoriesToString";
 import { CopyServerIP } from "./CopyServerIp";
 import { Vote } from "./Vote";
+import { ServerImageIcon } from "./Image";
+import { useServerDataContext } from "@/context/ServerDataContext";
 
 export function ServerSidebar({ server }: { server: any }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-1 gap-3">
-      <ServerImage classname="!bg-card" server={server} />
       <Info server={server} />
       <CopyServerIP server={server} />
       <Vote server={server} />
@@ -41,12 +41,13 @@ export function ServerSidebarBottom({ server }: { server: any }) {
 }
 
 function Info({ server }: { server: any }) {
+  const { status } = useServerDataContext();
   return (
     <Card className="relative">
       {/* Information */}
-      {/* <div className="absolute top-0 w-full h-[120px] bg-primary rounded-t-xl" /> */}
-      {/* <CardHeader className="mt-[110px]"> */}
+      <div className="absolute top-0 w-full h-[60px] bg-primary rounded-t-xl" />
       <CardHeader className="">
+        <ServerImageIcon classname="z-10 !bg-card" base64={status.icon} />
         <h2 className="font-bold text-2xl">{server.title}</h2>
 
         <p>{server.subtitle}</p>

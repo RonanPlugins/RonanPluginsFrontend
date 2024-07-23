@@ -8,7 +8,7 @@ import Loading from "../common/Loading";
 import { Users } from "lucide-react";
 import { CopyServerIP } from "./CopyServerIp";
 
-interface ServerStatus {
+export interface ServerStatus {
   online: boolean;
   icon: string;
   motd: string;
@@ -54,7 +54,7 @@ function LayoutList({
       <div className="flex flex-col flex-grow">
         {/* Image */}
         <Link className="w-full" to={`../server/${server._id}`}>
-          <ServerImage server={server} classname="flex-grow" />
+          <ServerImage server={server} />
         </Link>
         {/* Server Info */}
         <div className="w-full flex flex-row flex-nowrap px-3 pb-3">
@@ -69,9 +69,9 @@ function LayoutList({
                   <Loading size={28} />
                 ) : (
                   <>
-                    <Users size={20} />
                     {status && status.players ? (
                       <>
+                        <Users size={20} />
                         {status ? status.players.online : 0}/
                         {status ? status.players.max : 0}
                       </>
