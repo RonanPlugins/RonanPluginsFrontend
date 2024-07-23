@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Loading from "../common/Loading";
 import usePageTitle from "@/utils/usePageTitle";
+import { Separator } from "../ui/separator";
 
 export default function Signup() {
   usePageTitle("Register");
@@ -49,6 +50,16 @@ export default function Signup() {
         }
       })
       .finally(() => setSigningUp(false));
+  };
+
+  const handleSocialLogin = (provider: string) => {
+    // Handle social login logic here
+    switch (provider) {
+      case "discord":
+        return api.loginDiscord();
+      case "github":
+        return api.loginGithub();
+    }
   };
 
   return (
@@ -134,6 +145,26 @@ export default function Signup() {
               Login
             </Button>
           </Link>
+        </div>
+        <Separator className="mb-2 border-2" />
+        <div className="mt-2">
+          <p className="text-center text-muted-foreground">or login with</p>
+          <div className="mt-2 flex justify-center space-x-4">
+            <Button
+              onClick={() => handleSocialLogin("discord")}
+              className="text-white py-2 px-4 rounded-xl shadow-sm bg-[#5865F2]"
+            >
+              <img src="/assets/discord.svg" className="h-5 w-5 mr-2" alt="" />
+              Discord
+            </Button>
+            <Button
+              onClick={() => handleSocialLogin("github")}
+              className="text-white py-2 px-4 rounded-xl shadow-sm bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700"
+            >
+              <img src="/assets/github.svg" className="h-5 w-5 mr-2" alt="" />
+              GitHub
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
