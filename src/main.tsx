@@ -6,7 +6,7 @@ import { router } from "./pages/router.tsx";
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     const swPath =
-      process.env.NODE_ENV !== "PROD" ? "/dev-dist/sw.js" : "/sw.js";
+      import.meta.env.VITE_ENV !== "PROD" ? "/dev-dist/sw.js" : "/sw.js";
     navigator.serviceWorker
       .register(swPath)
       .then((registration) => {
