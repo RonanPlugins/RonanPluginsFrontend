@@ -96,7 +96,7 @@ function ServerBanner({ server }: { server: any }) {
                   <div className="font-bold flex flex-row items-center gap-2">
                     <Circle
                       size={20}
-                      className="animate-pulse duration-[4000]"
+                      className="animate-pulse duration-[4000ms]"
                       stroke="#008512"
                     />
                     Online
@@ -106,7 +106,7 @@ function ServerBanner({ server }: { server: any }) {
                 <div className="font-bold flex flex-row items-center gap-2">
                   <Circle
                     size={20}
-                    className="animate-pulse duration-[4000]"
+                    className="animate-pulse duration-[4000ms]"
                     stroke="#fc0303"
                   />
                   Offline
