@@ -24,3 +24,4 @@ dist/
 *.sw?
 .env
 /public/tinymce/
+/dev-dist

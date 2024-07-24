@@ -49,12 +49,12 @@ export default defineConfig({
               cacheName: "api-images",
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+                maxAgeSeconds: 60, // 60 Seconds (dev mode)
               },
             },
           },
           {
-            urlPattern: /^https:\/api.minecentral.net\/api\/.*\/.*\/image$/,
+            urlPattern: /^https:\/\/api.minecentral.net\/api\/.*\/.*\/image$/,
             handler: "CacheFirst",
             options: {
               cacheName: "api-images",
