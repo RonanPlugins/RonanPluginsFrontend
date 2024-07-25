@@ -26,3 +26,11 @@ export default function getDate(str: string) {
   // console.log(diffMinutes + " minutes");
   // console.log(diffSeconds + " secs");
 }
+
+export function getTimePassed(str: string) {
+  const date = new Date(str);
+  const diffTime = Math.abs(date.getTime() - new Date().getTime());
+  // const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+  return diffHours;
+}

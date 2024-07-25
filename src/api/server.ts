@@ -98,6 +98,17 @@ export default {
         return null;
       });
   },
+  bump(serverID: string): Promise<string | null> {
+    return backendApi
+      .post(`/server/bump/${serverID}`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  },
 };
 
 interface FilterParams {

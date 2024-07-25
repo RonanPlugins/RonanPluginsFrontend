@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { CalendarDays, Edit, Edit3Icon } from "lucide-react";
-import date from "../../utils/date";
+import { CalendarDays, Edit, Edit3Icon, Loader, RssIcon } from "lucide-react";
+import date, { getTimePassed } from "../../utils/date";
 import { useUserContext } from "@/context/UserContext";
 import { SERVER_CATEGORY } from "minecentral-api";
 import { Separator } from "../ui/separator";
-
 import { ServerUploadIcon } from "./UploadIcon";
-
 import { DiscordWidget } from "../common/DiscordWidget";
 import { Report } from "../common/Report";
 import { CategoriesToString } from "../common/CategoriesToString";
@@ -15,6 +13,10 @@ import { CopyServerIP } from "./CopyServerIp";
 import { Vote } from "./Vote";
 import { ServerImageIcon } from "./Image";
 import { useServerDataContext } from "@/context/ServerDataContext";
+import { useState } from "react";
+import { toast } from "sonner";
+import serverAPI from "../../api/server";
+import Loading from "../common/Loading";
 
 export function ServerSidebar({ server }: { server: any }) {
   return (
@@ -76,20 +78,7 @@ function Info({ server }: { server: any }) {
 }
 
 function Tools({ server }: { server: any }) {
-  // const [userProfile, setUser] = useState<any>({});
-  // const [loading, setLoading] = useState(true);
   const { user } = useUserContext();
-
-  // async function getUser() {
-  //   const user = await memberAPI.get(`${resource.authorID._id}`);
-  //   setUser(user);
-  // }
-
-  // useEffect(() => {
-  //   getUser();
-  //   setLoading(false);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   if (!user) return <></>;
 
@@ -111,10 +100,47 @@ function Tools({ server }: { server: any }) {
               <p>Edit Server</p>
             </Link>
             <ServerUploadIcon resource={server} />
+            <Bump server={server} />
           </CardContent>
         </Card>
       )}
     </>
+  );
+}
+
+function Bump({ server }: { server: any }) {
+  const [loading, setLoading] = useState(false);
+  const enabled = getTimePassed(server.updatedAt) > 23;
+  function bump() {
+    if (!enabled) {
+      toast.error(
+        `Please wait ${
+          23 - getTimePassed(server.updatedAt)
+        } hours to Bump again!`
+      );
+    } else {
+      setLoading(true);
+      serverAPI
+        .bump(server._id)
+        .then((data) => {
+          console.log(data);
+          server.updatedAt = new Date();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }
+  return (
+    <div
+      className={`flex flex-row items-center gap-2 hover:text-primary hover:cursor-pointer ${
+        !enabled ? "text-muted-foreground" : ""
+      }`}
+      onClick={bump}
+    >
+      {loading ? <Loading size={16} /> : <RssIcon size={16} />}
+      <p>Bump Server</p>
+    </div>
   );
 }
 
