@@ -72,8 +72,8 @@ export function TextEditor({
         tinymceScriptSrc="/tinymce/tinymce.min.js"
         licenseKey="gpl"
         onInit={(_evt, editor) => (editorRef.current = editor)}
-        initialValue={content || ""}
-        onChange={() => {
+        value={content || ""}
+        onEditorChange={() => {
           if (editorRef.current) {
             onChange(editorRef.current.getContent());
           }
