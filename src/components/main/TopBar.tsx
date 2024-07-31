@@ -4,10 +4,13 @@ import { ModeToggle } from "../common/ModeToggle";
 import Links from "@/lib/Links";
 import LoginDialog from "./LoginDialog";
 import NavItem from "./NavItem";
-import { navItems } from "./NavBar";
 import { ImageSmall } from "../common/Image";
 
-export function TopBar() {
+export function TopBar({
+  navItems,
+}: {
+  navItems: { title: string; link: string; list: string[] }[];
+}) {
   const { isLoggedIn, user } = useUserContext();
   const location = useLocation();
 

@@ -22,6 +22,7 @@ import { FilterVersion_Resource } from "@/components/filters/resources/FilterVer
 import useDebounce from "@/hooks/useDebounce";
 import { useFilterContext_Common } from "@/context/FilterContext_Common";
 import { Ads_ResourceList } from "@/components/common/Ads_ResourceList";
+import { DevelopmentBanner } from "@/utils/devmode";
 
 export function Resources() {
   usePageTitle("Resources");
@@ -96,6 +97,7 @@ export function Resources() {
 
   return (
     <>
+      <DevelopmentBanner dismissible={true} />
       {/* Resource Hot Category Bar */}
       <div className="hidden lg:h-10 lg:flex flex-row mx-auto w-full items-center justify-center bg-card space-x-1">
         <FilterCategory_Resource className="!h-8" />

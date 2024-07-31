@@ -25,9 +25,9 @@ export default function About() {
             </header>
             <div className="py-4 text-center md:text-left flex md:inline-block flex-wrap space-y-2">
               <div className="grow w-full md:w-0">
-                <Link to={Links.Resources}>
+                <Link to={Links.Servers}>
                   <Button className="rounded-xl md:ml-0 w-full max-w-xl md:w-fit md:mr-2">
-                    Browse Marketplace
+                    Browse our Server List
                   </Button>
                 </Link>
               </div>
